@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:55:39 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.common.sql.ExtraData">
+
+	<resultMap id="extraDataResult" type="ExtraData">
+		<result property="extraDataId" column="extra_data_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="objectId" column="object_id"/>
+		<result property="dataDefineId" column="data_define_id"/>
+		<result property="dataValue" column="data_value"/>	
+		<result property="compareMode" column="compare_mode"/>
+		<result property="dataType" column="data_type"/>
+		<result property="dataCode" column="data_code"/>
+		<result property="dataDescription" column="data_description"/>
+		<result property="displayWeight" column="display_weight"/>
+		<result property="displayLevel" column="display_level"/>		
+		<result property="validDataEnum" column="valid_data_enum"/>
+		<result property="inputMethod" column="input_method"/>
+		<result property="inputLevel" column="input_level"/>
+		<result property="ttl" column="ttl"/>		
+	</resultMap>
+	
+	<sql id="selectColumns">
+			a.extra_data_id,
+			a.uuid,
+			a.object_id,
+			a.object_type,
+			a.data_define_id,
+			a.data_value,			
+			b.data_type,
+			b.data_code,
+			b.data_description ,
+			b.display_weight,
+			b.display_level,
+			b.valid_data_enum,
+			b.input_method,
+			b.ttl,
+			b.input_level,
+			b.compare_mode
+		</sql>
+	
+
+	<insert id="insert" parameterType="ExtraData" useGeneratedKeys="true"  keyProperty="extraDataId">
+		INSERT INTO ${tableName}
+			(<if test="extraDataId>0">extra_data_id,</if>uuid, object_id, object_type, data_define_id, data_value)
+		VALUES
+			(<if test="extraDataId>0">#{extraDataId},</if>#{uuid}, #{objectId}, #{objectType}, #{dataDefineId}, #{dataValue})
+	</insert>
+
+	<update id="update" parameterType="ExtraData">
+		UPDATE
+			${tableName}
+		SET
+			uuid = #{uuid},
+			object_id = #{objectId},
+			object_type = #{objectType},
+			data_define_id = #{dataDefineId},
+			data_value = #{dataValue}
+		WHERE
+			extra_data_id = #{extraDataId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			${tableName}
+		WHERE
+			extra_data_id = #{extraDataId}
+	</delete>
+	
+	<select id="select" parameterType="ExtraDataCriteria" resultMap="extraDataResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			${tableName} AS a 
+			INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id 
+		WHERE
+			a.extra_data_id = #{extraDataId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		   <if test="uuid != null and uuid.length > 0">
+				uuid in 
+				<foreach item="item" collection="uuid" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+			<if test="objectId != 0">
+				AND a.object_id=#{objectId}
+			</if>
+			<if test="dataDefineId > 0">
+				AND a.data_define_id=#{dataDefineId}
+			</if>
+			<if test="objectType != null">
+				AND a.object_type=#{objectType}
+			</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="ExtraDataCriteria" resultType="int">
+		SELECT
+			a.extra_data_id
+		FROM
+			${tableName} AS a 
+			INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			a.extra_data_id ASC
+	</select>
+	
+	<select id="list" parameterType="ExtraDataCriteria" resultMap="extraDataResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			${tableName} AS a 
+			INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="count" parameterType="ExtraDataCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			${tableName} as a
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<delete id="deleteByObjectId" parameterType="ExtraDataCriteria">
+		DELETE a FROM
+			${tableName} as a
+		WHERE
+			a.object_id = #{objectId}
+			AND
+			a.object_type = #{objectType}
+	</delete>
+	
+
+</mapper>

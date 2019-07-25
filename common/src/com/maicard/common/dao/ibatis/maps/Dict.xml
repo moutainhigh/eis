@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:50:26 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Dict">
+
+	<resultMap id="dictResult" type="Dict">
+		<result property="dictId" column="dict_id"/>
+		<result property="dictData" column="dict_data"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="Dict" useGeneratedKeys="true"  keyProperty="dictId">
+		INSERT INTO dict
+			(<if test="dictId>0">dict_id,</if> owner_id, dict_data
+		VALUES
+			(<if test="dictId>0">#{dictId},</if> #{ownerId}, #{dictData})
+	</insert>
+
+	<update id="update" parameterType="Dict">
+		UPDATE
+			dict
+		SET
+			dict_data = #{dictData},
+			owner_id = #{ownerId}
+		WHERE
+			dict_id = #{dictId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			dict
+		WHERE
+			dict_id = #{dictId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="dictResult">
+		SELECT
+			dict_id,
+			dict_data
+		FROM
+			dict
+		WHERE
+			dict_id = #{dictId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		  	<if test="dictData != null">
+				dict_data = #{dictData}		
+		  	</if>
+		  	<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+	  	</where>
+	</sql>
+	
+	<select id="listPk" parameterType="DictCriteria" resultType="int">
+		SELECT
+			dict_id
+		FROM
+			dict
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			dict_id ASC
+	</select>
+
+	<select id="list" parameterType="DictCriteria" resultMap="dictResult">
+		SELECT
+			dict_id,
+			dict_data
+		FROM
+			dict
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			dict_id ASC
+	</select>
+
+	<select id="count" parameterType="DictCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			dict
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

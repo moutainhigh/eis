@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:00 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Uuid">
+	<insert id="insert" parameterType="Uuid" useGeneratedKeys="true" keyProperty="uuid">
+		INSERT INTO uuid (<if test="uuid>0">uuid,</if>) VALUES (<if test="uuid>0">#{uuid},</if>) 
+	</insert>
+	
+	<delete id="clean" parameterType="long">
+		DELETE FROM
+			uuid
+		WHERE
+			uuid &lt;  #{uuid}
+	</delete>
+	
+	
+	<insert id="insertForUser" parameterType="UserUnique">
+		INSERT INTO user_unique (user_unique_key, uuid, owner_id) VALUES (#{userUniqueKey}, #{uuid},#{ownerId}) 
+	</insert>
+	
+	<select id="getMaxIdForUser" parameterType="UserUniqueCriteria" resultType="long">
+	    SELECT 
+	    	IFNULL(MAX(CAST(user_unique_key AS UNSIGNED INTEGER)),0) 
+	    FROM 
+	    	user_unique
+	    <include refid="criteriaWhereClause"/>
+	</select>
+	
+	<sql id="criteriaWhereClause">
+		<where>
+		  	<if test="ownerId > 0">
+				owner_id = #{ownerId} 		
+		  	</if>
+		  	<if test="uuid > 0">
+				AND uuid = #{uuid} 		
+		  	</if>
+		</where>
+	</sql>
+</mapper>

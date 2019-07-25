@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:50:27 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.common.sql.Theme">
+
+	<resultMap id="themeResult" type="Theme">
+		<result property="themeId" column="theme_id"/>
+		<result property="themeCode" column="theme_code"/>
+		<result property="themeName" column="theme_name"/>
+		<result property="themeDesc" column="theme_desc"/>
+		<result property="pic" column="pic"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			theme_id,
+			theme_code,
+			theme_name,
+			theme_desc,
+			pic,
+			current_status,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="Theme" useGeneratedKeys="true"  keyProperty="themeId">
+		INSERT INTO theme
+			(<if test="themeId>0">theme_id,</if> owner_id, theme_code, theme_name, theme_desc, pic, current_status)
+		VALUES
+			(<if test="themeId>0">#{themeId},</if> #{ownerId}, #{themeCode}, #{themeName}, #{themeDesc}, #{pic}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="Theme">
+		UPDATE
+			theme
+		SET
+			theme_code = #{themeCode},
+			theme_name = #{themeName},
+			theme_desc = #{themeDesc},
+			pic = #{pic},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			theme_id = #{themeId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			theme
+		WHERE
+			theme_id = #{themeId}
+	</delete>
+	
+	
+	
+	<select id="select" parameterType="int" resultMap="themeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			theme
+		WHERE
+			theme_id = #{themeId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+		</where>
+	</sql>
+	
+	<select id="listPk" parameterType="ThemeCriteria" resultType="int">
+		SELECT
+			theme_id
+		FROM
+			theme
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="list" parameterType="ThemeCriteria" resultMap="themeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			theme
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			theme_id ASC
+	</select>
+
+	<select id="count" parameterType="ThemeCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			theme
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

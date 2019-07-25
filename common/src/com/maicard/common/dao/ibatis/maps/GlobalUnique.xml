@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:50:20 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GlobalUnique">
+
+	<resultMap id="globalUniqueResult" type="GlobalUnique">
+		<result property="data" column="data"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="GlobalUnique">
+		INSERT INTO global_unique
+			(data,owner_id)
+		VALUES
+			(#{data},#{ownerId})
+	</insert>
+
+		<insert id="insertIgnore" parameterType="GlobalUnique">
+		INSERT IGNORE INTO global_unique
+			(data,owner_id)
+		VALUES
+			(#{data},#{ownerId})
+	</insert>
+	
+
+	<select id="count" parameterType="GlobalUnique" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			global_unique
+		WHERE
+			`data` = #{data}
+			AND
+			owner_id = #{ownerId}
+	</select>
+	
+	<select id="list" parameterType="GlobalUniqueCriteria" resultMap="globalUniqueResult">
+		SELECT
+			`data`,
+			owner_id
+		FROM
+			global_unique
+	</select>
+	
+	<select id="delete" parameterType="GlobalUnique" resultType="int">
+		DELETE	FROM
+			global_unique
+		WHERE
+			`data` = #{data}
+			AND
+			owner_id = #{ownerId}
+	</select>
+	
+
+</mapper>

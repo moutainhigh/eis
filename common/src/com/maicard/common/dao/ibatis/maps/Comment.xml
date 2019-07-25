@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:03 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.common.sql.Comment">
+
+	<resultMap id="commentResult" type="Comment">
+		<result property="commentId" column="comment_id"/>
+		<result property="commentConfigId" column="comment_config_id"/>
+		<result property="relatedCommentId" column="related_comment_id"/>
+		<result property="rootCommentId" column="root_comment_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="createTime" column="create_time"/>
+		<result property="publishTime" column="publish_time"/>
+		<result property="objectType" column="object_type"/>
+		<result property="readCount" column="read_count"/>
+		<result property="replyCount" column="reply_count"/>		
+		<result property="praiseCount" column="praise_count"/>		
+		<result property="objectId" column="object_id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="rank" column="rank"/>
+		<result property="rate" column="rate"/>
+		<result property="data" column="data" typeHandler="com.maicard.typeHandler.TextHashMapTypeHandler"/>		
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+		<result property="version" column="version"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+	    comment_id,
+	    comment_config_id,
+	    related_comment_id,
+	    root_comment_id,
+		uuid,
+		create_time,
+		publish_time,
+		object_type,
+		read_count,
+		reply_count,
+		praise_count,
+		object_id,
+		title,
+		content,
+		rank,
+		rate,
+		`data`,
+		current_status,
+		owner_id,
+		version
+	</sql>
+	
+
+	<insert id="insert" parameterType="Comment"  useGeneratedKeys="true"  keyProperty="commentId">
+		INSERT INTO comment
+			(<if test="commentId>0">comment_id,</if> comment_config_id, owner_id, related_comment_id, root_comment_id, uuid, create_time, publish_time, object_type, read_count, reply_count, praise_count, object_id, title, content, rank, rate, `data`, current_status, version)
+		VALUES
+			(<if test="commentId>0">#{commentId},</if> #{commentConfigId}, #{ownerId}, #{relatedCommentId}, #{rootCommentId}, #{uuid}, #{createTime}, #{publishTime}, #{objectType}, #{readCount}, #{replyCount}, #{praiseCount}, #{objectId}, #{title}, #{content}, #{rank}, #{rate}, #{data, typeHandler=com.maicard.typeHandler.TextHashMapTypeHandler}, #{currentStatus}, #{version})
+	</insert>
+
+	<update id="update" parameterType="Comment">
+		UPDATE
+			comment
+		SET
+			comment_config_id = #{commentConfigId},
+			related_comment_id = #{relatedCommentId},
+			root_comment_id = #{rootCommentId},
+			uuid = #{uuid},
+			create_time = #{createTime},
+			publish_time = #{publishTime},
+			object_type = #{objectType},
+			read_count = #{readCount},
+			reply_count = #{replyCount},
+			praise_count = #{praiseCount},
+			object_id = #{objectId},
+			title = #{title},
+			content = #{content},
+			rank = #{rank},
+			rate = #{rate},
+			data = #{data, typeHandler=com.maicard.typeHandler.TextHashMapTypeHandler},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId},
+			version = #{version}
+		WHERE
+			comment_id = #{commentId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			comment
+		WHERE
+			comment_id = #{commentId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="commentResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			comment
+		WHERE
+			comment_id = #{commentId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		    owner_id = #{ownerId}
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="uuid > 0">
+				AND uuid=#{uuid}
+			</if>
+			<if test="rootCommentId > 0">
+				AND root_comment_id = #{rootCommentId}
+			</if>
+			<if test="rank > 0">
+				AND rank = #{rank}
+			</if>
+			<if test="createTimeBegin != null">
+				AND create_time &gt;= #{createTimeBegin}
+			</if>
+			<if test="createTimeEnd != null">
+				AND create_time &lt;= #{createTimeEnd}
+			</if>
+			<if test="objectType != null">
+				AND object_type = #{objectType}
+			</if>
+			<if test="objectId > 0">
+				AND object_id = #{objectId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="CommentCriteria" resultType="long">
+		SELECT
+			comment_id
+		FROM
+			comment
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			publish_time DESC, create_time DESC, comment_id DESC
+	</select>
+	
+	<select id="list" parameterType="CommentCriteria" resultMap="commentResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			comment
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			publish_time DESC, create_time DESC, comment_id DESC
+	</select>
+
+	<select id="count" parameterType="CommentCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			comment
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

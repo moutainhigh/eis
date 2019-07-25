@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:50:27 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Language">
+
+	<resultMap id="languageResult" type="Language">
+		<result property="languageId" column="language_id"/>
+		<result property="languageName" column="language_name"/>
+		<result property="languageDescription" column="language_description"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			language_id,
+			language_name,
+			language_description,
+			current_status,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="Language" useGeneratedKeys="true"  keyProperty="languageId">
+		INSERT INTO language
+			(<if test="languageId>0">language_id,</if> owner_id, language_name, language_description, current_status)
+		VALUES
+			(<if test="languageId>0">#{languageId},</if> #{ownerId}, #{languageName}, #{languageDescription}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="Language">
+		UPDATE
+			language
+		SET
+			language_name = #{languageName},
+			language_description = #{languageDescription},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			language_id = #{languageId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			language
+		WHERE
+			language_id = #{languageId}
+	</delete>
+	
+	
+	
+	<select id="select" parameterType="int" resultMap="languageResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			language
+		WHERE
+			language_id = #{languageId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+		</where>
+	</sql>
+	
+	<select id="listPk" parameterType="LanguageCriteria" resultType="int">
+		SELECT
+			language_id
+		FROM
+			language
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="list" parameterType="LanguageCriteria" resultMap="languageResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			language
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			language_id ASC
+	</select>
+
+	<select id="count" parameterType="LanguageCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			language
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

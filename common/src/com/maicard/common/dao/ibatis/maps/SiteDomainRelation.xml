@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:08 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SiteDomainRelation">
+
+	<resultMap id="siteDomainRelationResult" type="SiteDomainRelation">
+		<result property="siteDomainRelationId" column="site_domain_relation_id"/>
+		<result property="siteCode" column="site_code"/>
+		<result property="domain" column="domain"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<sql id="selectColumns">
+			site_domain_relation_id,
+			site_code,
+			domain,
+			current_status,
+			owner_id
+	</sql>
+	
+	<insert id="insert" parameterType="SiteDomainRelation"  useGeneratedKeys="true"  keyProperty="siteDomainRelationId">
+		INSERT INTO site_domain_relation
+			(<if test="siteDomainRelationId>0">site_domain_relation_id,</if> owner_id, site_code, domain, current_status)
+		VALUES
+			(<if test="siteDomainRelationId>0">#{siteDomainRelationId},</if> #{ownerId}, #{siteCode}, #{domain}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="SiteDomainRelation">
+		UPDATE
+			site_domain_relation
+		SET
+			site_code = #{siteCode},
+			domain = #{domain},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			site_domain_relation_id = #{siteDomainRelationId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			site_domain_relation
+		WHERE
+			site_domain_relation_id = #{siteDomainRelationId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="siteDomainRelationResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			site_domain_relation
+		WHERE
+			site_domain_relation_id = #{siteDomainRelationId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="siteCode != null">
+				AND site_code=#{siteCode}
+			</if>
+			<if test="domain != null">
+				AND domain=#{domain}
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="listPk" parameterType="SiteDomainRelationCriteria" resultType="int">
+		SELECT
+			site_domain_relation_id
+		FROM
+			site_domain_relation
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="list" parameterType="SiteDomainRelationCriteria" resultMap="siteDomainRelationResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			site_domain_relation
+		<include refid="criteriaWhereClause"/>
+	</select>	
+
+	<select id="count" parameterType="SiteDomainRelationCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			site_domain_relation 
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

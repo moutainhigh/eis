@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:45 CST 2013-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>			
+		<!--  common -->
+		
+		<typeAlias alias="Area" type="com.maicard.common.domain.Area"/>
+		<typeAlias alias="AreaCriteria" type="com.maicard.common.criteria.AreaCriteria"/>
+		
+		<typeAlias alias="Audit" type="com.maicard.common.domain.Audit"/>
+		<typeAlias alias="AuditCriteria" type="com.maicard.common.criteria.AuditCriteria"/>
+		
+		<typeAlias alias="Config" type="com.maicard.common.domain.Config"/>
+		<typeAlias alias="ConfigCriteria" type="com.maicard.common.criteria.ConfigCriteria"/>		
+		
+		<typeAlias alias="Comment" type="com.maicard.common.domain.Comment"/>
+		<typeAlias alias="CommentCriteria" type="com.maicard.common.criteria.CommentCriteria"/>
+
+		<typeAlias alias="CommentConfig" type="com.maicard.common.domain.CommentConfig"/>
+		<typeAlias alias="CommentConfigCriteria" type="com.maicard.common.criteria.CommentConfigCriteria"/>
+				
+		<typeAlias alias="DataDefine" type="com.maicard.common.domain.DataDefine"/>
+		<typeAlias alias="DataDefineCriteria" type="com.maicard.common.criteria.DataDefineCriteria"/>
+		
+		<typeAlias alias="Dict" type="com.maicard.common.domain.Dict"/>
+		<typeAlias alias="DictCriteria" type="com.maicard.common.criteria.DictCriteria"/>
+		
+		<typeAlias alias="ExtraData" type="com.maicard.common.domain.ExtraData"/>
+		<typeAlias alias="ExtraDataCriteria" type="com.maicard.common.criteria.ExtraDataCriteria"/>	
+		
+		<typeAlias alias="GlobalUnique" type="com.maicard.common.domain.GlobalUnique"/>
+		<typeAlias alias="GlobalUniqueCriteria" type="com.maicard.common.criteria.GlobalUniqueCriteria"/>
+
+		<typeAlias alias="GlobalOrderIdCriteria" type="com.maicard.common.criteria.GlobalOrderIdCriteria"/>			
+		
+		<typeAlias alias="IpPolicy" type="com.maicard.common.domain.IpPolicy"/>
+		<typeAlias alias="IpPolicyCriteria" type="com.maicard.common.criteria.IpPolicyCriteria"/>
+			
+		<typeAlias alias="IpLocation" type="com.maicard.common.domain.IpLocation"/>
+		<typeAlias alias="IpLocationCriteria" type="com.maicard.common.criteria.IpLocationCriteria"/>
+			
+		<typeAlias alias="Job" type="com.maicard.common.domain.Job"/>
+		<typeAlias alias="JobCriteria" type="com.maicard.common.criteria.JobCriteria"/>
+
+		<typeAlias alias="Language" type="com.maicard.common.domain.Language"/>
+		<typeAlias alias="LanguageCriteria" type="com.maicard.common.criteria.LanguageCriteria"/>
+		
+		<typeAlias alias="Location" type="com.maicard.common.domain.Location"/>
+		<typeAlias alias="LocationCriteria" type="com.maicard.common.criteria.LocationCriteria"/>	
+		
+		<typeAlias alias="QUserInfo" type="com.maicard.common.domain.QUserInfo"/>
+		<typeAlias alias="QUserInfoCriteria" type="com.maicard.common.criteria.QUserInfoCriteria"/>	
+		
+		<typeAlias alias="Region" type="com.maicard.common.domain.Region"/>
+		<typeAlias alias="RegionCriteria" type="com.maicard.common.criteria.RegionCriteria"/>	
+		
+		<typeAlias alias="SecurityLevel" type="com.maicard.common.domain.SecurityLevel"/>
+		<typeAlias alias="SecurityLevelCriteria" type="com.maicard.common.criteria.SecurityLevelCriteria"/>
+	
+		<typeAlias alias="SiteDomainRelation" type="com.maicard.common.domain.SiteDomainRelation"/>
+		<typeAlias alias="SiteDomainRelationCriteria" type="com.maicard.common.criteria.SiteDomainRelationCriteria"/>
+		
+		<typeAlias alias="SiteThemeRelation" type="com.maicard.common.domain.SiteThemeRelation"/>
+		<typeAlias alias="SiteThemeRelationCriteria" type="com.maicard.common.criteria.SiteThemeRelationCriteria"/>
+		
+		<typeAlias alias="UserUnique" type="com.maicard.common.domain.UserUnique"/>
+		<typeAlias alias="UserUniqueCriteria" type="com.maicard.common.criteria.UserUniqueCriteria"/>
+		
+		<typeAlias alias="Version" type="com.maicard.common.domain.Version"/>
+		<typeAlias alias="VersionCriteria" type="com.maicard.common.criteria.VersionCriteria"/>
+		<typeAlias type="com.maicard.common.domain.Uuid" alias="Uuid"/>		
+		
+		<typeAlias alias="Theme" type="com.maicard.common.domain.Theme"/>
+		<typeAlias alias="ThemeCriteria" type="com.maicard.common.criteria.ThemeCriteria"/>	
+		
+	</typeAliases>
+	
+	<typeHandlers>    
+    	<typeHandler javaType="List" jdbcType="VARCHAR"  handler="com.maicard.typeHandler.StringArrayTypeHandler" />
+     	<typeHandler javaType="HashMap" jdbcType="VARCHAR"  handler="com.maicard.typeHandler.TextHashMapTypeHandler" />
+     	<typeHandler javaType="HashMap" jdbcType="BLOB"  handler="com.maicard.typeHandler.BinHashMapTypeHandler" />
+     </typeHandlers>     
+</configuration>
