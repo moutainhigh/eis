@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:02 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DocumentNodeRelation">
+
+	<resultMap id="documentNodeRelationResult" type="DocumentNodeRelation">
+		<result property="documentNodeRelationId" column="document_node_relation_id"/>
+		<result property="udid" column="udid"/>
+		<result property="nodeId" column="node_id"/>
+		<result property="currentStatus" column="current_status"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="DocumentNodeRelation"  useGeneratedKeys="true"  keyProperty="documentNodeRelationId">
+		INSERT INTO document_node_relation
+			(<if test="documentNodeRelationId>0">document_node_relation_id,</if> udid, node_id, current_status)
+		VALUES
+			(<if test="documentNodeRelationId>0">#{documentNodeRelationId},</if> #{udid}, #{nodeId}, #{currentStatus})
+		
+	</insert>
+
+	<update id="update" parameterType="DocumentNodeRelation">
+		UPDATE
+			document_node_relation
+		SET
+			udid = #{udid},
+			node_id = #{nodeId},
+			current_status = #{currentStatus}
+		WHERE
+			document_node_relation_id = #{documentNodeRelationId}
+	</update>
+	
+	<select id="select" parameterType="int" resultMap="documentNodeRelationResult">
+		SELECT
+			document_node_relation_id,
+			udid,
+			node_id,
+			current_status
+		FROM
+			document_node_relation
+		WHERE
+			document_node_relation_id = #{documentNodeRelationId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="udid > 0">
+				udid = #{udid}
+			</if>
+			<if test="nodeId > 0">
+				AND node_id = #{nodeId}
+			</if>
+			<if test="documentNodeRelationId > 0">
+				AND document_node_relation_id = #{documentNodeRelationId}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="DocumentNodeRelationCriteria" resultMap="documentNodeRelationResult">
+		SELECT
+			document_node_relation_id,
+			udid,
+			node_id,
+			current_status
+		FROM
+			document_node_relation
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			document_node_relation_id ASC
+	</select>
+
+	<select id="count" parameterType="DocumentNodeRelationCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			document_node_relation
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<delete id="delete" parameterType="DocumentNodeRelationCriteria">
+		DELETE FROM
+			document_node_relation
+		<include refid="criteriaWhereClause"/>
+	</delete>
+
+</mapper>

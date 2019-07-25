@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:55:35 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.product.sql.ItemData">
+
+	<resultMap id="itemDataResult" type="ItemData">
+		<result property="productDataId" column="product_data_id"/>
+		<result property="productId" column="product_id"/>
+		<result property="dataDefineId" column="data_define_id"/>
+		<result property="dataValue" column="data_value"/>	
+		
+		<result property="dataType" column="data_type"/>
+		<result property="dataCode" column="data_code"/>
+		<result property="dataName" column="data_name"/>
+		<result property="dataDescription" column="data_description"/>
+		<result property="validDataEnum" column="valid_data_enum"/>
+		<result property="inputMethod" column="input_method"/>
+		<result property="displayMode" column="display_mode"/>
+		<result property="inputLevel" column="input_level"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			a.product_data_id,
+			a.product_id,
+			a.data_define_id,
+			a.data_value,
+			b.data_type,
+			b.data_code,
+			b.data_name,
+			b.data_description ,
+			b.valid_data_enum,
+			b.input_method,
+			b.display_mode,
+			b.data_description
+	</sql>
+
+	<insert id="insert" parameterType="ItemData" useGeneratedKeys="true"  keyProperty="productDataId">
+		INSERT INTO ${tableName}
+			(<if test="productDataId > 0">product_data_id, </if>product_id, data_define_id, data_value)
+		VALUES
+			(<if test="productDataId > 0">#{productDataId}, </if>#{productId}, #{dataDefineId}, #{dataValue})
+	</insert>
+
+	<update id="update" parameterType="ItemData">
+		UPDATE
+			${tableName}
+		SET
+			product_id = #{productId},
+			data_define_id = #{dataDefineId},
+			data_value = #{dataValue}
+		WHERE
+			product_data_id = #{productDataId}
+	</update>
+	
+	<select id="select" parameterType="int" resultMap="itemDataResult">
+	    SELECT
+			<include refid="selectColumns"/>
+		FROM
+			item_data AS a  left join data_define as b on a.data_define_id=b.data_define_id
+		WHERE
+			a.product_data_id = #{productDataId}
+		UNION ALL
+			SELECT
+				<include refid="selectColumns"/>
+			FROM
+				item_data_history AS a  left join data_define as b on a.data_define_id=b.data_define_id
+			WHERE
+				a.product_data_id = #{productDataId}
+		LIMIT 1
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+	  		<if test="productDataId > 0">
+				a.product_data_id=#{productDataId}
+			</if>
+			<if test="productDataIds != null">
+				AND a.product_data_id in 
+				<foreach item="item" collection="productDataIds" open="(" separator="," close=")">
+		        			#{item}
+		  		</foreach>	
+			</if>
+			<if test="productId > 0">
+				AND a.product_id=#{productId}
+			</if>
+			<if test="productIds != null">
+				AND a.product_id in 
+				<foreach item="item" collection="productIds" open="(" separator="," close=")">
+		        			#{item}
+		  		</foreach>	
+			</if>
+			<if test="dataDefineId > 0">
+				AND a.data_define_id=#{dataDefineId}
+			</if>
+			<if test="productDataId > 0">
+				AND a.product_data_id=#{productDataId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="ItemDataCriteria" resultMap="itemDataResult">	    
+	    SELECT
+		<include refid="selectColumns" />		
+		FROM item_data as a LEFT JOIN data_define AS b on a.data_define_id=b.data_define_id
+		<include refid="criteriaWhereClause"/>
+		<if test="tableName != null and tableName != 'item_data'">
+			UNION 
+			SELECT
+				<include refid="selectColumns"/>
+			FROM
+				${tableName} as a LEFT JOIN data_define AS b on a.data_define_id=b.data_define_id
+			<include refid="criteriaWhereClause"/>
+		</if>
+	</select>
+	
+	<select id="listBy" parameterType="ItemDataCriteria" resultType="long">
+		SELECT
+			DISTINCT 
+			a.product_id
+		FROM
+		<if test="queryCondition != null">
+			<foreach item="item" collection="queryCondition" open="(" separator=" UNION ALL " close=")">
+				SELECT
+					product_id,
+					product_data_id
+				FROM ${tableName}
+				WHERE
+					data_define_id = #{item.dataDefineId} 
+				AND
+					data_value = #{item.dataValue}
+	  		</foreach>
+	  		as a group by a.product_id
+	  		HAVING count(*) = #{queryConditonSize}			
+	  	</if>
+		ORDER BY
+			a.product_id ASC
+	</select>
+
+	<select id="count" parameterType="ItemDataCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			(SELECT * FROM item_data AS a
+		<include refid="criteriaWhereClause"/>
+		<if test="tableName != null and tableName != 'item_data'">
+		    UNION ALL SELECT * from ${tableName} AS a
+			<include refid="criteriaWhereClause"/>  
+		</if>
+		) AS c
+	</select>
+	
+	<update id="copyToHistory" parameterType="ItemDataCriteria">
+		<if test="productDataIds != null">	
+		insert into ${tableName} select * from item_data where product_data_id in 
+		<foreach item="item" collection="productDataIds" open="(" separator="," close=")">
+	        		#{item}
+	  	</foreach>	
+	  	</if>	
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE a FROM
+			item_data as a
+		<include refid="criteriaWhereClause"/>
+
+	</delete>
+
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:16 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserLevelProject">
+
+	<resultMap id="userLevelProjectResult" type="UserLevelProject">
+		<result property="userLevelProjectId" column="user_level_project_id"/>
+		<result property="userLevelId" column="user_level_id"/>
+		<result property="userLevelType" column="user_level_type"/>
+		<result property="userType" column="user_type"/>
+		<result property="userLevelProjectName" column="user_level_project_name"/>
+		<result property="userLevelProjectDescripition" column="user_level_project_descripition"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="UserLevelProject">
+		INSERT INTO user_level_project
+			(<if test="userLevelProjectId>0">user_level_project_id,</if>user_level_id, user_level_type, user_type, user_level_project_name, user_level_project_descripition, current_status, flag)
+		VALUES
+			(<if test="userLevelProjectId>0">#{userLevelProjectId},</if>#{userLevelId}, #{userLevelType}, #{userType}, #{userLevelProjectName}, #{userLevelProjectDescripition}, #{currentStatus}, #{flag})
+		<selectKey keyProperty="userLevelProjectId" resultType="int">
+			SELECT LAST_INSERT_ID() as user_level_project_id
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="UserLevelProject">
+		UPDATE
+			user_level_project
+		SET
+			user_level_id = #{userLevelId},
+			user_level_type = #{userLevelType},
+			user_type = #{userType},
+			user_level_project_name = #{userLevelProjectName},
+			user_level_project_descripition = #{userLevelProjectDescripition},
+			current_status = #{currentStatus},
+			flag = #{flag}
+		WHERE
+			user_level_project_id = #{userLevelProjectId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			user_level_project
+		WHERE
+			user_level_project_id = #{userLevelProjectId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="userLevelProjectResult">
+		SELECT
+			user_level_project_id,
+			user_level_id,
+			user_level_type,
+			user_type,
+			user_level_project_name,
+			user_level_project_descripition,
+			current_status,
+			flag
+		FROM
+			user_level_project
+		WHERE
+			user_level_project_id = #{userLevelProjectId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+			<if test="userLevelId > 0">
+				AND user_level_id=#{userLevelId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="UserLevelProjectCriteria" resultMap="userLevelProjectResult">
+		SELECT
+			user_level_project_id,
+			user_level_id,
+			user_level_type,
+			user_type,
+			user_level_project_name,
+			user_level_project_descripition,
+			current_status,
+			flag
+		FROM
+			user_level_project
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			user_level_project_id ASC
+	</select>
+
+	<select id="count" parameterType="UserLevelProjectCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			user_level_project
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

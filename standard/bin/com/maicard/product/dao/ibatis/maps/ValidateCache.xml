@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:55:37 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ValidateCache">
+
+	<resultMap id="validateCacheResult" type="ValidateCache">
+		<result property="data1" column="data1"/>
+		<result property="data2" column="data2"/>
+		<result property="data3" column="data3"/>
+	</resultMap>	
+
+	<select id="initCacheFromItem" resultMap="validateCacheResult">
+		SELECT DISTINCT a.data_value as data1,b.data_value as data2 FROM (SELECT product_id,data_define_id,data_value,current_status FROM item_data WHERE data_define_id=179 ) a INNER JOIN (SELECT product_id,data_define_id,data_value,current_status FROM item_data WHERE data_define_id=181 ) b ON a.product_id=b.product_id
+		UNION ALL
+		SELECT DISTINCT a.data_value as data1 ,b.data_value as data2 FROM (SELECT product_id,data_define_id,data_value,current_status FROM item_data_history WHERE data_define_id=179 ) a INNER JOIN(SELECT product_id,data_define_id,data_value,current_status FROM item_data_history WHERE data_define_id=181 ) b ON a.product_id=b.product_id;
+	</select>	
+</mapper>

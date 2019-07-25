@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:58 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.site.sql.Document">
+
+	<resultMap id="documentResult" type="Document">
+		<result property="udid" column="udid"/>
+		<result property="documentCode" column="document_code"/>
+		<result property="viewLevel" column="view_level"/>
+		<result property="level" column="level"/>
+		<result property="parentUdid" column="parent_udid"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="author" column="author"/>
+		<result property="publisherId" column="publisher_id"/>
+		<result property="publisher" column="publisher"/>
+		<result property="createTime" column="create_time"/>
+		<result property="publishTime" column="publish_time"/>
+		<result property="validTime" column="valid_time"/>
+		<result property="displayTypeId" column="display_type_id"/>
+		<result property="displayTypeName" column="display_type_name"/>
+		<result property="displayIndex" column="display_index"/>
+		<result property="documentTypeId" column="document_type_id"/>
+		<result property="documentTypeCode" column="document_type_code"/>
+		<result property="flag" column="flag"/>
+		<result property="languageId" column="language_id"/>
+		<result property="languageName" column="language_name"/>
+		<result property="mimeType" column="mime_type"/>
+		<result property="alwaysOnTop" column="always_on_top"/>
+		<result property="redirectTo" column="redirect_to"/>
+		<result property="templateId" column="template_id"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="lastModified" column="last_modified"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="Document"  useGeneratedKeys="true"  keyProperty="udid">
+		INSERT INTO document
+			(<if test="udid>0">udid,</if>owner_id, document_code, view_level, `level`, parent_udid, title, content, author, publisher_id, create_time, publish_time, valid_time, display_type_id, display_index, document_type_id, flag, language_id, mime_type, redirect_to, template_id, current_status)
+		VALUES
+			(<if test="udid>0">#{udid},</if> #{ownerId}, #{documentCode}, #{viewLevel}, #{level}, #{parentUdid}, #{title}, #{content}, #{author}, #{publisherId}, #{createTime}, #{publishTime}, #{validTime}, #{displayTypeId}, #{displayIndex}, #{documentTypeId}, #{flag}, #{languageId}, #{mimeType}, #{redirectTo}, #{templateId}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="Document">
+		UPDATE
+			document
+		SET
+			document_code = #{documentCode},
+			view_level = #{viewLevel},
+			`level` = #{level},
+			`parent_udid` = #{parentUdid},
+			title = #{title},
+			content = #{content},
+			author = #{author},
+			publisher_id = #{publisherId},
+			publish_time = #{publishTime},
+			valid_time = #{validTime},
+			display_type_id = #{displayTypeId},
+			display_index = #{displayIndex},
+			document_type_id = #{documentTypeId},
+			flag = #{flag},
+			language_id = #{languageId},
+			mime_type = #{mimeType},
+			always_on_top = #{alwaysOnTop},
+			redirect_to = #{redirectTo},
+			template_id = #{templateId},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			udid = #{udid}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			document
+		WHERE
+			udid = #{udid}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="documentResult">
+		SELECT
+			a.udid,
+			a.document_code,
+			a.view_level,
+			a.level,
+			a.parent_udid,
+			a.title,
+			a.content,
+			a.author,
+			a.publisher_id,
+			a.create_time,
+			a.publish_time,
+			a.valid_time,
+			a.display_type_id,
+			a.display_index,
+			a.document_type_id,
+			a.flag,
+			a.language_id,
+			a.mime_type,
+			a.always_on_top,
+			a.current_status,
+			a.redirect_to,
+			a.template_id,
+			a.last_modified,
+			a.owner_id,
+			b.document_type_name,
+			b.document_type_code,
+			c.username,
+			d.display_type_name
+			
+		FROM
+			document as a
+			inner join document_type as b on a.document_type_id = b.document_type_id
+			left join partner as c on a.publisher_id = c.uuid
+			left join display_type as d on a.display_type_id = d.display_type_id		
+		WHERE
+			a.udid = #{udid}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="author != null">
+				a.author=#{author}
+			</if>
+			<if test="udid > 0">
+				AND a.udid =#{udid}
+			</if>
+			<if test="maxUdid > 0">
+				AND a.udid &lt;=#{maxUdid}
+			</if>
+			<if test="minUdid > 0">
+				AND a.udid &gt;=#{minUdid}
+			</if>
+			<if test="maxViewLevel > 0">
+				AND a.view_level &lt;=#{maxViewLevel}
+			</if>
+			<if test="title != null">
+				AND a.title like concat('%', #{title}, '%')
+			</if>
+			
+			<if test="mimeType != null">
+				AND a.mime_type = #{mimeType}
+			</if>
+			<if test="publishTime != null">
+				AND a.publish_time like concat(#{publishTime}, '%')
+			</if>
+			<if test="publishTimeBegin != null">
+				AND a.publish_time &gt;= #{publishTimeBegin}
+			</if>
+			<if test="publishTimeEnd != null">
+				AND a.publish_time &lt;= #{publishTimeEnd}
+			</if>
+			<if test="documentTypeId > 0">
+				AND a.document_type_id=#{documentTypeId}
+			</if>
+			<if test="documentTypeCode != null">
+				AND b.document_type_code=#{documentTypeCode}
+			</if>	
+			<if test="noDocumentTypeCode != null">
+				AND b.document_type_code != #{noDocumentTypeCode}
+			</if>
+			<if test="documentCode != null and documentCode.length > 0">
+				AND a.document_code in 
+				<foreach item="item" collection="documentCode" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+					
+			<if test="currentStatus != null">
+				AND a.current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="displayTypeId > 0">
+				AND a.display_type_id=#{displayTypeId}
+			</if>
+			<if test="publisherId > 0">
+				AND a.publisher_id=#{publisherId}
+			</if>
+			<if test="nodePath != null">			
+				AND a.udid 
+					IN (SELECT udid FROM document_node_relation AS b INNER JOIN node AS c ON b.`node_id`=c.`node_id` AND c.`path`=
+		 			<foreach collection="nodePath" item="item" separator=") AND a.udid IN (SELECT udid FROM document_node_relation AS b INNER JOIN node AS c ON b.`node_id`=c.`node_id` AND c.path=" close=")">
+						#{item}
+        			</foreach> 
+        	</if>
+        	<if test="ownerId > 0">
+				AND a.owner_id = #{ownerId}
+			</if>
+			<if test="flag > 0">
+				AND a.flag = #{flag}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="listPk" parameterType="DocumentCriteria" resultType="int">
+		SELECT
+			a.udid
+		FROM
+			document as a
+			inner join document_type as b on a.document_type_id = b.document_type_id
+			left join sys_user as c on a.publisher_id = c.uuid
+			left join display_type as d on a.display_type_id = d.display_type_id
+			<if test="ignoreReader > 0">
+			    left join user_read_log as f on a.udid=f.udid and f.uuid != #{ignoreReader}			    
+			</if>
+			<if test="tags != null and tags.length &gt; 0">
+				INNER JOIN (SELECT g.tag_name tag_name, h.object_id object_id FROM tag AS g, tag_object_relation AS h WHERE g.tag_id=h.tag_id) AS j ON a.udid=j.object_id
+				AND j.tag_name IN
+				<foreach item="item" collection="tags" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>			
+			</if>
+		<include refid="criteriaWhereClause"/>
+		<if test="orderBy != null">
+		    ORDER BY ${orderBy}		    
+		</if>
+		<if test="orderBy == null">
+		    ORDER BY
+			a.always_on_top DESC , a.display_index DESC,  a.publish_time DESC, a.udid DESC
+		</if>
+		
+	</select>
+
+	<select id="list" parameterType="DocumentCriteria" resultMap="documentResult">
+		SELECT
+			a.udid,
+			a.document_code,
+			a.title,
+			a.content,
+			a.author,
+			a.publisher_id,
+			a.create_time,
+			a.publish_time,
+			a.valid_time,
+			a.display_type_id,
+			a.display_index,
+			a.document_type_id,
+			a.flag,
+			a.language_id,
+			a.mime_type,
+			a.always_on_top,
+			a.current_status,
+			a.redirect_to,
+			a.template_id,
+			a.last_modified,
+			a.owner_id,
+			b.document_type_name,
+			b.document_type_code,
+			c.username,
+			d.display_type_name,
+			e.language_name
+			
+		FROM
+			document as a
+			inner join document_type as b on a.document_type_id = b.document_type_id
+			left join sys_user as c on a.publisher_id = c.uuid
+			left join display_type as d on a.display_type_id = d.display_type_id
+		<include refid="criteriaWhereClause"/>
+		<if test="orderBy != null">
+		    ORDER BY ${orderBy}		    
+		</if>
+		<if test="orderBy == null">
+		    ORDER BY
+			a.always_on_top DESC , a.display_index DESC,  a.publish_time DESC, a.udid DESC
+		</if>
+	</select>	
+	
+	<select id="count" parameterType="DocumentCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			document as a
+			inner join document_type as b on a.document_type_id = b.document_type_id
+			left join sys_user as c on a.publisher_id = c.uuid
+			left join display_type as d on a.display_type_id = d.display_type_id
+		<include refid="criteriaWhereClause"/>
+	</select>
+</mapper>

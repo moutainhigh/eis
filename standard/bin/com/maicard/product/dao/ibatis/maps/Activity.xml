@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:42 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.product.sql.Activity">
+
+	<resultMap id="activityResult" type="Activity">
+		<result property="activityId" column="activity_id"/>
+		<result property="activityType" column="activity_type"/>
+		<result property="activityName" column="activity_name"/>
+		<result property="activityCode" column="activity_code"/>
+		<result property="activityIdentify" column="activity_identify"/>
+		<result property="activityDesc" column="activity_desc"/>
+		<result property="payPromotion" column="pay_promotion"/>
+		<result property="loginPromotion" column="login_promotion"/>
+		<result property="processor" column="processor"/>		
+		<result property="accountLimit" column="account_limit"/>
+		<result property="accountFreeLimit" column="account_free_limit"/>
+		<result property="accountFeePerCount" column="account_fee_per_count"/>
+		<result property="promotion" column="promotion"/>
+		<result property="ipLimit" column="ip_limit"/>
+		<result property="logging" column="logging"/>
+		<result property="url" column="url"/>		
+		<result property="beginTime" column="begin_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		<result property="completePercent" column="complete_percent"/>
+		<result property="weight" column="weight"/>
+		<result property="exclude" column="exclude"/>
+		<result property="relationObjectType" column="relation_object_type"/>
+		<result property="relationObjectData" column="relation_object_data"/>
+		<result property="relationMode" column="relation_mode"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			activity_id,
+			activity_type,
+			activity_name,
+			activity_code,
+			activity_identify,
+			activity_desc,
+			processor,
+			account_limit,
+			account_free_limit,
+			account_fee_per_count,
+			promotion, 
+			login_promotion,
+			pay_promotion,
+			ip_limit,
+			current_status,
+			logging,
+			url,
+			begin_time,
+			end_time,
+			data,
+			complete_percent,
+			`weight`,
+			`exclude`,
+			relation_object_type,
+			relation_object_data,
+			relation_mode,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="Activity" useGeneratedKeys="true"  keyProperty="activityId">
+		INSERT INTO activity
+			(<if test="activityId > 0">activity_id, </if> owner_id, activity_type, activity_name, activity_code, activity_identify, activity_desc, pay_promotion, processor, account_limit, account_free_limit, account_fee_per_count, promotion, ip_limit, current_status, logging, url, begin_time, end_time, data, complete_percent, `weight`, `exclude`, relation_object_type, relation_object_data, relation_mode)
+		VALUES
+			(<if test="activityId > 0">#{activityId}, </if> #{ownerId}, #{activityType}, #{activityName}, #{activityCode}, #{activityIdentify}, #{activityDesc}, #{payPromotion}, #{processor}, #{accountLimit}, #{accountFreeLimit}, #{accountFeePerCount}, #{promotion}, #{ipLimit}, #{currentStatus}, #{logging}, #{url}, #{beginTime}, #{endTime}, #{data, javaType=HashMap, jdbcType=VARCHAR}, #{completePercent}, #{weight}, #{exclude}, #{relationObjectType}, #{relationObjectData}, #{relationMode})
+	</insert>
+
+	<update id="update" parameterType="Activity">
+		UPDATE
+			activity
+		SET
+			activity_type = #{activityType},
+			activity_name = #{activityName},
+			activity_code = #{activityCode},
+			activity_identify = #{activityIdentify},
+			activity_desc = #{activityDesc},
+			pay_promotion = #{payPromotion},
+			login_promotion = #{loginPromotion},
+			processor = #{processor},
+			account_limit = #{accountLimit},
+			account_free_limit = #{accountFreeLimit},
+			account_fee_per_count = #{accountFeePerCount},
+			promotion = #{promotion},
+			ip_limit = #{ipLimit},
+			current_status = #{currentStatus},
+			logging = #{logging},
+			url = #{url},
+			begin_time = #{beginTime},
+			end_time = #{endTime},
+			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
+			complete_percent = #{completePercent},
+			`weight` = #{weight},
+			`exclude` = #{exclude},
+			relation_object_type = #{relationObjectType},
+			relation_object_data = #{relationObjectData},
+			relation_mode = #{relationMode},
+			owner_id = #{ownerId}
+		WHERE
+			activity_id = #{activityId}
+	</update>
+
+	<delete id="delete" parameterType="long">
+		DELETE FROM
+			activity
+		WHERE
+			activity_id = #{activityId}
+	</delete>
+	
+	<select id="select" parameterType="long" resultMap="activityResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			activity 
+		WHERE
+			activity_id = #{activityId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="activityType !=null and activityType !=''">
+				activity_type=#{activityType}
+			</if>
+			<if test="activityIdentify !=null">
+				AND activity_identify=#{activityIdentify}
+			</if>
+			<if test="activityCode !=null">
+				AND activity_code=#{activityCode}
+			</if>
+			<if test="currentStatus != null">
+			   <if test="activityType !=null">
+			     AND 
+			   </if>
+				  current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="activityId > 0">
+		       <if test="activityType !=null and activityType !=''">
+			     AND 
+			   </if>			
+				activity_id=#{activityId}
+			</if>
+			<if test="activityName != null and activityName !=''">
+			   <if test="activityType !=null and activityType !=''">
+			     AND 
+			   </if>		
+				activity_name=#{activityName}
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="ActivityCriteria" resultType="long">
+		SELECT
+			activity_id
+		FROM
+			activity 
+		<include refid="criteriaWhereClause"/>
+		ORDER BY `weight` DESC, activity_id
+	</select>
+
+	<select id="count" parameterType="ActivityCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			activity
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

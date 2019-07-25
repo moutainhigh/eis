@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:11 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Tag">
+
+	<resultMap id="tagResult" type="Tag">
+		<result property="tagId" column="tag_id"/>
+		<result property="tagName" column="tag_name"/>
+		<result property="tagCode" column="tag_code"/>
+		<result property="objectCount" column="object_count"/>
+		<result property="hits" column="hits"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			tag_id,
+			tag_name,
+			object_count,
+			hits,
+			current_status,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="Tag"  useGeneratedKeys="true"  keyProperty="tagId">
+		INSERT INTO tag
+			(<if test="tagId>0">tag_id,</if> owner_id, tag_name, tag_code, object_count, hits, current_status)
+		VALUES
+			(<if test="tagId>0">#{tagId},</if> #{ownerId}, #{tagName}, #{tagCode}, #{objectCount}, #{hits}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="Tag">
+		UPDATE
+			tag
+		SET
+			tag_code = #{tagCode},
+			object_count = #{objectCount},
+			hits = #{hits},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			tag_id = #{tagId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			tag
+		WHERE
+			tag_id = #{tagId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="tagResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			tag
+		WHERE
+			tag_id = #{tagId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="ownerId > 0">
+				owner_id = #{ownerId}
+			</if>		
+			<if test="tagName != null">
+				AND tag_name = #{tagName}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>		
+			<if test="objectType != null">
+				AND tag_id  IN (SELECT tag_id FROM tag_object_relation WHERE object_type=#{objectType})
+			</if>
+			<if test="ownerId > 0">
+			</if>
+		</where>
+		<if test="orderBy != null">			
+			ORDER BY 					
+		 	<foreach collection="orderBy" item="order" separator=",">
+				${order}
+        	</foreach> 
+        </if>		
+	</sql>
+	
+	<select id="listPk" parameterType="TagCriteria" resultType="long">
+		SELECT
+			tag_id
+		FROM
+			tag  
+		<include refid="criteriaWhereClause"/>
+			
+	</select>
+	
+
+	<select id="list" parameterType="TagCriteria" resultMap="tagResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			tag
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="count" parameterType="TagCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tag
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

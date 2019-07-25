@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MessageType">
+
+	<resultMap id="messageTypeResult" type="MessageType">
+		<result property="messageTypeId" column="message_type_id"/>
+		<result property="messageTypeName" column="message_type_name"/>
+		<result property="messageTypeDescription" column="message_type_description"/>
+		<result property="charLimit" column="char_limit"/>
+		<result property="templateContent" column="template_content"/>
+		<result property="processClass" column="process_class"/>
+		<result property="currentStatus" column="current_status"/>		
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+		message_type_id,
+		message_type_name,
+		message_type_description,
+		char_limit,
+		template_content,
+		process_class,
+		current_status,
+		owner_id
+	</sql>
+
+	<insert id="insert" parameterType="MessageType" useGeneratedKeys="true"  keyProperty="messageTypeId">
+		INSERT INTO message_type
+			(<if test="messageTypeId>0">message_type_id,</if>owner_id, message_type_name, message_type_description, char_limit, template_content, process_class, current_status)
+		VALUES
+			(<if test="messageTypeId>0">#{messageTypeId},</if>#{ownerId}, #{messageTypeName}, #{messageTypeDescription}, #{charLimit}, #{templateContent}, #{processClass}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="MessageType">
+		UPDATE
+			message_type
+		SET
+			message_type_name = #{messageTypeName},
+			message_type_description = #{messageTypeDescription},
+			char_limit = #{charLimit},
+			template_content = #{templateContent},
+			process_class = #{processClass},
+			current_status = #{currentStatus},	
+			owner_id = #{ownerId}
+		WHERE
+			message_type_id = #{message_typeId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			message_type
+		WHERE
+			message_type_id = #{message_typeId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="messageTypeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			message_type		
+		WHERE
+			message_type_id = #{message_typeId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="messageTypeName != null">
+			AND message_type_name=#{messageTypeName}
+		</if>
+		<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="MessageTypeCriteria" resultMap="messageTypeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			message_type	
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="count" parameterType="MessageTypeCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			message_type
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:17 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Template">
+
+	<resultMap id="templateResult" type="Template">
+		<result property="templateId" column="template_id"/>
+		<result property="templateName" column="template_name"/>
+		<result property="suggestLevel" column="suggest_level"/>
+		<result property="languageId" column="language_id"/>
+		<result property="templateSuiteId" column="template_suite_id"/>
+		<result property="templateLocation" column="template_location"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			template_id,
+			template_name,
+			suggest_level,
+			language_id,
+			template_suite_id,
+			template_location,
+			current_status,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="Template"  useGeneratedKeys="true"  keyProperty="templateId">
+		INSERT INTO template
+			(<if test="templateId>0">template_id,</if> owner_id, template_name, suggest_level, language_id, template_suite_id, template_location, current_status)
+		VALUES
+			(<if test="templateId>0">#{templateId},</if> #{ownerId}, #{templateName}, #{suggestLevel}, #{languageId}, #{templateSuiteId}, #{templateLocation}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="Template">
+		UPDATE
+			template
+		SET
+			template_name = #{templateName},
+			suggest_level = #{suggestLevel},
+			language_id = #{languageId},
+			template_suite_id = #{templateSuiteId},
+			template_location = #{templateLocation},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			template_id = #{templateId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			template
+		WHERE
+			template_id = #{templateId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="templateResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			template
+		WHERE
+			template_id = #{templateId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+		</where>
+	</sql>
+	
+	<select id="listPk" parameterType="TemplateCriteria" resultType="int">
+		SELECT
+			template_id
+		FROM
+			template
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="list" parameterType="TemplateCriteria" resultMap="templateResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			template
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			template_id ASC
+	</select>
+
+	<select id="count" parameterType="TemplateCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			template
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

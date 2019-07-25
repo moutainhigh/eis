@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:57:45 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PartnerPrivilegeRoleRelation">
+
+	<resultMap id="partnerPrivilegeRoleRelationResult" type="PartnerPrivilegeRoleRelation">
+		<result property="privilegeRoleRelationId" column="privilege_role_relation_id"/>
+		<result property="privilegeId" column="privilege_id"/>
+		<result property="roleId" column="role_id"/>
+		<result property="currentStatus" column="current_status"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="PartnerPrivilegeRoleRelation">
+		INSERT INTO partner_privilege_role_relation
+			(owner_id, privilege_id, role_id, current_status)
+		VALUES
+			(#{ownerId}, #{privilegeId}, #{roleId}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="PartnerPrivilegeRoleRelation">
+		UPDATE
+			partner_privilege_role_relation
+		SET
+			privilege_id = #{privilegeId},
+			role_id = #{roleId},
+			current_status = #{currentStatus}
+		WHERE
+			privilege_role_relation_id = #{privilegeRoleRelationId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			partner_privilege_role_relation
+		WHERE
+			privilege_role_relation_id = #{privilegeRoleRelationId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="partnerPrivilegeRoleRelationResult">
+		SELECT
+			privilege_role_relation_id,
+			privilege_id,
+			role_id,
+			current_status
+		FROM
+			partner_privilege_role_relation
+		WHERE
+			privilege_role_relation_id = #{privilegeRoleRelationId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+			<if test="privilegeId > 0">
+				AND privilege_id=#{privilegeId}
+			</if>
+			<if test="roleId > 0">
+				AND role_id=#{roleId}
+			</if>
+			
+		</where>
+	</sql>
+
+	<select id="list" parameterType="PartnerPrivilegeRoleRelationCriteria" resultMap="partnerPrivilegeRoleRelationResult">
+		SELECT
+			privilege_role_relation_id,
+			privilege_id,
+			role_id,
+			current_status
+		FROM
+			partner_privilege_role_relation
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			privilege_role_relation_id ASC
+	</select>
+
+	<select id="count" parameterType="PartnerPrivilegeRoleRelationCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			partner_privilege_role_relation
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

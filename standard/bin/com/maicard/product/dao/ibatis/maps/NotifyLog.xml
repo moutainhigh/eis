@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NotifyLog">
+
+	<resultMap id="notifyLogResult" type="NotifyLog">
+		<result property="transactionId" column="transaction_id"/>
+		<result property="sendTime" column="send_time"/>
+        <result property="response" column="response"/>		
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			transaction_id,
+			send_time,
+			response,
+			current_status,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="NotifyLog">
+		INSERT INTO notify_log
+			(owner_id, transaction_id, send_time,response, current_status)
+		VALUES
+			(#{ownerId}, #{transactionId}, #{sendTime},#{response}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="NotifyLog">
+		UPDATE
+			notify_log
+		SET
+			send_time = #{sendTime},
+			response=#{response},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			transaction_id = #{transactionId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			notify_log
+		WHERE
+			transaction_id = #{transactionId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="notifyLogResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			notify_log
+		WHERE
+			transaction_id = #{transactionId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="transactionId != null">
+				transaction_id = #{transactionId}		
+	  		</if>
+	  		<if test="beginTime != null">
+		  		AND send_time &gt;= #{beginTime}
+		  	</if>
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+	  		<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="NotifyLogCriteria" resultMap="notifyLogResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			notify_log
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			send_time DESC
+	</select>
+
+	<select id="count" parameterType="NotifyLogCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			notify_log
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<select id="getFailedNotify" parameterType="NotifyLogCriteria" resultMap="notifyLogResult">
+		SELECT
+			a.transaction_id,
+			a.send_time,
+			a.response,
+			a.current_status,
+			a.owner_id
+		FROM
+			notify_log as a,
+			(SELECT MAX(send_time) AS send_time FROM notify_log WHERE  current_status != 102008 AND transaction_id NOT IN (SELECT transaction_id FROM notify_log WHERE current_status=102008) GROUP BY transaction_id) as b
+		<where>
+			a.send_time=b.send_time 
+			<if test="beginTime != null">
+		  		AND a.send_time &gt;= #{beginTime}
+		  	</if>
+		</where>
+	</select>
+	
+	<select id="getUnSendNotify" parameterType="NotifyLogCriteria" resultMap="notifyLogResult">
+		SELECT
+			a.transaction_id,
+			a.close_time,
+			a.current_status,
+			a.owner_id
+		FROM
+			item as a
+		<where>
+			a.`close_time` != NULL AND a.close_time &gt;= #{beginTime}
+			AND
+			a.transaction_id not in (
+				SELECT transaction_id	FROM notify_log	WHERE	send_time &gt;= #{beginTime}
+		  	)
+		</where>
+	</select>
+	
+	<delete id="cleanOldNotifyLog" parameterType="NotifyLogCriteria">
+		DELETE FROM
+			notify_log
+		WHERE
+			send_time &lt; #{endTime}
+	</delete>
+
+</mapper>

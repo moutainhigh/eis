@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:54:01 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.money.sql.PayMethod">
+
+	<resultMap id="payMethodResult" type="PayMethod">
+		<result property="payMethodId" column="pay_method_id"/>
+		<result property="payChannelId" column="pay_channel_id"/>
+		<result property="name" column="name"/>
+		<result property="validTimeRange" column="valid_time_range"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+		<result property="processClass" column="process_class"/>
+		<result property="contextType" column="context_type"/>
+		<result property="payTypeId" column="pay_type_id"/>
+		<result property="referUuid" column="refer_uuid"/>
+		<result property="weight" column="weight"/>
+		<result property="percent" column="percent"/>
+		<result property="commission" column="commission"/>
+		<result property="commissionType" column="commission_type"/>				
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		<result property="ownerId" column="owner_id"/>
+		
+	</resultMap>
+	
+	<sql id="selectColumns">
+			pay_method_id,
+			pay_channel_id,
+			name,
+			valid_time_range,
+			current_status,
+			flag,
+			process_class,
+			context_type,
+			pay_method_id,
+			pay_type_id,
+			refer_uuid,
+			weight,
+			percent,
+			commission,
+			commission_type,
+			`data`,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="PayMethod" useGeneratedKeys="true"  keyProperty="payMethodId">
+		INSERT INTO pay_method
+			(<if test="payMethodId>0">pay_method_id,</if>owner_id, pay_channel_id, name, valid_time_range, current_status, flag, process_class, pay_type_id, refer_uuid, weight, percent, commission, commission_type, data, context_type)
+		VALUES
+			(<if test="payMethodId>0">#{payMethodId},</if>#{ownerId}, #{payChannelId}, #{name}, #{validTimeRange}, #{currentStatus}, #{flag}, #{processClass}, #{payTypeId}, #{referUuid}, #{weight}, #{percent}, #{commission}, #{commissionType}, #{data, javaType=HashMap, jdbcType=VARCHAR}, #{contextType})
+	</insert>
+
+	<update id="update" parameterType="PayMethod">
+		UPDATE
+			pay_method
+		SET
+			pay_channel_id = #{payChannelId},
+			name = #{name},
+			valid_time_range = #{validTimeRange},
+			current_status = #{currentStatus},
+			flag = #{flag},
+			process_class = #{processClass},
+			pay_type_id = #{payTypeId},
+			refer_uuid = #{referUuid},
+			weight = #{weight},
+			percent = #{percent},
+			commission = #{commission},
+			commission_type = #{commissionType},
+			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
+			context_type = #{contextType},
+			owner_id = #{ownerId}
+			
+		WHERE
+			pay_method_id = #{payMethodId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			pay_method
+		WHERE
+			pay_method_id = #{payMethodId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="payMethodResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			pay_method
+		WHERE
+			pay_method_id = #{payMethodId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null and currentStatus.length &gt; 0">
+			current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="referUuid > 0">
+				AND refer_uuid = #{referUuid}
+		</if>
+	  	<if test="contextType != null">
+				AND (context_type = #{contextType} OR context_type IS NULL)
+		</if>
+		<if test="payTypeId > 0">
+				AND pay_type_id = #{payTypeId}
+		</if>
+	  	<if test="ownerId > 0">
+				AND owner_id IN (#{ownerId},0)
+		</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="PayMethodCriteria" resultMap="payMethodResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			pay_method
+		<include refid="criteriaWhereClause"/>
+		<if test="orderBy != null">
+			ORDER BY ${orderBy}
+		</if>
+	</select>
+	
+	<select id="listPk" parameterType="PayMethodCriteria" resultType="int">
+		SELECT
+			pay_method_id
+		FROM
+			pay_method
+		<include refid="criteriaWhereClause"/>
+		<if test="orderBy != null">
+			ORDER BY ${orderBy}
+		</if>
+	</select>
+
+	<select id="count" parameterType="PayMethodCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			pay_method
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

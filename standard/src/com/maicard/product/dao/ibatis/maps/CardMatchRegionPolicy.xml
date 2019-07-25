@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:55:33 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CardMatchRegionPolicy">
+
+	<resultMap id="ioServerMapResult" type="CardMatchRegionPolicy">
+		<result property="cardMatchRegionPolicyId" column="card_match_region_policy_id"/>
+		<result property="cardRegion" column="card_region"/>
+		<result property="cardType" column="card_type"/>
+		<result property="labelMoney" column="label_money"/>
+		<result property="processUuid" column="process_uuid"/>
+		<result property="currentStatus" column="current_status"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="CardMatchRegionPolicy"  useGeneratedKeys="true"  keyProperty="cardMatchRegionPolicyId">
+		INSERT INTO card_match_region_policy
+			(<if test="cardMatchRegionPolicyId>0">card_match_region_policy_id,</if>card_region, card_type, label_money, process_uuid, current_status)
+		VALUES
+			(<if test="cardMatchRegionPolicyId>0">#{cardMatchRegionPolicyId},</if>#{cardRegion}, #{cardType}, #{labelMoney}, #{processUuid}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="CardMatchRegionPolicy">
+		UPDATE
+			card_match_region_policy
+		SET
+			card_region = #{cardRegion},
+			card_type = #{cardType},
+			label_money = #{labelMoney},
+			process_uuid = #{processUuid},
+			current_status = #{currentStatus}
+		WHERE
+			card_match_region_policy_id = #{cardMatchRegionPolicyId}
+	</update>
+	
+	
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			card_match_region_policy
+		WHERE
+			card_match_region_policy_id = #{cardMatchRegionPolicyId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="ioServerMapResult">
+		SELECT
+			card_match_region_policy_id,
+			card_region,
+			card_type,
+			label_money,
+			process_uuid,
+			current_status,
+		FROM
+			card_match_region_policy
+		WHERE
+			card_match_region_policy_id = #{cardMatchRegionPolicyId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="cardRegion != null">
+				card_region=#{cardRegion}
+			</if>
+			<if test="cardType != null">
+				AND card_type=#{cardType}
+			</if>
+			<if test="labelMoney > 0">
+				AND label_money=#{labelMoney}
+			</if>
+			<if test="processUuid > 0">
+				AND (process_uuid=#{processUuid} OR process_uuid = 0)
+			</if>
+			
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="CardMatchRegionPolicyCriteria" resultMap="ioServerMapResult">
+		SELECT
+			card_match_region_policy_id,
+			card_region,
+			card_type,
+			label_money,			
+			process_uuid,
+			current_status
+		FROM
+			card_match_region_policy
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="count" parameterType="CardMatchRegionPolicyCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			card_match_region_policy
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<delete id="deleteByCriteria" parameterType="CardMatchRegionPolicyCriteria">
+		DELETE FROM
+			card_match_region_policy
+		<include refid="criteriaWhereClause"/>
+	</delete>
+	
+
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:45 CST 2013-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>			
+		<!--  site  -->		
+		<typeAlias alias="Advert" type="com.maicard.site.domain.Advert"/>
+		<typeAlias alias="AdvertCriteria" type="com.maicard.site.criteria.AdvertCriteria"/>
+		
+		<typeAlias alias="DisplayType" type="com.maicard.site.domain.DisplayType"/>
+		<typeAlias alias="DisplayTypeCriteria" type="com.maicard.site.criteria.DisplayTypeCriteria"/>
+		
+		<typeAlias alias="Document" type="com.maicard.site.domain.Document"/>
+		<typeAlias alias="DocumentCriteria" type="com.maicard.site.criteria.DocumentCriteria"/>
+		
+		<typeAlias alias="DocumentData" type="com.maicard.site.domain.DocumentData"/>
+		<typeAlias alias="DocumentDataCriteria" type="com.maicard.site.criteria.DocumentDataCriteria"/>
+
+		<typeAlias alias="DocumentNodeRelation" type="com.maicard.site.domain.DocumentNodeRelation"/>
+		<typeAlias alias="DocumentNodeRelationCriteria" type="com.maicard.site.criteria.DocumentNodeRelationCriteria"/>
+
+		<typeAlias alias="DocumentType" type="com.maicard.site.domain.DocumentType"/>
+		<typeAlias alias="DocumentTypeCriteria" type="com.maicard.site.criteria.DocumentTypeCriteria"/>
+		
+		<typeAlias alias="Node" type="com.maicard.site.domain.Node"/>
+		<typeAlias alias="NodeCriteria" type="com.maicard.site.criteria.NodeCriteria"/>
+			
+		<typeAlias alias="Staticize" type="com.maicard.site.domain.Staticize"/>
+		<typeAlias alias="StaticizeCriteria" type="com.maicard.site.criteria.StaticizeCriteria"/>
+			
+		<typeAlias alias="Tag" type="com.maicard.site.domain.Tag"/>
+		<typeAlias alias="TagCriteria" type="com.maicard.site.criteria.TagCriteria"/>
+	
+		<typeAlias alias="TagObjectRelation" type="com.maicard.site.domain.TagObjectRelation"/>
+		<typeAlias alias="TagObjectRelationCriteria" type="com.maicard.site.criteria.TagObjectRelationCriteria"/>	
+
+		<typeAlias alias="TagStat" type="com.maicard.site.domain.TagStat"/>
+		<typeAlias alias="TagStatCriteria" type="com.maicard.site.criteria.TagStatCriteria"/>
+		
+		<typeAlias alias="Template" type="com.maicard.site.domain.Template"/>
+		<typeAlias alias="TemplateCriteria" type="com.maicard.site.criteria.TemplateCriteria"/>		
+		
+		<typeAlias alias="UserReadLog" type="com.maicard.site.domain.UserReadLog"/>
+		<typeAlias alias="UserReadLogCriteria" type="com.maicard.site.criteria.UserReadLogCriteria"/>	
+	</typeAliases>
+</configuration>

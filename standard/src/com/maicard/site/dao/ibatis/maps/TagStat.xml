@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:16 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TagStat">
+
+	<resultMap id="tagStatResult" type="TagStat">
+		<result property="tagStatId" column="tag_stat_id"/>
+		<result property="tagId" column="tag_id"/>
+		<result property="hits" column="hits"/>
+		<result property="statHour" column="stat_hour"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="TagStat"  useGeneratedKeys="true"  keyProperty="tagStatId">
+		INSERT INTO tag_stat
+			(<if test="tagStatId>0">tag_stat_id,</if> owner_id, tag_id, hits, stat_hour)
+		VALUES
+			(<if test="languageId>0">#{tagStatId},</if> #{ownerId}, #{tagId}, #{hits}, #{statHour})
+	</insert>
+
+	<update id="update" parameterType="TagStat">
+		UPDATE
+			tag_stat
+		SET
+			tag_id = #{tagId},
+			hits = #{hits},
+			stat_hour = #{statHour},
+			owner_id = #{ownerId}
+		WHERE
+			tag_stat_id = #{tagStatId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			tag_stat
+		WHERE
+			tag_stat_id = #{tagStatId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="tagStatResult">
+		SELECT
+			tag_stat_id,
+			tag_id,
+			hits,
+			stat_hour,
+			owner_id
+		FROM
+			tag_stat
+		WHERE
+			tag_stat_id = #{tagStatId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+			current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+	  	</where>
+	</sql>
+
+	<select id="list" parameterType="TagStatCriteria" resultMap="tagStatResult">
+		SELECT
+			tag_stat_id,
+			tag_id,
+			hits,
+			stat_hour,
+			owner_id
+		FROM
+			tag_stat
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			tag_stat_id ASC
+	</select>
+
+	<select id="count" parameterType="TagStatCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tag_stat
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

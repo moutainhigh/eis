@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:55:37 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductPartnerRelation">
+
+	<resultMap id="productPartnerRelationResult" type="ProductPartnerRelation">
+		<result property="productPartnerRelationId" column="product_partner_relation_id"/>
+		<result property="productId" column="product_id"/>
+		<result property="partnerId" column="partner_id"/>
+		<result property="weight" column="weight"/>
+		<result property="ttl" column="ttl"/>
+		<result property="maxRetry" column="max_retry"/>
+		<result property="failPolicy" column="fail_policy"/>
+		<result property="currentStatus" column="current_status"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="ProductPartnerRelation"  useGeneratedKeys="true"  keyProperty="productPartnerRelationId">
+		INSERT INTO product_partner_relation
+			(<if test="productPartnerRelationId>0">product_partner_relation_id,</if>product_id, partner_id, weight, ttl, max_retry, fail_policy, current_status)
+		VALUES
+			(<if test="productPartnerRelationId>0">#{productPartnerRelationId},</if>#{productId}, #{partnerId}, #{weight}, #{ttl}, #{maxRetry}, #{failPolicy}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="ProductPartnerRelation">
+		UPDATE
+			product_partner_relation
+		SET
+			product_id = #{productId},
+			partner_id = #{partnerId},
+			weight = #{weight},
+			ttl = #{ttl},
+			max_retry = #{maxRetry},
+			fail_policy = #{failPolicy},
+			current_status = #{currentStatus}
+		WHERE
+			product_partner_relation_id = #{productPartnerRelationId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			product_partner_relation
+		WHERE
+			product_partner_relation_id = #{productPartnerRelationId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="productPartnerRelationResult">
+		SELECT
+			product_partner_relation_id,
+			product_id,
+			partner_id,
+			weight,
+			ttl,
+			max_retry,
+			fail_policy,
+			current_status
+		FROM
+			product_partner_relation
+		WHERE
+			product_partner_relation_id = #{productPartnerRelationId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+	  		<if test="productId > 0">
+				AND product_id = #{productId}
+	  		</if>
+	  		<if test="partnerId > 0">
+				AND partner_id = #{partnerId}
+	  		</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="ProductPartnerRelationCriteria" resultMap="productPartnerRelationResult">
+		SELECT
+			product_partner_relation_id,
+			product_id,
+			partner_id,
+			weight,
+			ttl,
+			max_retry,
+			fail_policy,
+			current_status
+		FROM
+			product_partner_relation
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			weight DESC
+	</select>
+
+	<select id="count" parameterType="ProductPartnerRelationCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			product_partner_relation
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

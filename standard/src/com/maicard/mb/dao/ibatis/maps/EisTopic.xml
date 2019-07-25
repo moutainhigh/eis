@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:52:30 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EisTopic">
+
+	<resultMap id="topicResult" type="EisTopic">
+		<result property="topicId" column="topic_id"/>
+		<result property="topicCode" column="topic_code"/>
+		<result property="topicName" column="topic_name"/>
+		<result property="topicDescription" column="topic_description"/>
+		<result property="currentStatus" column="current_status"/>		
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<sql id="selectColumns">
+		topic_id,
+		topic_code,
+		topic_name,
+		topic_description,
+		current_status,
+		owner_id
+	</sql>
+	
+	<insert id="insert" parameterType="EisTopic" useGeneratedKeys="true"  keyProperty="topicId">
+		INSERT INTO eis_topic
+			(<if test="topicId>0">topic_id,</if>owner_id, topic_code, topic_name, topic_description, current_status)
+		VALUES
+			(<if test="topicId>0">topicId,</if>ownerId, #{topicCode}, #{topicName}, #{topicDescription}, #{currentStatus})
+	</insert>
+	
+	
+
+	<update id="update" parameterType="EisTopic">
+		UPDATE
+			eis_topic
+		SET
+			topic_code = #{topicCode},
+			topic_name = #{topicName},
+			topic_description = #{topicDescription},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			topic_id = #{topicId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			eis_topic
+		WHERE
+			topic_id = #{topicId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="topicResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			eis_topic		
+		WHERE
+			topic_id = #{topicId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="topicCode != null">
+			AND topic_code=#{topicCode}
+		</if>
+		<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+		</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="EisTopicCriteria" resultMap="topicResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			eis_topic	
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			topic_id ASC
+	</select>
+
+	<select id="count" parameterType="EisTopicCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			eis_topic
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

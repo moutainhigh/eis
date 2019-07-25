@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:13 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.site.sql.TagObjectRelation">
+
+	<resultMap id="tagObjectRelationResult" type="TagObjectRelation">
+		<result property="tagObjectRelationId" column="tag_object_relation_id"/>
+		<result property="tagId" column="tag_id"/>
+		<result property="objectType" column="object_type"/>
+		<result property="objectId" column="object_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="extraStatus" column="extra_status"/>
+	</resultMap>
+	
+
+	<insert id="insert" parameterType="TagObjectRelation" useGeneratedKeys="true"  keyProperty="tagObjectRelationId">
+		INSERT INTO tag_object_relation
+			(<if test="tagObjectRelationId>0">tag_object_relation_id,</if>tag_id, object_type, object_id, create_time, current_status, extra_status)
+		VALUES
+			(<if test="tagObjectRelationId>0">#{tagObjectRelationId},</if>#{tagId}, #{objectType}, #{objectId}, #{createTime}, #{currentStatus}, #{extraStatus})
+		ON DUPLICATE KEY UPDATE tag_id=#{tagId},object_type=#{objectType},object_id=#{objectId}
+	</insert>
+
+	<update id="update" parameterType="TagObjectRelation">
+		UPDATE
+			tag_object_relation
+		SET
+			tag_id = #{tagId},
+			object_type = #{objectType},
+			object_id = #{objectId},
+			create_time = #{createTime},
+			current_status = #{currentStatus},
+			extra_status = #{extraStatus}
+		WHERE
+			tag_object_relation_id = #{tagObjectRelationId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			tag_object_relation
+		WHERE
+			tag_object_relation_id = #{tagObjectRelationId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="tagObjectRelationResult">
+		SELECT
+			tag_object_relation_id,
+			tag_id,
+			object_type,
+			object_id,
+			create_time,
+			current_status,
+			extra_status
+		FROM
+			tag_object_relation
+		WHERE
+			tag_object_relation_id = #{tagObjectRelationId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="objectType != null">
+				a.object_type=#{objectType}
+			</if>
+			<if test="objectId > 0">
+				AND a.object_id=#{objectId}
+			</if>
+			
+			<if test="currentStatus != null">
+				AND a.current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="tagIds != null and tagIds.length &gt; 0">
+				AND a.tag_id in (
+				<foreach collection="tagIds" item="item" separator="," close=")">
+						#{item}
+        		</foreach> 
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="TagObjectRelationCriteria" resultMap="tagObjectRelationResult">
+		SELECT
+			a.tag_object_relation_id,
+			a.tag_id,
+			a.object_type,
+			a.object_id,
+			a.create_time,
+			a.current_status,
+			a.extra_status
+		FROM
+			tag_object_relation as a
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			tag_object_relation_id ASC
+	</select>
+
+
+	<select id="count" parameterType="TagObjectRelationCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tag_object_relation as a
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	
+	
+	<delete id="deleteByCriteria" parameterType="TagObjectRelationCriteria">
+		DELETE a FROM
+			tag_object_relation as a
+		<include refid="criteriaWhereClause"/>
+	</delete>
+
+</mapper>

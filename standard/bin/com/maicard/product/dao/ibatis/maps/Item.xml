@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:55:34 CST 2013 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.product.sql.Item">
+
+	<resultMap id="itemResult" type="Item">
+		<result property="itemId" column="item_id" />
+		<result property="transactionTypeId" column="transaction_type_id" />
+		<result property="transactionId" column="transaction_id" />
+		<result property="inOrderId" column="in_order_id" />
+		<result property="outOrderId" column="out_order_id" />
+		<result property="name" column="name" />
+		<result property="content" column="content" />
+		<result property="productId" column="product_id" />
+		<result property="objectType" column="object_type" />
+		<result property="chargeFromAccount" column="charge_from_account" />
+		<result property="chargeToAccount" column="charge_to_account" />
+		<result property="labelMoney" column="label_money" />
+		<result property="rate" column="rate" />
+		<result property="count" column="count" />
+		<result property="requestMoney" column="request_money" />
+		<result property="successMoney" column="success_money" />
+		<result property="frozenMoney" column="frozen_money" />
+		<result property="inMoney" column="in_money" />
+		<result property="outMoney" column="out_money" />
+		<result property="enterTime" column="enter_time" />
+		<result property="ttl" column="ttl" />
+		<result property="maxRetry" column="max_retry" />
+		<result property="closeTime" column="close_time" />
+		<result property="currentStatus" column="current_status" />
+		<result property="extraStatus" column="extra_status" />
+		<result property="billingStatus" column="billing_status" />
+		<result property="outStatus" column="out_status" />
+		<result property="cartId" column="cart_id" />
+		<result property="lockGlobalUniqueId" column="lock_global_unique_id" />
+		<result property="processCount" column="process_count" />
+		<result property="supplyPartnerId" column="supply_partner_id" />
+		<result property="config" column="config" javaType="HashMap" jdbcType="VARCHAR" />
+		<result property="weight" column="weight" />
+		<result property="lastEffect" column="last_effect" />
+		<result property="shareConfigId" column="share_config_id" />
+		<result property="price" column="price" javaType="Price" jdbcType="VARCHAR" />
+		<result property="inviter" column="inviter" />
+		<result property="ownerId" column="owner_id" />
+	</resultMap>
+	<insert id="insert" parameterType="Item" useGeneratedKeys="true" keyProperty="itemId">
+		INSERT INTO item
+		(
+		<if test="itemId > 0">item_id, </if>
+		owner_id, transaction_id, in_order_id, out_order_id, transaction_type_id, name,
+		content, product_id, object_type, charge_from_account, charge_to_account,
+		label_money, rate, count, request_money, success_money, frozen_money, in_money, out_money,
+		enter_time, ttl, max_retry, close_time, current_status, extra_status, billing_status, out_status,
+		cart_id, lock_global_unique_id, process_count,
+		supply_partner_id, config, weight, last_effect, share_config_id, price, inviter)
+		VALUES
+		(
+		<if test="itemId > 0">#{itemId}, </if>
+		#{ownerId}, #{transactionId}, #{inOrderId}, #{outOrderId}, #{transactionTypeId},#{name}, #{content}, #{productId}, #{objectType}, #{chargeFromAccount},#{chargeToAccount}, #{labelMoney}, #{rate}, #{count}, #{requestMoney}, #{successMoney}, #{frozenMoney}, #{inMoney}, #{outMoney}, #{enterTime}, #{ttl}, #{maxRetry}, #{closeTime}, #{currentStatus}, #{extraStatus}, #{billingStatus}, #{outStatus}, #{cartId}, #{lockGlobalUniqueId}, #{processCount}, #{supplyPartnerId},#{config, javaType=HashMap, jdbcType=VARCHAR},
+		#{weight}, #{lastEffect}, #{shareConfigId}, #{price, javaType=Price, jdbcType=VARCHAR}, #{inviter})
+	</insert>
+
+	<update id="update" parameterType="Item">
+		UPDATE ${tableName}
+		SET
+		transaction_id = #{transactionId}, in_order_id = #{inOrderId}, out_order_id =
+		#{outOrderId},
+		transaction_type_id = #{transactionTypeId},
+		`name` = #{name},
+		content = #{content},
+		product_id = #{productId},
+		object_type = #{objectType},
+		charge_from_account = #{chargeFromAccount},
+		charge_to_account = #{chargeToAccount},
+		label_money = #{labelMoney},
+		rate = #{rate},
+		`count` = #{count},
+		request_money = #{requestMoney},
+		success_money = #{successMoney}, frozen_money =
+		#{frozenMoney}, in_money = #{inMoney}, out_money = #{outMoney},
+		enter_time = #{enterTime},
+		ttl = #{ttl}, max_retry = #{maxRetry},
+		close_time = #{closeTime},
+		current_status = #{currentStatus},
+		extra_status = #{extraStatus}, billing_status = #{billingStatus}, out_status = #{outStatus},
+		cart_id = #{cartId},
+		lock_global_unique_id = #{lockGlobalUniqueId}, process_count = #{processCount},
+		supply_partner_id = #{supplyPartnerId}, config = #{config, javaType=HashMap, jdbcType=VARCHAR}, weight = #{weight},
+		last_effect = #{lastEffect}, share_config_id = #{shareConfigId}, price = #{price, javaType=Price, jdbcType=VARCHAR}, inviter = #{inviter},owner_id = #{ownerId}
+		WHERE
+		item_id = #{itemId}
+	</update>
+
+	<update id="updateNoNull" parameterType="Item">
+		UPDATE
+		${tableName}
+		<set>
+			<if test="transactionId != null">
+				transaction_id = #{transactionId},
+			</if>
+			<if test="inOrderId != null">
+				in_order_id = #{inOrderId},
+			</if>
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			<if test="transactionTypeId > 0">
+				transaction_type_id = #{transactionTypeId},
+			</if>
+			<if test="name != null">
+				`name` = #{name},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="objectType != null">
+				object_type = #{objectType},
+			</if>
+			<if test="productId > 0">
+				product_id = #{productId},
+			</if>
+			<if test="chargeFromAccount > 0">
+				charge_from_account = #{chargeFromAccount},
+			</if>
+			<if test="chargeToAccount > 0">
+				charge_to_account = #{chargeToAccount},
+			</if>
+			<if test="labelMoney > 0">
+				label_money = #{labelMoney},
+			</if>
+			<if test="rate > 0">
+				rate = #{rate},
+			</if>
+			<if test="count > 0">
+				`count` = #{count},
+			</if>
+			<if test="successMoney > 0">
+				success_money = #{successMoney},
+			</if>
+			<if test="frozenMoney > 0">
+				frozen_money = #{frozenMoney},
+			</if>
+			<if test="inMoney > 0">
+				in_money = #{inMoney},
+			</if>
+			<if test="outMoney > 0">
+				out_money = #{outMoney},
+			</if>
+			<if test="enterTime != null">
+				enter_time = #{enterTime},
+			</if>
+			<if test="ttl > 0">
+				`ttl` = #{ttl},
+			</if>
+			<if test="maxRetry > 0">
+				max_retry = #{maxRetry},
+			</if>
+			<if test="closeTime != null">
+				close_time = #{closeTime},
+			</if>
+			<if test="currentStatus > 0">
+				current_status = #{currentStatus},
+			</if>
+			<if test="extraStatus > 0">
+				extra_status = #{extraStatus},
+			</if>
+			<if test="billingStatus > 0">
+				billing_status = #{billingStatus},
+			</if>
+			<if test="outStatus > 0">
+				out_status = #{outStatus},
+			</if>
+			<if test="cartId > 0">
+				cart_id = #{cartId},
+			</if>
+			<if test="lockGlobalUniqueId != null">
+				lock_global_unique_id = #{lockGlobalUniqueId},
+			</if>
+			<if test="processCount > 0">
+				process_count = #{processCount},
+			</if>
+			<if test="supplyPartnerId > 0">
+				supply_partner_id = #{supplyPartnerId},
+			</if>
+			<if test="config != null and config.size &gt; 0">
+				config = #{config, javaType=HashMap, jdbcType=VARCHAR},
+			</if>
+			<if test="weight > 0">
+				`weight` = #{weight},
+			</if>
+			<if test="lastEffect > 0">
+				last_effect = #{lastEffect},
+			</if>
+			<if test="shareConfigId > 0">
+				share_config_id = #{shareConfigId},
+			</if>
+			<if test="price != null">
+				price = #{price, javaType=Price, jdbcType=VARCHAR},
+			</if>
+			<if test="inviter > 0">
+				inviter = #{inviter},
+			</if>
+			<if test="ownerId > 0">
+				owner_id = #{ownerId},
+			</if>
+		</set>
+		WHERE
+		item_id = #{itemId}
+	</update>
+
+
+	<delete id="deleteByProductId" parameterType="int">
+		DELETE FROM
+		item
+		WHERE
+		product_id = #{productId}
+	</delete>
+
+	<sql id="selectColumns">
+		a.item_id,
+		a.transaction_id,
+		a.in_order_id,
+		a.out_order_id,
+		a.transaction_type_id,
+		a.name,
+		a.content,
+		a.product_id,
+		a.object_type,
+		a.charge_from_account,
+		a.charge_to_account,
+		a.label_money,
+		a.rate,
+		a.count,
+		a.request_money,
+		a.success_money,
+		a.frozen_money,
+		a.in_money,
+		a.out_money,
+		a.enter_time,
+		a.ttl,
+		a.max_retry,
+		a.close_time,
+		a.current_status,
+		a.extra_status,
+		a.billing_status,
+		a.out_status,
+		a.cart_id,
+		a.lock_global_unique_id,
+		a.process_count,
+		a.supply_partner_id,
+		a.config,
+		a.weight,
+		a.last_effect,
+		a.share_config_id,
+		a.price,
+		a.inviter,
+		a.owner_id
+	</sql>
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="username !=null and username !=''">
+				front_user.username=#{username}
+			</if>
+			<if test="enterTimeBegin != null">
+				AND enter_time &gt;=#{enterTimeBegin}
+			</if>
+			<if test="enterTimeEnd != null">
+				AND enter_time &lt;=#{enterTimeEnd}
+			</if>
+			<if test="closeTimeBegin != null">
+				AND close_time &gt;=#{closeTimeBegin}
+			</if>
+			<if test="closeTimeEnd != null">
+				AND close_time &lt;=#{closeTimeEnd}
+			</if>
+
+			<if test="inviters !=null and inviters.length > 0">
+				AND a.inviter in (
+				<foreach item="item" index="index" collection="inviters" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="transactionId != null">
+				AND a.transaction_id=#{transactionId}
+			</if>
+			<if test="productIds != null">
+				AND a.product_id IN
+				<foreach item="item" collection="productIds" open="(" separator="," close=")">${item}</foreach>
+			</if>
+			<if test="shareConfigId != 0">
+				AND a.share_config_id=#{shareConfigId}
+			</if>
+			<if test="inOrderId != null">
+				AND a.in_order_id=#{inOrderId}
+			</if>
+			<if test="outOrderId != null">
+				AND a.out_order_id=#{outOrderId}
+			</if>
+			<if test="transactionTypeId > 0">
+				AND a.transaction_type_id=#{transactionTypeId}
+			</if>
+			<if test="transactionIds != null and transactionIds.length > 0">
+				AND a.transaction_id in
+				<foreach item="item" collection="transactionIds" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="itemIds != null">
+				AND a.item_id in
+				<foreach item="item" collection="itemIds" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="content != null and content != ''">
+				AND a.content = #{content}
+			</if>
+			<if test="minWeight > 0">
+				AND a.weight &gt;= #{minWeight}
+			</if>
+			<if test="maxWeight > 0">
+				AND a.weight &lt;= #{maxWeight}
+			</if>
+			<if test="lastEffectInterval > 0">
+				AND a.last_effect &lt;= #{lastEffectInterval}
+			</if>
+			<if test="needMinRequestMoney > 0">
+				AND a.request_money &gt;= #{needMinRequestMoney}
+			</if>
+			<if test="fixWeight > 0">
+				AND a.weight = #{fixWeight}
+			</if>
+			<if test="chargeFromAccount > 0">
+				AND a.charge_from_account=#{chargeFromAccount}
+			</if>
+			<if test="chargeToAccount > 0">
+				AND a.charge_to_account=#{chargeToAccount}
+			</if>
+			<if test="currentStatus != null and currentStatus.length > 0">
+				AND a.current_status in
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="cartId > 0">
+				AND a.cart_id=#{cartId}
+			</if>
+			<if test="extraStatus > 0">
+				AND a.extra_status=#{extraStatus}
+			</if>
+			<if test="billingStatus > 0">
+				AND a.billing_status=#{billingStatus}
+			</if>
+			<if test="outStatus > 0">
+				AND a.out_status=#{outStatus}
+			</if>
+			<if test="lockGlobalUniqueId != null">
+				AND a.lock_global_unique_id=#{lockGlobalUniqueId}
+			</if>
+			<if test="ownerId > 0">
+				AND a.owner_id = #{ownerId}
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEOUT_ONLY'">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &gt;= a.ttl
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="ItemCriteria" resultMap="itemResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM item as a
+
+		<include refid="criteriaWhereClause" />
+		<if test="tableName != null and tableName != 'item'">
+			UNION
+			SELECT
+			<include refid="selectColumns" />
+			FROM
+			${tableName} as a
+			<include refid="criteriaWhereClause" />
+		</if>
+		<if test="orderBy != null">
+			ORDER BY ${orderBy}
+		</if>
+		<if test="orderBy == null">
+			ORDER BY enter_time DESC
+		</if>
+	</select>
+	<select id="listWithoutFrontUser" parameterType="ItemCriteria" resultMap="itemResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		item as a
+		<include refid="criteriaWhereClause" />
+		<if test="tableName != null and tableName != 'item'">
+			union all
+			select
+			<include refid="selectColumns" />
+			FROM
+			${tableName} as a
+			<include refid="criteriaWhereClause" />
+		</if>
+		ORDER BY
+		enter_time DESC
+	</select>
+	<select id="count" parameterType="ItemCriteria" resultType="int">
+		SELECT SUM(num) FROM (select COUNT(*) num FROM item AS a
+
+		<include refid="criteriaWhereClause" />
+		<if test="queryProcessingItem == 'both'">
+			UNION
+			SELECT
+			COUNT(*) num
+			FROM
+			item_history AS a
+
+			<include refid="criteriaWhereClause" />
+		</if>
+		<if test="tableName != null">
+			UNION
+			SELECT
+			COUNT(*) num
+			FROM
+			${tableName} AS a
+
+			<include refid="criteriaWhereClause" />
+		</if>
+		) AS a
+	</select>
+	<select id="countWithoutFrontUser" parameterType="ItemCriteria" resultType="int">
+		SELECT
+		SUM(num)
+		FROM
+		(select
+		COUNT(*) num
+		FROM
+		item AS a
+		<include refid="criteriaWhereClause" />
+		<if test="queryProcessingItem == 'both'">
+			UNION
+			SELECT
+			COUNT(*) num
+			FROM
+			item_history AS a
+			<include refid="criteriaWhereClause" />
+		</if>
+		) AS a
+	</select>
+	<select id="fetchWithLock" parameterType="ItemCriteria" resultMap="itemResult">
+		CALL fetch_with_lock( #{transactionId}, #{lockStatus},
+		<foreach item="item" collection="currentStatus" open="" separator="" close="">#{item}</foreach>
+		,
+		#{needMinRequestMoney},
+		#{transactionTypeId},
+		#{timeoutPolicy},
+		#{noFrozenMoney},
+		#{lockGlobalUniqueId}
+		<if test="productIds != null">
+			,
+			<foreach item="item" collection="productIds" open="'" separator="," close="'">${item}</foreach>
+		</if>
+		<if test="productIds == null">,
+			NULL
+		</if>
+		)
+	</select>
+
+	<select id="fetchWithPartMoneyLock1" parameterType="ItemCriteria" resultMap="itemResult">
+		CALL part_money_lock_1(
+		#{transactionTypeId},
+		#{needMinRequestMoney},
+		#{needRequestMoney},
+		#{lockStatus},
+		<foreach item="item" collection="currentStatus" open="" separator="" close="">#{item}</foreach>
+		,
+		#{lockGlobalUniqueId},
+		#{timeoutPolicy},
+		<if test="productIds != null">
+			,
+			<foreach item="item" collection="productIds" open="'" separator="," close="'">${item}</foreach>
+		</if>
+		<if test="productIds == null">,
+			NULL
+		</if>
+		)
+	</select>
+
+	<update id="lock" parameterType="Item">
+		UPDATE
+		item
+		SET
+		current_status = #{afterLockStatus},
+		lock_global_unique_id = #{lockGlobalUniqueId},
+		out_order_id = #{outOrderId}
+
+		WHERE
+		transaction_id = #{transactionId}
+		AND
+		current_status = #{beforeLockStatus}
+	</update>
+
+
+
+
+	<select id="countForMatch" parameterType="ItemCriteria" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		item as a
+		<where>
+			a.request_money + a.success_money + a.frozen_money = a.label_money
+			AND
+			a.extra_status != 710001
+			<if test="needMinRequestMoney > 0">
+				AND a.request_money &gt;= #{needMinRequestMoney}
+			</if>
+			<if test="transactionTypeId > 0">
+				AND a.transaction_type_id = #{transactionTypeId}
+			</if>
+			<if test="minWeight > 0">
+				AND a.weight &gt;= #{minWeight}
+			</if>
+			<if test="maxWeight > 0">
+				AND a.weight &lt;= #{maxWeight}
+			</if>
+			<if test="fixWeight > 0">
+				AND a.weight = #{fixWeight}
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEIN_ONLY'">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &lt;= a.ttl AND a.process_count &lt;= a.max_retry
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEOUT_ONLY'">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &gt;= a.ttl AND a.process_count &lt;= a.max_retry + 5
+			</if>
+			<if test="noFrozenMoney == true">
+				AND a.frozen_money &lt;= 0
+			</if>
+			<if test="lastEffectInterval > 0">
+				AND a.last_effect &lt;= #{lastEffectInterval}
+			</if>
+			<if test="currentStatus != null">
+				AND a.current_status IN
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="productIds != null">
+				AND a.product_id IN
+				<foreach item="item" collection="productIds" open="(" separator="," close=")">${item}</foreach>
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="listForMatch" parameterType="ItemCriteria" resultMap="itemResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		item as a
+		<where>
+			<if test="forceLockUnMatchMoney == false">
+				a.request_money + a.success_money + a.frozen_money = a.label_money
+			</if>
+			<if test="noExtraStatusIsNotMatching == true">
+				AND a.extra_status != 710001
+			</if>
+			<if test="needMinRequestMoney > 0">
+				AND a.request_money &gt;= #{needMinRequestMoney}
+			</if>
+			<if test="transactionTypeId > 0">
+				AND a.transaction_type_id = #{transactionTypeId}
+			</if>
+			<if test="minWeight > 0">
+				AND a.weight &gt;= #{minWeight}
+			</if>
+			<if test="chargeFromAccount > 0">
+				AND a.charge_from_account = #{chargeFromAccount}
+			</if>
+			<if test="maxWeight > 0">
+				AND a.weight &lt;= #{maxWeight}
+			</if>
+			<if test="fixWeight > 0">
+				AND a.weight = #{fixWeight}
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEIN_ONLY'">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &lt;= a.ttl AND a.process_count &lt;= a.max_retry + 5
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEOUT_ONLY'">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &gt;= a.ttl AND a.process_count &lt;= a.max_retry + 20
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEDEAD_ONLY' and transactionTypeId == 12">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &gt;= a.ttl * 10
+			</if>
+			<if test="timeoutPolicy != null and timeoutPolicy == 'TIMEDEAD_ONLY' and transactionTypeId == 13">
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &gt;= a.ttl * 5
+				AND (UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) &gt;= 150
+			</if>
+			<if test="noFrozenMoney == true">
+				AND a.frozen_money &lt;= 0
+			</if>
+			<if test="needMinRequestMoney > 0">
+				AND a.request_money &gt;= #{needMinRequestMoney}
+			</if>
+			<if test="currentStatus != null">
+				AND a.current_status IN
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="productIds != null">
+				AND a.product_id IN
+				<foreach item="item" collection="productIds" open="(" separator="," close=")">${item}</foreach>
+			</if>
+			<if test="lastEffectInterval > 0">
+				AND a.last_effect &lt;= #{lastEffectInterval}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="inOrderId != null">
+				AND a.in_order_id = #{inOrderId}
+			</if>
+			<if test="noUsedItem == true">
+				AND a.success_money &lt;= 0
+			</if>
+			<if test="minRate > 0">
+				AND rate &gt;= #{minRate}
+			</if>
+			<if test="maxRate > 0">
+				AND rate &lt;= #{maxRate}
+			</if>
+			<if test="minCount> 0">
+				AND `count` &gt;= #{minCount}
+			</if>
+			<if test="maxCount > 0">
+				AND `count` &lt;= #{maxCount}
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort == 'requestMoneyDesc'">
+				ORDER BY a.weight DESC, a.process_count, a.request_money DESC
+			</when>
+			<when test="sort != null and sort == 'successMoneyDesc'">
+				ORDER BY a.weight DESC, a.process_count, a.success_money DESC, a.last_effect
+			</when>
+			<otherwise>
+				ORDER BY a.weight DESC, a.request_money, a.enter_time,a.last_effect
+			</otherwise>
+		</choose>
+		<if test="maxRandomPage == 0">
+			LIMIT ${maxRandomCount}
+		</if>
+	</select>
+
+	<update id="copyToHistory" parameterType="ItemCriteria">
+		<if test="itemIds != null">
+			insert into ${tableName} select * from item where item_id in
+			<foreach item="item" collection="itemIds" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</update>
+
+	<delete id="deleteByCriteria" parameterType="ItemCriteria">
+		DELETE
+		a
+		FROM
+		item as a
+		<include refid="criteriaWhereClause" />
+	</delete>
+
+	<delete id="delete" parameterType="String">
+		DELETE FROM
+		item
+		WHERE
+		transaction_id=#{transactionId}
+	</delete>
+
+	<update id="releaseItemWithFrozenMoney" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			frozen_money = IF(frozen_money - #{frozenMoney} &gt; 0, frozen_money - #{frozenMoney}, 0),
+			request_money = IF(success_money + request_money + #{frozenMoney} &lt;= label_money, request_money + #{frozenMoney},request_money),
+			process_count = #{processCount},
+			<if test="enterTime != null">
+				enter_time = #{enterTime},
+			</if>
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="weight > 0">
+				weight = #{weight},
+			</if>
+			<if test="ttl > 0">
+				ttl = #{ttl},
+			</if>
+			<if test="extraStatus > 0">
+				extra_status = #{extraStatus},
+			</if>
+			current_status=IF(current_status = 710026, 710026, #{currentStatus}),
+			lock_global_unique_id = NULL,
+			last_effect = #{lastEffect}
+
+		</set>
+		<where>
+			item_id=#{itemId}
+		</where>
+	</update>
+
+	<update id="releaseItemWithFrozenMoney2" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			frozen_money = frozen_money - #{frozenMoney},
+			request_money = request_money + #{frozenMoney},
+			process_count = IF(process_count - 1 &lt; 0, 0, process_count -1),
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			<if test="weight > 0">
+				weight = #{weight},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			current_status = #{currentStatus},
+			lock_global_unique_id = NULL
+		</set>
+		<where>
+			transaction_id=#{transactionId}
+			AND frozen_money &gt;= #{frozenMoney}
+		</where>
+	</update>
+
+	<update id="releaseItemWithoutFrozenMoney" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			request_money = request_money + #{frozenMoney},
+
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			current_status = #{currentStatus}
+		</set>
+		<where>
+			transaction_id=#{transactionId}
+			AND frozen_money &gt;= #{frozenMoney}
+		</where>
+	</update>
+
+	<update id="lockUpdateAndRelaseAdditinalFrozenMoney" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			frozen_money = frozen_money + #{frozenMoney},
+			request_money = request_money - #{frozenMoney},
+			<if test="ttl > 0">
+				ttl = #{ttl},
+			</if>
+			<if test="afterLockStatus > 0">
+				current_status = #{afterLockStatus},
+			</if>
+			<if test="lockGlobalUniqueId != null">
+				lock_global_unique_id = #{lockGlobalUniqueId},
+			</if>
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId}
+			</if>
+		</set>
+		<where>
+			item_id = #{itemId}
+			AND
+			request_money &gt;= #{frozenMoney}
+			AND
+			request_money &gt; 0
+			<if test="beforeLockStatus > 0">
+				AND current_status = #{beforeLockStatus}
+			</if>
+
+		</where>
+	</update>
+
+
+	<update id="plusItemMoneyWithFrozenMoney" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="closeTime != null">
+				close_time = #{closeTime},
+			</if>
+			frozen_money = IF(frozen_money - #{frozenMoney} &lt;= 0, 0, frozen_money - #{frozenMoney}) ,
+			success_money = IF(success_money + #{frozenMoney} &gt; (label_money + 20000), label_money, success_money + #{successMoney}),
+			request_money = IF(request_money + #{requestMoney} &gt; (label_money ), label_money, request_money + #{requestMoney}),
+			current_status = #{currentStatus},
+			extra_status = #{extraStatus},
+			out_status = #{outStatus},
+			<if test="billingStatus > 0">
+				billing_status = #{billingStatus},
+			</if>
+			<if test="inMoney > 0">
+				in_money = #{inMoney},
+			</if>
+			ttl = #{ttl},
+			lock_global_unique_id = NULL,
+			process_count = #{processCount},
+			last_effect = #{lastEffect}
+		</set>
+		<where>
+			transaction_id=#{transactionId}
+			AND current_status != 710010
+			AND billing_status != 730006
+		</where>
+	</update>
+
+	<update id="updateWithMoneyCondition" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			<if test="ttl > 0">
+				ttl = #{ttl},
+			</if>
+			frozen_money = label_money - success_money - #{frozenMoney} ,
+			request_money = request_money + #{frozenMoney},
+			current_status= #{currentStatus},
+			extra_status = #{extraStatus},
+			lock_global_unique_id = NULL
+
+		</set>
+		<where>
+			transaction_id=#{transactionId}
+		</where>
+	</update>
+
+	<update id="plusItemMoneyWithoutFrozenMoney" parameterType="Item">
+		UPDATE
+		item
+		<set>
+			<if test="outOrderId != null">
+				out_order_id = #{outOrderId},
+			</if>
+			success_money = success_money + #{successMoney},
+			request_money = request_money -
+			#{successMoney},
+			current_status = #{currentStatus},
+			extra_status =
+			IF(success_money &gt;= label_money , '710029','710010'),
+			lock_global_unique_id = NULL
+
+		</set>
+		<where>
+			transaction_id=#{transactionId}
+		</where>
+	</update>
+
+	<update id="changeStatus" parameterType="Item">
+		UPDATE
+		${tableName}
+		<set>
+			<if test="closeTime != null">
+				close_time = #{closeTime},
+			</if>
+			<if test="processCount == 1">
+				process_count = process_count+1,
+			</if>
+			current_status = #{currentStatus},
+			extra_status = #{extraStatus},
+			<if test="billingStatus > 0">
+				billing_status = #{billingStatus},
+			</if>
+			<if test="inMoney > 0">
+				in_money = #{inMoney},
+			</if>
+			<if test="outStatus > 0">
+				out_status = #{outStatus},
+			</if>
+			lock_global_unique_id = NULL,
+			last_effect = #{lastEffect}
+
+		</set>
+		<where>
+			transaction_id=#{transactionId}
+		</where>
+	</update>
+
+	<select id="listProcessTimeout" parameterType="ItemCriteria" resultMap="itemResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		item as a
+		<where>
+			<if test="timeoutSeconds > 0">
+				(UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(a.enter_time)) - a.ttl &gt;= #{timeoutSeconds}
+			</if>
+			<if test="currentStatus != null and currentStatus.length > 0">
+				AND a.current_status in
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="transactionTypeId > 0">
+				AND transaction_type_id = #{transactionTypeId}
+			</if>
+
+
+		</where>
+	</select>
+
+	<select id="listFrozenDeadAccount" parameterType="ItemCriteria" resultMap="itemResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		item as a
+		<where>
+			a.transaction_type_id = 12
+			AND
+			a.frozen_money &gt; 0
+			AND
+			a.success_money &gt; 0
+			AND
+			a.current_status=710021
+		</where>
+	</select>
+	<select id="downloadCsv" parameterType="ItemCriteria" resultType="String">
+		CALL saveToCsv(#{beginTime},#{endTime},#{chargeFromAccount})
+	</select>
+	<select id="totalFailItem" parameterType="int" resultType="int"> CALL total_failItem( #{productId})
+	</select>
+</mapper>

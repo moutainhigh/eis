@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:44 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GiftCard">
+
+	<resultMap id="giftCardResult" type="GiftCard">
+		<result property="giftCardId" column="gift_card_id"/>
+		<result property="cardNumber" column="card_number"/>
+		<result property="cardPassword" column="card_password"/>
+		<result property="objectType" column="object_type"/>
+		<result property="objectId" column="object_id"/>
+		<result property="objectExtraId" column="object_extra_id"/>
+		<result property="createTime" column="create_time"/>
+		<result property="validTime" column="valid_time"/>
+		<result property="usedTime" column="used_time"/>
+		<result property="usedByUuid" column="used_by_uuid"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+		<result property="labelMoney" column="label_money"/>
+		<result property="requestMoney" column="request_money"/>
+		<result property="frozenMoney" column="frozen_money"/>
+		<result property="successMoney" column="success_money"/>
+		<result property="moneyTypeId" column="money_type_id"/>
+		<result property="processClass" column="process_class"/>
+		<result property="lockGlobalUniqueId" column="lock_global_unique_id"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			gift_card_id,
+			card_number,
+			card_password,
+			object_type,
+			object_id,
+			object_extra_id,
+			create_time,
+			valid_time,
+			used_time,
+			used_by_uuid,
+			current_status,
+			flag,
+			label_money,
+			request_money,
+			frozen_money,
+			success_money,
+			money_type_id,
+			process_class,
+			lock_global_unique_id,
+			owner_id
+	</sql>
+	
+
+	<insert id="insert" parameterType="GiftCard" useGeneratedKeys="true"  keyProperty="giftCardId">
+		INSERT INTO gift_card
+			(<if test="giftCardId>0">gift_card_id,</if>owner_id, card_number, card_password, object_type, object_id, object_extra_id, create_time, valid_time, used_time, used_by_uuid, current_status, flag, label_money, request_money, frozen_money, success_money, money_type_id, process_class)
+		VALUES
+			(<if test="giftCardId>0">#{giftCardId},</if>#{ownerId}, #{cardNumber}, #{cardPassword}, #{objectType}, #{objectId}, #{objectExtraId}, #{createTime}, #{validTime}, #{usedTime}, #{usedByUuid}, #{currentStatus}, #{flag}, #{labelMoney}, #{requestMoney}, #{frozenMoney}, #{successMoney}, #{moneyTypeId}, #{processClass})
+	</insert>
+
+	<update id="update" parameterType="GiftCard">
+		UPDATE
+			gift_card
+		SET
+			card_number = #{cardNumber},
+			card_password = #{cardPassword},
+			object_type = #{objectType},
+			object_id = #{objectId},
+			object_extra_id = #{objectExtraId},
+			create_time = #{createTime},
+			valid_time = #{validTime},
+			used_time = #{usedTime},
+			used_by_uuid = #{usedByUuid},
+			current_status = #{currentStatus},
+			label_money = #{labelMoney},
+			request_money = #{requestMoney},
+			frozen_money = #{frozenMoney},
+			success_money = #{successMoney},
+			flag = #{flag},
+			money_type_id = #{moneyTypeId},
+			process_class = #{processClass},
+			lock_global_unique_id = #{lockGlobalUniqueId},
+			owner_id = #{ownerId}
+		<where>
+			gift_card_id = #{giftCardId}
+		</where>
+		
+	</update>
+	<update id="fetchWithLocksimple" parameterType="GiftCardCriteria">
+		UPDATE
+			gift_card
+		<set>
+			current_status = #{newStatus},				
+			lock_global_unique_id = #{lockGlobalUniqueId},
+			used_by_uuid = #{usedByUuid},
+			frozen_money = request_money + #{requestMoney},
+			request_money = request_money - #{requestMoney},
+		</set>	
+		<where>
+		    current_status=100001
+		    and card_number=#{cardNumber}
+		</where>
+		</update>
+	<update id="fetchWithLock" parameterType="GiftCardCriteria">
+		UPDATE
+			gift_card
+		<set>
+			current_status = #{newStatus},				
+			lock_global_unique_id = #{lockGlobalUniqueId},
+			used_by_uuid = #{usedByUuid},
+			frozen_money = request_money + #{requestMoney},
+			request_money = request_money - #{requestMoney},
+		</set>
+		<where>
+			current_status = 
+			<foreach item="item" collection="currentStatus" open="" separator="" close="">
+	        		#{item}
+	  		</foreach>
+	  		AND lock_global_unique_id IS NULL
+			<if test="objectType != null">
+				AND object_type=#{objectType}
+			</if>
+			<if test="objectIds != null and objectIds.length >  0">
+				AND object_id IN
+				<foreach item="item" collection="objectIds" open="(" separator="," close=")">
+	        		#{item}
+	  			</foreach>
+			</if>
+			<if test="objectExtraId > 0">
+				AND object_extra_id = #{objectExtraId}
+			</if>
+			<if test="requestMoney > 0">
+				AND request_money &gt;= #{requestMoney}
+			</if>
+			<if test="minUseInterval > 0">
+				AND (used_time IS NULL OR CURRENT_TIMESTAMP-used_time &gt;= #{minUseInterval})
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>		
+		LIMIT 1
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM
+			gift_card
+		WHERE
+			gift_card_id = #{giftCardId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="giftCardResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			gift_card
+		WHERE
+			gift_card_id = #{giftCardId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+            <if test="cardNumber != null">
+               card_number=#{cardNumber}
+            </if>			
+			<if test="objectType != null">
+				object_type=#{objectType}
+			</if>
+			<if test="currentStatus != null and currentStatus.length &gt; 0">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="objectIds != null and objectIds.length >  0">
+				AND object_id IN
+				<foreach item="item" collection="objectIds" open="(" separator="," close=")">
+	        		#{item}
+	  			</foreach>
+			</if>
+			<if test="objectExtraId > 0">
+				AND object_extra_id = #{objectExtraId}
+			</if>
+			<if test="usedByUuid > 0">
+				AND used_by_uuid=#{usedByUuid}
+			</if>
+			<if test="lockGlobalUniqueId != null">
+				AND lock_global_unique_id=#{lockGlobalUniqueId}
+			</if>
+			<if test="minUseInterval > 0">
+				AND (used_time IS NULL OR CURRENT_TIMESTAMP-used_time &gt;= #{minUseInterval})
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="GiftCardCriteria" resultMap="giftCardResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			gift_card
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			card_number ASC
+	</select>
+
+	<select id="count" parameterType="GiftCardCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			gift_card
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

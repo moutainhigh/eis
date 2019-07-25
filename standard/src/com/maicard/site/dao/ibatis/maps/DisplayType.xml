@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:57 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DisplayType">
+
+	<resultMap id="displayTypeResult" type="DisplayType">
+		<result property="displayTypeId" column="display_type_id"/>
+		<result property="displayTypeName" column="display_type_name"/>
+		<result property="displayTypeDescription" column="display_type_description"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			display_type_id,
+			display_type_name,
+			display_type_description,
+			current_status,
+			flag
+	</sql>
+
+	<insert id="insert" parameterType="DisplayType"  useGeneratedKeys="true"  keyProperty="displayTypeId">
+		INSERT INTO displayType
+			(<if test="displayTypeId>0">display_type_id,</if> owner_id, display_type_name, display_type_description, current_status, flag)
+		VALUES
+			(<if test="displayTypeId>0">#{displayTypeId},</if> #{ownerId}, #{displayTypeName}, #{displayTypeDescription}, #{currentStatus}, #{flag})
+	</insert>
+
+	<update id="update" parameterType="DisplayType">
+		UPDATE
+			displayType
+		SET
+			displayType_name = #{displayTypeName},
+			displayType_description = #{displayTypeDescription},
+			current_status = #{currentStatus},
+			flag = #{flag},
+			owner_id = #{ownerId}
+			
+		WHERE
+			display_type_id = #{displayTypeId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			display_type
+		WHERE
+			display_type_id = #{displayTypeId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="displayTypeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			display_type
+		WHERE
+			display_type_id = #{displayTypeId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="DisplayTypeCriteria" resultType="int">
+		SELECT
+			display_type_id
+		FROM
+			display_type
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			display_type_id DESC
+	</select>
+	
+	<select id="list" parameterType="DisplayTypeCriteria" resultMap="displayTypeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			display_type
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			display_type_id DESC
+	</select>
+
+	<select id="count" parameterType="DisplayTypeCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			display_type
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

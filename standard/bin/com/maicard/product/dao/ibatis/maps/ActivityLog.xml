@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:42 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.product.sql.ActivityLog">
+
+	<resultMap id="activityLogResult" type="ActivityLog">
+		<result property="activityLogId" column="activity_log_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="index" column="index"/>
+		<result property="activityId" column="activity_id"/>
+		<result property="activityType" column="activity_type"/>
+		<result property="activityIdentify" column="activity_identify"/>
+		<result property="ip" column="ip"/>
+		<result property="logTime" column="log_time"/>
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+		<result property="promotion" column="promotion"/>
+		<result property="fee" column="fee"/>
+		<result property="action" column="action"/>
+		<result property="payFeeJoin" column="pay_fee_join"/>
+		<result property="completePercent" column="complete_percent"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			activity_log_id,
+			uuid,
+			`index`,
+			activity_id,
+			activity_type,
+			activity_identify,
+			ip,
+			current_status,
+			log_time,
+			data,
+			flag,
+			promotion,
+			fee,
+			action,
+			pay_fee_join,
+			complete_percent,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="ActivityLog" useGeneratedKeys="true"  keyProperty="activityLogId">
+		INSERT INTO activity_log
+			(<if test="activityLogId > 0">activity_log_id, </if>owner_id, uuid, `index`, activity_id, activity_type, activity_identify, ip, current_status, log_time, data, flag, promotion, fee, action, pay_fee_join, complete_percent)
+		VALUES
+			(<if test="activityLogId > 0">#{activityLogId}, </if>#{ownerId}, #{uuid}, #{index}, #{activityId}, #{activityType}, #{activityIdentify}, #{ip},  #{currentStatus}, #{logTime}, #{data, javaType=HashMap, jdbcType=VARCHAR}, #{flag}, #{promotion}, #{fee}, #{action}, #{payFeeJoin}, #{completePercent})
+	</insert>
+
+	<update id="update" parameterType="ActivityLog">
+		UPDATE
+			activity_log
+		SET
+			uuid = #{uuid},
+			`index` = #{index},
+			activity_id = #{activityId},
+			activity_type = #{activityType},
+			activity_identify = #{activityIdentify},
+			ip = #{ip},
+			current_status = #{currentStatus},
+			log_time = #{logTime},
+			data = #{data, javaType=HashMap, jdbcType=VARCHAR},
+			flag = #{flag},
+			promotion = #{promotion},
+			fee = #{fee},
+			action = #{action},
+			pay_fee_join = #{payFeeJoin},
+			complete_percent = #{completePercent},
+			owner_id = #{ownerId}
+
+		WHERE
+			activity_log_id = #{activityLogId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			activity_log
+		WHERE
+			activity_log_id = #{activityLogId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="activityLogResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			activity_log 
+		WHERE
+			activity_log_id = #{activityLogId}
+	</select>
+	
+	
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="uuid > 0">
+				uuid=#{uuid}
+			</if>
+			<if test="index > 0">
+				`index`=#{index}
+			</if>
+			<if test="payFeeJoin > 0">
+				AND pay_fee_join=#{payFeeJoin}
+			</if>
+			<if test="activityType != null">
+				AND activity_type=#{activityType}
+			</if>
+			<if test="promotion != null">
+				AND promotion=#{promotion}
+			</if>
+			<if test="action != null">
+				AND action=#{action}
+			</if>
+			<if test="activityIdentify !=null">
+				AND activity_identify=#{activityIdentify}
+			</if>
+			<if test="beginTime != null">
+				AND log_time &gt;=#{beginTime}
+			</if>	
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="activityLogId > 0">
+				AND activity_log_id=#{activityLogId}
+			</if>
+			<if test="activityId > 0">
+				AND activity_id=#{activityId}
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="ActivityLogCriteria" resultType="int">
+		SELECT
+			activity_log_id
+		FROM
+			activity_log 
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<select id="list" parameterType="ActivityLogCriteria" resultMap="activityLogResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			activity_log 
+		<include refid="criteriaWhereClause"/>
+		ORDER BY log_time
+	</select>
+	
+	<select id="like" parameterType="ActivityLogCriteria" resultMap="activityLogResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			activity_log 
+		WHERE
+			<if test="action != null">
+				action=#{action}
+			</if>
+			<if test="activityId > 0">
+				AND activity_id=#{activityId}
+			</if>
+			<if test="index > 0">
+				AND `index`  LIKE concat('%',#{index},'%')
+			</if>
+			<if test="beginTime != null">
+				AND log_time &gt;=#{beginTime}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		ORDER BY log_time
+	</select>
+
+	<select id="count" parameterType="ActivityLogCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			activity_log
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

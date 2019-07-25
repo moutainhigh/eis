@@ -1,0 +1,162 @@
+#!/bin/bash
+#
+# Description:  Manages a EIS system as an 
+#               OCF High-Availability resource under Heartbeat/LinuxHA control
+#
+# Copyright (c) 2014 Beijing WWBJ Technology Co.,Ltd
+#
+eis_user=netsnake
+export OCF_ROOT=/usr/lib/ocf
+: ${OCF_FUNCTIONS_DIR=${OCF_ROOT}/lib/heartbeat}
+. ${OCF_FUNCTIONS_DIR}/ocf-shellfuncs
+
+usage() 
+{
+	cat <<-!
+usage: $0 action
+
+action:
+        start       : start all avaiable EIS system module
+
+        stop        : stop the running EIS system 
+
+        status      : return the status of EIS, run or down
+!
+	return $OCF_ERR_ARGS
+}
+
+monitor_squid()
+{
+	return 1
+}
+
+start_squid()
+{
+	if [ ! -e $eis_running_config_file ];then
+		echo $eis_running_config_file not exists!
+		return $OCF_ERR_GENERIC
+	fi
+	echo "1" > /tmp/eis_start
+	for eis_dir in `cat $eis_running_config_file`;do
+		if [ ! -e $eis_dir/conf/server.xml ];then
+			echo $eis_dir is not a valid EIS module, ignore!
+			continue
+		fi
+		su - $eis_user -c $eis_dir/restart.sh
+	done
+	return $OCF_SUCCESS
+
+
+}
+
+stop_squid()
+{
+	if [ ! -e $eis_running_config_file ];then
+		echo $eis_running_config_file not exists!
+		return $OCF_ERR_GENERIC
+	fi
+	for eis_dir in `cat $eis_running_config_file`;do
+		if [ ! -e $eis_dir/conf/server.xml ];then
+			echo $eis_dir is not a valid EIS module, ignore!
+			continue
+		fi
+		$eis_dir/bin/shutdown.sh
+		for (( i=1; i<6; i++ ));
+		do
+		        process_cnt=`ps -ef|grep java|grep -v grep|grep $eis_dir|wc -l`;
+		        if [ $process_cnt -gt 0 ];then
+               			echo "Try kill process...$i"
+              		 	ps -ef|grep java|grep -v grep|grep $eis_dir|awk '{print $2}'|xargs kill -9
+        		else 
+               			break
+        		fi
+        		sleep 1;
+		done
+	done
+	return $OCF_SUCCESS
+
+}
+
+
+status_squid()
+{
+	if [ ! -e $eis_running_config_file ];then
+		echo $eis_running_config_file not exists!
+		return $OCF_ERR_GENERIC
+	fi
+	for eis_dir in `cat $eis_running_config_file`;do
+		echo $eis_dir
+		if [ ! -e $eis_dir ];then
+			return $OCF_ERR_GENERIC;
+		fi
+		if [ ! -e $eis_dir/conf/server.xml ];then
+			return $OCF_ERR_GENERIC;
+		fi
+		eis_port=`grep SHUTDOWN $eis_dir/conf/server.xml|grep -o "[0-9]\+"`;
+		netstat -lpn|grep $eis_port
+		eis_status=$?
+		if [ $eis_status -eq 1 ];then
+			echo "EIS module $eis_dir not running.";
+			return $OCF_ERR_GENERIC
+		else 
+			echo "EIS module $eis_dir is running.";
+		fi
+	done
+	return $OCF_SUCCESS
+}
+
+
+: === Debug ${0##*/} $1 ===
+
+if [ ! $EIS_RUNNING_CONFIG ];then
+	ocf_log error "EIS_RUNNING_CONFIG environment variable not found! CAN NOT CONTINUE!"
+	return $OCF_ERR_GENERIC
+fi
+if [ ! -e $EIS_RUNNING_CONFIG ];then
+	ocf_log error "EIS_RUNNING_CONFIG file not found! CAN NOT CONTINUE!"
+	return $OCF_ERR_GENERIC
+fi
+eis_running_config_file=$EIS_RUNNING_CONFIG
+
+
+
+
+COMMAND=$1
+
+
+case "$COMMAND" in
+	start)
+		ocf_log info  "[$eis_running_config_file] Enter EIS start"
+		start_squid
+		func_status=$?
+		ocf_log debug  "[$eis_running_config_file] Leave EIS start $func_status"
+		exit $func_status
+		;;
+	stop)
+		ocf_log info  "[$eis_running_config_file] Enter EIS stop"
+		stop_squid
+		func_status=$?
+		ocf_log info  "[$eis_running_config_file] Leave EIS stop $func_status"
+		exit $func_status
+		;;
+	status)
+		status_squid
+		exit $?
+		;;
+	monitor)
+		#ocf_log debug  "[$SQUID_NAME] Enter squid monitor"
+		#monitor_squid
+		#func_status=$?
+		#ocf_log debug  "[$SQUID_NAME] Leave squid monitor $func_status"
+		exit $func_status
+		;;
+	validate-all)
+		validate_all_squid
+		exit $?
+		;;
+	*)
+		usage
+		;;
+esac
+
+# vim: set sw=4 ts=4 :

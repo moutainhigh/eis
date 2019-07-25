@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:57:34 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PartnerMenu">
+
+	<resultMap id="partnerMenuResult" type="PartnerMenu">
+		<result property="menuId" column="menu_id"/>
+		<result property="menuName" column="menu_name"/>
+		<result property="menuUrl" column="menu_url"/>
+		<result property="parameter" column="parameter"/>
+		<result property="resourceId" column="resource_id"/>
+		<result property="parentMenuId" column="parent_menu_id"/>
+		<result property="menuLevel" column="menu_level"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			menu_id,
+			menu_name,
+			menu_url,
+			parameter,
+			resource_id,
+			parent_menu_id,
+			menu_level,
+			current_status,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="PartnerMenu">
+		INSERT INTO partner_menu
+			(<if test="menuId>0">menu_id,</if> owner_id, menu_name, menu_url, parameter, resource_id, parent_menu_id,menu_level,current_status)
+		VALUES
+			(<if test="menuId>0">#{menuId},</if> #{ownerId}, #{menuName}, #{menuUrl}, #{parameter}, #{resourceId}, #{parentMenuId}, #{menuLevel}, #{currentStatus})
+		<selectKey keyProperty="menuId" resultType="int">
+			SELECT LAST_INSERT_ID() as menu_id
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="PartnerMenu">
+		UPDATE
+			partner_menu
+		SET
+			menu_name = #{menuName},
+			menu_url = #{menuUrl},		
+			parameter = #{parameter},
+			resource_id = #{resourceId},	
+			parent_menu_id = #{parentMenuId},
+			menu_level = #{menuLevel},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			menu_id = #{menuId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			partner_menu
+		WHERE
+			menu_id = #{menuId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="partnerMenuResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			partner_menu
+		WHERE
+			menu_id = #{menuId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			owner_id = #{ownerId}
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	</where>
+	</sql>
+
+	<select id="list" parameterType="PartnerMenuCriteria" resultMap="partnerMenuResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			partner_menu
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="count" parameterType="PartnerMenuCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			partner_menu
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

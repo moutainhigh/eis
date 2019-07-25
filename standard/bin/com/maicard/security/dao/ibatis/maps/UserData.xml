@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:10 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.security.sql.UserData">
+
+	<resultMap id="userDataResult" type="UserData">
+		<result property="userDataId" column="user_data_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="dataDefineId" column="data_define_id"/>
+		<result property="dataType" column="data_type"/>
+		<result property="dataCode" column="data_code"/>
+		<result property="dataValue" column="data_value"/>
+		<result property="dataDescription" column="data_description"/>
+		
+		<result property="validDataEnum" column="valid_data_enum"/>
+		<result property="inputMethod" column="input_method"/>
+		<result property="displayLevel" column="display_level"/>
+		<result property="inputLevel" column="input_level"/>
+		<result property="multiExist" column="multi_exist"/>
+		<result property="ttl" column="ttl"/>
+		<result property="defaultValue" column="default_value"/>
+	</resultMap>
+	
+	<resultMap id="userDataViewResult" type="UserData">
+		<result property="userDataId" column="user_data_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="dataValue" column="data_value"/>
+	</resultMap>
+	
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="dataValue != null">
+				a.data_value=#{dataValue}
+			</if>
+			<if test="currentStatus != null">
+				AND a.current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="uuid > 0">
+				AND a.uuid=#{uuid}
+			</if>
+			<if test="dataDefineId > 0">
+				AND a.data_define_id=#{dataDefineId}
+			</if>
+			<if test="dataCode != null">
+				AND b.data_code=#{dataCode}
+			</if>
+			<if test="userTypeId > 0">
+				AND b.object_id in (#{userTypeId},0)
+			</if>
+			<if test="userExtraTypeId > 0">
+				AND (b.object_extra_id=#{userExtraTypeId} OR b.object_extra_id=0)
+			</if>
+			<if test="userDataId > 0">
+				AND a.user_data_id=#{userDataId}
+			</if>
+		</where>
+	</sql>
+	
+
+	<insert id="insert" parameterType="UserData" useGeneratedKeys="true"  keyProperty="userDataId">
+		INSERT INTO ${tableName}
+			(<if test="userDataId > 0">user_data_id, </if>uuid, data_define_id, data_value)
+		VALUES
+			(<if test="userDataId > 0">#{userDataId}, </if>#{uuid}, #{dataDefineId}, #{dataValue})
+	</insert>
+
+	<update id="update" parameterType="UserData">
+		UPDATE
+			${tableName}
+		SET
+			uuid = #{uuid},
+			data_define_id = #{dataDefineId},
+			data_value = #{dataValue}
+		WHERE
+			user_data_id = #{userDataId}
+	</update>
+
+	
+	
+	<delete id="deleteByCriteria" parameterType="UserDataCriteria">
+		DELETE a FROM
+			${tableName} as a
+		<include refid="criteriaWhereClause"/>
+
+	</delete>
+	
+	<delete id="delete" parameterType="int">
+		DELETE a FROM
+			user_data_all as a
+		WHERE
+			user_data_id = #{id}
+	</delete>
+	
+	<select id="select" parameterType="UserDataCriteria" resultMap="userDataResult">
+		SELECT
+			a.user_data_id,
+			a.uuid,
+			a.data_define_id,
+			b.data_type,
+			b.data_code,
+			a.data_value,
+			b.data_description ,
+			b.valid_data_enum,
+			b.input_method,
+			b.display_level,
+			b.input_level,
+			b.ttl
+			b.default_value
+		FROM
+			${tableName} AS a 
+			INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id AND b.object_type='user'
+		
+		WHERE
+			a.user_data_id = #{userDataId}
+	</select>
+
+	<select id="list" parameterType="UserDataCriteria" resultMap="userDataResult">
+		SELECT
+			a.user_data_id,
+			a.uuid,
+			a.data_define_id,
+			b.data_type,
+			b.data_code,
+			a.data_value,
+			b.data_description ,
+			b.valid_data_enum,
+			b.input_method,
+			b.display_level,
+			b.input_level,
+			b.ttl,
+			b.default_value
+		FROM
+			data_define as b
+			LEFT JOIN
+			${tableName} AS a 
+			ON b.data_define_id=a.data_define_id AND b.object_type='user'
+			<include refid="criteriaWhereClause"/>
+		ORDER BY
+			a.user_data_id ASC
+	</select>
+	
+	<select id="listPk" parameterType="UserDataCriteria" resultType="String">
+		SELECT
+			concat(a.uuid, '#', a.user_data_id)
+		FROM
+			${tableName} AS a 
+			INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id AND b.object_type='user'
+			<include refid="criteriaWhereClause"/>
+		ORDER BY
+			a.user_data_id ASC
+	</select>
+
+	<select id="count" parameterType="UserDataCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			${tableName} as a
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:57 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserReadLog">
+
+	<resultMap id="userReadLogResult" type="UserReadLog">
+		<result property="userReadLogId" column="user_read_log_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="udid" column="udid"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="readTime" column="read_time"/>
+		
+	</resultMap>
+
+	<insert id="insert" parameterType="UserReadLog" useGeneratedKeys="true"  keyProperty="userReadLogId">
+		INSERT INTO user_read_log
+			(<if test="userReadLogId>0">user_read_log_id,</if>uuid, udid, current_status, read_time)
+		VALUES
+			(<if test="userReadLogId>0">#{userReadLogId},</if>#{uuid}, #{udid}, #{currentStatus}, #{readTime})
+	</insert>
+
+	<update id="update" parameterType="UserReadLog">
+		UPDATE
+			user_read_log
+		SET
+			uuid = #{uuid},
+			udid = #{udid},
+			current_status = #{currentStatus},
+			read_time = #{readTime}
+		WHERE
+			user_read_log_id = #{userReadLogId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			user_read_log
+		WHERE
+			user_read_log_id = #{userReadLogId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="userReadLogResult">
+		SELECT
+			user_read_log_id,
+			uuid,
+			udid,
+			current_status,
+			read_time
+		FROM
+			user_read_log
+		WHERE
+			user_read_log_id = #{userReadLogId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="UserReadLogCriteria" resultType="int">
+		SELECT
+			user_read_log_id
+		FROM
+			user_read_log
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			user_read_log_id DESC
+	</select>
+	
+	<select id="list" parameterType="UserReadLogCriteria" resultMap="userReadLogResult">
+		SELECT
+			user_read_log_id,
+			uuid,
+			udid,
+			current_status,
+			read_time
+		FROM
+			user_read_log
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			user_read_log_id DESC
+	</select>
+
+	<select id="count" parameterType="UserReadLogCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			user_read_log
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

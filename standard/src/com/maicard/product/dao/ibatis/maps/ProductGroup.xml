@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.product.sql.ProductGroup">
+
+	<resultMap id="productGroupResult" type="ProductGroup">
+		<result property="id" column="id"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="level" column="level"/>
+		<result property="groupDesc" column="group_desc"/>
+		<result property="objectType" column="object_type"/>
+		<result property="objectId" column="object_id"/>
+		<result property="groupKey" column="group_key"/>
+		<result property="groupValue" column="group_value"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="groupTarget" column="group_target"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			id,
+			parent_id,
+			`level`,
+			group_desc,
+			group_key,
+			group_value,
+			current_status,
+			object_type,
+			object_id,
+			group_target,
+			owner_id
+	</sql>
+
+	<insert id="insert" parameterType="ProductGroup"  useGeneratedKeys="true"  keyProperty="id">
+		INSERT INTO product_group
+			(<if test="id>0">id,</if>parent_id, `level`, group_desc, group_key, group_value, current_status, object_type, object_id, group_target, owner_id)
+		VALUES
+			(<if test="id>0">#{id},</if>#{parentId}, #{level}, #{groupDesc}, #{groupKey}, #{groupValue}, #{currentStatus}, #{objectType}, #{objectId}, #{groupTarget}, #{ownerId})
+	</insert>
+
+	<update id="update" parameterType="ProductGroup">
+		UPDATE
+			product_group
+		SET
+			`level` = #{level},
+			parent_id = #{parentId},
+			group_desc = #{groupDesc},
+			group_key = #{groupKey},
+			group_value = #{groupValue},
+			current_status = #{currentStatus},
+			object_type = #{objectType},
+			object_id = #{objectId},
+			group_target = #{groupTarget},
+			owner_id = #{ownerId}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM
+			product_group
+		WHERE
+			id = #{id}
+	</delete>
+	
+	<select id="select" parameterType="string" resultMap="productGroupResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			product_group
+		WHERE
+			id = #{id}
+	</select>
+	
+	<select id="getMaxObjectId" parameterType="long" resultType="long">
+		SELECT 
+			IFNULL( MAX(object_id),0) 
+		FROM 
+			product_group
+		WHERE owner_id=#{ownerId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>		
+		<if test="objectType != null">
+			object_type=#{objectType}
+		</if>
+		<if test="ownerId > 0">
+			AND owner_id=#{ownerId}
+		</if>
+		<if test="objectId > 0">
+			AND object_id=#{objectId}
+		</if>
+		<if test="level > 0">
+			AND level=#{level}
+		</if>
+		<if test="parentId > 0">
+			AND parent_id=#{parentId}
+		</if>
+		
+		<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>	
+		</where>
+	</sql>
+
+	<select id="list" parameterType="ProductGroupCriteria" resultMap="productGroupResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			product_group
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			id ASC
+	</select>
+	
+	
+	
+
+	<select id="count" parameterType="ProductGroupCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			product_group
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<!--  查找符合条件的下一级别所有group数据 -->
+	<select id="listNextGroup" parameterType="ProductGroupCriteria" resultMap="productGroupResult">
+		SELECT 
+			a.* 
+		FROM product_group AS a 
+		INNER JOIN (
+			SELECT group_target,`level` FROM product_group 
+		<include refid="criteriaWhereClause"/>
+
+		) AS b WHERE a.level=b.level+1 AND a.group_target = b.group_target
+	</select>
+	
+
+</mapper>

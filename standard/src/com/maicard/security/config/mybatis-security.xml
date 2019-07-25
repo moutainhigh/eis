@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:45 CST 2013-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>			
+		<!--  security -->		
+		<typeAlias alias="OperateLog" type="com.maicard.security.domain.OperateLog"/>
+		<typeAlias alias="OperateLogCriteria" type="com.maicard.security.criteria.OperateLogCriteria"/>	
+		
+		<typeAlias alias="PasswordLog" type="com.maicard.security.domain.PasswordLog"/>
+		<typeAlias alias="PasswordLogCriteria" type="com.maicard.security.criteria.PasswordLogCriteria"/>		
+		
+		<typeAlias alias="UserType" type="com.maicard.security.domain.UserType"/>
+		<typeAlias alias="UserTypeCriteria" type="com.maicard.security.criteria.UserTypeCriteria"/>
+			
+		<typeAlias alias="UserData" type="com.maicard.security.domain.UserData"/>
+		<typeAlias alias="UserDataCriteria" type="com.maicard.security.criteria.UserDataCriteria"/>
+
+		<typeAlias alias="UserLevelCondition" type="com.maicard.security.domain.UserLevelCondition"/>
+		<typeAlias alias="UserLevelConditionCriteria" type="com.maicard.security.criteria.UserLevelConditionCriteria"/>
+			
+		<typeAlias alias="UserLevelProject" type="com.maicard.security.domain.UserLevelProject"/>
+		<typeAlias alias="UserLevelProjectCriteria" type="com.maicard.security.criteria.UserLevelProjectCriteria"/>
+
+		<typeAlias alias="UserDynamicData" type="com.maicard.security.domain.UserDynamicData"/>		
+		
+		<typeAlias alias="UserRegionRelation" type="com.maicard.security.domain.UserRegionRelation"/>
+		<typeAlias alias="UserRegionRelationCriteria" type="com.maicard.security.criteria.UserRegionRelationCriteria"/>
+
+		<typeAlias alias="UserRelation" type="com.maicard.security.domain.UserRelation"/>
+		<typeAlias alias="UserRelationCriteria" type="com.maicard.security.criteria.UserRelationCriteria"/>
+		
+		
+		
+		<!--  partner -->			
+		<typeAlias alias="Partner" type="com.maicard.security.domain.User"/>
+		<typeAlias alias="PartnerCriteria" type="com.maicard.security.criteria.UserCriteria"/>
+		
+		<typeAlias alias="PartnerMenu" type="com.maicard.security.domain.Menu"/>
+		<typeAlias alias="PartnerMenuCriteria" type="com.maicard.security.criteria.MenuCriteria"/>
+
+		<typeAlias alias="PartnerMenuRoleRelation" type="com.maicard.security.domain.MenuRoleRelation"/>
+		<typeAlias alias="PartnerMenuRoleRelationCriteria" type="com.maicard.security.criteria.MenuRoleRelationCriteria"/>
+
+		<typeAlias alias="PartnerPrivilege" type="com.maicard.security.domain.Privilege"/>
+		<typeAlias alias="PartnerPrivilegeCriteria" type="com.maicard.security.criteria.PrivilegeCriteria"/>
+		
+		<typeAlias alias="PartnerPrivilegeRoleRelation" type="com.maicard.security.domain.PrivilegeRoleRelation"/>
+		<typeAlias alias="PartnerPrivilegeRoleRelationCriteria" type="com.maicard.security.criteria.PrivilegeRoleRelationCriteria"/>
+
+		<typeAlias alias="PartnerRelation" type="com.maicard.security.domain.UserRelation"/>
+		<typeAlias alias="PartnerRelationCriteria" type="com.maicard.security.criteria.UserRelationCriteria"/>
+
+		<typeAlias alias="PartnerRole" type="com.maicard.security.domain.Role"/>
+		<typeAlias alias="PartnerRoleCriteria" type="com.maicard.security.criteria.RoleCriteria"/>
+
+		<typeAlias alias="PartnerRoleRelation" type="com.maicard.security.domain.UserRoleRelation"/>
+		<typeAlias alias="PartnerRoleRelationCriteria" type="com.maicard.security.criteria.UserRoleRelationCriteria"/>
+		
+		<!--  front -->
+		<typeAlias alias="FrontUser" type="com.maicard.security.domain.User"/>
+		<typeAlias alias="FrontUserCriteria" type="com.maicard.security.criteria.UserCriteria"/>
+		
+		<typeAlias alias="FrontRole" type="com.maicard.security.domain.Role"/>
+		<typeAlias alias="FrontRoleCriteria" type="com.maicard.security.criteria.RoleCriteria"/>		
+
+		<typeAlias alias="FrontUserRelation" type="com.maicard.security.domain.UserRelation"/>
+		<typeAlias alias="FrontUserRelationCriteria" type="com.maicard.security.criteria.UserRelationCriteria"/>
+
+		<typeAlias alias="FrontUserRoleRelation" type="com.maicard.security.domain.UserRoleRelation"/>
+		<typeAlias alias="FrontUserRoleRelationCriteria" type="com.maicard.security.criteria.UserRoleRelationCriteria"/>
+
+		<typeAlias alias="FrontPrivilege" type="com.maicard.security.domain.Privilege"/>
+		<typeAlias alias="FrontPrivilegeCriteria" type="com.maicard.security.criteria.PrivilegeCriteria"/>
+		
+		<typeAlias alias="FrontPrivilegeRoleRelation" type="com.maicard.security.domain.PrivilegeRoleRelation"/>
+		<typeAlias alias="FrontPrivilegeRoleRelationCriteria" type="com.maicard.security.criteria.PrivilegeRoleRelationCriteria"/>
+		
+		<typeAlias alias="UserOnlineLog" type="com.maicard.security.domain.UserOnlineLog"/>
+		<typeAlias alias="UserOnlineLogCriteria" type="com.maicard.security.criteria.UserOnlineLogCriteria"/>
+	
+	</typeAliases>
+</configuration>

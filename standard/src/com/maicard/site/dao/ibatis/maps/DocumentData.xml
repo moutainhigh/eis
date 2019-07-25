@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:01 CST 2013 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DocumentData">
+
+	<resultMap id="documentDataResult" type="DocumentData">
+		<result property="documentDataId" column="document_data_id" />
+		<result property="dataDefineId" column="data_define_id" />
+		<result property="udid" column="udid" />
+		<result property="dataValue" column="data_value" />
+
+		<result property="dataType" column="data_type" />
+		<result property="dataCode" column="data_code" />
+		<result property="dataName" column="data_name"/>
+		<result property="validDataEnum" column="valid_data_enum" />
+		<result property="inputMethod" column="input_method" />
+		<result property="dataDescription" column="data_description" />
+		<result property="displayWeight" column="display_weight" />
+		<result property="inputLevel" column="input_level" />
+		<result property="displayMode" column="display_mode"/>
+		<result property="displayLevel" column="display_level" />
+	</resultMap>
+
+	<sql id="selectColumns">
+		a.document_data_id,
+		a.udid,
+		a.data_define_id,
+		a.data_value,
+		b.data_type,
+		b.data_code,
+		b.data_name,
+		b.valid_data_enum,
+		b.input_method,
+		b.ttl,
+		b.data_description,
+		b.display_weight,
+		b.input_level,
+		b.display_mode,
+		b.display_level
+	</sql>
+
+	<insert id="insert" parameterType="DocumentData" useGeneratedKeys="true" keyProperty="documentDataId">
+		INSERT INTO document_data
+		(
+		<if test="documentDataId>0">document_data_id,</if>
+		data_define_id, udid, data_value)
+		VALUES
+		(
+		<if test="documentDataId>0">#{documentDataId},</if>
+		#{dataDefineId}, #{udid}, #{dataValue})
+	</insert>
+
+	<update id="update" parameterType="DocumentData">
+		UPDATE
+		document_data
+		SET
+		data_define_id = #{dataDefineId},
+		udid = #{udid},
+		data_value = #{dataValue}
+		WHERE
+		document_data_id = #{documentDataId}
+	</update>
+
+	<select id="select" parameterType="int" resultMap="documentDataResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		document_data AS a
+		INNER JOIN document AS d ON a.udid = d.udid
+		INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id AND b.object_type='document'
+		WHERE
+		a.document_data_id = #{documentDataId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="udid > 0">
+				a.udid = #{udid}
+			</if>
+			<if test="dataDefineId > 0">
+				AND a.data_define_id = #{dataDefineId}
+			</if>
+			<if test="dataValue != null">
+				AND a.data_value = #{dataValue}
+			</if>
+			
+		</where>
+	</sql>
+
+	<select id="list" parameterType="DocumentDataCriteria" resultMap="documentDataResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		document_data AS a
+		INNER JOIN document AS d ON a.udid = d.udid
+		INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id AND b.object_type='document'
+		<include refid="criteriaWhereClause" />
+	</select>
+
+	<select id="listPk" parameterType="DocumentDataCriteria" resultType="int">
+		SELECT
+		a.document_data_id
+		FROM
+		document_data AS a
+		INNER JOIN document AS d ON a.udid = d.udid
+		INNER JOIN data_define AS b ON a.data_define_id=b.data_define_id AND b.object_type='document'
+		<include refid="criteriaWhereClause" />
+
+	</select>
+
+
+
+	<select id="count" parameterType="DocumentDataCriteria" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		document_data as a
+		<include refid="criteriaWhereClause" />
+	</select>
+
+	<delete id="delete" parameterType="int">
+		DELETE a FROM
+		document_data
+		WHERE
+		document_data_id = #{documentDataId}
+	</delete>
+
+	<delete id="deleteByCriteria" parameterType="DocumentDataCriteria">
+		DELETE a FROM
+		document_data as a
+		<include refid="criteriaWhereClause" />
+	</delete>
+
+</mapper>

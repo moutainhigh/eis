@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:57:41 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PartnerPrivilege">
+
+	<resultMap id="partnerPrivilegeResult" type="PartnerPrivilege">
+		<result property="privilegeId" column="privilege_id"/>
+		<result property="parentPid" column="parent_pid"/>
+		<result property="operateCode" column="operate_code"/>
+		<result property="privilegeName" column="privilege_name"/>
+		<result property="privilegeDesc" column="privilege_desc"/>
+		<result property="objectTypeCode" column="object_type_code"/>
+		<result property="objectList" column="object_list"/>
+		<result property="objectAttributePattern" column="object_attribute_pattern"/>
+		<result property="matchPattern" column="match_pattern"/>
+		<result property="recursive" column="recursive"/>
+		<result property="inherit" column="inherit"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<resultMap id="PartnerResult" type="Partner">
+		<result property="uuid" column="uuid"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			a.privilege_id,
+			a.parent_pid,
+			a.operate_code,
+			a.privilege_name,
+			a.privilege_desc,
+			a.object_attribute_pattern,
+			a.object_type_code,
+			a.object_list,
+			a.match_pattern,
+			a.recursive,
+			a.inherit,
+			a.current_status,
+			a.flag,
+			a.owner_id
+	</sql>
+	
+	<insert id="insert" parameterType="PartnerPrivilege" useGeneratedKeys="true"  keyProperty="privilegeId">
+		INSERT INTO partner_privilege
+			(<if test="privilegeId>0">privilege_id,</if>parent_pid, operate_code, privilege_name, privilege_desc, object_attribute_pattern, object_type_code, object_list, match_pattern, recursive, inherit, current_status, flag, owner_id)
+		VALUES
+			(<if test="privilegeId>0">#{privilegeId},</if>#{parentPid}, #{operateCode}, #{privilegeName}, #{privilegeDesc}, #{objectAttributePattern}, #{objectTypeCode}, #{objectList}, #{matchPattern}, #{recursive}, #{inherit}, #{currentStatus}, #{flag}, #{ownerId})
+	</insert>
+
+	<update id="update" parameterType="PartnerPrivilege">
+		UPDATE
+			partner_privilege
+		SET
+			parent_pid = #{parentPid},
+			operate_code = #{operateCode},
+			privilege_name = #{privilegeName},
+			privilege_desc = #{privilegeDesc},
+			object_attribute_pattern = #{objectAttributePattern},
+			object_type_code = #{objectTypeCode},
+			object_list = #{objectList},
+			match_pattern = #{matchPattern},
+			recursive = #{recursive},
+			inherit = #{inherit},
+			current_status = #{currentStatus},
+			flag = #{flag},
+			owner_id = #{ownerId}
+			
+		WHERE
+			privilege_id = #{privilegeId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			partner_privilege
+		WHERE
+			privilege_id = #{privilegeId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="partnerPrivilegeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			partner_privilege as a
+		WHERE
+			privilege_id = #{privilegeId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				a.current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="ownerId > 0">
+			AND a.owner_id = #{ownerId}
+		</if>
+		<if test="objectTypeCode != null">
+			AND	a.object_type_code = #{objectTypeCode}
+	  	</if>
+	  	<if test="roleIds != null and roleIds.length > 0">
+				AND b.role_id in 
+				<foreach item="item" collection="roleIds" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>			
+	  	</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="PartnerPrivilegeCriteria" resultMap="partnerPrivilegeResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			partner_privilege as a 
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			privilege_id ASC
+	</select>
+
+	<select id="count" parameterType="PartnerPrivilegeCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			partner_privilege as a
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<select id="listByRole" parameterType="PartnerPrivilegeCriteria"  resultMap="partnerPrivilegeResult">
+		SELECT 
+			DISTINCT <include refid="selectColumns"/>			
+		FROM 
+			partner_privilege AS a INNER JOIN partner_privilege_role_relation AS b  ON a.privilege_id=b.privilege_id
+		<include refid="criteriaWhereClause"/>
+
+	</select>
+
+</mapper>

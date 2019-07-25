@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:58:14 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserLevelCondition">
+
+	<resultMap id="userLevelConditionResult" type="UserLevelCondition">
+		<result property="userLevelConditionId" column="user_level_condition_id"/>
+		<result property="userLevelProjectId" column="user_level_project_id"/>
+		<result property="userLevelConditionName" column="user_level_condition_name"/>
+		<result property="userLevelConditionDescription" column="user_level_condition_description"/>
+		<result property="userLevelConditionValue" column="user_level_condition_value"/>
+		<result property="userLevelConditionType" column="user_level_condition_type"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="UserLevelCondition">
+		INSERT INTO user_level_condition
+			(<if test="userLevelConditionId>0">user_level_condition_id,</if>user_level_project_id, user_level_condition_name, user_level_condition_description, user_level_condition_value, user_level_condition_type, current_status, flag)
+		VALUES
+			(<if test="userLevelConditionId>0">#{userLevelConditionId},</if>#{userLevelProjectId}, #{userLevelConditionName}, #{userLevelConditionDescription}, #{userLevelConditionValue}, #{userLevelConditionType}, #{currentStatus}, #{flag})
+	</insert>
+
+	<update id="update" parameterType="UserLevelCondition">
+		UPDATE
+			user_level_condition
+		SET
+			user_level_project_id = #{userLevelProjectId},
+			user_level_condition_name = #{userLevelConditionName},
+			user_level_condition_description = #{userLevelConditionDescription},
+			user_level_condition_value = #{userLevelConditionValue},
+			user_level_condition_type = #{userLevelConditionType},
+			current_status = #{currentStatus},
+			flag = #{flag}
+		WHERE
+			user_level_condition_id = #{userLevelConditionId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			user_level_condition
+		WHERE
+			user_level_condition_id = #{userLevelConditionId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="userLevelConditionResult">
+		SELECT
+			user_level_condition_id,
+			user_level_project_id,
+			user_level_condition_name,
+			user_level_condition_description,
+			user_level_condition_value,
+			user_level_condition_type,
+			current_status,
+			flag
+		FROM
+			user_level_condition
+		WHERE
+			user_level_condition_id = #{userLevelConditionId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+			<if test="userLevelProjectId > 0">
+				AND user_level_project_id=#{userLevelProjectId}
+			</if>
+			<if test="userLevelConditionType > 0">
+				AND user_level_condition_type=#{userLevelConditionType}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="UserLevelConditionCriteria" resultMap="userLevelConditionResult">
+		SELECT
+			user_level_condition_id,
+			user_level_project_id,
+			user_level_condition_name,
+			user_level_condition_description,
+			user_level_condition_value,
+			user_level_condition_type,
+			current_status,
+			flag
+		FROM
+			user_level_condition
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			user_level_condition_id ASC
+	</select>
+
+	<select id="count" parameterType="UserLevelConditionCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			user_level_condition
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

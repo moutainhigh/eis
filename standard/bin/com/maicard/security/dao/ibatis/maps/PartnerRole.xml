@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:57:50 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PartnerRole">
+
+	<resultMap id="partnerRoleResult" type="PartnerRole">
+		<result property="roleId" column="role_id"/>
+		<result property="parentRoleId" column="parent_role_id"/>
+		<result property="roleLevel" column="role_level"/>
+		<result property="roleType" column="role_type"/>
+		<result property="roleName" column="role_name"/>
+		<result property="roleDescription" column="role_description"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="flag" column="flag"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			role_id,
+			parent_role_id,
+			role_level,
+			role_type,
+			role_name,
+			role_description,
+			current_status,
+			flag,
+			owner_id
+	</sql>	
+	<insert id="insert" parameterType="PartnerRole" useGeneratedKeys="true"  keyProperty="roleId">
+		INSERT INTO partner_role
+			(<if test="roleId>0">role_id,</if>owner_id, parent_role_id, role_level,role_type, role_name, role_description, current_status,flag)
+		VALUES
+			(<if test="roleId>0">#{roleId},</if>#{ownerId}, #{parentRoleId}, #{roleLevel}, #{roleType}, #{roleName}, #{roleDescription}, #{currentStatus}, #{flag})
+		
+	</insert>
+
+	<update id="update" parameterType="PartnerRole">
+		UPDATE
+			partner_role
+		SET
+			parent_role_id = #{parentRoleId},
+			role_level = #{roleLevel},
+			role_type = #{roleType},
+			role_name = #{roleName},
+			role_description = #{roleDescription},
+			current_status = #{currentStatus},
+			flag = #{flag},
+			owner_id = #{ownerId}
+		WHERE
+			role_id = #{roleId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			partner_role
+		WHERE
+			role_id = #{roleId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="partnerRoleResult">
+		SELECT
+				<include refid="selectColumns"/>
+		FROM
+			partner_role
+		WHERE
+			role_id = #{roleId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+		<if test="roleLevel > 0">
+			AND role_level = #{roleLevel}
+		</if>
+	  	</where>
+	</sql>
+
+	<select id="list" parameterType="PartnerRoleCriteria" resultMap="partnerRoleResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			partner_role
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			role_id ASC
+	</select>
+
+	<select id="count" parameterType="PartnerRoleCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			partner_role
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

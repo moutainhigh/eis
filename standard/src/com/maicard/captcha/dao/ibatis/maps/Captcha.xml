@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:50:09 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Captcha">
+
+	<resultMap id="captchaResult" type="Captcha">
+		<result property="captchaId" column="captcha_id"/>
+		<result property="captchaCode" column="captcha_code"/>
+		<result property="checksum" column="checksum"/>
+		<result property="createTime" column="create_time"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="extraStatus" column="extra_status"/>
+		<result property="imageName" column="image_name"/>
+		<result property="image" column="image"/>
+		<result property="supplier" column="supplier"/>
+		<result property="ttl" column="ttl"/>
+		<result property="word" column="word"/>
+		<result property="outOrderId" column="out_order_id"/>
+						
+	</resultMap>
+	<!-- 本语句仅适用于炒卡VPS系统，已过期，NetSnake,2017-05-21. -->
+	<!-- <update id="init">
+	     For SQLite
+  		CREATE TABLE IF NOT EXISTS captcha(captcha_id INTEGER PRIMARY KEY AUTOINCREMENT , captcha_code VARCHAR(255), checksum VARCHAR(255), create_time DATETIME DEFAULT CURRENT_TIMESTAMP, current_status INT(11), extra_status INT(11), image_name VARCHAR(255), image BLOB, supplier BIGINT(11), ttl INT(11), word VARCHAR(255), out_order_id VARCHAR(255))
+	</update> -->
+
+	<insert id="insert" parameterType="Captcha" useGeneratedKeys="true"  keyProperty="captchaId">
+		INSERT INTO captcha
+			(<if test="captchaId>0">captcha_id,</if> captcha_code, checksum, create_time, current_status, extra_status, image_name, image, supplier, ttl, word, out_order_id)
+		VALUES
+			(<if test="captchaId>0">#{captchaId},</if>#{captchaCode}, #{checksum}, #{createTime}, #{currentStatus}, #{extraStatus}, #{imageName}, #{image}, #{supplier}, #{ttl}, #{word}, #{outOrderId})
+	</insert>
+
+	<update id="update" parameterType="Captcha">
+		UPDATE
+			captcha
+		SET
+			captcha_code = #{captchaCode},
+			checksum = #{checksum},
+			create_time = #{createTime},
+			current_status = #{currentStatus},
+			extra_status = #{extraStatus},
+			image_name = #{imageName},
+			image = #{image},
+			supplier = #{supplier},
+			ttl = #{ttl},
+			word = #{word},
+			out_order_id = #{outOrderId}
+			
+		WHERE
+			captcha_id = #{captchaId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			captcha
+		WHERE
+			captcha_id = #{captchaId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="captchaResult">
+		SELECT
+			captcha_id,
+			captcha_code,
+			checksum,
+			create_time,
+			current_status,
+			extra_status,
+			image_name,
+			image,
+			supplier,
+			ttl,
+			word,
+			out_order_id
+		FROM
+			captcha
+		WHERE
+			captcha_id = #{captchaId}
+	</select>
+	
+	
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="captchaId > 0">
+				captcha_id=#{captchaId}
+			</if>
+			<if test="imageName != null">
+				AND image_name=#{imageName}
+			</if>
+			<if test="supplier > 0">
+				AND supplier=#{supplier}
+			</if>
+			<if test="checksum != null">
+				AND checksum=#{checksum}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+		</where>
+	</sql>
+
+
+	<select id="list" parameterType="CaptchaCriteria" resultMap="captchaResult">
+		SELECT
+			captcha_id,
+			captcha_code,
+			checksum,
+			create_time,
+			current_status,
+			extra_status,
+			image_name,
+			image,
+			supplier,
+			ttl,
+			word,
+			out_order_id
+		FROM
+			captcha
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+	<select id="count" parameterType="CaptchaCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			captcha
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>
