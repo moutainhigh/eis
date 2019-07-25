@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:51:32 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.flow.sql.Workflow">
+
+	<resultMap id="workflowResult" type="Workflow">
+		<result property="workflowId" column="workflow_id"/>
+		<result property="workflowName" column="workflow_name"/>
+		<result property="workflowDesc" column="workflow_desc"/>
+		<result property="targetObjectType" column="target_object_type"/>
+		<result property="targetObjectOperateCodeList" column="target_object_operate_code_list"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<sql id="selectColumns">
+			workflow_id,
+			workflow_name,
+			workflow_desc,
+			target_object_type,
+			target_object_operate_code_list,
+			current_status,
+			owner_id
+	</sql>
+
+
+	<insert id="insert" parameterType="Workflow"  useGeneratedKeys="true"  keyProperty="workflowId">
+		INSERT INTO workflow
+			(<if test="workflowId>0">workflow_id,</if> owner_id, workflow_name, workflow_desc, target_object_type, target_object_operate_code_list, current_status)
+		VALUES
+			(<if test="workflowId>0">#{workflowId},</if> #{ownerId}, #{workflowName}, #{workflowDesc}, #{targetObjectType}, #{targetObjectOperateCodeList}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="Workflow">
+		UPDATE
+			workflow
+		SET
+			workflow_name = #{workflowName},
+			workflow_desc = #{workflowDesc},
+			target_object_type = #{targetObjectType},
+			target_object_operate_code_list = #{targetObjectOperateCodeList},
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			workflow_id = #{workflowId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			workflow
+		WHERE
+			workflow_id = #{workflowId}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="workflowResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			workflow
+		WHERE
+			workflow_id = #{workflowId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="ownerId > 0">
+			owner_id IN (#{ownerId},0)
+		</if>
+		<if test="targetObjectType != null">
+			AND target_object_type=#{targetObjectType}
+		</if>
+		<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="WorkflowCriteria" resultMap="workflowResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			workflow
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			workflow_id ASC
+	</select>
+
+	<select id="count" parameterType="WorkflowCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			workflow
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	
+	
+
+</mapper>
