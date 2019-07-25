@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:45 CST 2013-->
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-	<typeAliases>			
-		<!--  captcha -->		
-		<typeAlias alias="Captcha" type="com.maicard.captcha.domain.Captcha"/>
-		<typeAlias alias="CaptchaCriteria" type="com.maicard.captcha.criteria.CaptchaCriteria"/>
-	</typeAliases>
-</configuration>
