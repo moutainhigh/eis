@@ -110,7 +110,7 @@
 	</target>
 	<target depends="jar" name="build" />
 
-	<target depends="svn,init" name="build-project">
+	<target depends="init" name="build-project">
 		<echo message="Building ${ant.project.name}: ${ant.file}" />
 		<javac encoding="UTF-8" debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" nowarn="true" source="${java_version}" target="${java_version}">
 			<src path="src" />
