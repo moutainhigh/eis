@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:57:55 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SecurityLevel">
+
+	<resultMap id="securityLevelResult" type="SecurityLevel">
+		<result property="level" column="`level`"/>
+		<result property="name" column="`name`"/>
+		<result property="description" column="description"/>
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		<result property="currentStatus" column="current_status"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+			`level`,
+			`name`,
+			description,
+			data,
+			current_status
+	</sql>
+
+	<insert id="insert" parameterType="SecurityLevel" useGeneratedKeys="true"  keyProperty="level">
+		INSERT INTO security_level
+			(<if test="level>0">`level`,</if> owner_id, `name`, description,parent_`level`,data,current_status)
+		VALUES
+			(<if test="level>0">#{level},</if> #{ownerId}, #{name}, #{description},#{data, javaType=HashMap, jdbcType=VARCHAR}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="SecurityLevel">
+		UPDATE
+			security_level
+		SET
+			`name` = #{name},
+			description = #{description},			
+			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
+			current_status = #{currentStatus},
+		WHERE
+			`level` = #{level}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			security_level
+		WHERE
+			`level` = #{level}
+	</delete>
+	
+	<select id="select" parameterType="int" resultMap="securityLevelResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			security_level
+		WHERE
+			`level` = #{level}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="SecurityLevelCriteria" resultMap="securityLevelResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			security_level
+		<include refid="criteriaWhereClause"/>
+		
+	</select>
+
+	<select id="count" parameterType="SecurityLevelCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			security_level
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

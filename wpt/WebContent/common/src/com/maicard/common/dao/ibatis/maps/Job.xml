@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Job">
+
+	<resultMap id="jobResult" type="Job">
+		<result property="jobId" column="job_id"/>
+		<result property="jobType" column="job_type"/>
+		<result property="jobName" column="job_name"/>
+		<result property="beanName" column="bean_name"/>
+		<result property="serverId" column="server_id"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="runningStatus" column="running_status"/>
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="Job" useGeneratedKeys="true"  keyProperty="jobId">
+		INSERT INTO job
+			(<if test="jobId>0">job_id,</if>job_type, job_name, bean_name, server_id, `data`, current_status, running_status)
+		VALUES
+			(<if test="jobId>0">#{jobId},</if>#{jobType}, #{jobName}, #{beanName}, #{serverId}, #{data}, #{currentStatus}, #{runningStatus})
+	</insert>
+
+	<update id="update" parameterType="Job">
+		UPDATE
+			job
+		SET
+			job_type = #{jobType},
+			job_name = #{jobName},
+			bean_name = #{beanName},
+			server_id = #{serverId},
+			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
+			current_status = #{currentStatus},
+			running_status = #{runningStatus}
+		WHERE
+			job_id = #{jobId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			job
+		WHERE
+			job_id = #{jobId}
+	</delete>
+	
+	<sql id="selectColumns">
+			job_id,
+			job_type,
+			job_name,
+			bean_name,
+			server_id,
+			`data`,
+			current_status,
+			running_status,
+			owner_id
+	</sql>
+	
+	<select id="select" parameterType="int" resultMap="jobResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			job
+		WHERE
+			job_id = #{jobId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<if test="currentStatus != null">
+				current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  	</if>
+	  	<if test="beanName != null">
+				AND bean_name = #{beanName}
+		</if>
+		<if test="serverId > 0">
+				AND server_id IN (#{serverId},0)
+		</if>
+	  	<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+		</if>
+	</sql>
+
+	<select id="list" parameterType="JobCriteria" resultMap="jobResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			job
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			job_id ASC
+	</select>
+
+	<select id="count" parameterType="JobCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			job
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

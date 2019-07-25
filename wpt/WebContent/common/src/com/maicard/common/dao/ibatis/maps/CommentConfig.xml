@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:03 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.common.sql.CommentConfig">
+
+	<resultMap id="commentConfigResult" type="CommentConfig">
+		<result property="commentConfigId" column="comment_config_id"/>
+		<result property="objectType" column="object_type"/>	
+		<result property="objectId" column="object_id"/>
+		<result property="initStatus" column="init_status"/>
+		<result property="unique" column="unique"/>
+		<result property="canDelete" column="can_delete"/>
+		<result property="canEdit" column="can_edit"/>
+		<result property="commentProcessor" column="comment_processor"/>
+		<result property="extraDataDefine" column="extra_data_define" typeHandler="com.maicard.typeHandler.TextHashMapTypeHandler"/>		
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+	    comment_config_id,
+		object_type,
+		object_id,
+		init_status,
+		`unique`,
+		can_delete,
+		can_edit,
+		comment_processor,
+		extra_data_define,
+		current_status,
+		owner_id
+	</sql>
+	
+
+	<insert id="insert" parameterType="CommentConfig"  useGeneratedKeys="true"  keyProperty="commentConfigId">
+		INSERT INTO comment_config
+			(<if test="commentConfigId>0">comment_config_id,</if> owner_id, object_type, object_id, init_status, `unique`, can_delete, can_edit,	comment_processor,extra_data_define,current_status)
+		VALUES
+			(<if test="commentConfigId>0">#{commentConfigId},</if> #{ownerId}, #{objectType}, #{objectId}, #{initStatus}, #{unique}, #{canDelete}, #{canEdit}, #{commentProcessor}, #{extraDataDefine, typeHandler=com.maicard.typeHandler.TextHashMapTypeHandler}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="CommentConfig">
+		UPDATE
+			comment_config
+		SET
+			object_type = #{objectType},
+			object_id = #{objectId},
+			init_status = #{initStatus},
+			`unique` = #{unique},
+			can_delete = #{canDelete},
+			can_edit = #{canEdit},
+			comment_processor = #{commentProcessor},
+			extra_data_define = #{extraDataDefine, typeHandler=com.maicard.typeHandler.TextHashMapTypeHandler},			
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			comment_config_id = #{commentConfigId}
+	</update>
+
+	<delete id="delete" parameterType="long">
+		DELETE FROM
+			comment_config
+		WHERE
+			comment_config_id = #{commentConfigId}
+	</delete>
+	
+	<select id="select" parameterType="long" resultMap="commentConfigResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			comment_config
+		WHERE
+			comment_config_id = #{commentConfigId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+		    owner_id = #{ownerId}
+			<if test="currentStatus != null">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+			<if test="objectType != null">
+				AND object_type = #{objectType}
+			</if>
+			<if test="objectId > 0 and withGlobalConfig == true">
+				AND object_id  IN (#{objectId}, 0)
+			</if>
+			<if test="objectId > 0 and  withGlobalConfig == false">
+				AND object_id  = #{objectId}
+			</if>
+			<if test="initStatus > 0">
+				AND init_status = #{initStatus}
+			</if>
+		</where>
+	</sql>
+
+	<select id="listPk" parameterType="CommentConfigCriteria" resultType="long">
+		SELECT
+			comment_config_id
+		FROM
+			comment_config
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			comment_config_id ASC
+	</select>
+	
+	<select id="list" parameterType="CommentConfigCriteria" resultMap="commentConfigResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			comment_config
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			comment_config_id ASC
+	</select>
+
+	<select id="count" parameterType="CommentConfigCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			comment_config
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>
