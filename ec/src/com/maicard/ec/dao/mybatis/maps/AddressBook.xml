@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AddressBook">
+
+	<resultMap id="addressBookResult" type="AddressBook">
+		<result property="addressBookId" column="address_book_id"/>
+		<result property="uuid" column="uuid"/>
+		<result property="country" column="country"/>
+		<result property="province" column="province"/>
+		<result property="city" column="city"/>
+		<result property="district" column="district"/>
+		<result property="address" column="address"/>
+		<result property="contact" column="contact"/>
+		<result property="phone" column="phone"/>
+		<result property="mobile" column="mobile"/>
+		<result property="postcode" column="postcode"/>
+		<result property="tags" column="tags"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastUseTime" column="last_use_time"/>
+		<result property="useCount" column="use_count"/>
+		<result property="identify" column="identify"/>
+		<result property="currentStatus" column="current_status"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+	
+	<sql id="selectColumns">
+	    address_book_id,
+		uuid,
+		country,
+		province,
+		city,
+		district,
+		address,
+		contact,
+		phone,
+		mobile,
+		postcode,
+		tags,
+		create_time,
+		last_use_time,		
+		use_count,	
+		identify,
+		current_status,
+		owner_id 
+	</sql>
+
+	<insert id="insert" parameterType="AddressBook" useGeneratedKeys="true"  keyProperty="id">
+		INSERT INTO address_book
+			(<if test="addressBookId>0">address_book_id,</if> owner_id, uuid, province,city, district, address, contact, phone, mobile, postcode, create_time, last_use_time, use_count, current_status, identify)
+		VALUES
+			(<if test="addressBookId>0">#{addressBookId},</if> #{ownerId},  #{uuid}, #{province},#{city}, #{district}, #{address}, #{contact}, #{phone}, #{mobile}, #{postcode}, #{createTime}, #{lastUseTime}, #{useCount}, #{currentStatus}, #{identify})
+	</insert>
+	<update id="updateAllToNormal" parameterType="AddressBook">
+	  update address_book set current_status=100001 where uuid=#{uuid}
+	</update>
+	<update id="update" parameterType="AddressBook">
+		UPDATE
+			address_book
+		SET
+			uuid = #{uuid},
+			country = #{country},
+			province = #{province},
+			city = #{city},
+			district = #{district},
+			address = #{address},
+			contact = #{contact},
+			phone = #{phone},
+			mobile = #{mobile},
+			postcode = #{postcode},
+			tags = #{tags},
+			create_time = #{createTime},
+			last_use_time = #{lastUseTime},		
+			use_count = #{useCount},
+			identify = #{identify},	
+			current_status = #{currentStatus},
+			owner_id = #{ownerId}
+		WHERE
+			address_book_id = #{addressBookId} and uuid=#{uuid}
+	</update>
+
+	<delete id="delete" parameterType="AddressBook">
+		DELETE FROM
+			address_book
+		WHERE
+			address_book_id = #{addressBookId} and uuid=#{uuid}
+	</delete>
+	
+	<select id="select" parameterType="String" resultMap="addressBookResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			address_book
+		WHERE
+			address_book_id = #{addressBookId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="addressBookId > 0">
+				address_book_id = #{addressBookId}
+			</if>
+			<if test="province != null ">
+				AND province = #{province}
+			</if>
+			<if test="city != null ">
+				AND city = #{city}
+			</if>
+			<if test="mobile != null ">
+				AND mobile = #{mobile}
+			</if>
+			<if test="contact != null ">
+				AND contact = #{contact}
+			</if>
+			<if test="identify != null ">
+				AND identify = #{identify}
+			</if>
+			<if test="uuid != null and uuid.length &gt; 0 ">
+				AND uuid IN
+				<foreach item="item" collection="uuid" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>	
+			</if>
+			<if test="currentStatus != null and currentStatus.length > 0">
+				AND current_status in 
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+	        			#{item}
+	  			</foreach>				
+	  		</if>
+	  		<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="AddressBookCriteria" resultMap="addressBookResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			address_book
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			current_status DESC, use_count DESC, last_use_time DESC, address_book_id desc
+	</select>
+	<select id="count" parameterType="AddressBookCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			address_book
+		<include refid="criteriaWhereClause"/>
+	</select>
+   	<update id="setNormalAdd">
+   	  update address_book set current_status=100001 
+   	</update>	
+   	<update id="setDefaultAdd" parameterType="AddressBook">
+   	  update address_book set current_status=100003 where address_book_id=#{addressbookid}
+   	</update>
+</mapper>

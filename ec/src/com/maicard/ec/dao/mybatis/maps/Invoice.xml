@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Invoice">
+	<resultMap id="invoiceResult" type="Invoice">
+		<result property="invoiceId" column="invoice_id" />
+		<result property="uuid" column="uuid" />
+		<result property="invoiceCode" column="invoice_code" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="memory" column="memory" />
+		<result property="currentStatus" column="current_status" />
+		<result property="taxPayerId" column="tax_payer_id" />
+		<result property="bankAccountId" column="bank_account_id" />
+		<result property="contactPhone" column="contact_phone" />
+		<result property="registeredAddress" column="registered_address" />
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="Invoice" useGeneratedKeys="true"
+		keyProperty="invoiceId">
+		INSERT INTO invoice
+		(
+		<if test="invoiceId>0">invoice_id,</if>
+		owner_id, invoice_code,
+		title, content, memory, current_status, tax_payer_id,
+		bank_account_id, contact_phone, registered_address,
+		data,uuid)
+		VALUES
+		(
+		<if test="invoiceId>0">#{invoiceId},</if>
+	    #{ownerId},  #{invoiceCode}, 
+		#{title}, #{content}, #{memory},#{currentStatus},
+		#{taxPayerId}, #{bankAccountId}, #{contactPhone},
+		#{registeredAddress}, #{data, javaType=HashMap, jdbcType=VARCHAR},#{uuid})
+	</insert>
+
+	<sql id="selectColumns">
+		invoice_id,
+		invoice_code,
+		title,
+		content,
+		current_status,
+		tax_payer_id,
+		bank_account_id,
+		contact_phone,
+		registered_address,
+		data,
+		uuid,
+		owner_id
+	</sql>
+
+	<update id="update" parameterType="Invoice">
+		UPDATE
+			invoice
+		SET
+			title = #{title},
+			invoice_code = #{invoiceCode}, 
+			content = #{content},
+			current_status = #{currentStatus},
+			tax_payer_id = #{taxPayerId}, 
+			bank_account_id = #{bankAccountId},
+			contact_phone = #{contactPhone},
+			registered_address = #{registeredAddress},
+			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
+			uuid = #{uuid},
+			owner_id = #{ownerId}
+		WHERE
+			invoice_id = #{invoiceId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			invoice
+		WHERE
+			invoice_id = #{invoiceId}
+	</delete>
+
+	<select id="select" parameterType="int" resultMap="invoiceResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			invoice
+		WHERE
+			invoice_id = #{invoiceId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="uuid > 0">
+				uuid=#{uuid}
+			</if>
+			<if test="invoiceCode != null">
+				AND invoice_code=#{invoiceCode}
+			</if>
+			<if test="title != null">
+				AND title=#{title}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in
+				<foreach item="item" collection="currentStatus" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="ownerId > 0">
+				AND owner_id = #{ownerId}
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="InvoiceCriteria" resultMap="invoiceResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+		invoice
+			<include refid="criteriaWhereClause" />
+	</select>
+
+	<select id="count" parameterType="InvoiceCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			invoice
+		<include refid="criteriaWhereClause" />
+	</select>
+
+</mapper>
