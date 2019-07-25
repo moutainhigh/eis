@@ -1,0 +1,4 @@
+USE eis_v4_chaoka;
+TRUNCATE TABLE validate_cache;
+INSERT IGNORE INTO validate_cache (data1,data2) SELECT DISTINCT a.data_value,b.data_value FROM (SELECT product_id,data_define_id,data_value,current_status FROM item_data WHERE data_define_id=179 ) a INNER JOIN (SELECT product_id,data_define_id,data_value,current_status FROM item_data WHERE data_define_id=181 ) b ON a.product_id=b.product_id;
+INSERT IGNORE INTO validate_cache (data1,data2) SELECT DISTINCT a.data_value,b.data_value FROM (SELECT product_id,data_define_id,data_value,current_status FROM item_data_history WHERE data_define_id=179 ) a INNER JOIN(SELECT product_id,data_define_id,data_value,current_status FROM item_data_history WHERE data_define_id=181 ) b ON a.product_id=b.product_id;

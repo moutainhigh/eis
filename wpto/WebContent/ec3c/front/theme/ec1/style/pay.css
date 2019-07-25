@@ -1,0 +1,28 @@
+.content{
+	width:1000px;
+	margin:0 auto;
+	margin-top:40px;
+	min-height: 520px;
+}
+.box_QRcode{
+	width:99.8%;
+	height:auto;
+	border:1px #B1191A solid;
+	overflow:hidden;
+}
+.textAlignCenter{
+	text-align:center;
+}
+.textIn20{
+	text-indent:20px;
+}
+.box_QRcode #code{
+	width: 182px;
+    height: 182px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px #999 solid;
+}
+.box_QRcode p{
+	margin:10px 0px;
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--BACKEDN后台 Quartz 任务 -->
+
+	<!-- Shenzhouxing coupon monitor, 神州行点券生成监控 -->
+	<bean id="shenzhouxingCouponMonitorDetails"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="shenzhouxingCouponProcessor" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	<bean id="shenzhouxingCouponMonitorTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="shenzhouxingCouponMonitorDetails" />
+		</property>
+		<property name="cronExpression">
+			<value>5 */3 * * * ?</value>
+		</property>
+	</bean>
+		
+	
+	
+	<!-- <bean id="backendJobList"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="shenzhouxingCouponMonitorTrigger" />
+			</list>
+		</property>
+	</bean>	 -->
+	
+
+	
+
+</beans>

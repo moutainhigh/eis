@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:task="http://www.springframework.org/schema/task" 
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd 
+		">
+		
+	<bean id="propertyConfigurer" class="com.maicard.security.util.EncryptPropertyPlaceholderConfigurer" p:locations="classpath:server-special-v4.properties" />
+	<bean id="conversionService"  class="org.springframework.context.support.ConversionServiceFactoryBean">
+	    	<property name="converters">
+	    	<list>
+	    		<bean class="com.maicard.converters.DefaultDateFormatConverter" />
+	    	</list>
+	    	</property>
+	 </bean>    
+	<mvc:annotation-driven conversion-service="conversionService"/>  
+	
+	<!-- ApplicationListeners -->
+	<bean id="performanceMonitorListener" class="org.springframework.web.context.ContextLoaderListener"/>
+	
+	<!-- Message source，用于读取不同语言的说明，目前用于对一些数据字段进行说明 -->	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" 
+		p:defaultEncoding="UTF-8" p:basenames="classpath:sconfig/message_common, classpath:pconfig/data_name, classpath:pconfig/message" 
+		p:cacheSeconds="3600" p:useCodeAsDefaultMessage="true"
+	/>
+	
+	<!--  File upload and multipart resolve -->
+	<bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource" c:_0="temp" />
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:maxUploadSize="10000000" p:uploadTempDir-ref="uploadTempDir"/>
+	
+	<!-- Aop -->
+    <context:component-scan base-package="com.maicard" use-default-filters="false" name-generator="com.maicard.common.util.ImplAopNameGenerator">  
+        	<context:include-filter type="regex" expression="com.maicard.billing.dao.ibatis.*" />  	
+       		<context:include-filter type="regex" expression="com.maicard.common.dao.ibatis.*" />  	
+       		<context:include-filter type="regex" expression="com.maicard.captcha.dao.ibatis.*" />  
+       		<context:include-filter type="regex" expression="com.maicard.flow.dao.ibatis.*" />
+       		<context:include-filter type="regex" expression="com.maicard.mb.dao.ibatis.*" />  
+       		<context:include-filter type="regex" expression="com.maicard.money.dao.ibatis.*" />  
+       		<context:include-filter type="regex" expression="com.maicard.security.dao.ibatis.*" />  
+			<context:include-filter type="regex" expression="com.maicard.site.dao.ibatis.*" />  
+       		<context:include-filter type="regex" expression="com.maicard.stat.dao.ibatis.*" />  
+         	<context:include-filter type="regex" expression="com.maicard.product.dao.ibatis.*" />  
+       		    		
+           	<context:include-filter type="regex" expression="com.maicard.aspect.common.*" />  
+           	<context:include-filter type="regex" expression="com.maicard.aspect.partner.*" />  
+            <context:include-filter type="regex" expression="com.maicard.billing.service.impl.*" />  
+            <context:include-filter type="regex" expression="com.maicard.captcha.service.impl.*" />   
+            <context:include-filter type="regex" expression="com.maicard.common.service.impl.*" />  
+            <context:include-filter type="regex" expression="com.maicard.common.cache.impl.*" />  
+            <context:include-filter type="regex" expression="com.maicard.common.service.task.*" />  
+           	<context:include-filter type="regex" expression="com.maicard.flow.service.impl.*" />
+           	<context:include-filter type="regex" expression="com.maicard.mb.service.impl.*" />
+           	<context:include-filter type="regex" expression="com.maicard.mb.service.rabbit.*" />
+           	<context:include-filter type="regex" expression="com.maicard.money.service.impl.*" />  
+           	<context:include-filter type="regex" expression="com.maicard.security.service.impl.*" />  
+       		<context:include-filter type="regex" expression="com.maicard.site.service.impl.*" />   
+           	<context:include-filter type="regex" expression="com.maicard.stat.service.impl.*" />  
+           	<context:include-filter type="regex" expression="com.maicard.product.service.impl.*" />  
+            <context:include-filter type="regex" expression="com.maicard.product.service.task.*" />  
+           	<context:include-filter type="regex" expression="com.maicard.outer.*" />
+           	
+   	      	<!--  EC module -->
+            <context:include-filter type="regex" expression="com.maicard.ec.service.impl.*" />          
+           	<context:include-filter type="regex" expression="com.maicard.ec.dao.mybatis.*" />  
+            <context:include-filter type="regex" expression="com.maicard.ec.partner.controller.*" />   
+           	
+           	           	
+           	<!--  WPT standard -->           	
+            <context:include-filter type="regex" expression="com.maicard.wpt.dao.mybatis.*" />
+            <context:include-filter type="regex" expression="com.maicard.wpt.service.impl.*" />
+            <context:include-filter type="regex" expression="com.maicard.wpt.nodeProcessor.*" />   
+            <context:include-filter type="regex" expression="com.maicard.wpt.partner.controller.*" />   
+  
+    </context:component-scan>
+    <aop:aspectj-autoproxy proxy-target-class="true"/> 
+    <bean id="dynamicDataSource" class="com.maicard.common.base.DynamicDataSource">  
+        <property name="targetDataSources">  
+            <map key-type="java.lang.String">  
+                <entry value-ref="normalDataSource" key="normalDataSource"></entry>  
+                <entry value-ref="logDataSource" key="logDataSource"></entry>  
+            </map>  
+        </property>  
+        <property name="defaultTargetDataSource" ref="normalDataSource">  
+        </property>  
+    </bean>  
+    	
+   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"	p:dataSource-ref="dynamicDataSource" />
+
+	 <tx:annotation-driven transaction-manager="transactionManager" />
+    	 
+	<!-- Normal Data source -->
+	<bean id="normalDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<property name="poolProperties">  
+            <bean class="org.apache.tomcat.jdbc.pool.PoolProperties">  
+                <property name="url" value="${jdbc.url}"/>  
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>  
+                <property name="username" value="${jdbc.username}"/>  
+                <property name="password" value="${jdbc.password}"/>  
+                <property name="jmxEnabled" value="true"/>  
+                <property name="testWhileIdle" value="false"/>  
+                <property name="testOnBorrow" value="true"/>  
+                <property name="validationInterval" value="30000"/>  
+                <property name="testOnReturn" value="false"/>  
+                <property name="validationQuery" value="select 1"/>  
+                <property name="timeBetweenEvictionRunsMillis" value="30000"/>  
+                <property name="maxActive" value="5"/>  
+                <property name="initialSize" value="1"/>  
+                <property name="maxWait" value="1800"/>  
+                <property name="removeAbandonedTimeout" value="60"/>  
+                <property name="minEvictableIdleTimeMillis" value="30000"/>  
+                <property name="maxIdle" value="1"/>  
+                <property name="minIdle" value="1"/>  
+                <property name="logAbandoned" value="true"/>  
+                <property name="removeAbandoned" value="true"/>  
+                <property name="jdbcInterceptors" value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"/>  
+            </bean>  
+        </property>
+	</bean>
+	
+	<bean id="logDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<property name="poolProperties">  
+            <bean class="org.apache.tomcat.jdbc.pool.PoolProperties">  
+                <property name="url" value="${jdbcLog.url}"/>  
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>  
+                <property name="username" value="${jdbcLog.username}"/>  
+                <property name="password" value="${jdbcLog.password}"/>  
+                <property name="jmxEnabled" value="true"/>  
+                <property name="testWhileIdle" value="false"/>  
+                <property name="testOnBorrow" value="true"/>  
+                <property name="validationInterval" value="30000"/>  
+                <property name="testOnReturn" value="false"/>  
+                <property name="validationQuery" value="select 1"/>  
+                <property name="timeBetweenEvictionRunsMillis" value="30000"/>  
+                <property name="maxActive" value="5"/>  
+                <property name="initialSize" value="1"/>  
+                <property name="maxWait" value="1800"/>  
+                <property name="removeAbandonedTimeout" value="60"/>  
+                <property name="minEvictableIdleTimeMillis" value="30000"/>  
+                <property name="maxIdle" value="1"/>  
+                <property name="minIdle" value="1"/>  
+                <property name="logAbandoned" value="true"/>  
+                <property name="removeAbandoned" value="true"/>  
+                <property name="jdbcInterceptors" value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"/>  
+            </bean>  
+        </property>
+	</bean>
+	
+		
+	<bean id="sqlSessionFactory" class="com.maicard.common.base.MultiConfigSqlSessionFactoryBean">
+		<property name="configLocations">
+			<list>
+				<value>classpath*:com/maicard/billing/config/mybatis-billing.xml</value>
+				<value>classpath*:com/maicard/common/config/mybatis-common.xml</value>
+				<value>classpath*:com/maicard/captcha/config/mybatis-captcha.xml</value>
+				<value>classpath*:com/maicard/flow/config/mybatis-flow.xml</value>
+				<value>classpath*:com/maicard/mb/config/mybatis-mb.xml</value>
+				<value>classpath*:com/maicard/money/config/mybatis-money.xml</value>
+				<value>classpath*:com/maicard/product/config/mybatis-product.xml</value>
+				<value>classpath*:com/maicard/security/config/mybatis-security.xml</value>
+				<value>classpath*:com/maicard/site/config/mybatis-site.xml</value>
+				<value>classpath*:com/maicard/stat/config/mybatis-stat.xml</value>
+
+				<value>classpath*:com/maicard/ec/config/mybatis-ec.xml</value>
+				<value>classpath*:com/maicard/wpt/config/mybatis-wpt.xml</value>
+			</list>		
+		</property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:com/maicard/billing/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/common/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/flow/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/mb/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/money/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/product/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/security/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/site/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/stat/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/ec/dao/mybatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/wpt/dao/mybatis/maps/*.xml</value>
+			</list>
+		</property>
+
+		 <property name="dataSource" ref="dynamicDataSource" />
+ 	</bean>
+ 	
+ 	<bean id="sqlSession"  class="org.mybatis.spring.SqlSessionTemplate">  
+        	<constructor-arg index="0" ref="sqlSessionFactory" />  
+     	</bean> 
+	
+ 		
+        
+         <!--  根据后缀不同返回不同的格式输出 -->
+        <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">  
+        	<property name="ignoreAcceptHeader" value="true" />  
+                <property name="defaultContentType" value="text/html" /> 
+                <property name="mediaTypes">  
+	            <map>  
+	                <entry key="html" value="text/html" />  
+	                <entry key="pdf" value="application/pdf" />  
+	                <entry key="xml" value="application/xml" />  
+	                <entry key="json" value="application/json" />  
+	                <entry key="tree" value="application/json" />
+	            </map>  
+	        </property>  
+     		<property name="favorParameter" value="false" />  
+	        <property name="viewResolvers">  
+	            <list>  
+	                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />  
+	                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+	                    <property name="viewClass" value="com.maicard.views.ThemeView" />  
+	                    <property name="prefix" value="/WEB-INF/jsp/" />  
+	                    <property name="suffix" value=".jsp"></property> 	                    
+	                </bean>  
+	            </list>  
+	        </property>  
+	        <property name="defaultViews">  
+	            <list>  
+	                <bean class="com.maicard.views.PartnerJsonView" />  	                
+	            </list>  
+	        </property>  
+   	 </bean>  
+        
+    <!--  缓存  -->
+	<cache:annotation-driven />
+	<bean id="cacheManagerFactory" class="com.maicard.common.base.CustomEhCacheManagerFactoryBean"
+		p:configLocation="classpath:sconfig/ehcache-rmi.xml"
+		p:multicastGroupAddress="${ehcacheAddress}"
+		p:multicastGroupPort="${ehcachePort}"
+		p:timeToLive="${ehcacheTtl}" />
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="cacheManagerFactory" />    
+        
+	<import resource="classpath:sconfig/threadpool.xml" />
+	<import resource="classpath:sconfig/jms-rabbit.xml" />
+	<import resource="classpath:sconfig/distributed-redis.xml" />
+	<import resource="classpath:job-partner.xml" />	
+	
+    <!-- 开启任务注解 -->
+	<task:annotation-driven executor="eisDefaultThreadPool"/>	
+</beans>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:52:30 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.stat.sql.Profit">
+
+	<resultMap id="profitResult" type="Profit">
+		<result property="profitId" column="profit_id"/>
+		<result property="statTime" column="stat_time"/>
+		<result property="uuid" column="uuid"/>
+		<result property="objectType" column="object_type"/>
+		<result property="objectId" column="object_id"/>
+		<result property="profit" column="profit"/>		
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<sql id="selectColumns">
+		profit_id,
+		stat_time,
+		uuid,
+		object_type,
+		object_id,
+		profit,
+		owner_id
+	</sql>
+	
+	<insert id="insert" parameterType="Profit" useGeneratedKeys="true"  keyProperty="profitId">
+		INSERT INTO profit
+			(<if test="profitId>0">profit_id,</if>owner_id, stat_time, uuid, object_type, object_id, profit)
+		VALUES
+			(<if test="profitId>0">profitId,</if>#{ownerId}, #{statTime}, #{uuid}, #{objectType}, #{objectId}, #{profit})
+	</insert>
+	
+	<!-- 
+
+	<update id="update" parameterType="Profit">
+		UPDATE
+			profit
+		SET
+			stat_time = #{statTime},
+			uuid = #{uuid},
+			object_id = #{objectId},
+			profit = #{profit},
+			owner_id = #{ownerId}
+		WHERE
+			profit_id = #{profitId}
+	</update>
+	
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			profit
+		WHERE
+			profit_id = #{profitId}
+	</delete>
+	-->
+	
+
+	
+	<select id="select" parameterType="int" resultMap="profitResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			profit		
+		WHERE
+			profit_id = #{profitId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+	  	<if test="statTime != null">
+			stat_time=#{statTime}
+		</if>
+		<if test="ownerId > 0">
+			AND owner_id = #{ownerId}
+		</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="ProfitCriteria" resultMap="profitResult">
+		SELECT
+			<include refid="selectColumns"/>
+		FROM
+			profit	
+		<include refid="criteriaWhereClause"/>
+		ORDER BY
+			profit_id ASC
+	</select>
+
+	<select id="count" parameterType="ProfitCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			profit
+		<include refid="criteriaWhereClause"/>
+	</select>
+	
+	<delete id="deleteBy" parameterType="int">
+		DELETE FROM
+			profit
+		<include refid="criteriaWhereClause"/>
+	</delete>
+
+</mapper>

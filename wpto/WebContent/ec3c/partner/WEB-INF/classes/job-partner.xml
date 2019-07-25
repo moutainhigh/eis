@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--BOSS后台 Quartz 任务 -->
+
+	<!-- Begin incomingStat define 每周二执行，统计上周的收入和利润 -->
+	<bean id="incomingStatDetails"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="incomingStatJob" />
+		</property>
+		<property name="targetMethod">
+			<value>start</value>
+		</property>
+	</bean>
+	<bean id="incomingStatTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="incomingStatDetails" />
+		</property>
+		<property name="cronExpression">
+			<value>5 3 6 ? * TUES</value><!-- 每周二6点3分5秒执行 -->
+		</property>
+	</bean>
+		
+	
+	
+	<!-- Begin pay move to history job define 每天3点3分执行一次，把两天前的pay数据移动到历史表 -->
+	<bean id="payMoveToHistoryJobDetails"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="payMoveToHistoryJob" />
+		</property>
+		<property name="targetMethod">
+			<value>start</value>
+		</property>
+	</bean>
+	<bean id="payMoveToHistoryJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="payMoveToHistoryJobDetails" />
+		</property>
+		<property name="cronExpression">
+			<value>10 3 3 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- Begin pay stat job define 每3分钟分执行一次，统计上一小时的支付数据 -->
+	<bean id="payStatJobDetails"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="payStatJob" />
+		</property>
+		<property name="targetMethod">
+			<value>start</value>
+		</property>
+	</bean>
+	<bean id="payStatJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="payStatJobDetails" />
+		</property>
+		<property name="cronExpression">
+			<value>13 */3 * * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- Begin item stat job define 每3分钟分执行一次，统计上一小时的消费数据 -->
+	<bean id="itemStatJobDetails"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="itemStatJob" />
+		</property>
+		<property name="targetMethod">
+			<value>start</value>
+		</property>
+	</bean>
+	<bean id="itemStatJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="itemStatJobDetails" />
+		</property>
+		<property name="cronExpression">
+			<value>43 */3 * * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- Begin clean notify log job define 每3分钟分执行一次，清理指定时间之前的通知日志 -->
+	<bean id="cleanNotifyLogJobDetails"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="notifyLogService" />
+		</property>
+		<property name="targetMethod">
+			<value>cleanOldNotifyLog</value>
+		</property>
+	</bean>
+	
+	
+	<!-- Begin order recycle and flush product amount task define 收回那些已超过有效期的等待付款订单，将其数量加回产品并更新产品数据 -->
+	<bean id="orderRecycleTaskDefine"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="orderRecycleTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	<bean id="orderRecycleTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="orderRecycleTaskDefine" />
+		</property>
+		<property name="cronExpression">
+			<value>15 */5 * * * ?</value>
+		</property>
+	</bean>
+	<!-- End of vps status check task define -->
+	
+	<!-- Begin global unique data load check task define 检查全局数据是否已经加载到REDIS中 -->
+	<bean id="globalUniqueDataTaskDefine"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="globalUniqueDataTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	<bean id="globalUniqueDataTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="globalUniqueDataTaskDefine" />
+		</property>
+		<property name="cronExpression">
+			<value>15 20 * * * ?</value>
+		</property>
+	</bean>
+	<!-- End of vps status check task define -->
+	
+	
+	
+	<bean id="bossJobDefine"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="incomingStatTrigger" />
+				<ref bean="payMoveToHistoryJobTrigger" />
+				<ref bean="payStatJobTrigger" />
+				<ref bean="itemStatJobTrigger" />				
+				<ref bean="orderRecycleTaskTrigger" />				
+				<ref bean="globalUniqueDataTaskTrigger" />				
+			</list>
+		</property>
+	</bean>	
+	
+
+	
+
+</beans>

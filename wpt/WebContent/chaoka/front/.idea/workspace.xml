@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="2d80e012-acce-443b-9301-a33038520f84" name="Default" comment="" />
+    <ignored path="chaoka.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="detail.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WEB-INF/jsp/product/detail.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="41" selection-start="3480" selection-end="3480" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="buydetail.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/ui/buydetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="153" column="0" selection-start="4430" selection-end="4430" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#1644#2208#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pay2.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/ui/pay2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="360" column="16" selection-start="8980" selection-end="8980" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reg.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/ui/reg.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="0" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="phonereg.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/ui/phonereg.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="385" column="1" selection-start="8962" selection-end="8962" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Web.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/style/Web.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="750" column="1" selection-start="24681" selection-end="24681" vertical-scroll-proportion="0.4117647">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/style/list.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="766" column="9" selection-start="14474" selection-end="14482" vertical-scroll-proportion="-12.4">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="commonui.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/ui/commonui.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="8" selection-start="81" selection-end="763" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/js/ui/commonui.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/js/ui/bindphone.js" />
+        <option value="$PROJECT_DIR$/js/ui/buy.js" />
+        <option value="$PROJECT_DIR$/js/ui/editinfo.js" />
+        <option value="$PROJECT_DIR$/js/ui/indexinfo.js" />
+        <option value="$PROJECT_DIR$/js/ui/money.js" />
+        <option value="$PROJECT_DIR$/WEB-INF/jsp/include/common_header_nav.jsp" />
+        <option value="$PROJECT_DIR$/js/ui/editnewpasswordbyemail.js" />
+        <option value="$PROJECT_DIR$/js/ui/commonui.js" />
+        <option value="$PROJECT_DIR$/WEB-INF/jsp/product/detail.jsp" />
+        <option value="$PROJECT_DIR$/js/ui/reg.js" />
+        <option value="$PROJECT_DIR$/js/ui/phonereg.js" />
+        <option value="$PROJECT_DIR$/js/ui/sasa" />
+        <option value="$PROJECT_DIR$/js/ui/buydetail.js" />
+        <option value="$PROJECT_DIR$/style/list.css" />
+        <option value="$PROJECT_DIR$/js/ui/pay2.js" />
+        <option value="$PROJECT_DIR$/style/Web.css" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1" />
+    <option name="y" value="1" />
+    <option name="width" value="1364" />
+    <option name="height" value="736" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents ProjectPane="true" />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="product" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="product" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="style" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chaoka" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wwbj\eis-v4-current-front\WebContent\front\chaoka\js\ui" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="false">C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\wwbj\eis-v4-current-front\WebContent\front\chaoka" />
+          <option name="myCopyRoot" value="D:\wwbj\eis-v4-current-front\WebContent\front\chaoka" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\wwbj\eis-v4-current-front\WebContent\front\chaoka" />
+          <option name="myCopyRoot" value="D:\wwbj\eis-v4-current-front\WebContent\front\chaoka" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2d80e012-acce-443b-9301-a33038520f84" name="Default" comment="" />
+      <created>1362735100251</created>
+      <updated>1362735100251</updated>
+    </task>
+    <task id="LOCAL-00001">
+      <created>1362966981117</created>
+      <updated>1362966981117</updated>
+    </task>
+    <task id="LOCAL-00002">
+      <created>1362967412105</created>
+      <updated>1362967412105</updated>
+    </task>
+    <task id="LOCAL-00003">
+      <created>1362968857103</created>
+      <updated>1362968857103</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1362968984103</created>
+      <updated>1362968984103</updated>
+    </task>
+    <task id="LOCAL-00005">
+      <created>1362969060104</created>
+      <updated>1362969060104</updated>
+    </task>
+    <task id="LOCAL-00006">
+      <created>1362969236105</created>
+      <updated>1362969236105</updated>
+    </task>
+    <task id="LOCAL-00007">
+      <created>1362969313103</created>
+      <updated>1362969313103</updated>
+    </task>
+    <task id="LOCAL-00008">
+      <created>1362969485103</created>
+      <updated>1362969485103</updated>
+    </task>
+    <task id="LOCAL-00009">
+      <created>1362969808103</created>
+      <updated>1362969808103</updated>
+    </task>
+    <task id="LOCAL-00010">
+      <created>1362969852105</created>
+      <updated>1362969852105</updated>
+    </task>
+    <task id="LOCAL-00011">
+      <created>1362969945103</created>
+      <updated>1362969945103</updated>
+    </task>
+    <task id="LOCAL-00012">
+      <created>1362970008110</created>
+      <updated>1362970008110</updated>
+    </task>
+    <task id="LOCAL-00013">
+      <created>1362970100103</created>
+      <updated>1362970100103</updated>
+    </task>
+    <task id="LOCAL-00014">
+      <created>1362970224103</created>
+      <updated>1362970224103</updated>
+    </task>
+    <task id="LOCAL-00015">
+      <created>1362970343106</created>
+      <updated>1362970343106</updated>
+    </task>
+    <task id="LOCAL-00016">
+      <created>1362970442104</created>
+      <updated>1362970442104</updated>
+    </task>
+    <task id="LOCAL-00017">
+      <created>1362970629104</created>
+      <updated>1362970629104</updated>
+    </task>
+    <task id="LOCAL-00018">
+      <created>1362970804103</created>
+      <updated>1362970804103</updated>
+    </task>
+    <task id="LOCAL-00019">
+      <created>1362970890108</created>
+      <updated>1362970890108</updated>
+    </task>
+    <task id="LOCAL-00020">
+      <created>1362971325104</created>
+      <updated>1362971325104</updated>
+    </task>
+    <task id="LOCAL-00021">
+      <created>1362971575108</created>
+      <updated>1362971575108</updated>
+    </task>
+    <task id="LOCAL-00022">
+      <created>1362971629103</created>
+      <updated>1362971629103</updated>
+    </task>
+    <task id="LOCAL-00023">
+      <created>1362972177105</created>
+      <updated>1362972177105</updated>
+    </task>
+    <task id="LOCAL-00024">
+      <created>1362972210105</created>
+      <updated>1362972210105</updated>
+    </task>
+    <task id="LOCAL-00025">
+      <created>1362972647103</created>
+      <updated>1362972647103</updated>
+    </task>
+    <task id="LOCAL-00026">
+      <created>1362972799104</created>
+      <updated>1362972799104</updated>
+    </task>
+    <task id="LOCAL-00027">
+      <created>1362973060105</created>
+      <updated>1362973060105</updated>
+    </task>
+    <task id="LOCAL-00028">
+      <created>1362973145106</created>
+      <updated>1362973145106</updated>
+    </task>
+    <task id="LOCAL-00029">
+      <created>1362973207104</created>
+      <updated>1362973207104</updated>
+    </task>
+    <task id="LOCAL-00030">
+      <created>1362973309105</created>
+      <updated>1362973309105</updated>
+    </task>
+    <task id="LOCAL-00031">
+      <created>1362973582104</created>
+      <updated>1362973582104</updated>
+    </task>
+    <task id="LOCAL-00032">
+      <created>1362973649103</created>
+      <updated>1362973649103</updated>
+    </task>
+    <task id="LOCAL-00033">
+      <created>1362974062114</created>
+      <updated>1362974062114</updated>
+    </task>
+    <task id="LOCAL-00034">
+      <created>1362974175104</created>
+      <updated>1362974175104</updated>
+    </task>
+    <task id="LOCAL-00035">
+      <created>1362974323103</created>
+      <updated>1362974323103</updated>
+    </task>
+    <task id="LOCAL-00036">
+      <created>1362974481104</created>
+      <updated>1362974481104</updated>
+    </task>
+    <task id="LOCAL-00037">
+      <created>1362975072103</created>
+      <updated>1362975072103</updated>
+    </task>
+    <task id="LOCAL-00038">
+      <created>1362975591112</created>
+      <updated>1362975591112</updated>
+    </task>
+    <task id="LOCAL-00039">
+      <created>1362975650103</created>
+      <updated>1362975650103</updated>
+    </task>
+    <task id="LOCAL-00040">
+      <created>1362975807103</created>
+      <updated>1362975807103</updated>
+    </task>
+    <task id="LOCAL-00041">
+      <created>1362975936105</created>
+      <updated>1362975936105</updated>
+    </task>
+    <task id="LOCAL-00042">
+      <created>1362976038104</created>
+      <updated>1362976038104</updated>
+    </task>
+    <task id="LOCAL-00043">
+      <created>1362976148104</created>
+      <updated>1362976148104</updated>
+    </task>
+    <task id="LOCAL-00044">
+      <created>1362976235103</created>
+      <updated>1362976235103</updated>
+    </task>
+    <task id="LOCAL-00045">
+      <created>1362978033104</created>
+      <updated>1362978033105</updated>
+    </task>
+    <task id="LOCAL-00046">
+      <created>1362978192103</created>
+      <updated>1362978192103</updated>
+    </task>
+    <task id="LOCAL-00047">
+      <created>1362978300106</created>
+      <updated>1362978300106</updated>
+    </task>
+    <task id="LOCAL-00048">
+      <created>1362978835103</created>
+      <updated>1362978835103</updated>
+    </task>
+    <task id="LOCAL-00049">
+      <created>1362979097103</created>
+      <updated>1362979097103</updated>
+    </task>
+    <task id="LOCAL-00050">
+      <created>1364280102107</created>
+      <updated>1364280102107</updated>
+    </task>
+    <task id="LOCAL-00051">
+      <created>1364280219106</created>
+      <updated>1364280219106</updated>
+    </task>
+    <task id="LOCAL-00052">
+      <created>1364280264138</created>
+      <updated>1364280264138</updated>
+    </task>
+    <task id="LOCAL-00053">
+      <created>1364281053105</created>
+      <updated>1364281053105</updated>
+    </task>
+    <task id="LOCAL-00054">
+      <created>1364282132105</created>
+      <updated>1364282132105</updated>
+    </task>
+    <task id="LOCAL-00055">
+      <created>1364282195105</created>
+      <updated>1364282195105</updated>
+    </task>
+    <task id="LOCAL-00056">
+      <created>1364282274109</created>
+      <updated>1364282274109</updated>
+    </task>
+    <task id="LOCAL-00057">
+      <created>1364552002117</created>
+      <updated>1364552002117</updated>
+    </task>
+    <task id="LOCAL-00058">
+      <created>1364552045107</created>
+      <updated>1364552045108</updated>
+    </task>
+    <task id="LOCAL-00059">
+      <created>1364552102106</created>
+      <updated>1364552102106</updated>
+    </task>
+    <task id="LOCAL-00060">
+      <created>1364552281105</created>
+      <updated>1364552281105</updated>
+    </task>
+    <task id="LOCAL-00061">
+      <created>1364552439105</created>
+      <updated>1364552439105</updated>
+    </task>
+    <task id="LOCAL-00062">
+      <created>1364552536104</created>
+      <updated>1364552536104</updated>
+    </task>
+    <task id="LOCAL-00063">
+      <created>1364553464104</created>
+      <updated>1364553464104</updated>
+    </task>
+    <task id="LOCAL-00064">
+      <created>1364553679107</created>
+      <updated>1364553679108</updated>
+    </task>
+    <task id="LOCAL-00065">
+      <created>1364554076109</created>
+      <updated>1364554076109</updated>
+    </task>
+    <task id="LOCAL-00066">
+      <created>1364554429106</created>
+      <updated>1364554429106</updated>
+    </task>
+    <task id="LOCAL-00067">
+      <created>1364554710103</created>
+      <updated>1364554710103</updated>
+    </task>
+    <task id="LOCAL-00068">
+      <created>1364791647107</created>
+      <updated>1364791647107</updated>
+    </task>
+    <task id="LOCAL-00069">
+      <created>1364791805131</created>
+      <updated>1364791805132</updated>
+    </task>
+    <task id="LOCAL-00070">
+      <created>1366610008127</created>
+      <updated>1366610008127</updated>
+    </task>
+    <task id="LOCAL-00071">
+      <created>1366610258104</created>
+      <updated>1366610258104</updated>
+    </task>
+    <task id="LOCAL-00072">
+      <created>1366610657104</created>
+      <updated>1366610657104</updated>
+    </task>
+    <task id="LOCAL-00073">
+      <created>1366613883107</created>
+      <updated>1366613883107</updated>
+    </task>
+    <task id="LOCAL-00074">
+      <created>1366615405105</created>
+      <updated>1366615405105</updated>
+    </task>
+    <task id="LOCAL-00075">
+      <created>1366616385104</created>
+      <updated>1366616385104</updated>
+    </task>
+    <task id="LOCAL-00076">
+      <created>1366616762104</created>
+      <updated>1366616762104</updated>
+    </task>
+    <task id="LOCAL-00077">
+      <created>1366619019104</created>
+      <updated>1366619019104</updated>
+    </task>
+    <task id="LOCAL-00078">
+      <created>1366619492108</created>
+      <updated>1366619492109</updated>
+    </task>
+    <task id="LOCAL-00079">
+      <created>1366619598164</created>
+      <updated>1366619598164</updated>
+    </task>
+    <task id="LOCAL-00080">
+      <created>1366619658104</created>
+      <updated>1366619658104</updated>
+    </task>
+    <task id="LOCAL-00081">
+      <created>1366619693104</created>
+      <updated>1366619693104</updated>
+    </task>
+    <task id="LOCAL-00082">
+      <created>1366619886104</created>
+      <updated>1366619886104</updated>
+    </task>
+    <task id="LOCAL-00083">
+      <created>1366620010220</created>
+      <updated>1366620010220</updated>
+    </task>
+    <task id="LOCAL-00084">
+      <created>1366620305105</created>
+      <updated>1366620305105</updated>
+    </task>
+    <task id="LOCAL-00085">
+      <created>1366620379727</created>
+      <updated>1366620379727</updated>
+    </task>
+    <task id="LOCAL-00086">
+      <created>1366620620106</created>
+      <updated>1366620620106</updated>
+    </task>
+    <task id="LOCAL-00087">
+      <created>1366620967124</created>
+      <updated>1366620967124</updated>
+    </task>
+    <task id="LOCAL-00088">
+      <created>1366624790106</created>
+      <updated>1366624790106</updated>
+    </task>
+    <task id="LOCAL-00089">
+      <created>1366624853112</created>
+      <updated>1366624853112</updated>
+    </task>
+    <task id="LOCAL-00090">
+      <created>1366625112119</created>
+      <updated>1366625112119</updated>
+    </task>
+    <task id="LOCAL-00091">
+      <created>1366626182105</created>
+      <updated>1366626182105</updated>
+    </task>
+    <task id="LOCAL-00092">
+      <created>1366627731105</created>
+      <updated>1366627731105</updated>
+    </task>
+    <task id="LOCAL-00093">
+      <created>1366627958104</created>
+      <updated>1366627958104</updated>
+    </task>
+    <task id="LOCAL-00094">
+      <created>1366687127130</created>
+      <updated>1366687127130</updated>
+    </task>
+    <task id="LOCAL-00095">
+      <created>1366687941119</created>
+      <updated>1366687941119</updated>
+    </task>
+    <task id="LOCAL-00096">
+      <created>1366688222104</created>
+      <updated>1366688222104</updated>
+    </task>
+    <task id="LOCAL-00097">
+      <created>1366688280110</created>
+      <updated>1366688280110</updated>
+    </task>
+    <task id="LOCAL-00098">
+      <created>1366688337105</created>
+      <updated>1366688337105</updated>
+    </task>
+    <task id="LOCAL-00099">
+      <created>1366688467104</created>
+      <updated>1366688467104</updated>
+    </task>
+    <task id="LOCAL-00100">
+      <created>1366695663104</created>
+      <updated>1366695663104</updated>
+    </task>
+    <task id="LOCAL-00101">
+      <created>1366695848104</created>
+      <updated>1366695848104</updated>
+    </task>
+    <task id="LOCAL-00102">
+      <created>1366697134108</created>
+      <updated>1366697134109</updated>
+    </task>
+    <task id="LOCAL-00103">
+      <created>1366698454104</created>
+      <updated>1366698454104</updated>
+    </task>
+    <task id="LOCAL-00104">
+      <created>1366698541106</created>
+      <updated>1366698541106</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1" y="1" width="1364" height="736" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293919" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20528302" sideWeight="0.6706081" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293919" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="javascript-exception">
+          <properties />
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="3677" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/js/ui/commonui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="8" selection-start="81" selection-end="763" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/pay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.024667932" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/buylist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/buy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WEB-INF/jsp/include/common_header_nav.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="589" selection-end="589" vertical-scroll-proportion="0.03929273" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/ECMAScript.js2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="23" selection-start="10" selection-end="51" vertical-scroll-proportion="0.038910504" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WEB-INF/jsp/node/pay/detail.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="49" selection-start="136" selection-end="136" vertical-scroll-proportion="0.03929273">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/paylist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="45" selection-start="4558" selection-end="4560" vertical-scroll-proportion="0.037383176" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/phonereg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="385" column="1" selection-start="8962" selection-end="8962" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WEB-INF/jsp/product/detail.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="41" selection-start="3480" selection-end="3480" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/reg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/commonui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="8" selection-start="81" selection-end="763" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/buydetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="153" column="0" selection-start="4430" selection-end="4430" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1644#2208#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/list.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="766" column="9" selection-start="14474" selection-end="14482" vertical-scroll-proportion="-12.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/ui/pay2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="360" column="16" selection-start="8980" selection-end="8980" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/Web.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="750" column="1" selection-start="24681" selection-end="24681" vertical-scroll-proportion="0.4117647">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

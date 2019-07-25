@@ -1,0 +1,144 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+/*galleryCreate*/
+ul li{list-style:none;}
+ul{padding:0;margin:0;}
+*{outline:0;}
+/*p{
+-webkit-margin-before: 0;
+-webkit-margin-after: 0;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;}*/
+.main .left .leftBox{
+	margin:0 auto;
+	border:1px solid #eee;
+	box-sizing:content-box;
+}
+.main .left .leftBox .leftHeader{
+	height:40px;
+	background:#428bca;	
+	color:#fff;
+	line-height:40px;
+	padding-left:5%;
+}
+.main .leftBox .tab{
+	height:50px;
+	line-height:50px;
+	background:#f5f5f5;
+}
+.main .leftBox .tab ul{
+	padding-left:5%;
+	padding-right:5%;
+	width:90%;
+	box-sizing:content-box;	
+	overflow:hidden;
+}
+.main .leftBox .tab ul li{
+	display:inline-block;
+	text-align:center;
+	box-sizing:border-box;
+	margin:5px;
+	margin-bottom:0;
+	height:45px;
+	border-radius:5px 5px 0 0;
+	cursor:pointer;
+}
+.main .leftBox .tab ul li.active{
+	background:#fff;
+}
+.main .leftBox .tab ul li.current{
+	background:#fff;
+}
+.main .leftBox .tabContent ul{
+	width:100%;
+	line-height:50px;
+	margin-left:0;
+	-webkit-padding-start: 0px;
+	margin-bottom:0px;
+	padding-left:0px;
+}
+.main .leftBox .tabContent ul li{
+	display:inline-block;
+	text-align:center;	
+}
+.main .leftBox .tabContent ul li a{
+	display:inline-block;
+	text-align:center;
+	height:30px;
+	margin-top:10px;
+	line-height:30px;
+	width:80%;	
+	color:#222;
+	text-decoration:none;
+	border:1px solid #ddd;	
+}
+.main .leftBox .tabContent ul li.currentTabCont a{
+	border:1px solid #428bca;	
+}
+.main .leftBox .tabContent ul li a:hover{
+	border:1px solid #428bca;	
+}
+.main .leftBox .body{
+	overflow-x:hidden;
+	padding-left:1%;
+	overflow-y:auto;
+}
+.main .leftBox .body .cont{
+	border:1px solid #ddd;	
+	width:30%;
+	text-align:center;
+	margin-left:1%;
+	margin-right:1%;
+	float:left;
+	margin-bottom:5px;
+	cursor:pointer;
+}
+.main .leftBox .body .cont:hover{
+	border:1px solid #428bca;	
+}
+#nr{
+	position:relative;
+	
+}
+#nr .editArea li{
+	position:absolute;
+	z-index:20;
+}
+.main .right .rightBox{
+	margin:0 auto;
+	border:1px solid #eee;
+	box-sizing:content-box;
+}
+.main .right .rightBox .rightHeader{
+	height:40px;
+	background:#428bca;	
+	color:#fff;
+	line-height:40px;
+	padding-left:5%;
+}
+
+@media (min-width:992px){
+	.main .left .leftBox{
+		width:85%;	
+	}
+	.main .right .rightBox{
+		width:75%;	
+	}
+	.main .middle .middleBox{
+		width:78%;
+	}
+	
+}
+.hidePicker{
+	display:none;
+	position:absolute;
+	left:50%;
+	margin-left:-97.5px;
+}
+.modalDrag{
+	position:relative;
+}

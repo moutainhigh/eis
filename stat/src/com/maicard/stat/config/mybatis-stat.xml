@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:45 CST 2013-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>			
+		<!--  statistic -->
+		<typeAlias alias="FrontUserStat" type="com.maicard.stat.domain.FrontUserStat"/>
+		<typeAlias alias="FrontUserStatCriteria" type="com.maicard.stat.criteria.FrontUserStatCriteria"/>
+		
+		<typeAlias alias="ItemStat" type="com.maicard.stat.domain.ItemStat"/>
+		<typeAlias alias="ItemStatCriteria" type="com.maicard.stat.criteria.ItemStatCriteria"/>
+		
+		<typeAlias alias="PayStat" type="com.maicard.stat.domain.PayStat"/>
+		<typeAlias alias="PayStatCriteria" type="com.maicard.stat.criteria.PayStatCriteria"/>
+		
+		<typeAlias alias="WithdrawStat" type="com.maicard.stat.domain.WithdrawStat"/>
+		<typeAlias alias="WithdrawStatCriteria" type="com.maicard.stat.criteria.WithdrawStatCriteria"/>
+		
+		<typeAlias alias="Profit" type="com.maicard.stat.domain.Profit"/>
+		<typeAlias alias="ProfitCriteria" type="com.maicard.stat.criteria.ProfitCriteria"/>
+		
+		<typeAlias alias="IncomingStat" type="com.maicard.stat.domain.IncomingStat"/>
+
+		
+	</typeAliases>
+</configuration>

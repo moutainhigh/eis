@@ -1,0 +1,154 @@
+.BoxOrder {
+	float: left;
+	padding-bottom: 20px;
+	width: 99.8%;
+	height: auto;
+	border: 1px solid #ff6400
+}
+
+.btnsOrder1 {
+	height: 50px;
+	border-bottom: 1px solid #ff6400;
+	line-height: 50px
+}
+
+.btnsOrder1 li {
+	float: left;
+	margin-left: 30px
+}
+
+.btnsOrder1 li a {
+	color: #ff6400
+}
+
+.btnsOrder2 {
+	width:81%;
+	height: 70px;
+	float:left;
+}
+
+.btnsOrder2 li {
+	float: left;
+	text-align: center
+}
+
+.li1 {
+	width: 40%
+}
+
+.li2,.li3,.li4 {
+	width: 20%;
+	text-align: center
+}
+.operation{
+	width: 19%;
+	text-align: center;
+	float: right;
+}
+.operation1{
+	width: 19%;
+	text-align: center;
+	float: right;
+	min-height: 70px;
+}
+.orderlist {
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+	border-bottom: 1px solid #ff6400
+}
+.btn-group-order{
+	width:100%;
+	height:70px;
+	margin-top: 20px;
+}
+ .box_left{
+	width:81%;
+	height:auto;
+	overflow:hidden;
+	float:left;
+}
+.box_order{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+}
+.box_order_title{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	border-bottom: 1px solid #ff6400;
+    line-height: 70px;
+}
+.boxUl{
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	float:left;
+}
+.orderlist li {
+    min-height: 70px;
+    padding: 10px 0px;
+	float:left;
+}
+
+.orderlist img {
+	float: left;
+	margin-right: 30px;
+	margin-left: 30px;
+	height: 70px;
+	width:auto;
+}
+
+.productlist {
+	width: 100%;
+	height: 70px
+}
+
+.listbox {
+	float: right;
+	display: block;
+	margin-top: 15px;
+	width: 350px;
+	height: auto
+}
+
+.lineH120 {
+	line-height: 90pt
+}
+
+.listbox a {
+	float: left;
+	display: block;
+	margin-left: 5px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #eee;
+	color: #000;
+	text-align: center;
+	text-decoration: none;
+	font-size: 9pt;
+	line-height: 20px
+}
+
+.listbox a.currentPage {
+	color: #ff6400!important
+}
+
+.especially {
+	border: 0!important;
+	font-weight: 700
+}
+
+.orderNum {
+width: 90%;
+    font-size: 13px;
+    height: 30px;
+    /* margin: 0 auto; */
+    padding-left: 30px;
+	line-height: 30px;
+}
+
+p {
+	margin: 10px 0!important
+}

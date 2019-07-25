@@ -1,0 +1,115 @@
+.wrapper_1{width:100%;height:auto;overflow:hidden;background-color:#fff}.wid90{width:90%;height:auto;margin-left:5%;overflow:hidden}.ui-btn-group{width:100%;height:40px;background-color:#f8f8f8;border-bottom:1px #c5c5c5 solid}.ui-btn-group li{width:24.7%;height:26px;margin-top:7px;text-align:center;border-right:1px #c5c5c5 solid;float:left;line-height:26px}.ui-btn-group li:last-child{border-right:0}.ui-btn-group li a.current{color:#ff6400!important}.ui-no-border{border:0!important}.box_product{position:relative;width:90%;height:auto;margin:0 auto;color:#505050;font-size:15px;padding:10px 5%;line-height:20px;overflow:hidden;background-color:#f8f8f8;border-top:}.ware_img{width:30%;max-width:100px;height:auto;float:left;border:1px #cdcdcd solid}.ware_img img{width:90%;max-width:90px;height:auto;margin-left:5%;margin-top:3px}.box_right2{width:63%;height:70px;float:right}.divCenter{height:35px;width:100%;line-height:35px}.ware_from{width:auto;float:left;display:block;font-size:12px}.fare{display:block;width:auto;float:right;font-size:12px}.orderInfo{width:90%;height:30px;line-height:30px;margin:0 auto}.box_order{width:100%;height:auto;overflow:hidden;}.line{width:100%;height:auto;border-bottom:1px #afaeb3 solid}.box_money{text-align:left;height:40px;line-height:40px;overflow:hidden}.btn-group{height:50px;margin:0 auto;line-height:50px}.box_order .btn-group a{width:80px;display:block;height:30px;line-height:30px;text-align:center;float:right;margin-top:10px;margin-left:10px}a.quxiaodingdan{border:1px #ff6400 solid;color:#ff6400}a.qufukuan{border:1px #84A030 solid;color:#fff;background-color:#84A030}a.querenshouhuo1{border:1px #000 solid;color:#000}.msg{position:fixed;width:50%;top:30%;left:25%;text-align:center;padding:10px 0 10px;border-radius:8px;background:#222;opacity:.8;color:#fff;display:none}@media(min-width:768px){.msg{position:fixed;width:300px;top:30%;left:50%;margin-left:-150px;text-align:center;padding:10px 0 10px;border-radius:8px;background:#222;opacity:.8;color:#fff;display:none}}.listbox{width:auto;float:right;margin-right:5px}.listbox a{display:block;border:1px solid #eee;color:black;width:20px;height:20px;float:left;margin-left:5px;text-align:center;text-decoration:none;font-size:12px;line-height:20px}.listbox a.currentPage{color:#ff6400!important}
+.ui-btn-group li a.current {
+    color: #819C32!important;
+}
+.orderInfo {
+    height: 36px;
+    line-height: 36px;
+    padding: 2px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    
+}
+.orderInfo >div{
+    font-size: 14px;
+}
+.box_product{
+    font-size: 12px;
+    background-color: #f7f7f7;
+    margin-bottom: 3px;
+    padding: 5px 10px;
+    width: 100%;
+        box-sizing: border-box;
+}
+.box_product span{
+    font-size: 12px;
+        color: #333;
+}
+.box_order{
+	margin-top: 9px;
+	background-color: #fff;
+}
+.box_product a>div> img{
+    height: 100px;
+    width: 100px;
+    float: left;
+}
+.divCenter,.one_sprice{
+    text-align: right;
+}
+.box_product span.price_mark,.box_product span.ware_name{
+    font-size: 14px;
+}
+.box_product span.price_mark span{
+    font-size: 14px;
+}
+.box_product span.all_num{
+    color: #929292;
+}
+.box_product span.ware_name{
+    padding-left: 5px;
+    display: inline-block;
+}
+.box_money{
+    text-align: right;
+    height: auto;
+}
+.box_money p{
+    padding: 0 10px;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+.box_money span,.box_money{
+    font-size: 12px;
+}
+.box_money span.orange{
+    font-size: 14px;
+}
+.box_order .btn-group a{
+    font-size: 14px;
+    border-radius: 25px;
+    height: 25px;
+    line-height: 25px;
+}
+.btn-group{
+    border-top: 1px solid #EEE;
+    padding: 0 10px;
+}
+.wrapper_1{
+    background-color: #F1F1F1;
+        margin-top: 40px;
+}
+.ui-btn-group li a{
+    font-weight: normal;
+    color: #333;
+    font-size: 15px;
+}
+.wid90{
+    width: 100%;
+    height: auto;
+     margin-left: 0; 
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+a.quxiaodingdan {
+    border: 1px #84A030 solid;
+    color: #84A030;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

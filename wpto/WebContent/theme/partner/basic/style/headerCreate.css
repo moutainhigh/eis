@@ -1,0 +1,44 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+/*header*/
+.operate li:hover{
+	background:#fff;
+	color:#222;
+	border:#222 0.5px solid;
+}
+.operate li.redHover:hover{
+	background:#df1118;
+	color:#222;
+	border:#222 0.5px solid;
+}
+#operate>li>a:hover{
+	color:#222;
+}
+
+
+@media (min-width:768px){
+	.setting{
+		display:none;
+	}
+	#operate{
+		margin-right:50px;
+		
+	}
+}
+@media (max-width:768px){
+	.setting{
+		display:block;
+	}
+	.navbar-nav>li>a {
+    padding-top: 0px; 
+    padding-bottom: 0px; 
+    
+	}
+	.nav>li>a {
+		padding: 5px 15px;
+	}
+}

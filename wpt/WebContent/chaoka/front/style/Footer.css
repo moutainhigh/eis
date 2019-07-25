@@ -1,0 +1,30 @@
+.footerT {
+	PADDING-BOTTOM: 0px; MARGIN: 10px 0px 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px;  PADDING-TOP: 10px;
+}
+.footer_txtL {
+	LINE-HEIGHT: 20px; WIDTH: 480px; FLOAT: left; COLOR: #666; MARGIN-RIGHT: 20px;
+}
+.footer_txtR {
+	LINE-HEIGHT: 20px; WIDTH: 460px; FLOAT: right; COLOR: #666;
+}
+.footerD {
+	PADDING-BOTTOM: 10px; MARGIN: 0 auto; PADDING-LEFT: 0px; WIDTH: 960px; PADDING-RIGHT: 0px; COLOR: #7e7e7e; BORDER-TOP: #003a95 3px solid; TEXT-DECORATION: none; PADDING-TOP: 10px;
+}
+.footerDL {
+	TEXT-ALIGN: center; LINE-HEIGHT: 24px; WIDTH: 960px; FLOAT: left;
+}
+.footerDL LI A:link {
+	COLOR: #7e7e7e; TEXT-DECORATION: none;
+}
+.footerDL LI A:visited {
+	COLOR: #7e7e7e; TEXT-DECORATION: none;
+}
+.footerDL LI A:hover {
+	COLOR: #7e7e7e; TEXT-DECORATION: underline;
+}
+.footerDL LI A:active {
+	COLOR: #7e7e7e; TEXT-DECORATION: underline;
+}
+.footerDR {
+	TEXT-ALIGN: center; LINE-HEIGHT: 22px; WIDTH: 960px; FLOAT: right;
+}

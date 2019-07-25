@@ -1,0 +1,115 @@
+.main .leftBox .tab .tabbox,
+.main .leftBox .tabContent .tabbox{
+	width: 90%;
+	overflow: hidden;
+	margin:0 auto;
+	position: relative;
+	
+}
+.main .leftBox .tab .tabbox{
+	height: 30px;
+}
+.main .leftBox .tabContent .tabbox{
+	height: 90px;
+}
+.main .leftBox .tabContent .tabbox{
+
+}
+.main .leftBox .tab,
+.main .leftBox .tabContent{
+	position: relative;
+}
+.main .leftBox .tab ul,
+.main .leftBox .tabContent ul{
+	padding-left: 0;
+	padding-right: 0;
+	position: absolute;top:0;left: 0;
+	transition:all 0.5s ease;
+	-webkit-transition:all 0.5s ease;
+	-moz-transition:all 0.5s ease;
+}
+.main .leftBox .tab ul li,
+.main .leftBox .tabContent ul li{
+	/*width: 76px;*/
+    padding: 0!important;
+    margin: 0!important;
+}
+.control span{
+	font-size: 13px;
+    cursor: pointer;
+     display: inline-block;
+    width: 20px;height: 30px;
+    background-color: #DDE7F1;
+    color: #428BCA;
+    line-height: 30px;
+    text-align: center;  
+}
+.control span:hover{
+	 background-color: #fff;
+}
+.main .leftBox .tab{
+	position: relative;
+}
+.control{
+	position: absolute;
+    top: 0;
+    width: 100%;
+
+}
+.control.controlvertical{
+	top: 27px;
+}
+.control .right{
+	float: right;
+}
+.main .leftBox .tabContent ul li a{
+	margin-top: 0;
+}
+.main .leftBox .tabContent ul{
+	line-height: 30px!important;
+	text-align: left!important;
+}
+.main .leftBox .tab ul li.current {
+    background: transparent!important;
+    color: #428BCA;
+}
+.main .leftBox .tab ul li:hover{
+	background: transparent!important;
+    color: #428BCA;
+}
+.main .leftBox .tabContent ul li.currentTabCont a{
+	border: 1px solid #A2C1DF!important;
+    background-color: #fff;
+}
+.main .leftBox .tabContent ul li a{
+	height: 20px;line-height: 20px;
+	margin-top: 3px;
+	border-radius: 5px;
+	border:none!important;
+}
+.main .leftBox .tabContent ul li a:hover{
+	background-color: #fff;
+}
+.tabContent .control span{
+	background-color: #fff;
+}
+.tabContent .control span:hover{
+	background-color: #DDE7F1;
+}
+.main .leftBox .body{
+	background: #F1F1F1;
+	padding-top: 8px;
+	max-height: 300px;
+}
+.main .leftBox .body .cont{
+	    border: 1px solid #64839D;
+}
+/*取色*/
+.farbtastic .wheel{
+	background-color: rgba(0, 0, 0, 0.48);
+    border-radius: 14px;
+}
+.imgClose{
+	right: 1px!important;
+    top: 1px!important;
+}

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:p="http://www.springframework.org/schema/p" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		">
+
+	<!-- Aop -->
+	<context:component-scan base-package="com.maicard" use-default-filters="false" name-generator="com.maicard.common.util.ImplAopNameGenerator">
+		<context:include-filter type="regex" expression="com.maicard.aspect.boss.LogMoneyChangeAspect" />
+		<context:include-filter type="regex" expression="com.maicard.aspect.common.*" />
+		<context:include-filter type="regex" expression="com.maicard.aspect.front.*" />
+
+		<context:include-filter type="regex" expression="com.maicard.billing.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.captcha.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.common.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.flow.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.mb.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.money.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.security.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.stat.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.product.dao.ibatis.*" />
+
+		<context:include-filter type="regex" expression="com.maicard.billing.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.captcha.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.common.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.common.cache.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.flow.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.mb.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.mb.service.rabbit.*" />
+		<context:include-filter type="regex" expression="com.maicard.money.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.money.service.cp.*" />
+
+		<context:include-filter type="regex" expression="com.maicard.security.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.stat.service.*" />
+		<context:include-filter type="regex" expression="com.maicard.product.service.impl.*" />
+
+		<context:include-filter type="regex" expression="com.maicard.site.dao.ibatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.site.service.impl.*" />
+
+		<!-- EC module -->
+		<context:include-filter type="regex" expression="com.maicard.ec.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.ec.dao.mybatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.ec.front.controller.*" />
+
+		<!-- Gallery model -->
+		<context:include-filter type="regex" expression="com.maicard.gallery.dao.mybatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.gallery.service.impl.*" />
+		<context:include-filter type="regex" expression="com.maicard.gallery.front.controller.*" />
+
+		<!-- WPT standard -->
+		<context:include-filter type="regex" expression="com.maicard.wpt.dao.mybatis.*" />
+		<context:include-filter type="regex" expression="com.maicard.wpt.service.impl.*" />
+
+
+		<context:include-filter type="regex" expression="com.maicard.wpt.front.controller.*" />
+
+		<context:exclude-filter type="regex" expression="com.maicard.wpt.front.controller.WeixinApiController" />
+
+	</context:component-scan>
+
+
+	<bean id="sqlSessionFactory" class="com.maicard.common.base.MultiConfigSqlSessionFactoryBean">
+		<property name="configLocations">
+			<list>
+				<value>classpath*:com/maicard/billing/config/mybatis-billing.xml</value>
+				<value>classpath*:com/maicard/common/config/mybatis-common.xml</value>
+				<value>classpath*:com/maicard/captcha/config/mybatis-captcha.xml</value>
+				<value>classpath*:com/maicard/flow/config/mybatis-flow.xml</value>
+				<value>classpath*:com/maicard/mb/config/mybatis-mb.xml</value>
+				<value>classpath*:com/maicard/money/config/mybatis-money.xml</value>
+				<value>classpath*:com/maicard/product/config/mybatis-product.xml</value>
+				<value>classpath*:com/maicard/security/config/mybatis-security.xml</value>
+				<value>classpath*:com/maicard/site/config/mybatis-site.xml</value>
+				<value>classpath*:com/maicard/stat/config/mybatis-stat.xml</value>
+				<value>classpath*:com/maicard/wpt/config/mybatis-wpt.xml</value>
+				<value>classpath*:com/maicard/ec/config/mybatis-ec.xml</value>
+				<value>classpath*:com/maicard/gallery/config/mybatis-gallery.xml</value>
+		</list>
+		</property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:com/maicard/billing/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/captcha/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/common/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/flow/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/mb/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/money/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/product/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/security/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/site/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/stat/dao/ibatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/wpt/dao/mybatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/ec/dao/mybatis/maps/*.xml</value>
+				<value>classpath*:com/maicard/gallery/dao/mybatis/maps/*.xml</value>
+			</list>
+		</property>
+
+		<property name="dataSource" ref="dynamicDataSource" />
+	</bean>
+
+	<import resource="classpath:sconfig/common.xml" />
+
+	<!-- 支持后缀协商和设备协商的视图配置 -->
+	<import resource="classpath:sconfig/view-negotiation-nomobile.xml" />
+
+
+	<!-- 缓存 -->
+	<cache:annotation-driven />
+	<bean id="cacheManagerFactory" class="com.maicard.common.base.CustomEhCacheManagerFactoryBean" p:configLocation="classpath:sconfig/ehcache-local.xml" />
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="cacheManagerFactory" />
+
+
+	<import resource="classpath:sconfig/threadpool.xml" />
+	<import resource="classpath:sconfig/jms-rabbit.xml" />
+	<import resource="classpath:sconfig/redis.xml" />
+
+</beans>

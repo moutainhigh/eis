@@ -1,0 +1,395 @@
+@charset "utf-8";
+.list_img li {
+	display: block
+}
+
+.list_img li img {
+	width: 100%;
+	height: auto;
+	margin: 0 auto
+}
+
+ul {
+	list-style: none;
+	zoom: 1
+}
+
+img {
+	border: 0
+}
+
+a {
+	blr: expression(this.onFocus=this.blur());
+	outline: 0
+}
+
+.videogroup {
+	width: 50%;
+	height: auto;
+	display: block;
+	overflow: hidden
+}
+
+.videogroup li {
+	width: 50%;
+	height: auto;
+	display: block;
+	float: left
+}
+
+.videogroup li img {
+	width: 100%;
+	height: 219px;
+	display: block
+}
+
+.footer {
+	margin-top: 50px
+}
+
+.time_bar {
+	position: relative;
+	color: #fff;
+	text-align: right;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: -20px;
+	background-color: rgba(207,200,200,0.5);
+	font-size: 15px;
+	height: 20px;
+	line-height: 20px
+}
+
+.list_video {
+ 
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto
+}
+
+.list_video li {
+	float: left;
+	width: 20%;
+	height: auto;
+	text-align: center;
+	color: #000;
+	display: block;
+	margin: 0 2.5%;
+	margin-bottom: 20px
+}
+
+.list_video li .box_title {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height: 30px;
+	font-size: 15px
+}
+
+.list_video li a {
+	color: #000
+}
+
+.list_video li img {
+	width: 203px;
+    height: 203px;
+    border-radius: 203px;
+    padding: 7px;
+    border: 1px #999 solid;
+}
+
+.list_video p {
+	width: 90%;
+	height: 82px;
+	margin: 0 auto!important;
+	font-size: 15px;
+	display: block
+}
+.list_yingyang {
+ 
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto
+}
+
+.list_yingyang li {
+	float: left;
+    width: 25%;
+    text-align: center;
+    color: #000;
+    display: block;
+    overflow: hidden;
+}
+
+.list_yingyang li .box_title {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height: 30px;
+	font-size: 15px
+}
+
+.list_yingyang li a {
+	color: #000
+}
+
+.list_yingyang li img {
+	width: 90%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 5px;
+}
+
+.list_yingyang p {
+	width: 90%;
+	height: 50px;
+	margin: 0 auto!important;
+	font-size: 15px;
+	display: block
+}
+.list_yingyang li img {
+	width: 90%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 5px;
+}
+/*.explain {
+	width: 200px;
+	height: auto;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: left;
+
+}*/
+
+.content {
+	padding: 5px 0;
+	line-height: 24px;
+	text-align: center;
+	font-size: 15px
+}
+
+.empty {
+	height: 100px
+}
+/*.list_xinyang{
+ 
+}
+.list_xinyang li{
+	float: left;
+    width: 22%;
+    text-align: center;
+    color: #000;
+    display: block;
+	padding-bottom:30px;
+}
+.list_xinyang li:nth-child(4n-2){
+	margin-left:4%;
+}
+.list_xinyang li:nth-child(4n-1){
+	margin:0 4%;
+}
+.list_xinyang li a{
+	color:#000;
+}
+.list_xinyang li img{
+	width:210px;
+	height:210px;
+	border-radius:210px;
+}
+.list_xinyang li  .explain{
+ padding:10px 0px;
+}*/
+/*新版改版样式*/
+/*
+.list_xinyang{
+	width:100%;
+}
+.list_xinyang li{
+	float: left;
+    width: 30%;
+    height: auto;
+    color: #000;
+    display: block;
+    padding-top: 30px;
+}
+.list_xinyang li:nth-child(3n-1){
+	margin:0px 5%;
+}
+.list_xinyang li a{
+	color:#000;
+}
+.list_xinyang li img{
+	width:100%;
+	height:auto;
+}
+.list_xinyang li .explain{
+	width: 100%;
+    height: 40px;
+    padding: 10px 5%;
+    background-color: #fff;
+    font-size: 13px;
+}*/
+.list_xinyang{
+ 
+}
+.list_xinyang li{
+	float: left;
+    width: 22%;
+    text-align: center;
+    color: #000;
+    display: block;
+	padding-bottom:30px;
+	-webkit-transition: -webkit-transform .4s linear;-moz-transition: -moz-transform .4s linear;-o-transition: -o-transform .4s linear;transition: transform .4s linear;
+}
+.list_xinyang li:nth-child(4n-2){
+	margin-left:4%;
+}
+.list_xinyang li:nth-child(4n-1){
+	margin:0 4%;
+}
+.list_xinyang li a{
+	color:#000;
+}
+.list_xinyang li img{
+	width: 203px;
+    height: 203px;
+    border-radius: 203px;
+    padding: 7px;
+    border: 1px #999 solid;
+}
+.list_xinyang li  .explain{
+ padding:10px 0px;
+}
+.list_xinyang li.ac{
+	-webkit-transform: translateX(-5px);-moz-transform: translateX(-5px);-ms-transform: translateX(-5px);-o-transform: translateX(-5px);transform: translateX(-5px);
+}
+
+
+
+.list_shanshi{
+ 
+}
+.list_shanshi li{
+	float: left;
+    width: 25%;
+    text-align: center;
+    color: #000;
+    display: block;
+	overflow:hidden;
+}
+.list_shanshi li  .box_img {
+    display: block;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+	border-radius:5px;
+}
+.list_shanshi .explain2{
+	width: 244px;
+	height: 45px;
+	overflow: hidden;
+	margin: 10px 0px;
+	text-align: left;
+	font-size: 13px;
+	margin-left: 18px;
+}
+.list_shanshi li  a{
+	color:#000;
+}
+/*食材鉴别*/
+/*.list_jianbie{
+ 
+}
+.list_jianbie li{
+	float: left;
+    width: 24%;
+    text-align: center;
+    color: #000;
+    display: block;
+    padding-bottom:20px;
+	overflow:hidden;
+}
+.list_jianbie li:nth-child(4n-3)
+{
+	margin-left:-1%;
+}
+.list_jianbie li:nth-child(4n-2)
+{
+	margin-left:1.5%;
+}
+.list_jianbie li:nth-child(4n-1)
+{
+	margin-left:1.5%;
+}
+.list_jianbie li:nth-child(4n-0)
+{
+	margin-left:1.7%;
+}
+.list_jianbie li  .box_img {
+    display: block;
+    height: auto;
+  padding: 10px;
+    margin: 0 auto;
+    position: relative;
+}
+.list_jianbie li  .box_img img{
+	width:100%;
+	height:auto;
+}
+.list_jianbie li  a{
+	color:#000;
+}
+.list_jianbie li .explain{
+	width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    font-size: 13px;
+    text-align: center;
+}*/
+.list_jianbie{
+ 
+}
+.list_jianbie li{
+	float: left;
+    width: 22%;
+    text-align: center;
+    color: #000;
+    display: block;
+    padding-bottom: 10px;
+}
+.list_jianbie li:nth-child(4n-2){
+	margin-left:4%;
+}
+.list_jianbie li:nth-child(4n-1){
+	margin:0 4%;
+}
+.list_jianbie li  .box_img {
+    display: block;
+    height: auto;
+    border: 1px #ff6400 solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 auto;
+    position: relative;
+}
+.list_jianbie li  .box_img img{
+	width:100%;
+	height:auto;
+	border-radius: 5px;
+}
+.list_jianbie li  a{
+	color:#000;
+}
+.list_jianbie .explain{
+	width:100%;
+	text-align:center;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}

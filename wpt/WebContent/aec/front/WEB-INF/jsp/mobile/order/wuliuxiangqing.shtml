@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="以先,以先食材" />
+<meta name="description" content="以先是一个有信仰的食材资讯平台，更是一个保证安全健康生活的平台" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="../../../../css/mobile/main.css"/>
+<link rel="stylesheet" type="text/css" href="../../../../css/mobile/logistics.css"/>
+</head>
+<body>
+	<div class="header" id="header">
+	  <a class="back" href="javascript:history.go(-1);"></a><span>物流详情</span><!--<a class="home" href="/">-->
+ </div>
+ <div id="wrapper_1">
+    <div class="box_title">
+			
+				<div class="box_left">
+					<img src="../../../../image/header.png"/>
+				</div>
+
+				<div class="box_center">
+					<ul class="wlmessage">
+						<li>
+							派件员：石亚军
+						</li>
+						<li>
+							手机号：1231231123
+						</li>
+						<li>
+							申通快递：3306079777266
+						</li>
+					</ul>
+				</div>
+				<div class="box_right ">
+				<div class="reputation">
+					<span>好评</span><a><img src="../../../../image/mobile/header/preview_unlike_icon1.png" style="width: 25px;height: 25px;"></a>
+				</div>
+				<div class="reputation no-border" >
+					<span>坏评</span><a><img src="../../../../image/mobile/header/preview_unlike_icon1.png" style="width: 25px;height: 25px;"></a>
+				</div>
+					<!-- <ul class="reputation">
+						<li>
+							好评<a><img src="../../../../image/mobile/header/preview_unlike_icon1.png"style="width: 35px;height: 35px;"></a>
+						</li>
+						
+							<div class="line"></div> 
+						
+						<li>
+							差评
+						</li>
+					</ul> -->
+				</div>
+		
+	  </div>
+	  <div class="wuliu">
+	     <div class="box-yx mt30 fo12"><span class="left">物流跟踪：<span class="orange">您的包裹已签收</span></span><span class="right">承运公司：<span class="orange">申通快递</span></span></div>
+	     <div class="package-status martop30">
+	     <ul id="J_listtext2" class="status-list">
+		     <li><span class="text">商家正通知快递公司揽件</span><p><span class="date">2016-04-17</span><span class="week">周日</span><span class="time">14:27:41</span></p></li>
+			 <li><span class="text">【广州市】广东广州花都区新华公司收件员 已揽件</span><p><span class="date hidden">2016-04-17</span><span class="week hidden">周日</span><span class="time">18:41:35</span></p></li>
+			 <li><span class="text">【广州市】广东广州花都区新华公司 已发出</span><p><span class="date hidden">2016-04-17</span><span class="week hidden">周日</span><span class="time">21:02:46</span></p></li>
+			 <li><span class="text">【广州市】快件已到达 广东广州转运中心</span><p><span class="date hidden">2016-04-17</span><span class="week hidden">周日</span><span class="time">21:55:38</span></p></li>
+			 <li><span class="text">【广州市】广东广州转运中心 已发出</span><p><span class="date hidden">2016-04-17</span><span class="week hidden">周日</span><span class="time">21:58:17</span></p></li>
+			 <li><span class="text">【北京市】快件已到达 北京转运中心</span><p><span class="date">2016-04-19</span><span class="week">周二</span><span class="time">07:53:52</span></p></li>
+			 <li class="latest"><span class="text">【北京市】北京转运中心 已发出</span><p><span class="date hidden">2016-04-19</span><span class="week hidden">周二</span><span class="time">09:21:34</span></p></li></ul>
+	    
+	     </div>
+	  </div>
+    </div>
+</body>
+</html>

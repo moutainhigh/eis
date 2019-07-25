@@ -1,0 +1,106 @@
+.title {
+  background: #00a1e9;
+  color: #ffffff;
+  width: 280px;
+  height: 54px;
+  font-size: 25px;
+  line-height: 54px;
+  text-align: center;
+  margin-bottom: 0;
+}
+.title {
+  margin-top: 0;
+    color: #5D5D5D;
+    font-size: 27px;
+    border-bottom:1px dashed #5D5D5D;
+    padding-bottom :5px;
+        margin-bottom: 29px;
+}
+.title span{
+  border-left: 4px solid #5D5D5D;
+  padding-left:6px;
+  display: inline-block;
+  font-size: 20px;
+}
+#queryForm select , #queryForm input[type='text'] {
+  height: 35px;
+  border: 1px #cecece solid;
+  outline: none;
+  width: 426px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.content {
+  position: relative;
+   background-color: #eee;
+    border-radius: 5px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+}
+.content table tr td {
+  padding-bottom: 15px;
+  /*padding-left: 30px;*/
+}
+@media(max-width: 1200px){
+  .content table tr td{
+    width: 100%!important;    display: inline-block;
+  }
+  #queryForm select, #queryForm input[type='text']{
+    width: 100%!important;
+  }
+  select[name='currentStatus'] {
+    margin-left: 0!important;
+}
+}
+.shijian {
+  border: 1px #efefef solid;
+  }
+.shijian input{
+  width: 170px !important;
+}
+.payStat-radio-right{
+  margin-right: 205px;
+}
+/* 查询及小计 */
+.query , .show-total {
+  margin-left: 60px !important;
+}
+.query-ml20 {
+  margin-left: 20px !important;
+}
+/* /查询及小计 */
+
+/* 导出数据按钮 */
+.educe-all{
+  margin-left: 40px;
+}
+/* /导出数据按钮 */
+
+/* 按钮通用样式*/
+.queryForm-btn-wt408 {
+    width: 408px !important;
+}
+.queryForm-btn-wt110 {
+  width: 120px !important;
+}
+/* /按钮通用样式*/
+.cur-poi {
+  cursor: pointer;
+}
+
+/* input及select margin */
+.mg-lf18 {
+  margin-left: 18px;
+}
+
+.table>thead>tr>th {
+    border-bottom: 0px;
+    border-top:none!important;
+    background-color: transparent!important;
+}
+.table{
+  text-align:center;border: 1px solid #ddd;
+      border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+   
+}

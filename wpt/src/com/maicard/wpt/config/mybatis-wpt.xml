@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:45 CST 2013-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>			
+		 <!--  Weipingtai -->
+		 <typeAlias alias="WeixinMsg" type="com.maicard.wpt.domain.WeixinMsg"/>
+		 
+		<typeAlias alias="AutoResponseModel" type="com.maicard.wpt.domain.AutoResponseModel"/>
+        <typeAlias alias="AutoResponseModelCriteria" type="com.maicard.wpt.criteria.AutoResponseModelCriteria"/>	
+        
+        <typeAlias alias="EntityShop" type="com.maicard.wpt.domain.EntityShop"/>
+        <typeAlias alias="EntityShopCriteria" type="com.maicard.wpt.criteria.EntityShopCriteria"/>	
+        
+        <typeAlias alias="WeixinRichTextMessage" type="com.maicard.wpt.domain.WeixinRichTextMessage"/>
+        <typeAlias alias="WeixinRichTextMessageCriteria" type="com.maicard.wpt.criteria.WeixinRichTextMessageCriteria"/>
+        
+        <typeAlias alias="WeixinGroup" type="com.maicard.wpt.domain.WeixinGroup"/>
+        <typeAlias alias="WeixinGroupCriteria" type="com.maicard.wpt.criteria.WeixinGroupCriteria"/>	
+        
+        <typeAlias alias="WeixinButton" type="com.maicard.wpt.domain.WeixinButton"/>
+        <typeAlias alias="WeixinButtonCriteria" type="com.maicard.wpt.criteria.WeixinButtonCriteria"/>	
+        	
+	</typeAliases>
+</configuration>

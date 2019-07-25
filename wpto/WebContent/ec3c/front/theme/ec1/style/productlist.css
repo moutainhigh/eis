@@ -1,0 +1,55 @@
+/* ProductList */
+.ProductList {
+    width: 1000px;
+}
+
+.ProductList ul {
+    overflow: hidden;
+}
+
+.ProductList li {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #DEDFDE;
+    /*width: 216px;*/
+   width: 216px;
+    padding: 10px;
+    text-align: center;
+}
+
+    .ProductList li a {
+        display: block;
+        cursor: pointer;
+    }
+
+    .ProductList li:nth-child(4n) {
+        margin-right: 0;
+    }
+
+.ProductList dt {
+    width: 160px;
+    height: 230px;
+   /* height: 230px;*/
+   /*  height: 160px;
+   margin: 0 auto 15px;*/
+}
+
+.ProductList dd.ProductName {
+    color: #666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 10px;
+}
+
+.ProductList dd.Price {
+    color: #e4393c;
+    font-size: 18px;
+    font-weight: 500;
+}
+.ProductList li img{
+	width: 216px;
+	
+}
+/* end ProductList */

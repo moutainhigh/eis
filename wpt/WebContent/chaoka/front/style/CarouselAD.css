@@ -1,0 +1,21 @@
+#CarouselAD {
+	POSITION: relative; WIDTH: 710px; HEIGHT: 160px; OVERFLOW: hidden
+}
+#CarouselAD UL.list {
+	POSITION: absolute; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 9999px; PADDING-RIGHT: 0px; HEIGHT: 100%; PADDING-TOP: 0px
+}
+#CarouselAD UL.list LI {
+	WIDTH: 510px; FLOAT: left; HEIGHT: 100%
+}
+#CarouselAD .list IMG {
+	BORDER-RIGHT-WIDTH: 0px; WIDTH: 100%; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 100%; BORDER-LEFT-WIDTH: 0px
+}
+#CarouselAD UL.playerControl {
+	POSITION: absolute; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; BOTTOM: 5px; PADDING-RIGHT: 0px; HEIGHT: 14px; RIGHT: 5px; PADDING-TOP: 0px
+}
+#CarouselAD UL.playerControl LI {
+	MARGIN: 0px 2px; WIDTH: 23px; FLOAT: left; HEIGHT: 14px; CURSOR: pointer
+}
+#CarouselAD UL.playerControl LI.curAD {
+	BACKGROUND-POSITION: -23px 0px
+}

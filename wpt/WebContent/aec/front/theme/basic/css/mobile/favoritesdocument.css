@@ -1,0 +1,43 @@
+.wrapper{width: 100%;height: auto;overflow: hidden;}ul.favoriteList{display:block;list-style:none}ul.favoriteList li{width:100%;height:100px;border-bottom:1px #cdcdcd dashed;padding-top:20px;margin-left:5%}.ware_img{width:40%;max-width:120px;height:92px;float:left}.ware_info{position:relative;float:left;width:55%;height:80px;margin-left:5%}.ware_intro{color:#666;font-size:17px;text-align:left;word-wrap:break-word}.ware_ymd{position:absolute;color:#999;font-size:12px;float:left;bottom:0}.ware_hws{position:absolute;color:#999;bottom:0;float:right;right:0;font-size:12px}
+ul.favoriteList{
+	width: 100%;
+	box-sizing: border-box;
+}
+ul.favoriteList li{
+	margin:0;
+	padding:0;
+	width:50%;
+	box-sizing: border-box;
+	float: left;
+	height: auto;
+	padding: 0 15px;
+	padding-top:15px;
+	    border-bottom: none;
+}
+ul.favoriteList li:nth-of-type(odd){
+	padding-right: 0;
+}
+ul.favoriteList li>a>img{
+	width: 180px;
+	height: 180px;
+}
+ul.favoriteList li>a{
+	font-size:14px;
+	display: inline-block;
+    width: 100%;
+}
+ul.favoriteList li>a p{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size:14px;
+        padding: 2px 0;
+}
+
+
+
+
+
+
+
+

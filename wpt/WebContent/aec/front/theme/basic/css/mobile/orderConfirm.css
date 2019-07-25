@@ -1,0 +1,20 @@
+.wrapper_1{width:100%;height:auto;overflow:hidden;}.block{display:block}.icon_right{background:rgba(0,0,0,0) url(../../image/mobile/header/left.png);display:block;height:19px;right:10px;top:50%;margin-top:-10px;width:11px;position:absolute;-webkit-background-size:11px 19px;-moz-background-size:11px 19px;-o-background-size:11px 19px;background-size:11px 19px;transform:rotate(180deg);-ms-transform:rotate(180deg);-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg)}input[name=addressBookId]{float:left;margin-left:5px;display:block}.addInfo{float:right;width:90%}.moreAddress{padding-top:10px;padding-bottom:8px}.moreAddCont{display:none}#addLink{color:#ff6400;padding:10px 0;display:block}.btn_add{width:100%;height:70px;text-align:center;line-height:70px;position:relative}.line{width:100%;height:0;border-bottom:1px #cfcfcf dashed}.address{width:100%;height:auto}.address ul{width:90%;padding:0 5%}.address ul li{height:auto;position:relative;width:100%;overflow:hidden;padding:20px 0;border-bottom:1px #cfcfcf solid}.address ul.moreAddCont li:last-child{border-bottom:0}.default_icon{color:#ff6400;margin:0 5px}.box_coupon{width:100%;height:auto}.big{width:20%}.box-xy{position:relative;display:block;list-style:none;width:100%;height:auto;overflow:hidden}.box-xy li{position:relative;width:100%;height:auto;color:#505050;font-size:15px;padding:10px 0;line-height:20px;overflow:hidden}.ware_img{width:30%;max-width:100px;height:70px;float:left;border:1px #cdcdcd solid;margin-top:10px}.ware_img img{width:90%;max-width:90px;height:63px;margin-left:5%;margin-top:3px}.box_right2{width:64%;height:90px;float:left;margin-left:5%}.divCenter{height:35px;width:100%;line-height:35px}.fare{float:right}.wid90{width:90%;height:auto;margin:0 auto;margin-left:5%;overflow:hidden}.order-status{width:100%;height:auto}.order-status li{height:35px;line-height:35px;overflow:hidden}.btn_group{width:100%;height:50px;margin:0 auto;position:fixed;bottom:0;left:0}.btn_a{color:#fff;width:70%;height:50px;line-height:50px;text-align:center;letter-spacing:1px;background-color:#ccc}.btn_b{width:30%;height:50px;text-align:center;letter-spacing:1px;background-color:#ff6400;border:0;font-size:15px;font-family:"microsoft Yahei"}.martop20{margin-top:20px!important}.martop10{margin-top:10px!important}.martop80{margin-top:80px!important}.box_r{width:95%;height:auto}.jine{border-bottom:1px #ff6400 solid;width:15%;color:#ff6400}.yanzheng{border-bottom:1px #ff6400 solid;width:100%;color:#ff6400;height:30px}.box_right{margin-left:10px}.geren{border-bottom:1px #ff6400 solid;width:78%;color:#ff6400}.danjia_dj{font-family:Microsoft YaHei;font-size:14px;color:#5a5a5a}.guige{color:#5a5a5a}.center_miaoshu{font-family:Microsoft YaHei;font-size:14px;color:#464646;font-weight:700;letter-spacing:2px}.danjia_style{font-family:Microsoft YaHei;font-size:14px;color:#ff6400}.center_yunfei{font-family:Microsoft YaHei;margin-right:5px;float:right;font-size:16px}.useCoupon{display:none;padding-bottom:15px}.useCouponBtn{margin-right:8px}.needInvoiceBtn{margin-right:8px}.needInvoice{display:none;padding-bottom:15px}.invoiceTitle{border-bottom:1px #ff6400 solid;width:100%;color:#ff6400;height:30px}.hidden{display:none}.addCouponCode{color:#a3a3a3}.waitMsg{position:absolute;padding:20px 8px;top:30%;width:45%;left:27.5%;text-align:center;background:#222;border-radius:10px;color:#fff;opacity:.5}
+
+.btn_add{
+	    background-color: #eee;
+}
+.btn_b{
+	background-color: #E45151;
+}
+.box_message_list{
+	    margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+/* 专题：完美时空官网
+   网络部 - 姜雪松 2008-6-3 
+   北京完美时空网络技术有限公司 版权所有 
+*/
+
+/* ========== Basic ========== */
+body { margin:0; padding:0; text-align:center; font-size:14px; line-height:23px; color:#000000; background:#fff; ; text-align:center; font-family:宋体, Arial, Helvetica, sans-serif; }
+a { blr:expression(this.onFocus=this.blur());
+}
+area { blr:expression(this.onFocus=this.blur());
+}
+#wrap { width:1003px; margin-right: auto; margin-left: auto; overflow:hidden; background:#fff; }
+.img { float:left; }
+.imgborder {border:#b5b5b5 solid 1px;}
+.font01 { color:#585858; }
+.font02 { font-family:sans-serif; font-size:14px; }
+.font03 { color:#a6a6a6; font-size:14px; }
+.font12 { color:#585858; font-weight:bold; }
+.font13 { color:#3c3c3c; font-weight:bold; font-size:14px; line-height:24px; }
+.font16 { color:#3c3c3c; font-size:14px; line-height:35px; }
+.font15 { color:#5f5d5f; font-size:14px; }
+.font14 { font-size:14px; color:#585858; }
+.font07 { font-family:sans-serif; font-size:11px; }
+.font08 { color:#a6a6a6; font-size:11px; }
+.font09 { line-height:24px; }
+.font11 { color:#717171; font-size:12px; line-height:20px; }
+.font04 { color:#555; font-size:14px; font-weight:bold; }
+.font05 { color:#fc5c04; font-size:14px; text-align:left; }
+.font06 { color:#555; font-size:14px; text-align:left; }
+.font17 { color:#555; font-weight:bold; }
+.font18 { color:#4d4d4d; font-size:14px; font-weight:bold; }
+/* ========== 客服字体 ========== */	
+.font_1 { font-size:14px; color:#990099; }
+.font_2 { font-size:14px; color:#ff0000; }
+.font_3 { font-size:14px; color:#1b1b1b; }
+.font_4 { font-size:22px; color:#ff0000; }
+.font_5 { font-size:14px; color:#006600; }
+.font_6 { font-size:14px; color:#ff0000; }
+.font_7 { font-size:16px; color:#006600; }
+.font_8 { font-size:14px; color:#00479d; }
+.font_9 { font-size:14px; font-weight:bold; color:#000; line-height:24px; }
+.font_12 { font-size:14px; color:#000; }
+.font_11 { font-size:14px; color:#fff; }
+.font_13 { font-size:14px; color:#000000; }
+.font_14 { font-size:14px; color:#FF0000; }
+
+/* ========== 文字链接 ========== */	
+a { text-decoration: underline; } /*链接无下划线none,有为underline*/
+a:link { color: #000; text-decoration: none; } /*未访问的链接 */
+a:visited { color: #000; text-decoration: none; } /*已访问的链接*/
+a:hover { color: #000; text-decoration: none; } /*鼠标在链接上 */
+a.font_12 { text-decoration: underline; } /*链接无下划线none,有为underline*/
+a.font_12:link { color: #000; text-decoration: none; } /*未访问的链接 */
+a.font_12:visited { color: #000; text-decoration: none; } /*已访问的链接*/
+a.font06 { text-decoration: underline; } /*链接无下划线none,有为underline*/
+a.font06:link { color: #535353; text-decoration: none; } /*未访问的链接 */
+a.font06:visited { color: #fc5c04; text-decoration: none; } /*已访问的链接*/
+a.nav_link, a.nav_link:visited { color: #555555; text-decoration: none; }
+a.nav_link:hover { color: #777777; text-decoration: none; }
+a.font_13 { text-decoration: underline; } /*链接无下划线none,有为underline*/
+a.font_13:link { color: #000; text-decoration:underline; } /*未访问的链接 */
+a.font_13:visited { color: #000; text-decoration:underline; } /*已访问的链接*/
+a.font_14 { text-decoration: underline; } /*链接无下划线none,有为underline*/
+a.font_14:link { color: #000; text-decoration:underline; } /*未访问的链接 */
+a.font_14:visited { color: #000; text-decoration:underline; } /*已访问的链接*/
+/* 2008-6-27 By jiangxuesong  客服*/
+a.font_email { text-decoration: underline; } /*链接无下划线none,有为underline*/
+a.font_email:link { color:#000000; text-decoration: none; } /*未访问的链接 */
+a.font_email:visited { color: #000; text-decoration: none; } /*已访问的链接*/
+a.font_email:hover { color: #0000ff; text-decoration: none; } /*鼠标在链接上 */
+a.font_2:link, a.font_2:visited, a.font_2:hover { color: #FF0000; }
+
+.fcm_down_btn{display:block;width:144px; margin-top:10px;margn-bottom:10px;height:26px; line-height:26px; color:#000; background:url(/style/fcm_btn_down.jpg) no-repeat; text-align:center;}
+.fcm_down_btn:link,.fcm_down_btn:visited{color:#000;text-decoration:underline;}
+.fcm_down_btn:hover{color:#000;text-decoration:underline;}
+.btn_back a:link,.btn_back a:visited,.btn_back a:hover,.btn_back a:active{color:#f00;text-decoration:underline;}
+a.fubiao_link:link, a.fubiao_link:visited{ color:#F00; text-decoration:underline font-size:14px} 
+a.fubiao_link:hover { color:#F00; text-decoration:underline;} 
+.tab_bg_on{width:168px;height:29px;line-height:29px;display:block;float:left;background:url(/style/tab_on_bg.jpg) no-repeat center;}
+.tab_bg{width:168px;height:29px;line-height:29px;display:block;float:left;background:url(/style/tab_bg.jpg) no-repeat center;}
+.newstab{overflow:hidden;margin-left:78px;}
+.newstab span{cursor:pointer;margin-right:12px;}
+.newscon  table{margin-top:10px;border:1px solid #000;border-collapse:collapse;}
+.newscon  table td{border:1px solid #000;padding:5px;}
+.newscon{text-align:left;}
+.newscon p{text-indent:2em;padding:10px 0;}
+.red{font-size:12px;color:#f00;}
+.blue{font-size:12px;color:blue;text-decoration:underline;}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>			
+		<typeAlias alias="AddressBook" type="com.maicard.ec.domain.AddressBook"/>
+        <typeAlias alias="AddressBookCriteria" type="com.maicard.ec.criteria.AddressBookCriteria"/>
+		
+        <typeAlias alias="DeliveryOrder" type="com.maicard.ec.domain.DeliveryOrder"/>
+        <typeAlias alias="DeliveryOrderCriteria" type="com.maicard.ec.criteria.DeliveryOrderCriteria"/>
+
+        <typeAlias alias="DeliveryPrice" type="com.maicard.ec.domain.DeliveryPrice"/>
+        <typeAlias alias="DeliveryPriceCriteria" type="com.maicard.ec.criteria.DeliveryPriceCriteria"/>
+        
+        <typeAlias alias="FeeAdjust" type="com.maicard.ec.domain.FeeAdjust"/>
+        <typeAlias alias="FeeAdjustCriteria" type="com.maicard.ec.criteria.FeeAdjustCriteria"/>
+        
+        <typeAlias alias="Invoice" type="com.maicard.ec.domain.Invoice"/>
+        <typeAlias alias="InvoiceCriteria" type="com.maicard.ec.criteria.InvoiceCriteria"/>
+	</typeAliases>
+</configuration>

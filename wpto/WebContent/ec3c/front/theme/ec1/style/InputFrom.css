@@ -1,0 +1,212 @@
+.Logo {
+    float: left;
+}
+
+.Top_Title {
+    height: 46px;
+    line-height: 46px;
+    width: 150px;
+    border-left: 1px solid #E0E0E0;
+    padding-left: 20px;
+    font-size: 24px;
+    color: #333;
+    font-family: "黑体";
+    display: block;
+    float:left;
+    margin-top:10px;
+}
+
+.InputWrap_Tip {
+    position: absolute;
+    right: 20px;
+    top: -25px;
+}
+
+    .InputWrap_Tip a {
+        font-size: 13px;
+        color: #005aa0;
+    }
+
+        .InputWrap_Tip a:hover {
+            text-decoration: underline;
+        }
+
+.InputWrap {
+    border: 1px solid #f0f0f0;
+    padding: 20px;
+    width: 920px;
+    margin: 0 auto;
+    min-height: 500px;
+    position: relative;
+    margin-top: 30px;
+}
+
+.InputForm {
+    width: 700px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.InputForm {
+    width: 950px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+    .InputForm table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .InputForm th {
+        width: 100px;
+        height: 48px;
+        line-height: 48px;
+        text-align: right;
+        padding-right: 10px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #666;
+    }
+
+    .InputForm td {
+        height: 48px;
+        line-height: 48px;
+        text-align: left;
+    }
+
+.InputWidth270, .InputWidth180 {
+    border: 1px solid #e6e6e6;
+    height: 30px;
+    width: 270px;
+    background-color: #FFFFFF;
+    padding-left: 5px;
+}
+
+.InputWidth180 {
+    width: 180px;
+}
+
+.MulText {
+    border: 1px solid #eeeeee;
+    background-color: #FFFFFF;
+    width: 270px;
+    height: 80px;
+    padding-left: 5px;
+}
+
+.btnExtCode {
+    background-color: #ffffff;
+    border: medium none;
+    color: #1F9EF7;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .btnExtCode:hover, .ForgetPwd:hover {
+        text-decoration: underline;
+        color: #1F9EF7;
+    }
+.btnGray {
+    background-color: #ffffff;
+    border: medium none;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.ForgetPwd {
+    color: #1F9EF7;
+}
+#imgCode{
+	display: inline-block;
+	
+}
+#txtExtCode{
+	display: inline-block;
+	
+}
+
+
+ .OrderTitle {
+            font-size: 16px;
+            line-height: 42px;
+            color: #666;
+            position: absolute;
+            left: 0;
+            top: -40px;
+        }
+
+        .ConfirmOrder {
+            width: 960px;
+            margin-top: 30px;
+            padding: 0 20px 20px;
+            border: 1px solid #f0f0f0;
+        }
+
+            .ConfirmOrder .InputForm {
+                width: 100%;
+                padding-top: 0;
+            }
+
+            .ConfirmOrder h1 {
+                color: #333;
+                font-size: 16px;
+                height: 40px;
+                line-height: 40px;
+                font-weight: normal;
+                margin-bottom: 10px;
+                position: relative;
+            }
+
+                .ConfirmOrder h1 span {
+                    font-size: 14px;
+                    position: absolute;
+                    right: 10px;
+                    color: #aaaaaa;
+                }
+
+        .hr {
+            width: 100%;
+            height: 0;
+            border-top: 1px solid #e6e6e6;
+        }
+
+        .tbOrder {
+            border-collapse: collapse;
+        }
+
+            .tbOrder th {
+                text-align: center;
+                color: #999;
+                width: 105px;
+                font-size: 12px;
+                font-family: Arial,"宋体";
+                height: 35px;
+                line-height: 35px;
+                border-bottom: 3px solid #b2d1ff;
+            }
+
+            .tbOrder td {
+                height: 80px;
+                line-height: 80px;
+                text-align: center;
+                position: relative;
+            }
+
+                .tbOrder td img {
+                    position: absolute;
+                    left: 8px;
+                    top: 11px;
+                }
+
+        .Total {
+            font-size: 14px;
+            color: #666;
+            font-family: Arial,"宋体";
+            text-align: right;
+        }
+
+        .Total_Price {
+            color: #e4393c;
+            font-size: 20px;
+            font-weight: 700;
+        }

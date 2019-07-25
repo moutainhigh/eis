@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="以先,以先食材" />
+<meta name="description" content="以先是一个有信仰的食材资讯平台，更是一个保证安全健康生活的平台" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="../../../../../css/mobile/main.css"/>
+<link rel="stylesheet" type="text/css" href="../../../../../css/mobile/list1.css"/>
+<script type="text/javascript" src="../../../../../js/mobile/jquery.min.js"></script> 
+<script type="text/javascript" src="../../../../../js/mobile/common.min.js"></script>
+<script type="text/javascript">
+			
+</script>
+</head>
+<body>
+ <div class="header" id="header">
+	  <a class="back" href="javascript:history.go(-1);"></a><span>一地一品</span><a class="list1" href="/"></a>
+ </div>
+	<div id="wrapper_1">
+	   <div class="box-yx">
+	      <img src="../../../../../image/mobile/video.png"/>
+	   </div>
+	     <ul class="btn-list">
+		   <li id="xwbd" class=" ">小先推荐</li>
+		   <li id="hzsq" class="current no-border">小先当家</li>
+		 </ul>
+		
+		  <!--小先当家-->
+		 <div class="box_sk hzsq " style="display: block;">	
+		 	  <!-- <ul class="box-xy wid90 ">
+	              <li>
+		   			<div class="ware_img"> <img src="../../../../../image/mobile/10.png"/></div>
+		   			<div class="box_right2">
+			  		<div> <span class="ware_names">昵称</span></div>
+			  		<div class="divCenter">
+			  		 <span class="ware_from">规格:500g</span>
+			  		 </div>
+			  		<div class="divCenter">
+			  		 <span class="ware_sprice " >原价:120.00</span>
+			  		 </div>
+              		<div class="one_sprice"><span class="price_mark orange">￥60.00</span> 
+              		<span class="fare "><input type="submit" class="btn_login" id="login" name="login" value="立即购买"/> </span>
+              		</div>
+		   			</div>
+			      </li> 
+	          </ul> --> 
+	          	<div class="box_product">
+			   <img src="../../../../../image/mobile/product.jpg"/>
+			   <div class="product-info">                           
+                                <p class="plain"><a href="/content/tuan/20160120163927.shtml">稻郷五常大米(买一送一)</a></p>
+                               
+                      
+								<p class="fo13">规格：5kg+赠品1kg</p>
+								<p class="fo13" >原价：<span class="old_sprice">￥98.00</span></p>
+                               
+								<div class="box_left">
+								  <span class="orange">￥168.00</span>
+								 
+								</div>
+								<div class="box_right">
+								   <a href="#" class="orangeButton1 fo12">立即购买</a>
+								</div>
+							
+                            </div>
+			</div>
+		 </div>
+
+		    <!--小先推荐-->
+		  	<div class="wid90 xwbd" style="display: none;">
+		  	
+		    </div>
+	</div>
+	 <!--食材信仰-->
+	
+	  
+
+</body>
+<script type="text/javascript">
+	$(function() {
+	 var $xwbd = $('#xwbd');
+     var $hzsq = $('#hzsq');
+
+      $xwbd.click(function(){
+        $hzsq.removeClass('current');
+        $xwbd.addClass('current');
+       
+        $('.hzsq').css('display','none');
+        $('.xwbd').css('display','block');
+    });
+
+     $hzsq.click(function(){
+
+        $xwbd.removeClass('current');
+        $hzsq.addClass('current');
+        $('.xwbd').css('display','none');
+        $('.hzsq').css('display','block');
+   
+    });
+
+
+
+})
+
+</script>
+</html>    

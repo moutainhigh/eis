@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:48 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.stat.sql.FrontUserStat">
+	<resultMap id="frontUserStatResult" type="FrontUserStat">
+	    <result property="registerCount" column="register_count"/>
+		<result property="activeCount" column="active_count"/>
+		<result property="loginCount" column="login_count"/>
+		<result property="inviter" column="inviter"/>
+		<result property="statTime" column="stat_time"/>
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+
+
+	<sql id="criteriaWhereClause">
+		<where>		
+			<if test="queryBeginTime != null">
+				stat_time &gt;= DATE_FORMAT(#{queryBeginTime},"%Y%m%d%H")
+			</if>
+			<if test="queryEndTime != null">
+				AND stat_time &lt;= DATE_FORMAT(#{queryEndTime},"%Y%m%d%H")
+			</if>
+			<if test="inviters !=null and inviters.length > 0">
+			AND inviter in (
+			<foreach item="item" collection="inviters"
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		</where>
+	</sql>
+	<select id="list" parameterType="FrontUserStatCriteria" resultMap="frontUserStatResult">
+		SELECT
+			<if test="groupByDay == true">
+	    		SUBSTR(stat_time,1,8) stat_time,
+	    	</if>
+	    	<if test="groupByDay == false">
+	    		stat_time,
+	    	</if>			
+			<if test="groupByInviter == true">
+	    		inviter,
+	    	</if>
+	    	
+			sum(register_count) register_count,
+	    	sum(active_count) active_count,
+	    	sum(login_count) login_count	    	
+		FROM
+			front_user_stat 
+		<include refid="criteriaWhereClause"/>
+		
+		GROUP BY
+		<if test="groupByInviter == true">
+	    	inviter,
+	    </if>
+		<if test="groupByDay == true">
+	    	SUBSTR(stat_time,1,8)
+	    </if>
+	    <if test="groupByDay == false">
+	    	stat_time
+	    </if>
+		
+	    
+		ORDER BY stat_time DESC
+	</select>
+
+	<select id="count" parameterType="PayStatCriteria" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			front_user_stat
+		<include refid="criteriaWhereClause"/>
+	</select>
+
+</mapper>

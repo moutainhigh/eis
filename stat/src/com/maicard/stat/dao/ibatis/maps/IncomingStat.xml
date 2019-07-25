@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:49 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IncomingStat">
+
+	<resultMap id="incomingStatResult" type="IncomingStat">
+		<result property="incomingStatId" column="incoming_stat_id"/>
+		<result property="totalMoney" column="total_money"/>
+		<result property="shareCost" column="share_cost"/>
+		<result property="fixCost" column="fix_cost"/>
+		<result property="otherCost" column="other_cost"/>
+		<result property="grossProfit" column="gross_profit"/>
+		<result property="taxRate" column="tax_rate"/>
+		<result property="netProfit" column="net_profit"/>
+		<result property="statTime" column="stat_time"/>
+	</resultMap>
+	
+	
+	
+	<select id="iuda" parameterType="PayStatCriteria" resultType="int">	
+		 CALL i_uda(#{startTime},#{endTime});
+	</select>	
+	
+	<select id="incomingStat" parameterType="PayStatCriteria" resultMap="incomingStatResult">	
+		 CALL incoming_stat(#{startTime},#{endTime});
+	</select>	
+
+	
+
+</mapper>

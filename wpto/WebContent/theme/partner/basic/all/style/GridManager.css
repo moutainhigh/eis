@@ -1,0 +1,142 @@
+/* 琛ㄦ牸鍒嗛〉 */
+
+.table-wrap .page-toolbar {
+  width: 100%;
+  position: relative;
+  padding: 5px 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f8f8', endColorstr='#ffececec', GradientType=0);
+  height:100px;
+}
+
+.table-wrap .page-toolbar .dataTables_info {
+  display: inline-block;
+  padding: 6px 5px;
+  vertical-align: middle;
+  position: absolute;
+  left: 329px;
+  top: 60px;
+}
+
+.table-wrap .page-toolbar .change-size {
+  display: inline-block;
+  padding: 2.5px 10px;
+  vertical-align: middle;
+  position: absolute;
+  left: 275px;
+  top: 20px;
+}
+
+.table-wrap .page-toolbar .change-size select[name="pSizeArea"] {
+  height: 25px;
+  padding: 4px;
+}
+
+.table-wrap .page-toolbar .goto-page {
+  display: inline-block;
+  padding: 2.5px 10px;
+  vertical-align: middle;
+  position:absolute;
+  top: 60px;
+  left: 468px;
+}
+
+.table-wrap .page-toolbar .goto-page .gp-input {
+  width: 50px;
+  height: 25px;
+  border: 1px solid #ddd;
+  padding: 0 5px;
+  margin: 0 5px;
+}
+
+.table-wrap .page-toolbar .refresh-action {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  padding: 1px 0 0 1px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-wrap .page-toolbar .refresh-action:hover {
+  color: #000;
+}
+
+.table-wrap .page-toolbar .refresh-action i {
+  cursor: pointer;
+  line-height: 15px;
+  font-size: 16px;
+  color: #0083ba;
+  font-weight: bold;
+}
+
+.table-wrap .page-toolbar .refresh-action.refreshing {
+  animation: rotationMedia 2s ease-in-out infinite;
+}
+
+.table-wrap .page-toolbar .ajax-page {
+  position: absolute;
+  height: 30px;
+  right: 5px;
+  bottom: 5px;
+  left: 360px;
+  top: 20px;
+}
+
+.table-wrap .page-toolbar .ajax-page :after {
+  clear: both;
+}
+
+.table-wrap .page-toolbar .ajax-page .pagination {
+  display: inline-block;
+  margin:0;
+}
+
+.table-wrap .page-toolbar .ajax-page .pagination > li {
+  display: block;
+  min-width: 30px;
+  height: 30px;
+  line-height: 18px;
+  float: left;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-left: none;
+  color: #000;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.table-wrap .page-toolbar .ajax-page .pagination > li:first-child {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  border-left: 1px solid #ddd;
+}
+
+.table-wrap .page-toolbar .ajax-page .pagination > li.disabled,
+.table-wrap .page-toolbar .ajax-page .pagination > li.disabled:focus,
+.table-wrap .page-toolbar .ajax-page .pagination > li .disabled:hover {
+  background-color: #fff;
+  border-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.table-wrap .page-toolbar .ajax-page .pagination > li.active,
+.table-wrap .page-toolbar .ajax-page .pagination > li.active:focus,
+.table-wrap .page-toolbar .ajax-page .pagination > li.active:hover {
+  background-color: #0083ba;
+  color: #fff;
+  z-index: 2;
+}
+
+.table-wrap .page-toolbar .ajax-page .pagination > li:focus,
+.table-wrap .page-toolbar .ajax-page .pagination > li:hover {
+  background-color: #eee;
+  border-color: #ddd;
+  color: #0083ba;
+}
+
+
+/*# sourceMappingURL=GridManager.css.map*/

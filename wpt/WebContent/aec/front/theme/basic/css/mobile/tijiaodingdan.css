@@ -1,0 +1,216 @@
+.content{WIDTH:100%;HEIGHT:AUTO;OVERFLOW:HIDDEN;MARGIN:0 AUTO;padding-bottom:50px}.first_box{margin-top:20px;width:99%!important}.status{width:645px;height:20px;margin:0 auto;margin-top:15px}.btn_val_gray{float:left}.btn_val_gray .line{display:block;height:7px;width:100px;background-color:#999;float:left;margin-top:7px}.btn_val_gray .circles{display:block;height:20px;width:20px;border-radius:20px;background-color:#999;float:left;margin:0 -3px 0 -3px}.btn_val{float:left}.btn_val .line{display:block;height:7px;width:100px;background-color:#ff6400;float:left;margin-top:7px}.btn_val .circles{display:block;height:20px;width:20px;border-radius:20px;background-color:#ff6400;float:left;margin:0 -3px 0 -3px}.text_status{width:215px;text-align:center;float:left}.pay li{float:left;margin-left:10px}.weixin{width:15px;height:15px}.zhifubao{margin-left:20px}.blurb{border:1px #ff6400 solid;height:40px}.goods_title{width:100%;height:auto;overflow:hidden;line-height:40px}.goods_title li{float:left;text-align:center}.goods_content1{border:1px #ff6400 solid;border-top:0;height:auto}.goods_content1_message{width:100%;height:auto;overflow:hidden}.goods_content1_message li{float:left;height:64px;padding:20px 0;line-height:64px}.goods_content1_message li img{margin-left:30%;margin-right:30px;height:64px;width:auto}.xuanzhe{margin-left:10px}.fapiao{margin-left:30px;border-top:1px #ccc dashed;padding-top:15px}.box_daijinquan{border-top:1px #ccc dashed;padding-top:15px}.no_border{border:0!important}.btngroup_address{width:99%;height:30px;line-height:30px}.input_style{border:1px #cdcdcd solid;border-left:0;border-top:0;border-right:0;width:200px}.voucher{width:800px;height:150px;border:1px #cdcdcd solid;border-radius:15px;margin-left:10%}.begin{display:block;color:#ff6400}.daijinquan{display:block;margin-top:30px;margin-left:50px;color:#ccc}.code{border-radius:10px;border:2px #ccc solid;margin-left:30%;width:250px;height:50px;margin-top:-35px;outline:0;font-size:15px;text-align:center}.mianzhi{display:block;margin-left:30%}.confirm_btn{display:block;width:150px;height:40px;background-color:#ff6400;color:#fff;letter-spacing:2px;margin-left:70%;border:0;font-size:18px;border-radius:5px;margin-top:20px}.last_box{height:200px}.text_shangpinjine{float:right;text-align:right;line-height:40px}.box_left{width:230px;display:block;float:left}.box_right{width:auto;display:block;float:right}.text_shangpinjine li{margin-top:3%;overflow:hidden}.present{width:80px;height:30px;background-color:#ff6400;color:#fff;letter-spacing:2px;margin-left:20px;outline:0;cursor:pointer}.li1{width:40%}.li2{width:20%;text-align:center}.li3{width:20%;text-align:center}.li4{width:20%;text-align:center}#couponing{outline:0;border-bottom:1px #ff6400 solid}
+body{
+	width: 100%;
+}
+.addressInfo div{
+	text-align: center;
+}
+.addressInfo div input{
+	width: 290px;
+	margin-left: 0;
+}
+.status{
+	width: 100%;
+}
+.btn_val_gray .line{
+	width: 50px;
+}
+.btn_val .line{
+	width: 50px;
+}
+.text_status{
+	width: 33%;
+}
+.btn_val_gray,.btn_val{
+	width: 33%;
+	position: relative;
+}
+.btn_val_gray .line,.btn_val .line{
+	width: 50%;
+}
+.btn_val_gray .circles,.btn_val .circles{
+	    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+}
+.content{
+	margin-top: 20px;
+}
+.content .title1{
+	text-align: left;
+	font-size: 16px;
+	font-weight: bold;
+}
+.default_adderss,.first_box{
+	margin-top: 0;
+}
+.default_adderss{
+	width: 80%;
+}
+/*改*/
+.address{
+	width: 100%;
+	padding: 15px;
+	box-sizing: border-box;
+	background-color: #eee;
+    border-bottom: 3px solid #769619;
+    position: relative;
+}
+.address .box{
+	width: 90%;
+	margin-left: 0;
+}
+.address>span{
+	position: absolute; top: 50%;right: 20px;
+	    font-size: 20px;
+    color: #B3B3B3;
+}
+.fontsize{
+	font-size: 12px!important;
+}
+.zhifudown{
+	padding: 0 10px;
+}
+.zhifudown h2{
+	font-size: 14px;
+	text-align: left;
+	line-height: 36px;
+    letter-spacing: 0;
+}
+.thirdly_box{
+	border: none;
+	background-color: #eee;
+}
+.thirdly_box ul{
+	padding: 10px 0;
+}
+.zhifudown table.product{
+	width: 100%;
+    border-color: #fff;
+    font-size: 14px!important;
+}
+.zhifudown table th{
+	line-height: 27px;
+	font-size: 14px!important;
+	    background-color: #eee;
+}
+.zhifudown table td{
+	font-size: 14px!important;
+	text-align: center;
+	    padding: 7px 0;
+}
+.zhifudown table td p{
+	margin: 0!important;
+}
+.xuanzhe{
+	margin-left: 0;
+	margin-top: 20px;
+	font-size: 14px!important;
+}
+.xuanzhe span{
+	font-size: 14px!important;
+}
+.fapiao{
+	margin-left: 20px;
+	font-size: 14px;
+}
+.text_shangpinjine{
+	padding: 0 10px;
+	width: 100%;
+	background-color: #f7f7f7;
+	border-top: 2px solid #ddd;
+	margin-top: 15px;
+	    box-sizing: border-box;
+}
+.text_shangpinjine li{
+	margin-top: 0;
+}
+.tjddp{
+	    position: fixed;
+    bottom: 0;
+    left: 0;
+    line-height: 30px;
+    width: 100%;
+    background-color: #eee;
+    margin: 0!important;
+    text-align: right;
+    line-height: 40px;
+}
+.present {
+    width: 105px;
+    height: 41px;
+    background-color: #E44D4D;
+    color: #fff;
+    /* letter-spacing: 2px; */
+    margin-left: 20px;
+    outline: 0;
+    cursor: pointer;
+    /* height: 100%; */
+}
+/*代金券弹框*/
+.voucherbox{
+	position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;
+	background-color: rgba(0,0,0,0.5);
+}
+.voucherbox .box{
+	width: 85%;
+	margin-top: 70px;
+	margin-left: 5%;
+	background-color: #fff;
+	border-radius: 5px;
+	    padding: 10px;
+	    position: relative;
+}
+.voucherbox .box h2{
+	text-align: center;
+	line-height: 30px;
+	color: #6C871E;
+}
+.voucherbox .box ul{
+	background-color: #eee;
+	    margin-top: 15px;
+}
+.voucherbox .box ul li{
+	padding: 10px 0;
+	position: relative;
+	border-bottom: 1px solid #fff;
+}
+.voucherbox .box ul li img{
+	    width: 20px;
+    position: absolute;
+    top: 9px;
+    left: 5px;
+    display: none;
+}
+.voucherbox .box ul li img.wxz{
+	display: block;
+}
+.voucherbox .box ul li input{
+	z-index: 999999;
+    position: absolute;
+    top: 9px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+}
+.voucherbox .box span.close{
+	display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(39, 39, 39, 0.64);
+    border-radius: 100%;
+    position: absolute;
+    top: -9px;
+    right: -8px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 25px;
+    color: #A5BB67;
+}
+
+
+
+
+
+

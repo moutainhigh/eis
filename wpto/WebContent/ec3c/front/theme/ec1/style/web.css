@@ -1,0 +1,225 @@
+/* Top */
+.Top {
+    width: 1000px;
+    margin: 0 auto;
+    height: 70px;
+    padding-top: 10px;
+}
+
+.Top_Left {
+    float: left;
+}
+
+.Top_Right {
+    float: right;
+}
+
+    .Top_Right a {
+        float: right;
+        color: #666;
+        margin-left: 20px;
+    }
+
+        .Top_Right a:hover {
+            text-decoration: underline;
+            color: #e4393c;
+        }
+/* end Top */
+/* Header */
+.Header {
+    width: 100%;
+    background-color: #B1191A;
+    height: 39px;
+}
+
+    .Header li {
+        float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        position: relative;
+    }
+
+        .Header li:hover, .Header li.Cur {
+            background-color: #FFFFFF;
+        }
+
+            .Header li:hover a, .Header li.Cur a {
+                color: #B1191A;
+            }
+
+        .Header li span {
+            color: #DDDDDD;
+            position: absolute;
+            font-family: Arial;
+            right: -2px;
+            top: 13px;
+        }
+
+        .Header li a {
+            color: #FFFFFF;
+            height: 39px;
+            line-height: 39px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+.Logo {
+   
+    background-repeat: no-repeat;
+    background-size: 180px auto;
+    display: block;
+    width: 200px;
+    height: 70px;
+}
+/* end Header */
+.Banner {
+    background-color: #FFC641;
+    height: 444px;
+    width: 1000px;
+   
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+    .Banner a {
+        display: block;
+        width: 1000px;
+        height: 444px;
+    }
+
+/* Footer */
+.Footer {
+    width: 1000px;
+    text-align: center;
+    height: 100px;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+/* end Footer */
+.btnRed{
+    width: 135px;
+    height: 38px;
+    line-height: 34px;
+    text-align: center;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #EC4144;
+    border: 1px solid #EC4144;
+    border-radius: 5px;
+    margin-left: 130px;
+}
+a.btnReder{
+	display: block;
+	width: 135px;
+    height: 38px;
+    line-height: 34px;
+    text-align: center;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #EC4144;
+    border: 1px solid #EC4144;
+    border-radius: 5px;
+    margin: 50px 0 0 240px;;
+}
+ .Banner{width:1000px;
+ 	height:444px;
+ 	position:relative;
+ 	overflow:hidden;
+ }
+  .Banner .ban_show{width:1000px;height:444px;  }
+  .Banner .ban_show li{position: absolute;display: none;}
+  .Banner .ban_show li img{width: 1000px;height: 444px;}
+  .Banner .ban_show li.active{display: block;}
+  .Banner .bn_xbtn{width:200px;height:20px;position:absolute;bottom:20px;right:20px;text-align:center;}
+  .Banner .bn_xbtn li{display:inline-block; cursor:pointer;border:1px solid #333; width:28px;height:20px;background:#B3B3B3; color:#fff;font-weight:bold;}
+  .Banner .bn_xbtn li:hover,.Banner .bn_xbtn li.curr{background:#312F2D; }
+
+  .Banner a{width:41px;height:69px;display:block;position:absolute;top:50%;margin-top:-34px;background:url(/theme/ec1/images/btn.png);}
+  .Banner a.pre{background-position:-83px 0px;}
+  .Banner a.next{right:0px;background-position:41px 0px;}
+  .Banner a.pre:hover{background-position:1px 0px;}
+  .Banner a.next:hover{background-position:123px 0px;}
+       .tbOrder {
+            border-collapse: collapse;
+            border: 1px solid #E5E5E5;
+            width: 100%;
+        }
+
+            .tbOrder th {
+                text-align: center;
+                color: #999;
+                font-size: 12px;
+                font-family: Arial,"宋体";
+                height: 35px;
+                line-height: 35px;
+                background-color: #F5F5F5;
+                font-weight: normal;
+            }
+
+            .tbOrder td {
+                height: 80px;
+                text-align: center;
+                position: relative;
+                color: #aaa;
+                border-right: 1px solid #E5E5E5;
+            }
+
+                .tbOrder td a {
+                    color: #333;
+                    cursor: pointer;
+                }
+
+                    .tbOrder td a:hover {
+                        color: #e4393c;
+                    }
+
+                .tbOrder td img {
+                    position: absolute;
+                    left: 8px;
+                    top: 11px;
+                }
+
+        .Total {
+            font-size: 14px;
+            color: #666;
+            font-family: Arial,"宋体";
+            text-align: right;
+        }
+
+        .Total_Price {
+            color: #e4393c;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        a.btn-again {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            color: #333;
+            display: block;
+            text-align: center;
+            width: 85px;
+            height: 27px;
+            line-height: 27px;
+            margin: 0 auto;
+        }
+
+            a.btn-again:hover {
+                border-color: #e4393c;
+                color: #e4393c;
+            }
+
+        .hr {
+            width: 80%;
+            height: 0;
+            display: block;
+            border-top: 1px solid #E5E5E5;
+            margin: 5px auto;
+        }
+        
+

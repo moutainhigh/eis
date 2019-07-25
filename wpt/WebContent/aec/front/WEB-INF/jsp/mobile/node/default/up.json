@@ -1,0 +1,40 @@
+{
+	"newsList":[
+		{
+			"content": "",
+			"currentStatus": 130005,
+			"documentCode": "20170726115149",
+			"documentTypeName": "系统文档",
+			"publishTime": "2017-07-26 11:51:28",
+			"title": "加载数据1",
+			"viewUrl": "/content/default/20170726115149.shtml"
+		},
+		{
+			"content": "",
+			"currentStatus": 130005,
+			"documentCode": "20170726115149",
+			"documentTypeName": "系统文档",
+			"publishTime": "2017-07-26 11:51:28",
+			"title": "加载数据2",
+			"viewUrl": "/content/default/20170726115149.shtml"
+		},
+		{
+			"content": "",
+			"currentStatus": 130005,
+			"documentCode": "20170726115149",
+			"documentTypeName": "系统文档",
+			"publishTime": "2017-07-26 11:51:28",
+			"title": "加载数据3",
+			"viewUrl": "/content/default/20170726115149.shtml"
+		},
+		{
+			"content": "",
+			"currentStatus": 130005,
+			"documentCode": "20170726115149",
+			"documentTypeName": "系统文档",
+			"publishTime": "2017-07-26 11:51:28",
+			"title": "加载数据4",
+			"viewUrl": "/content/default/20170726115149.shtml"
+		}
+	]
+}

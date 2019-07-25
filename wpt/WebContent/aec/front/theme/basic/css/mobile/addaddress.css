@@ -1,0 +1,181 @@
+#wrapper_1 {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding-bottom: 5px
+}
+
+.wid90 {
+	width: 90%;
+	height: auto;
+	margin-left: 5%;
+	overflow: hidden
+}
+
+#message input[type="text"] {
+	border-bottom: 1px #49B306 solid;
+	height: 35px;
+	width: 70%;
+	outline: 0
+}
+
+#message select {
+	height: 35px;
+	width: 34%;
+	border-bottom: 1px #49B306  solid;
+	outline: 0;
+	font-size: 14px;
+}
+
+.box_message_list li {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	color: #717777;
+	padding-bottom: 8px
+}
+
+.checkBox {
+	width: 20px;
+	height: 25px;
+	right: 10px;
+	top: 20px
+}
+
+.check {
+	margin-top: 10px;
+	width: 20px;
+	height: 20px
+}
+
+.box_left {
+	float: left;
+	position: relative
+}
+
+.wid90 a {
+	width: 80%;
+	line-height: 35px;
+	margin-left: 3%;
+	min-width: 400px
+}
+
+.text_left {
+	display: block;
+	float: left;
+	height: 35px;
+	padding-top: 15px;
+	text-align: right;
+	font-size: 14px!important;
+}
+
+.box_right {
+	float: right
+}
+
+.box_center {
+	margin-left: 35%
+}
+
+.btn_login {
+	width: 50%;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	background-color: #73AB07;
+	text-align: center;
+	font-size: 17px;
+	border: 0;
+	border-radius: 5px;
+	letter-spacing: 10px;
+	padding-left: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	    border-radius: 4px!important;
+}
+
+.line {
+	width: 100%;
+	height: 0;
+	margin-top: 40px;
+	border-top: 1px #c9c9c9 solid
+}
+
+.address_box {
+	width: 80%;
+	margin-left: 2%
+}
+
+.address {
+	line-height: 35px;
+	margin-left: 0
+}
+
+.change {
+	width: 34px;
+	margin: 0 auto;
+	margin-top: 5%
+}
+
+.martop20 {
+	margin-top: 20px!important
+}
+
+.checkBox {
+	width: 18px;
+	height: 18px;
+	margin-left: 10%;
+	margin-top: 0
+}
+
+.checkBox label {
+	cursor: pointer;
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	left: 0;
+	top: 10px;
+	z-index: 20;
+	background-color: #73AB07;
+	border: 1px solid #73AB07
+}
+
+.checkBox label:after {
+	-moz-opacity: 0;
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 3px;
+	left: 3px;
+	border: 2px solid #fff;
+	border-top: 0;
+	border-right: 0;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg)
+}
+
+.checkBox input[type=checkbox]:checked+label:after {
+	opacity: 1;
+	-moz-opacity: 1
+}
+
+.checkBox input[type=checkbox]:not(:checked)+label:after {
+	opacity: 0;
+	-moz-opacity: 0
+}
+
+label[class="error"] {
+		font-size: 12px;
+		color: #ff6400;
+		    display: inline-block;
+	}
+.box_message_list{
+	margin-top: 30px
+}
+

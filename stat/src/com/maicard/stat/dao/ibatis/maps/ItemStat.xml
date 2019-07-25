@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:49 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ItemStat">
+	<resultMap id="itemStatResult" type="ItemStat">
+		<result property="successCount" column="success_count"/>
+		<result property="totalCount" column="total_count"/>
+		<result property="successMoney" column="success_money"/>
+		<result property="totalMoney" column="total_money"/>
+		<result property="productId" column="product_id"/>
+		<result property="region" column="region"/>
+		<result property="server" column="server"/>
+		<result property="statTime" column="stat_time"/>
+		<result property="inviter" column="inviter"/>
+		<result property="productName" column="product_name"/>
+		<result property="inviterName" column="inviter_name"/>	
+	</resultMap>
+	
+	<resultMap id="itemResult" type="Item">
+		<result property="transactionId" column="transaction_id" />
+		<result property="content" column="content" />
+		<result property="successMoney" column="success_money" />
+		<result property="frozenMoney" column="frozen_money" />
+		<result property="inMoney" column="in_money" />
+		<result property="outMoney" column="out_money" />
+		<result property="enterTime" column="enter_time" />
+		<result property="ttl" column="ttl" />
+		<result property="maxRetry" column="max_retry" />
+		<result property="closeTime" column="close_time" />
+		<result property="currentStatus" column="current_status" />
+		<result property="extraStatus" column="extra_status" />
+		<result property="billingStatus" column="billing_status" />
+		<result property="outStatus" column="out_status" />
+		<result property="cartId" column="cart_id" />
+		<result property="moneySource" column="money_source" javaType="List" jdbcType="VARCHAR" />
+		<result property="lockGlobalUniqueId" column="lock_global_unique_id" />
+		<result property="processCount" column="process_count" />
+		<result property="supplyPartnerId" column="supply_partner_id" />
+		<result property="failPolicy" column="fail_policy" />
+		<result property="weight" column="weight" />
+		<result property="shareConfigId" column="share_config_id" />
+  	</resultMap>
+	
+	<!--  调用存储过程，采集指定时间段的用户数据，返回产生的统计数据数量 -->
+	<select id="gather" parameterType="ItemStatCriteria" resultType="int">	
+		 CALL item_statistic_gather(#{beginTime}, #{endTime}, "", true)
+	</select>	
+	<select id="changeInviter" parameterType="ItemStatCriteria" resultType="int">	
+	     CALL change_inviter(#{uuids},<foreach item="item" index="index" collection="inviter" separator="," close="">#{item}</foreach>,#{endTime})
+	</select>	
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="beginTime != null">
+			 	stat_time &gt;=  concat(replace(#{beginTime},"-",""),"00")
+			</if>
+			<if test="endTime != null">
+			 	AND stat_time &lt;= concat(replace(#{endTime},"-",""),"24")
+			</if>
+			<if test="productId != null">
+				AND a.product_id in (
+					<foreach item="item" index="index" collection="productId"
+				      separator="," close=")">
+				        #{item}
+				  	</foreach>	
+			</if>
+			<if test="region != null">
+				AND a.region in (
+					<foreach item="item" index="index" collection="region"
+				      separator="," close=")">
+				        #{item}
+				  	</foreach>	
+			</if>
+			<if test="server != null">
+				AND a.server in (
+					<foreach item="item" index="index" collection="server"
+				      separator="," close=")">
+				        #{item}
+				  	</foreach>				
+			</if>
+			<if test="inviter != null">
+				AND a.inviter in (
+					<foreach item="item" index="index" collection="inviter"
+				      separator="," close=")">
+				        #{item}
+				  	</foreach>				
+			</if>	
+			<if test="extraStatus>0">	
+			  and a.extra_status=#{extraStatus}
+			</if>			
+		</where>
+	</sql>
+	
+	<select id="listByHour" parameterType="ItemStatCriteria" resultMap="itemStatResult">
+		SELECT 
+			left(a.stat_time,10) as stat_time,
+			sum(a.success_count) as success_count, 
+			sum(a.total_count) as total_count, 
+			sum(floor(a.success_money)) as success_money, 
+			sum(a.total_money) as total_money, 
+			a.product_id, 
+			a.region, 
+			concat(d.server_name,'-',a.server) as server,
+			a.inviter,
+			b.product_name,
+			concat(c.username, '[', c.uuid, ']') as inviter_name,
+			c.level
+		FROM
+			item_stat as a
+			left join product as b on a.product_id = b.product_id
+			left join partner as c on a.inviter=c.uuid
+			left join product_server as d on a.server=d.product_server_id
+		<include refid="criteriaWhereClause"/>
+		GROUP BY
+			stat_time 
+		order by 
+			<choose>
+				<when test="orderBy != null">
+				  <foreach item="item" index="index" collection="orderBy"
+				      open="" separator="," close="">
+				        ${item}
+				  </foreach>				
+				</when>
+				<otherwise>
+					left(stat_time,10) desc					
+				</otherwise>
+			</choose>
+	</select>
+	<select id="listByInviter" parameterType="ItemStatCriteria" resultMap="itemStatResult">
+ SELECT  
+      IF(ISNULL(c.username),'系统',c.nick_name) inviter_name,
+      SUM(b.`success_money`) AS success_money,
+      SUM(b.total_money) AS total_money,
+      SUM(b.total_count) AS total_count,
+      SUM(b.success_count) AS success_count,
+      c.`username`
+      FROM  item_stat b 
+      LEFT JOIN 
+      (SELECT * FROM childrenlst WHERE LEVEL=2) AS a ON  INSTR(CONCAT(',',a.childrenlst,','),CONCAT(',',b.inviter,','))>0
+      LEFT JOIN 
+      partner c ON a.uuid=c.`uuid` 
+      WHERE b.stat_time&gt;=CONCAT(REPLACE(#{beginTime},"-",""),"00")
+      <if test="endTime !=null">
+        AND b.stat_time &lt;=  concat(replace(#{endTime},"-",""),"24")
+      </if>
+      <if test="username !=null">
+       AND c.username= #{username}
+      </if> 
+      <if test="productId !=null">
+	AND b.product_id in (
+					<foreach item="item" index="index" collection="productId"
+				      separator="," close=")">
+				        #{item}
+				  	</foreach>	
+      </if>      
+     GROUP BY 
+       a.childrenlst;
+	</select>
+	<select id="listByDay" parameterType="ItemStatCriteria" resultMap="itemStatResult">
+		SELECT 
+			left(a.stat_time,8) as stat_time,
+			sum(a.success_count) as success_count, 
+			sum(a.total_count) as total_count, 
+			floor(sum(a.success_money)) as success_money, 
+			sum(a.total_money) as total_money, 
+			a.product_id, 
+			a.region, 
+			concat(d.server_name,'-',a.server) as server,
+			a.inviter,
+			b.product_name,
+			concat(c.username, '[', c.uuid, ']') as inviter_name,
+			c.level
+		FROM
+			item_stat as a
+			left join product as b on a.product_id = b.product_id
+			left join partner as c on a.inviter=c.uuid
+			left join product_server as d on a.server=d.product_server_id
+		<include refid="criteriaWhereClause"/>		
+		GROUP BY
+			<choose>
+				<when test="groupBy != null">	             
+					${groupBy}	        
+					</when>       
+				<otherwise>
+					left(stat_time,8) 
+				</otherwise>
+			</choose>	
+		ORDER BY
+			<choose>
+				<when test="orderBy != null">
+					${orderBy}			
+				</when>
+				<otherwise>
+					left(stat_time,8) desc					
+				</otherwise>
+			</choose>
+		
+	</select>
+	<select id="countByInviter" parameterType="ItemStatCriteria" resultType="int">	
+       SELECT COUNT(*) FROM (
+ 		SELECT  
+      c.username AS inviter_name,
+      SUM(b.`success_money`) AS success_money,
+      SUM(b.total_money) AS total_money,
+      SUM(b.total_count) AS total_count,
+      SUM(b.success_count) AS success_count,
+      c.`username`
+      FROM  item_stat b 
+      LEFT JOIN 
+      (SELECT * FROM childrenlst WHERE LEVEL=2) AS a ON  INSTR(CONCAT(',',a.childrenlst,','),CONCAT(',',b.inviter,','))>0
+      LEFT JOIN 
+      partner c ON a.uuid=c.`uuid` 
+      WHERE b.stat_time&gt;=CONCAT(REPLACE(#{beginTime},"-",""),"00")
+      <if test="endTime !=null">
+        AND b.stat_time &lt;=  concat(replace(#{endTime},"-",""),"24")
+      </if>
+      <if test="username !=null">
+       AND c.username= #{username}
+      </if> 
+     GROUP BY 
+       a.childrenlst
+       ) AS a
+    </select>
+	
+	<select id="count" parameterType="ItemStatCriteria" resultType="int">
+		select 
+			<choose>
+				<when test="groupBy != null">
+					count(distinct ${groupBy})
+				</when>
+				<otherwise>
+					count(*)
+				</otherwise>
+			</choose>			
+         from item_stat as a left join product as b on a.product_id = b.product_id
+		<include refid="criteriaWhereClause"/>		
+	</select>
+	
+	<select id="bydaycount" parameterType="ItemStatCriteria" resultType="int">
+		select 
+          count(distinct left(stat_time,8))			
+         from item_stat as a left join product as b on a.product_id = b.product_id
+		<include refid="criteriaWhereClause"/>		
+	</select>
+	
+	<select id="byhourcount" parameterType="ItemStatCriteria" resultType="int">
+		select 
+			count(distinct left(stat_time,10))
+         from item_stat as a left join product as b on a.product_id = b.product_id
+		<include refid="criteriaWhereClause"/>		
+	</select>	
+	
+	<select id="moveToHistory" parameterType="ItemCriteria" resultType="int">
+		call item_move_to_history(#{beginTime}, #{endTime}, #{tableName})		
+	</select>
+	
+	<select id="getJWCharge"  resultType="float">
+	    SELECT
+  			a - b difference 
+		FROM
+		  (SELECT 
+		    SUM(success_money) a 
+		  FROM
+		    item 
+		  WHERE charge_from_account = 300633 
+		    AND enter_time &gt;= CONCAT(CURRENT_DATE(), ' 00:00:00') 
+		    AND product_id = 5101165) a,
+		  (SELECT 
+		    SUM(success_money) b 
+		  FROM
+		    item 
+		  WHERE charge_from_account = 300623 
+		    AND current_status = 710010 
+		    AND extra_status = 710017 
+		    AND enter_time &gt;= CONCAT(CURRENT_DATE(), ' 00:00:00')) b 
+	</select>
+	
+	<!-- 获取指定时间内骏卡冲盛大帐号被黑的单 -->
+	<select id="getJWShengdaTakeCard" parameterType="ItemStatCriteria" resultMap="itemResult">	
+		 CALL get_jw_take_card(#{beginTime})
+	</select>
+	
+		
+</mapper>

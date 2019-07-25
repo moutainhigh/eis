@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="以先,以先食材" />
+<meta name="description" content="以先是一个有信仰的食材资讯平台，更是一个保证安全健康生活的平台" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="../../../../css/mobile/main.css"/>
+<link rel="stylesheet" type="text/css" href="../../../../css/mobile/orderdetail.css"/>
+<script type="text/javascript">
+			
+</script>
+</head>
+<body>
+ <div class="header" id="header">
+	  <a class="back" href="javascript:history.go(-1);"></a><span>订单详情</span><!--<a class="home" href="/">-->
+ </div>
+	<div id="wrapper_1">
+	   <div class="box_title">
+			<div class="wid90">
+				<div class="box_left">
+					订单号:<span class="orange">292374899</span>
+				</div>
+				<div class="box_right orange">
+					待付款
+				</div>
+			</div>
+	  </div>
+	<div class="line"></div> 
+	  <ul class="order-status">
+	    <li class="wid90">
+		        <div class="box_left">
+					订单应付款
+				</div>
+				<div class="box_right orange">
+					￥117
+				</div>
+			<!-- <div class="line"></div> -->
+		</li>
+		 <li class="wid90">
+		        <div class="box_left">
+					支付方式
+				</div>
+				<div class="box_right orange">
+					微信支付
+				</div>
+			<div class="line"></div>
+		</li>
+		 <li class="wid90">
+		        <div class="box_left">
+					支付状态
+				</div>
+				<div class="box_right orange">
+					未支付
+				</div>
+			<div class="line"></div>
+		</li>
+		 <li class="wid90">
+		        <div class="box_left">
+					下单时间
+				</div>
+				<div class="box_right orange">
+					2016-6-12   18:33
+				</div>
+			
+		</li>
+	  </ul>
+	  <div class="line"></div>
+	  <div class="box_title">
+			<div class="wid90">
+				收货地址
+			</div>
+	  </div>
+	  <div class="line"></div>
+	  <div class="order-address">
+	     <p class="wid90">夏雪   27367237846</p>
+		 <p class="wid90">北京市朝阳区石佛营西里丰苑大厦319</p>
+	  </div>
+	  <div class="line"></div>
+	  <div class="box_title">
+			<div class="wid90">
+				发票信息
+			</div>
+	  </div>
+	  <div class="line"></div>
+	  <div class="fapiao">
+	     <div class="wid90">
+		          <div class="box_left">
+					发票抬头
+				</div>
+				<div class="box_right">
+					北京盛世家和科技有限公司
+				</div>
+				
+			</div>
+	  </div>
+	  <div class="line"></div>
+	   <div class="box_title">
+			<div class="wid90">
+				商品清单
+			</div>
+	  </div>
+	  <div class="line"></div>
+	  <ul class="buy-list">
+	    <li>
+		   <div class="ware_img"><img src="http://www.yixian365.com/static/documentFile/open/201605181056-3a7d364d-89d1-4e07-bff3-384130bc06c5.jpg"> </div>
+		   <div class="box_right2">
+			  <div> <span class="ware_name">桥沙地瓜</span></div>
+			  <div class="divCenter"> <span class="ware_from">5kg（约22个）</span><span class="all_num">×1</span></div>
+              <div class="one_sprice"><span class="price_mark">￥98.0</span> <span class="fare">运费：<span style="color:#ff6400;">￥0.0</span></span></div>
+			  </div>
+		</li>
+	  </ul>
+	  <div class="line"></div>
+	   <div class="box_title">
+			<div class="wid90">
+				价格清单
+			</div>
+	  </div>
+	  <div class="line"></div>
+	   <ul class="order-status">
+	    <li class="wid90">
+		        <div class="box_left">
+					商品金额总计
+				</div>
+				<div class="box_right orange">
+					￥117
+				</div>
+			
+		</li>
+		 <li class="wid90">
+		        <div class="box_left">
+					运费总计
+				</div>
+				<div class="box_right orange">
+					￥117
+				</div>
+			
+		</li>
+		 <li class="wid90">
+		        <div class="box_left">
+					代金券抵扣
+				</div>
+				<div class="box_right orange">
+					￥0.00
+				</div>
+		</li>
+		
+	  </ul>
+	  <div class="btn_group">
+	    <a href="#" class="btn_a box_left">取消订单</a>
+		<a href="#" class="btn_b box_right">立即支付</a>
+	  </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+.blue{color:#428bca;}
+.fa{font-size:16px;}
+#edui1{z-index:9!important;}
+.edui-editor-breadcrumb{
+    text-align:left !important;
+}
+#browserSync{line-height:12px !important;}
+#browser span{display:inline-block;line-height:12px;padding-left:5px;padding-right:5px;}
+#browserSync span{display:inline-block;line-height:12px;padding-left:5px;padding-right:3px;}
+#browser{line-height:12px !important;background:#fff !important;}
+.treeview, .treeview ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+background(url('/theme/basic/images/lineDottedVert.png'))
+}
+
+.treeview ul {
+    margin-top: 4px;
+}
+.treeview li {
+    margin: 0;
+    padding: 3px 0pt 3px 16px;
+}
+.treeview li { background: url('/theme/basic/images/treeview/treeview-default-line.png') 0 0 no-repeat; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-default.png'); }
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+.filetree li { padding: 3px 0 2px 16px; }
+.filetree span.folder, .filetree span.file { padding: 1px 0 1px 16px; display: block; }
+.treeview .hitarea {
+    background: url('/theme/basic/images/treeview/treeview-default.png') -64px -25px no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-left: -16px;
+    float: left;
+    cursor: pointer;
+}
+html .hitarea {
+    display: inline;
+    float:none;
+}
+
+.treeview li {
+    margin: 0;
+    padding: 3px 0pt 3px 16px;
+}
+#treecontrol { margin: 1em 0; display: none; }
+
+.treeview .hover { cursor: pointer; }
+
+.treeview li { background: url('/theme/basic/images/treeview/treeview-default-line.png') 0 0 no-repeat; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-default.png'); }
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+
+.treeview-red li { background-image: url('/theme/basic/images/treeview/treeview-red-line.gif'); }
+.treeview-red .hitarea, .treeview-red li.lastCollapsable, .treeview-red li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-red.gif'); }
+
+.treeview-black li { background-image: url('/theme/basic/images/treeview/treeview-black-line.gif'); }
+.treeview-black .hitarea, .treeview-black li.lastCollapsable, .treeview-black li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-black.gif'); }
+
+.treeview-gray li { background-image: url('/theme/basic/images/treeview/treeview-gray-line.gif'); }
+.treeview-gray .hitarea, .treeview-gray li.lastCollapsable, .treeview-gray li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-gray.gif'); }
+
+.treeview-famfamfam li { background-image: url('/theme/basic/images/treeview/treeview-famfamfam-line.gif'); }
+.treeview-famfamfam .hitarea, .treeview-famfamfam li.lastCollapsable, .treeview-famfamfam li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-famfamfam.gif'); }
+
+.treeview .placeholder {
+    background: url('/theme/basic/images/treeview/ajax-loader.gif') 0 0 no-repeat;
+    height: 16px;
+    width: 16px;
+    display: block;
+}
+
+.filetree li { padding: 3px 0 2px 16px; }
+.filetree span.folder, .filetree span.file { padding: 1px 0 1px 16px; display: block; }
+/* .filetree span.folder { background: url('/theme/basic/images/treeview/folder.gif') 0 no-repeat; }
+.filetree li.expandable span.folder { background: url('/theme/basic/images/treeview/folder-closed.gif') 0 no-repeat; } */
+/* .filetree span.file { background: url('/theme/basic/images/treeview/file.gif') 0 no-repeat; } */
+.fullScreenBg{
+    position:fixed;
+    background:#333;
+    opacity:0.7;
+    z-index:200;
+    width:100%;
+    height:100%;
+}
+.message{
+    position: fixed;
+    z-index: 300;
+    background: #fff;
+    height: 195px;
+    width: 300px;
+    left: 50%;
+    top: 287px;
+    margin-left: -150px;
+    text-align: center;
+    border-radius: 5px;
+    overflow: hidden;
+    padding-top: 51px;
+}
+.sidebar{
+    z-index:20;
+}
+.message .submit{
+    border-radius:5px;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    width:100px;
+    color:#fff;
+    font-size:20px;
+    background:#333;
+    display:inline-block;
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    margin-left:-50px;
+    cursor:pointer;
+}
+.message .text{
+    display:inline-block;
+    font-size:21px;
+}
+.submit{width:100%;text-align:center;}
+tr#kuozhantr{
+    border-top: 2px solid #5C6F87;
+}
+button, input, select, textarea {
+    border-radius: 5px;
+    border: 1px solid #989898;
+    padding: 1px 3px;
+    background-color: #E6E6E6;
+}
+#kzsj{
+    width: 100%;
+    border:1px solid #ddd;
+    margin-bottom: 20px;
+}
+#kzsj tr{
+    border-bottom: 1px solid #ddd;
+}
+td{
+    padding:16px 30px!important;
+}
+#kzsj>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}

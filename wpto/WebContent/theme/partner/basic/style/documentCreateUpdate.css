@@ -1,0 +1,306 @@
+/*栏目样式*/
+.blue{color:#428bca;}
+.fa{font-size:16px;}
+#edui1{
+	z-index:9!important;
+	width: 100%!important;
+	max-width: 750px;
+
+}
+#edui1_iframeholder{
+	width: 100%!important;
+	max-width: 750px;
+}
+#browser{line-height:12px !important;}
+#browser span{display:inline-block;line-height:12px;padding-left:5px;padding-right:5px;}
+#browserSync span{display:inline-block;line-height:12px;padding-left:5px;padding-right:3px;}
+#browserSync{line-height:12px !important;background:#fff !important;}
+.treeview, .treeview ul { 
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	background(url('/theme/basic/images/lineDottedVert.png'))
+}
+.treeview ul {
+	margin-top: 4px;
+}
+.treeview li { 
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+}
+.treeview li { background: url('/theme/basic/images/treeview/treeview-default-line.png') 0 0 no-repeat; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-default.png'); }  
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+.filetree li { padding: 3px 0 2px 16px; }
+.filetree span.folder, .filetree span.file { padding: 1px 0 1px 16px; display: block; }
+.treeview .hitarea {
+	background: url('/theme/basic/images/treeview/treeview-default.png') -64px -25px no-repeat;
+	height: 16px;
+	width: 16px;
+	margin-left: -16px;
+	float: left;
+	cursor: pointer;
+}
+html .hitarea {
+	display: inline;
+	float:none;
+}
+.treeview li { 
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+}
+#treecontrol { margin: 1em 0; display: none; }
+.treeview .hover { cursor: pointer; }
+.treeview li { background: url('/theme/basic/images/treeview/treeview-default-line.png') 0 0 no-repeat; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-default.png'); }  
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+.treeview-red li { background-image: url('/theme/basic/images/treeview/treeview-red-line.gif'); }
+.treeview-red .hitarea, .treeview-red li.lastCollapsable, .treeview-red li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-red.gif'); } 
+.treeview-black li { background-image: url('/theme/basic/images/treeview/treeview-black-line.gif'); }
+.treeview-black .hitarea, .treeview-black li.lastCollapsable, .treeview-black li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-black.gif'); }  
+.treeview-gray li { background-image: url('/theme/basic/images/treeview/treeview-gray-line.gif'); }
+.treeview-gray .hitarea, .treeview-gray li.lastCollapsable, .treeview-gray li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-gray.gif'); } 
+.treeview-famfamfam li { background-image: url('/theme/basic/images/treeview/treeview-famfamfam-line.gif'); }
+.treeview-famfamfam .hitarea, .treeview-famfamfam li.lastCollapsable, .treeview-famfamfam li.lastExpandable { background-image: url('/theme/basic/images/treeview/treeview-famfamfam.gif'); } 
+.treeview .placeholder {
+	background: url('/theme/basic/images/treeview/ajax-loader.gif') 0 0 no-repeat;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+.filetree li { padding: 3px 0 2px 16px; }
+.filetree span.folder, .filetree span.file { padding: 1px 0 1px 16px; display: block; }
+/* .filetree span.folder { background: url('/theme/basic/images/treeview/folder.gif') 0 no-repeat; }
+.filetree li.expandable span.folder { background: url('/theme/basic/images/treeview/folder-closed.gif') 0 no-repeat; } */
+/* .filetree span.file { background: url('/theme/basic/images/treeview/file.gif') 0 no-repeat; } */ 
+.fullScreenBg{
+	position:fixed;
+	background:#333;
+	opacity:0.7;
+	z-index:200;
+	width:100%;
+	height:100%;
+}
+.message{
+	position:fixed;
+	z-index:300;
+	background:#fff;
+	height:230px;
+	width:300px;
+	left:50%;
+	top:230px;
+	margin-left: -150px;
+	text-align:center;
+	border-radius:5px;
+	overflow:hidden;
+	padding-top:30px;
+}
+.sidebar{
+	z-index:20;
+}
+.message .submit{
+	border-radius:5px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	width:100px;
+	color:#fff;
+	font-size:20px;
+	background:#5D7BA0;
+	display:inline-block;
+	position:absolute;
+	bottom:20px;
+	left:50%;
+	margin-left:-50px;
+	cursor:pointer;
+}
+.message .text{
+	display:inline-block;
+	font-size:18px;		
+}
+/*产品编码的弹窗（产品列表样式）*/
+#iframeBg{
+	width:100%;
+	height:100%;
+}
+.activityProduct{    
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.activityProduct tr td{
+	padding:8px;
+}
+.ModalIframe{
+	position:fixed;
+	top:10%;
+	width:80%;
+	left:50%;
+	/*height:75%;*/
+	min-width:350px;
+	margin-left:-40%;
+	z-index:1500;
+	background:#fff;
+	border-radius:8px;
+	border:#428bca 1px solid;
+}
+.modalHeader{
+	height:40px;
+	background:#428bca;
+	line-height:40px;
+	color:#fff;
+	font-weight:bold;
+	padding-left:3%;
+	border-radius: 8px 8px 0 0;
+	cursor:move;
+}
+.black .modalHeader{
+	background: #f7f7f7 !important;
+	border-bottom: #ccd5db solid 1px !important;
+	color: #666666 !important;
+}
+.close{
+	float: right;
+	margin-right: 2%;
+	font-size: 30px;
+	font-weight: 300;
+	line-height:40px;
+	color: #fff;
+	text-shadow: 0 1px 0 #fff;
+	opacity:1;
+	color:#666;
+	
+}
+.modalBody{
+	padding-top:10px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:8px;
+}
+.modalFooter{
+	text-align:right;
+	padding-right:5%;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	
+	border-radius:0 0 8px 8px;
+}
+.black .modalFooter{
+	background: #f7f7f7;
+	border-top: #ccd5db solid 1px !important;
+}
+.modalFooter a{
+	color:#fff;
+	border-radius:5px;
+	margin-left:5%;
+}
+.modalFooter .submit{
+	background:#428bca;
+}
+/*添加图片*/
+.btn_addPic {
+	display: block;
+	position: relative;
+	width: 140px;
+	height: 22px;
+	overflow: hidden;
+	border: 1px solid #EBEBEB;
+	background: none repeat scroll 0 0 #F3F3F3;
+	color: #999999;
+	cursor: pointer;
+	text-align: center;
+}
+.btn_addPic span {
+	display: block;
+	line-height: 22px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.filePrew {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 140px;
+	height: 22px;
+	font-size: 100px;
+	opacity: 0;
+	cursor: pointer;
+}
+.box_input{
+	margin-bottom: 10px;
+}
+
+.dropbox ul{
+	list-style: none;
+}
+.dropbox ul li{
+	float: left;
+}
+
+.pageContent {
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	margin-top: 20px;
+}
+	
+.pageContent li {
+	width: 90px;
+	height: 90px;
+	border: 1px #f0f0f0 solid;
+	float: left;
+	margin-right: 20px;
+	position: relative;
+	/*overflow: hidden;*/
+	margin-bottom: 20px;
+}
+.pageContent li img {
+	width: 100%;
+	HEIGHT: 100%;
+}
+.upload_delete{
+	cursor: pointer;
+	position: absolute;
+	left: 30px;
+	top: 90px;
+}
+.uploaded{
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+.uploaded li{
+	width: 200px;
+	height: 200px;
+	border: 1px #f0f0f0 solid;
+	float: left;
+	margin-right: 20px;
+	position: relative;
+	/*overflow: hidden;*/
+	margin-bottom: 20px;
+}
+
+.uploaded li img{
+	width: 100%;
+	HEIGHT: 100%;
+}
+
+.btn_delPic{
+	cursor: pointer;
+	position: absolute;
+	left: 72px;
+	top: 200px;
+}

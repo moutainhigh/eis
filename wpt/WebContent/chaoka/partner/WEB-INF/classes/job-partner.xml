@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--BOSS后台 Quartz 任务 -->
+
+
+
+	<!-- Begin clean notify log job define 每3分钟分执行一次，清理指定时间之前的通知日志 -->
+	<bean id="cleanNotifyLogJobDetails" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="notifyLogService" />
+		</property>
+		<property name="targetMethod">
+			<value>cleanOldNotifyLog</value>
+		</property>
+	</bean>
+	<bean id="cleanNotifyLogJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="cleanNotifyLogJobDetails" />
+		</property>
+		<property name="cronExpression">
+			<value>35 */3 * * * ?</value>
+		</property>
+	</bean>
+
+
+
+	<!-- Begin failed notify resend task define 每3分钟执行一次，重新发送那些发送失败的通知 -->
+	<bean id="failedNotifyResendTaskDefine" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="notifyService" />
+		</property>
+		<property name="targetMethod">
+			<value>resendFailedNotify</value>
+		</property>
+	</bean>
+	<bean id="failedNotifyResendTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="failedNotifyResendTaskDefine" />
+		</property>
+		<property name="cronExpression">
+			<value>15 */3 * * * ?</value>
+		</property>
+	</bean>
+	<!-- End of failed notify resend task define -->
+
+
+	<bean id="bossJobDefine" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cleanNotifyLogJobTrigger" />
+				<ref bean="failedNotifyResendTaskTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

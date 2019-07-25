@@ -1,0 +1,276 @@
+.base_info{
+	min-height:185px;
+}
+
+.certification-title{
+	width: 100%;
+	background: url(/theme/basic/all/images/cut-line.png) center center repeat-x;
+}
+.certification-title span{
+	padding-right: 20px;
+	background-color: #fff;
+	font-size: 16px;
+	color: #474e5d;
+	font-weight: 700;
+}
+
+.certification_content{
+	width:80%;
+	margin:auto;
+	position:relative;
+}
+
+.base_content{
+	width:50%;
+	display:inline-block;
+	float:left;
+	margin:5px auto;
+}
+
+.content_left{
+	width:23%;
+	line-height: 40px;
+	text-align: right;
+	font-size: 14px;
+	color:rgb(94, 94, 94);
+	display: inline-block;
+	cursor:pointer;
+}
+.content_right{
+	width:20%;
+}
+.content_select{
+	width:208px;
+}
+
+.left_imgArea{
+	float:left;
+	width:320px;
+	position:relative;
+}
+
+.upload_area{
+	width: 318px;
+	height: 438px;
+	background: url(/theme/basic/all/images/up-big-bg.png) center center no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.uploadFile{
+	display: block;
+	width: 318px;
+	height: 438px;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	filter: alpha(Opacity=0);
+	opacity: 0;
+}
+.right_license{
+	float:right;
+	position:relative;
+	width:60%;
+}
+.license_content{
+	padding:5px 0px 11px 15px;
+	width:100%;
+}
+
+.content_right input{
+	width: 275px;
+	height: 38px;
+}
+.content_error{
+	color:red;
+	font-size:12px;
+	padding-left:5px;
+}
+.content_address{
+	width: 136px;
+	height: 38px;
+}
+.bank_upload{
+	width: 98px;
+	height: 98px;
+	background: url(/theme/basic/all/images/upload-s-bg.png) center center no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.bank_img{
+	display: block;
+	width: 98px;
+	height: 98px;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	filter: alpha(Opacity=0);
+	opacity: 0;
+}
+
+.upload_area_legal{
+	width: 98px;
+	height: 98px;
+	position: relative;
+	display:inline-block;
+	background-color: #fcfcfd;
+	margin-right: 25px;
+}
+
+.icon-box{
+	background: url(/theme/basic/all/images/p-s83a3cfb1e0.png);
+	margin:auto;
+	margin-top:23px;
+}
+
+.uploadLegalFile{
+	display: block;
+	width: 98px;
+	height: 98px;
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	filter: alpha(Opacity=0);
+	opacity: 0;
+}
+
+.ID_front{
+	top: 30px;
+	width: 41px;
+	height: 26px;
+	background-position: 0 -220px;
+}
+
+.icon-text{
+	color: #999;
+	width: 100%;
+	margin: 63px auto 0;
+	position: absolute;
+	top: 2px;
+	font-size: 12px;
+	text-align: center;	
+}
+
+.common_select{
+	width:275px;
+	height: 38px;
+}
+.span_button{
+	width: 166px;
+    border-radius: 5px;
+    height: 47px;
+    line-height: 47px;
+    color: white;
+    display: block;
+    background-color: #1A94E6;
+    text-align: center;
+    font-size: 19px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.pre_licenseImage{
+	height:438px;
+	width:318px;
+}
+
+.preview{
+	display:none;
+}
+.preview_mask{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 200;
+	background-color: black;
+	opacity: 0.6;
+	display:none;
+}
+
+.pre_licenseMask{
+	height:438px;
+	width:318px;
+}
+
+.mask-bg-box{
+	width: 318px;
+	height: 438px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.fdj-icon{
+	width: 41px;
+	height: 40px;
+	position: absolute;
+	cursor: pointer;
+	background-position: 0 0;
+	background-image: url(/theme/basic/all/images/p-s83a3cfb1e0.png);
+	background-repeat: no-repeat;
+}
+
+.big-fdj-icon{
+	top: 180px;
+	left: 140px;
+}
+
+.re_upload{
+	background-color: black;
+	text-align: center;
+	color: white;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	cursor:pointer;
+	z-index:300;
+}
+
+.re_upload_license{
+	width: 100%;
+	height: 50px;
+	font-size: 20px;
+	line-height: 50px;
+}
+
+.pre_smallImage{
+	height:98px;
+	width:98px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.pre_smallMask{
+	height:98px;
+	width:98px;
+}
+
+.mask-sm-box{
+	width: 98px;
+	height: 98px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.re_upload_small{
+	width: 100%;
+	height: 25px;
+	font-size: 14px;
+	line-height: 25px;
+}
+
+.small-fdj-icon{
+	left: 29px;
+	top: 19px;
+}

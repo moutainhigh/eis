@@ -1,0 +1,83 @@
+/*wx-bind-cont*/
+.wx-bind-cont{
+	padding-bottom:40px;
+}
+.cont-title{
+	height:120px;
+	line-height:120px;
+	font-size:30px;
+	padding-left:40px;
+}
+.wx-list{
+	width:100%;
+	padding:0 30px;
+	box-sizing:border-box;
+	overflow:hidden;
+}
+.wx-list li{
+	padding:0 10px 20px;
+	box-sizing:border-box;
+	width:20%;
+	float:left;
+}
+.wx-list li .item{
+	text-align:center;
+	border:#f2f2f2 solid 1px;
+	border-radius:5px;
+	padding:10px;
+}
+.wx-list li .item .wx-img{
+	width:110px;
+	height:110px;
+	border-radius:55px;
+	display:inline-block !important;
+	margin-top:10px;
+}
+h2.wx-title{
+	font-size:18px;
+	font-weight:500;
+	text-align:center;
+	padding:10px 0;
+}
+.wx-cont{
+	background:#ffffff;
+	padding:0 30px;
+	box-sizing:border-box;
+	line-height:1.8;
+	text-align:left;
+	overflow:hidden;
+	position:relative;
+}
+.tishi-img{
+	float:left;
+}
+.tishi-img img{
+	width:250px;
+}
+.tishi-txt{
+	float:left;
+	margin-top:50px;
+	width:620px;
+	margin-left:20px;	
+}
+.wx-cont p{
+	font-size:20px;
+}
+.wx-add{
+	padding-bottom:42px !important;
+}
+.btn-grey{
+	height:20px;
+	line-height:20px;
+	width:68px;
+	background:#ececec;
+	border:#c1c1c1 1px solid;
+	margin:10px auto;
+	font-size:10px;
+	border-radius:3px;
+}
+.next-step{
+	width:270px;
+	margin: 100px auto;
+	margin-bottom:0;
+}

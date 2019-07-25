@@ -1,0 +1,4 @@
+BASE_URL="http://58.59.18.123:8201/"
+PIC_URL = "http://58.59.18.123:8201/upload/thumbnail/"
+FREE_STATUS = 100001
+BUY_STATUS = 100010

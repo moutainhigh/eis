@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:49 CST 2013 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.stat.sql.PayStat">
+
+	<resultMap id="payStatResult" type="PayStat">
+		<result property="payStatId" column="pay_stat_id" />
+		<result property="totalCount" column="total_count" />
+		<result property="successCount" column="success_count" />
+		<result property="totalMoney" column="total_money" />
+		<result property="successMoney" column="success_money" />
+		<result property="payTypeId" column="pay_type_id" />
+		<result property="payMethodId" column="pay_method_id" />
+		<result property="payCardType" column="pay_card_type" />
+		<result property="statTime" column="stat_time" />
+		<result property="profit" column="profit" />
+		<result property="inviter" column="inviter" />
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="queryBeginTime != null">
+				a.stat_time &gt;= DATE_FORMAT(#{queryBeginTime},"%Y%m%d%H")
+			</if>
+			<if test="queryEndTime != null">
+				AND a.stat_time &lt;= DATE_FORMAT(#{queryEndTime},"%Y%m%d%H")
+			</if>
+			<if test="payMethodId > 0">
+				AND a.pay_method_id= #{payMethodId}
+			</if>
+			<if test="payTypeId > 0">
+				AND b.pay_type_id= #{payTypeId}
+			</if>
+			<if test="payCardType != null">
+				AND a.pay_card_type= #{payCardType}
+			</if>
+			<if test="inviters !=null and inviters.length > 0">
+				AND a.inviter in (
+				<foreach item="item" collection="inviters" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="groupByClause">
+		GROUP BY
+		<if test="groupByInviter == true">
+			a.inviter,
+		</if>
+		<if test="groupByPayMethodId == true">
+			a.pay_method_id,
+		</if>
+		<if test="groupByPayTypeId == true">
+			b.pay_type_id,
+		</if>
+		<if test="groupByPayCardType == true">
+			a.pay_card_type,
+		</if>
+		<if test="groupByMonth == true">
+			SUBSTR(a.stat_time,1,6)
+		</if>
+		<if test="groupByMonth == false">
+			<if test="groupByDay == true">
+				SUBSTR(a.stat_time,1,8)
+			</if>
+			<if test="groupByDay == false">
+				a.stat_time
+			</if>
+		</if>
+		
+	</sql>
+
+	<select id="list" parameterType="PayStatCriteria" resultMap="payStatResult">
+		SELECT
+		<if test="groupByNothing == false">
+			<if test="groupByMonth == true">
+				SUBSTR(a.stat_time,1,6) stat_time,
+			</if>
+			<if test="groupByMonth == false">			
+				<if test="groupByDay == true">
+					SUBSTR(a.stat_time,1,8) stat_time,
+				</if>
+				<if test="groupByDay == false">
+					a.stat_time,
+				</if>
+			</if>
+			<if test="groupByInviter == true">
+				a.inviter,
+			</if>
+			<if test="groupByPayMethodId == true">
+				a.pay_method_id,
+			</if>
+			<if test="groupByPayCardType == true">
+			a.pay_card_type,
+			</if>
+			<if test="groupByPayTypeId == true">
+				b.pay_type_id, 
+			</if>
+
+			sum(total_count) total_count,
+			sum(success_count) success_count,
+			sum(total_money) total_money,
+			sum(success_money) success_money,
+			sum(profit) profit
+		</if>
+		<if test="groupByNothing == true">
+			pay_stat_id,
+			total_count,
+			success_count,
+			total_money,
+			success_money,
+			pay_method_id,
+			pay_card_type,
+			stat_time,
+			profit,
+			inviter,
+			data
+		</if>
+
+
+		FROM
+			pay_stat AS a
+		LEFT JOIN pay_method as b ON a.pay_method_id = b.pay_method_id
+		<include refid="criteriaWhereClause" />
+		<if test="groupByNothing == false">
+			<include refid="groupByClause" />
+		</if>
+
+		ORDER BY a.stat_time DESC, a.inviter
+	</select>
+
+
+	<select id="count" parameterType="PayStatCriteria" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		(SELECT
+		<if test="groupByMonth == true">
+			SUBSTR(a.stat_time,1,6) stat_time,
+		</if>
+		<if test="groupByMonth == false">
+			<if test="groupByDay == true">
+				SUBSTR(a.stat_time,1,8) stat_time,
+			</if>
+			<if test="groupByDay == false">
+				a.stat_time,
+			</if>
+		</if>
+		<if test="groupByInviter == true">
+			a.inviter,
+		</if>
+		<if test="groupByPayMethodId == true">
+			a.pay_method_id,
+		</if>
+		<if test="groupByPayCardType == true">
+			a.pay_card_type,
+		</if>
+			b.pay_type_id,
+
+		sum(a.total_count) total_count
+
+		FROM
+			pay_stat AS a
+		LEFT JOIN pay_method AS b ON a.pay_method_id = b.pay_method_id
+		<include refid="criteriaWhereClause" />
+
+		<include refid="groupByClause" />
+		) AS pay_stat
+	</select>
+	<update id="calculateProfit">
+		call calculate_profit
+	</update>
+	
+	<update id="statistic" parameterType="PayStatCriteria">
+		call pay_statistic(#{statisticTimeBegin}, #{statisticTimeEnd})
+	</update>
+
+</mapper>

@@ -1,0 +1,72 @@
+body {
+    background-color: #F5F5F5;
+}
+
+.AccountTop {
+    height: 55px;
+    width: 100%;
+    background-color: #E45050;
+    padding-top: 25px;
+    background-image: url();
+    background-position: top center;
+    background-repeat: repeat-x;
+}
+
+.AccountTop_Left {
+    float: left;
+    color: #FFFFFF;
+    font-size: 18px;
+    width: 300px;
+}
+
+    .AccountTop_Left span {
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+.AccountTop_Nav {
+    float: right;
+}
+
+    .AccountTop_Nav ul {
+        overflow: hidden;
+    }
+
+    .AccountTop_Nav li {
+        float: left;
+        margin-left: 30px;
+        padding: 0 10px;
+    }
+
+        .AccountTop_Nav li.Cur, .AccountTop_Nav li:hover {
+            background-color: #FFFFFF;
+            border-radius: 3px;
+        }
+
+            .AccountTop_Nav li.Cur a, .AccountTop_Nav li:hover a {
+                color: red;
+                font-weight: 700;
+            }
+
+        .AccountTop_Nav li a {
+            color: #FFFFFF;
+            font-size: 14px;
+            line-height: 36px;
+        }
+
+
+.Account {
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 20px;
+    min-height: 500px;
+}
+
+.Account_Title {
+    color: #333;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    line-height: 20px;
+    color: #666;
+    font-weight: 700;
+}
