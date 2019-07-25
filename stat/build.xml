@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file. Any modifications will be overwritten. 
+	To include a user specific buildfile here, simply create one in the same 
+	directory with the processing instruction <?eclipse.ant.import?> as the first 
+	entry and export the buildfile again. -->
+<project basedir="." default="build" name="eis-stat">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="java_version" value="1.8" />
+	<path id="EIS.userclasspath">
+		<pathelement location="../lib/activemq-client-5.8.0.jar" />
+		<pathelement location="../lib/activemq-pool-5.8.0.jar" />
+		<pathelement location="../lib/activiti-bpmn-converter-5.13.jar" />
+		<pathelement location="../lib/activiti-bpmn-layout-5.13.jar" />
+		<pathelement location="../lib/activiti-bpmn-model-5.13.jar" />
+		<pathelement location="../lib/activiti-camel-5.13.jar" />
+		<pathelement location="../lib/activiti-cdi.jar" />
+		<pathelement location="../lib/activiti-common-rest-5.13.jar" />
+		<pathelement location="../lib/activiti-cxf-5.13.jar" />
+		<pathelement location="../lib/activiti-diagram-rest-5.13.jar" />
+		<pathelement location="../lib/activiti-engine-5.13.jar" />
+		<pathelement location="../lib/activiti-explorer-5.13.jar" />
+		<pathelement location="../lib/activiti-json-converter-5.13.jar" />
+		<pathelement location="../lib/activiti-modeler-5.13.jar" />
+		<pathelement location="../lib/activiti-mule-5.13.jar" />
+		<pathelement location="../lib/activiti-osgi-5.13.jar" />
+		<pathelement location="../lib/activiti-rest-5.13.jar" />
+		<pathelement location="../lib/activiti-simple-workflow-5.13.jar" />
+		<pathelement location="../lib/activiti-spring-5.13.jar" />
+		<pathelement location="../lib/aopalliance.jar" />
+		<pathelement location="../lib/asm-2.2.3.jar" />
+		<pathelement location="../lib/asm-commons-2.2.3.jar" />
+		<pathelement location="../lib/asm-util-2.2.3.jar" />
+		<pathelement location="../lib/aspectjrt.jar" />
+		<pathelement location="../lib/aspectjtools.jar" />
+		<pathelement location="../lib/aspectjweaver.jar" />
+		<pathelement location="../lib/cglib-nodep-2.1_3.jar" />
+		<pathelement location="../lib/commons-beanutils-1.7.0.jar" />
+		<pathelement location="../lib/commons-codec.jar" />
+		<pathelement location="../lib/commons-collections-3.1.jar" />
+		<pathelement location="../lib/commons-dbcp-1.2.1.jar" />
+		<pathelement location="../lib/commons-email-1.2.jar" />
+		<pathelement location="../lib/commons-fileupload-1.3.1.jar" />
+		<pathelement location="../lib/commons-httpclient-3.1.jar" />
+		<pathelement location="../lib/commons-io-2.4.jar" />
+		<pathelement location="../lib/commons-lang-2.6.jar" />
+		<pathelement location="../lib/commons-logging-1.1.jar" />
+		<pathelement location="../lib/commons-pool2-2.4.2.jar" />
+		<pathelement location="../lib/emayclient.jar" />
+		<pathelement location="../lib/ehcache.jar" />
+		<pathelement location="../lib/ewebeditor.jar" />
+		<pathelement location="../lib/ezmorph-1.0.4.jar" />
+		<pathelement location="../lib/mybatis-3.2.2.jar" />
+		<pathelement location="../lib/mybatis-spring-1.2.0.jar" />
+		<pathelement location="../lib/ipseeker.jar" />
+		<pathelement location="../lib/jackson-core-2.6.3.jar" />
+		<pathelement location="../lib/jackson-annotations-2.6.3.jar" />
+		<pathelement location="../lib/jackson-databind-2.6.2.jar" />
+		<pathelement location="../lib/javax.jms.jar" />
+		<pathelement location="../lib/javax.management.j2ee.jar" />
+		<pathelement location="../lib/jstl-1.2.jar" />
+		<pathelement location="../lib/junit-dep-4.10.jar" />
+		<pathelement location="../lib/junit.jar" />
+		<pathelement location="../lib/lucene-analyzers-2.2.0.jar" />
+		<pathelement location="../lib/lucene-core-2.2.0.jar" />
+		<pathelement location="../lib/lucene-highlighter-2.2.0.jar" />
+		<pathelement location="../lib/mail.jar" />
+		<pathelement location="../lib/maicard-http-4.1.jar" />
+		<pathelement location="../lib/mysql-connector-java-5.1.6-bin.jar" />
+		<pathelement location="../lib/oscache-2.4.1.jar" />
+		<pathelement location="../lib/patchca-0.5.0.jar" />
+		<pathelement location="../lib/qdox-1.5.jar" />
+		<pathelement location="../lib/quartz.jar" />
+		<pathelement location="../lib/servlet-api.jar" />
+		<pathelement location="../lib/slf4j-api.jar" />
+		<pathelement location="../lib/slf4j-jdk14-1.7.2.jar" />
+		<pathelement location="../lib/sojo-1.0.0.jar" />
+
+		<pathelement location="../lib/spring-amqp.RELEASE.jar" />
+		<pathelement location="../lib/spring-rabbit-1.2.0.RELEASE.jar" />
+		<pathelement location="../lib/spring-aop.jar" />
+		<pathelement location="../lib/spring-aspects.jar" />
+		<pathelement location="../lib/spring-beans.jar" />
+		<pathelement location="../lib/spring-context.jar" />
+		<pathelement location="../lib/spring-context-support.jar" />
+		<pathelement location="../lib/spring-core.jar" />
+		<pathelement location="../lib/spring-expression.jar" />
+		<pathelement location="../lib/spring-mobile-device.RELEASE.jar" />
+		<pathelement location="../lib/spring-instrument.jar" />
+		<pathelement location="../lib/spring-jdbc.jar" />
+		<pathelement location="../lib/spring-json-1.3.1.jar" />
+		<pathelement location="../lib/spring-messaging.jar" />
+		<pathelement location="../lib/spring-data-redis.RELEASE.jar" />
+		<pathelement location="../lib/spring-oxm.jar" />
+		<pathelement location="../lib/spring-tx.jar" />
+		<pathelement location="../lib/spring-web.jar" />
+		<pathelement location="../lib/spring-webmvc.jar" />
+		<pathelement location="../lib/spring-websocket.jar" />
+
+		<pathelement location="../lib/xmlpull-1.1.3.1.jar" />
+		<pathelement location="../lib/xstream-1.4.8.jar" />
+
+		<pathelement location="../api/eis-common.jar" />
+		<pathelement location="../api/eis-standard.jar" />
+	</path>
+	<path id="EAR Libraries.libraryclasspath" />
+
+	<path id="eis-stat.classpath">
+		<pathelement location="bin" />
+		<path refid="EIS.userclasspath" />
+	</path>
+	<target name="init">
+		<mkdir dir="bin" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="bin" />
+	</target>
+	<target depends="clean" name="cleanall">
+		<ant antfile="build.xml" dir="${eis-standard.location}" inheritAll="false" target="clean" />
+	</target>
+	
+	<target name="svn">
+	        <exec executable="svn">
+	        <arg line=" up"/>
+	        </exec>
+	</target>
+	
+	<target depends="jar" name="build" />
+	
+	<target depends="svn,init" name="build-project">
+		<javac encoding="UTF-8" nowarn="true" debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${java_version}" target="${java_version}">
+			<src path="src" />
+			<src path="support" />
+			<classpath refid="eis-stat.classpath" />
+		</javac>
+	</target>
+
+	<target depends="build-project" name="jar">
+		<jar destfile="../target/${ant.project.name}.jar">
+			<fileset dir="bin">
+				<include name="com/maicard/stat/**/*" />
+			</fileset>
+		</jar>
+		<jar destfile="../api/${ant.project.name}.jar">
+			<fileset dir="bin">
+				<include name="com/maicard/stat/**/*" />
+				<exclude name="**/impl/*" />
+				<exclude name="**/ibatis/**/*" />
+				<exclude name="**/mybatis/**/*" />
+			</fileset>
+		</jar>
+	</target>
+</project>

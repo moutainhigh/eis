@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 18:59:49 CST 2013 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.stat.sql.WithdrawStat">
+
+	<resultMap id="withdrawStatResult" type="WithdrawStat">
+		<result property="withdrawStatId" column="withdraw_stat_id" />
+		<result property="totalCount" column="total_count" />
+		<result property="successCount" column="success_count" />
+		<result property="totalMoney" column="total_money" />
+		<result property="successMoney" column="success_money" />
+		<result property="withdrawMethodId" column="withdraw_method_id" />
+		<result property="statTime" column="stat_time" />
+		<result property="profit" column="profit" />
+		<result property="inviter" column="inviter" />
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="queryBeginTime != null">
+				stat_time &gt;= DATE_FORMAT(#{queryBeginTime},"%Y%m%d%H")
+			</if>
+			<if test="queryEndTime != null">
+				AND stat_time &lt;= DATE_FORMAT(#{queryEndTime},"%Y%m%d%H")
+			</if>
+			<if test="withdrawMethodId > 0">
+				AND withdraw_method_id= #{withdrawMethodId}
+			</if>
+			<if test="inviters !=null and inviters.length > 0">
+				AND inviter in (
+				<foreach item="item" collection="inviters" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="groupByClause">
+		GROUP BY
+		<if test="groupByInviter == true">
+			inviter,
+		</if>
+		<if test="groupByWithdrawMethodId == true">
+			withdraw_method_id,
+		</if>
+		<if test="groupByDay == true">
+			SUBSTR(stat_time,1,8)
+		</if>
+		<if test="groupByDay == false">
+			stat_time
+		</if>
+	</sql>
+
+	<select id="list" parameterType="WithdrawStatCriteria" resultMap="withdrawStatResult">
+		SELECT
+		<if test="groupByNothing == false">
+			<if test="groupByDay == true">
+				SUBSTR(stat_time,1,8) stat_time,
+			</if>
+			<if test="groupByDay == false">
+				stat_time,
+			</if>
+			<if test="groupByInviter == true">
+				inviter,
+			</if>
+			<if test="groupByWithdrawMethodId == true">
+				withdraw_method_id,
+			</if>
+
+			sum(total_count) total_count,
+			sum(success_count) success_count,
+			sum(total_money) total_money,
+			sum(success_money) success_money,
+			sum(profit) profit
+		</if>
+		<if test="groupByNothing == true">
+			withdraw_stat_id,
+			total_count,
+			success_count,
+			total_money,
+			success_money,
+			withdraw_method_id,
+			stat_time,
+			profit,
+			inviter,
+			data
+		</if>
+
+
+		FROM
+		withdraw_stat
+		<include refid="criteriaWhereClause" />
+		<if test="groupByNothing == false">
+			<include refid="groupByClause" />
+		</if>
+
+		ORDER BY stat_time DESC, inviter
+	</select>
+
+
+	<select id="count" parameterType="WithdrawStatCriteria" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		(SELECT
+		<if test="groupByDay == true">
+			SUBSTR(stat_time,1,8) stat_time,
+		</if>
+		<if test="groupByDay == false">
+			stat_time,
+		</if>
+		<if test="groupByInviter == true">
+			inviter,
+		</if>
+		<if test="groupByWithdrawMethodId == true">
+			withdraw_method_id,
+		</if>
+
+		sum(total_count) total_count
+
+		FROM
+		withdraw_stat
+
+		<include refid="criteriaWhereClause" />
+
+		<include refid="groupByClause" />
+		) AS withdraw_stat
+	</select>
+	<update id="calculateProfit">
+		call calculate_profit
+	</update>
+
+</mapper>
