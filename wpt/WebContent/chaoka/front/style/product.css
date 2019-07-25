@@ -1,8 +1,0 @@
-.productList {line-height:24px;}
-.productList .headerName {display: inline-block; width:200px; text-align:center; background-color:#003a95; color:#ffffff; border-right:1px solid #cccccc; border-bottom:1px solid #cccccc;}
-.productList .headerMoney {display: inline-block; width:200px; text-align:center; background-color:#003a95; color:#ffffff; border-right:1px solid #cccccc; border-bottom:1px solid #cccccc;}
-.productList .headerOperate {display: inline-block; width:200px; text-align:center; background-color:#003a95; color:#ffffff; border-bottom:1px solid #cccccc;}
-
-.productList .contentName {display: inline-block; width:200px; text-align:center; background-color:#d7e9ff; color:#000000; border:1px solid #cccccc;}
-.productList .contentMoney {display: inline-block; width:200px; text-align:center; background-color:#d7e9ff; color:#000000; border:1px solid #cccccc;}
-.productList .contentOperate {display: inline-block; width:200px; text-align:center; background-color:#d7e9ff; color:#000000; border:1px solid #cccccc;}
