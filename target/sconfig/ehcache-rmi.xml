@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+	monitoring="autodetect">
+	<diskStore path="java.io.tmpdir" />
+    <sizeOfPolicy maxDepth="300" maxDepthExceededBehavior="abort"/>
+	
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic, multicastGroupAddress=${multicastGroupAddress}, multicastGroupPort=${multicastGroupPort}, timeToLive=${timeToLive}" />
+
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory" />
+
+	<defaultCache maxElementsInMemory="1000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="eis" maxElementsInMemory="50000" eternal="false"
+		overflowToDisk="false" timeToIdleSeconds="3600"
+		memoryStoreEvictionPolicy="LFU">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+			properties="replicateAsynchronously=true,replicatePuts=false,replicateUpdates=false,replicateUpdatesViaCopy=false,replicateRemovals=true " />
+	</cache>
+	<cache name="user" maxElementsInMemory="50000" eternal="false"
+		overflowToDisk="false" timeToIdleSeconds="600" timeToLiveSeconds="1800"
+		memoryStoreEvictionPolicy="LFU">
+		<cacheEventListenerFactory	class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+	</cache>
+
+	<cache name="product" maxElementsInMemory="50000" eternal="false" timeToLiveSeconds="86400"  timeToIdleSeconds="86400" 
+		overflowToDisk="false" 
+		memoryStoreEvictionPolicy="LFU">
+		<cacheEventListenerFactory	class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+	</cache>
+	
+	<cache name="va" maxElementsInMemory="50000" eternal="false"
+		overflowToDisk="false" timeToIdleSeconds="7200" timeToLiveSeconds="7200"
+		memoryStoreEvictionPolicy="LFU">
+		<cacheEventListenerFactory	class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+	</cache>
+	
+	<cache name="permanetCart" maxElementsInMemory="50000" eternal="true"
+                overflowToDisk="false" 
+                memoryStoreEvictionPolicy="LFU">
+                <cacheEventListenerFactory      class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+                <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+    </cache>
+	
+	<cache name="local" maxElementsInMemory="10000" eternal="false"
+                timeToIdleSeconds="86400" timeToLiveSeconds="86400" overflowToDisk="false"
+                memoryStoreEvictionPolicy="LRU" />
+</ehcache>    

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+	monitoring="autodetect">
+	<diskStore path="java.io.tmpdir" />
+    <sizeOfPolicy maxDepth="300" maxDepthExceededBehavior="abort"/>
+	
+	<terracottaConfig url="${terracottaUrl}" rejoin="true"/>
+
+	<defaultCache maxElementsInMemory="1000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="false"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="eis" maxElementsInMemory="50000" eternal="false" timeToLiveSeconds="3600"  timeToIdleSeconds="1800" 
+		memoryStoreEvictionPolicy="LRU">
+		<terracotta />   		
+	</cache>
+	
+	<cache name="user" maxElementsInMemory="50000" eternal="false"
+		overflowToDisk="false" timeToIdleSeconds="600" timeToLiveSeconds="1800"
+		memoryStoreEvictionPolicy="LRU">		
+		<terracotta />   		
+	</cache>
+
+	<cache name="product" maxElementsInMemory="50000" eternal="false" timeToLiveSeconds="3600"  timeToIdleSeconds="1800" 
+		overflowToDisk="false" 
+		memoryStoreEvictionPolicy="LRU">
+		<terracotta />   		
+	</cache>
+	
+	<cache name="va" maxElementsInMemory="50000" eternal="false"
+		overflowToDisk="false" timeToIdleSeconds="7200" timeToLiveSeconds="7200"
+		memoryStoreEvictionPolicy="LRU">
+		<terracotta />   		
+	</cache>
+	
+	<cache name="permanetCart" maxElementsInMemory="50000" eternal="true"
+                overflowToDisk="false" 
+                memoryStoreEvictionPolicy="LRU">
+		<terracotta />   		
+    </cache>
+	
+	<cache name="local" maxElementsInMemory="10000" eternal="false"
+                timeToIdleSeconds="1800" timeToLiveSeconds="3600" overflowToDisk="false"
+                memoryStoreEvictionPolicy="LRU" />
+</ehcache>    
