@@ -1,5 +1,7 @@
 package com.maicard.money.service.impl;
 
+import java.beans.IntrospectionException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -94,7 +96,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	}
 
 	@Override
-	public List<PayMethod> list(PayMethodCriteria payMethodCriteria) throws Exception{
+	public List<PayMethod> list(PayMethodCriteria payMethodCriteria){
 		payMethodCriteria.setPaging(null);
 		if(pkSet.size() < 1) {
 			initPk();
@@ -107,7 +109,16 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 				list.add(payMethod);
 			}
 		}
-		List<PayMethod> filteredList = ClassUtils.search(list, payMethodCriteria);
+		List<PayMethod> filteredList = null;
+		try {
+			filteredList = ClassUtils.search(list, payMethodCriteria);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| IntrospectionException e) {
+			e.printStackTrace();
+		}
+		if(filteredList == null) {
+			return Collections.emptyList();
+		}
 		return filteredList;
 		/*
 		List<Integer> pkList = payMethodDao.listPkOnPage(payMethodCriteria);
@@ -148,7 +159,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	 * @throws Exception 
 	 */
 	@Override
-	public Map<Integer, PayMethod> list4IdKeyMap(PayMethodCriteria payMethodCriteria) throws Exception {
+	public Map<Integer, PayMethod> list4IdKeyMap(PayMethodCriteria payMethodCriteria) {
 		Map<Integer, PayMethod> payMethodMap = new HashMap<Integer, PayMethod>();
 		List<PayMethod> payMethodList = list(payMethodCriteria);
 		if (payMethodList == null) {
