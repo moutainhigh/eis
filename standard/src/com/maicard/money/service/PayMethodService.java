@@ -16,13 +16,13 @@ public interface PayMethodService {
 	
 	PayMethod select(int payMethodId);
 
-	List<PayMethod> list(PayMethodCriteria payMethodCriteria);
+	List<PayMethod> list(PayMethodCriteria payMethodCriteria) throws Exception;
 
 	List<PayMethod> listOnPage(PayMethodCriteria payMethodCriteria);
 	
 	int count(PayMethodCriteria payMethodCriteria);
 
-	Map<Integer, PayMethod> list4IdKeyMap(PayMethodCriteria payMethodCriteria);
+	Map<Integer, PayMethod> list4IdKeyMap(PayMethodCriteria payMethodCriteria) throws Exception;
 
 
 }

@@ -6,10 +6,13 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.maicard.annotation.InputLevel;
 import com.maicard.annotation.QueryCondition;
 import com.maicard.common.base.Criteria;
@@ -338,7 +342,7 @@ public class ClassUtils {
 		}
 		return StringUtils.uncapitalize(eisObject.getClass().getSimpleName());
 	}
-	
+
 	/**
 	 * 尝试获取一个eis对象的id
 	 * 
@@ -396,5 +400,93 @@ public class ClassUtils {
 		}
 	}
 
+	/**
+	 * 根据指定条件在一个对象列表中
+	 * 根据查询条件返回符合条件的对象
+	 * @param <T>
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> search(List<?> targetList, Object params) throws IntrospectionException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		BeanInfo paramBi = Introspector.getBeanInfo(params.getClass());
+		BeanInfo elementBi = Introspector.getBeanInfo(targetList.get(0).getClass());
+		PropertyDescriptor paramPd[] = paramBi.getPropertyDescriptors();
+		if(paramPd == null || paramPd.length < 1){
+			logger.error("找不到查询参数对象的类信息的属性描述:" + params.getClass().getName());
+			return Collections.emptyList();
+		}
+		PropertyDescriptor elementPd[] = elementBi.getPropertyDescriptors();
+		if(elementPd == null || elementPd.length < 1){
+			logger.error("找不到查询列表对象的类信息的属性描述:" + targetList.get(0).getClass().getName());
+			return Collections.emptyList();
+		}
+		List<Object> copyList = new ArrayList<Object>();
+		copyList.addAll(targetList);
+		//System.out.println("待处理:" + JSON.toJSONString(copyList));
+		for(PropertyDescriptor pd:paramPd){
+			for(PropertyDescriptor epd : elementPd){
+				if(pd.getName().equalsIgnoreCase("class")) {
+					continue;
+				}
+				if(pd.getName().equals(epd.getName())){
+					//logger.info("比较相同的属性:" + pd.getName());
+					Method paramRm = pd.getReadMethod();
+					Method elementRm = epd.getReadMethod();
+					Object paramV = paramRm.invoke(params, new Object[] {});
+					int i = 0;
+					for(Object element : targetList) {
+						Object elementV = elementRm.invoke(element, new Object[] {});
+						if(elementV == null) {
+							//没有该属性
+							continue;
+						}
+						if(paramV == null) {
+							//没有设置该查询条件
+							continue;
+						}
+						logger.debug("检查第:" + i + "个元素:" + JSON.toJSONString(element) + ",查询参数类型是:" + paramV.getClass().getName());
+						if(paramV.getClass().isArray()) {
+							logger.debug("检查数组型查询参数:" + pd.getDisplayName() + "=>" + paramV.getClass().getComponentType());
+							int length = Array.getLength(paramV);
+							for(int j = 0; j < length; j++) {
+								Object paramElementV = Array.get(paramV, j);
+								if(paramElementV instanceof String && !paramElementV.toString().equals(elementV.toString())) {
+									logger.debug("1第" + i + "个元素的字符串属性:" + pd.getName() + "，值:" + elementV.toString() + "与参数的值:" + paramElementV.toString() + "不一致，去掉该元素");
+									copyList.set(i, null);
+									break;
+								} else if(!paramElementV.equals(elementV)) {
+									logger.debug("2第" + i + "个元素的属性:" + pd.getName() + "，值:" + elementV.toString() + "与参数的值:" + paramElementV.toString() + "不一致，去掉该元素");
+									copyList.set(i, null);
+									break;
+								}
+							}
+						} else if(elementV instanceof String && !paramV.toString().equalsIgnoreCase(elementV.toString())) {
+							//属性不一致，删除
+							logger.debug("3第" + i + "个元素的字符串属性:" + pd.getName() + "，值:" + elementV.toString() + "与参数的值:" + paramV.toString() + "不一致，去掉该元素");
+							copyList.set(i, null);
+						} else if(paramV.toString().equals("0")){
+							
+						}
+						else  if(!paramV.equals(elementV)) {
+							logger.debug("4第" + i + "个元素的属性:" + pd.getName() + "，值:" + elementV.toString() + "与参数的值:" + paramV.toString() + "不一致，去掉该元素");
+						copyList.set(i, null);
+						}
 
+						i++;
+					}
+
+				}
+			}
+		}
+		List<T> returnList = new ArrayList<T>();
+		if(copyList.size() < 1) {
+			return returnList;
+		}
+		for(Object o : copyList) {
+			if(o != null) {
+				returnList.add((T)o);
+			}
+		}
+		return returnList;
+
+	}
 }

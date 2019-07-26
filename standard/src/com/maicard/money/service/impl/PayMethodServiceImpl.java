@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.maicard.common.base.BaseService;
 import com.maicard.common.service.CacheService;
+import com.maicard.common.util.ClassUtils;
 import com.maicard.money.criteria.PayMethodCriteria;
 import com.maicard.money.dao.PayMethodDao;
 import com.maicard.money.domain.PayMethod;
@@ -30,7 +31,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	private CacheService cacheService;
 	
 	//缓存支付通道的主键
-	//private static Set<Integer> pkSet = new HashSet<Integer>();
+	private static Set<Integer> pkSet = new HashSet<Integer>();
 
 
 	@Override
@@ -78,11 +79,37 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	public PayMethod select(int payMethodId) {
 		return payMethodDao.select(payMethodId);
 	}
+	
+	private void initPk() {
+		List<Integer> pkList = payMethodDao.listPkOnPage(new PayMethodCriteria());
+		if(pkList == null || pkList.size() < 1) {
+			logger.warn("系统中没有任何支付通道");
+			return;
+		}
+		pkSet.clear();
+		for(Integer pk : pkList) {
+			pkSet.add(pk);
+		}
+		logger.info("初始化{}个支付通道主键", pkSet.size());
+	}
 
 	@Override
-	public List<PayMethod> list(PayMethodCriteria payMethodCriteria) {
+	public List<PayMethod> list(PayMethodCriteria payMethodCriteria) throws Exception{
 		payMethodCriteria.setPaging(null);
+		if(pkSet.size() < 1) {
+			initPk();
+		}
 		List<PayMethod> list = new ArrayList<PayMethod>();
+		//从缓存中获取所有支付方式
+		for(Integer pk : pkSet) {
+			PayMethod payMethod = payMethodDao.select(pk);
+			if(payMethod != null) {
+				list.add(payMethod);
+			}
+		}
+		List<PayMethod> filteredList = ClassUtils.search(list, payMethodCriteria);
+		return filteredList;
+		/*
 		List<Integer> pkList = payMethodDao.listPkOnPage(payMethodCriteria);
 		if(pkList == null || pkList.size() < 1) {
 			return Collections.emptyList();
@@ -93,7 +120,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 				list.add(payMethod);
 			}
 		}
-		return list;
+		return list;*/
 		
 	}
 	
@@ -118,9 +145,10 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	 * 获取payMethod id 为key 的 map
 	 * @param payMethodCriteria
 	 * @return
+	 * @throws Exception 
 	 */
 	@Override
-	public Map<Integer, PayMethod> list4IdKeyMap(PayMethodCriteria payMethodCriteria) {
+	public Map<Integer, PayMethod> list4IdKeyMap(PayMethodCriteria payMethodCriteria) throws Exception {
 		Map<Integer, PayMethod> payMethodMap = new HashMap<Integer, PayMethod>();
 		List<PayMethod> payMethodList = list(payMethodCriteria);
 		if (payMethodList == null) {

@@ -19,7 +19,7 @@ public class WithdrawMethodServiceImpl extends BaseService implements WithdrawMe
 	@Resource
 	private WithdrawMethodDao withdrawMethodDao;
 	
-	final String DEFAULT_ORDER_BY = "weight DESC, pay_method_id ASC";
+	final String DEFAULT_ORDER_BY = " weight DESC, pay_method_id ASC";
 
 
 	@Override
