@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.fastjson.JSON;
 import com.maicard.annotation.InputLevel;
 import com.maicard.annotation.QueryCondition;
 import com.maicard.common.base.Criteria;
@@ -443,7 +442,7 @@ public class ClassUtils {
 							//没有设置该查询条件
 							continue;
 						}
-						logger.debug("检查第:" + i + "个元素:" + JSON.toJSONString(element) + ",查询参数类型是:" + paramV.getClass().getName());
+						//logger.debug("检查第:" + i + "个元素:" + JSON.toJSONString(element) + ",查询参数类型是:" + paramV.getClass().getName());
 						if(paramV.getClass().isArray()) {
 							logger.debug("检查数组型查询参数:" + pd.getDisplayName() + "=>" + paramV.getClass().getComponentType());
 							int length = Array.getLength(paramV);
