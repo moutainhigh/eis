@@ -143,9 +143,10 @@
 	</target>
 
 	<target depends="build-project" name="jar">
+		<!--
 		<exec executable="/bin/sh">
 			<arg line="-c 'find ./bin -path &quot;*binx*&quot; -type f  -name \*.class -exec ./crypt.sh {} \;'" />
-		</exec>
+		</exec> -->
 		<jar destfile="../target/${ant.project.name}.jar">
 			<fileset dir="bin">
 				<include name="com/maicard/**/*" />
