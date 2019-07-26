@@ -30,6 +30,9 @@
 		<result column="clear_way" property="clearWay" jdbcType="VARCHAR"/>
 		<result column="offset_clear_times" property="offsetClearTimes" jdbcType="INTEGER"/>
 		<result column="statement_account" property="statementAccount" jdbcType="VARCHAR"/>
+		
+		<result column="version" property="version" jdbcType="INATEGER"/>
+		
 
 	</resultMap>
 	
@@ -58,18 +61,19 @@
 			clear_type,
 			clear_way,
 			offset_clear_times,
-			statement_account
+			statement_account,
+			`version`
 	</sql>
 
 	<insert id="insert" parameterType="ShareConfig" useGeneratedKeys="true"  keyProperty="shareConfigId">
 		INSERT INTO share_config
 			(<if test="shareConfigId>0">share_config_id,</if> owner_id, share_config_code, share_config_name, object_type, object_id, share_percent,share_uuid,
 			current_status,begin_money,end_money,share_type, money_direct, charge_type, pay_card_type, ttl, max_retry, data, weight, default_config,
-			enter_time_policy,clear_type,clear_way,offset_clear_times,statement_account)
+			enter_time_policy,clear_type,clear_way,offset_clear_times,statement_account, `version`)
 		VALUES
 			(<if test="shareConfigId>0">#{shareConfigId},</if> #{ownerId}, #{shareConfigCode}, #{shareConfigName}, #{objectType},  #{objectId}, #{sharePercent},
 			#{shareUuid}, #{currentStatus} , #{beginMoney}, #{endMoney}, #{shareType}, #{moneyDirect}, #{chargeType}, #{payCardType}, #{ttl}, #{maxRetry},
-			#{data, javaType=HashMap, jdbcType=VARCHAR}, #{weight}, #{defaultConfig}, #{enterTimePolicy}, #{clearType}, #{clearWay}, #{offsetClearTimes}, #{statementAccount})
+			#{data, javaType=HashMap, jdbcType=VARCHAR}, #{weight}, #{defaultConfig}, #{enterTimePolicy}, #{clearType}, #{clearWay}, #{offsetClearTimes}, #{statementAccount}, #{version})
 	</insert>
 
 	<update id="update" parameterType="ShareConfig">
@@ -98,9 +102,12 @@
 			clear_type = #{clearType},
 			clear_way = #{clearWay},
 			statement_account = #{statementAccount},
-			offset_clear_times = #{offsetClearTimes}
+			offset_clear_times = #{offsetClearTimes},
+			`version` = #{version}
 		WHERE
 			share_config_id = #{shareConfigId}
+			AND
+			`version` &lt; #{version}
 	</update>
 	
 	<update id="updateNoNull" parameterType="ShareConfig">
@@ -166,20 +173,24 @@
 				enter_time_policy = #{enterTimePolicy},
 			</if>
 			<if test="ownerId > 0">
-			    owner_id = #{ownerId}
+			    owner_id = #{ownerId},
 			</if>
 			<if test="clearType != null">
-				clear_type = #{clearType}
+				clear_type = #{clearType},
 			</if>
 			<if test="clearWay != null">
-				clear_way = #{clearWay}
+				clear_way = #{clearWay},
 			</if>
 			<if test="offsetClearTimes != null">
-				offset_clear_times = #{offsetClearTimes}
+				offset_clear_times = #{offsetClearTimes},
 			</if>
+			`version` = #{version}
 		</set>	
 		WHERE
 			share_config_id = #{shareConfigId}
+			AND
+			`version` &lt; #{version}
+			
 	</update>
 	
 	<delete id="delete" parameterType="int">

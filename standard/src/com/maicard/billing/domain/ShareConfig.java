@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.maicard.common.domain.EVEisObject;
 import com.maicard.common.domain.EisObject;
 import com.maicard.common.util.NumericUtils;
 import com.maicard.method.ExtraValueAccess;
@@ -16,7 +17,7 @@ import com.maicard.method.ExtraValueAccess;
 /**
  * 分成配置信息
  */
-public class ShareConfig extends EisObject implements Cloneable,ExtraValueAccess{
+public class ShareConfig extends EVEisObject implements Cloneable{
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -66,7 +67,6 @@ public class ShareConfig extends EisObject implements Cloneable,ExtraValueAccess
 	 */
 	private int maxRetry;
 	
-	private Map<String,String> data;
 	
 	private int weight;
 	/**
@@ -112,61 +112,6 @@ public class ShareConfig extends EisObject implements Cloneable,ExtraValueAccess
 	 */
 	private String statementAccount;
 	
-	@Override
-	public void setExtraValue(String code, String value) {
-		if(this.data == null){
-			this.data = new HashMap<String,String>();
-		}
-		if(StringUtils.isBlank(code) || StringUtils.isBlank(value)){
-			return;
-		}
-		this.data.put(code, value);
-	}
-
-	@Override
-	public String getExtraValue(String dataCode) {
-		if(this.data == null || this.data.size() < 1){
-			return null;
-		}
-		if(this.data.containsKey(dataCode)){
-			return this.data.get(dataCode).trim();
-		}
-		return null;		
-	}
-	@Override
-	public float getFloatExtraValue(String dataCode) {
-		if(this.data == null || this.data.size() < 1){
-			return 0;
-		}
-		if(this.data.containsKey(dataCode) && NumericUtils.isNumeric(this.data.get(dataCode))){
-			return Float.parseFloat(this.data.get(dataCode));
-		}
-		return 0;
-	}
-
-	@Override
-	public long getLongExtraValue(String dataCode) {
-		if(this.data == null || this.data.size() < 1){
-			return 0;
-		}
-		if(this.data.containsKey(dataCode) && NumericUtils.isNumeric(this.data.get(dataCode))){
-			return Long.parseLong(this.data.get(dataCode));
-		}
-		return 0;
-	}
-
-	@Override
-	public boolean getBooleanExtraValue(String dataCode) {
-		if(this.data == null || this.data.size() < 1){
-			return false;
-		}
-		if(this.data.get(dataCode) != null && this.data.get(dataCode).trim().equalsIgnoreCase("true")){
-			return true;
-		}
-		return false;
-	}
-
-
 	public int getShareConfigId() {
 		return shareConfigId ;
 	}
@@ -368,15 +313,6 @@ public class ShareConfig extends EisObject implements Cloneable,ExtraValueAccess
 	public void setEnterTimePolicy(String enterTimePolicy) {
 		this.enterTimePolicy = enterTimePolicy;
 	}
-
-	public Map<String, String> getData() {
-		return data;
-	}
-
-	public void setData(Map<String, String> data) {
-		this.data = data;
-	}
-
 
 	public String getPayCardType() {
 		return payCardType;

@@ -41,6 +41,9 @@ public class ShareConfigServiceImpl extends BaseService implements ShareConfigSe
 	}
 
 	public int update(ShareConfig shareConfig) {
+		if(shareConfig.getSyncFlag() == 0) {
+			shareConfig.incrVersion();
+		}
 		try{
 			return  shareConfigDao.update(shareConfig);
 		}catch(Exception e){
@@ -51,6 +54,9 @@ public class ShareConfigServiceImpl extends BaseService implements ShareConfigSe
 	}
 	
 	public int updateNoNull(ShareConfig shareConfig) {
+		if(shareConfig.getSyncFlag() == 0) {
+			shareConfig.incrVersion();
+		}
 		try{
 			return  shareConfigDao.updateNoNull(shareConfig);
 		}catch(Exception e){
