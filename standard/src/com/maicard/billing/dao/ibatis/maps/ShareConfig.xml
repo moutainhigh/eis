@@ -31,7 +31,7 @@
 		<result column="offset_clear_times" property="offsetClearTimes" jdbcType="INTEGER"/>
 		<result column="statement_account" property="statementAccount" jdbcType="VARCHAR"/>
 		
-		<result column="version" property="version" jdbcType="INATEGER"/>
+		<result column="version" property="version" jdbcType="BIGINT"/>
 		
 
 	</resultMap>
