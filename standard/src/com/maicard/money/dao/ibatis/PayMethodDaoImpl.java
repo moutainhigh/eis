@@ -25,6 +25,9 @@ public class PayMethodDaoImpl extends BaseDao implements PayMethodDao {
 	}
 
 	public int update(PayMethod payMethod) throws DataAccessException {
+		if(payMethod.getSyncFlag() == 0) {
+			payMethod.incrVersion();
+		}
 		int rs = getSqlSessionTemplate().update("com.maicard.money.sql.PayMethod.update", payMethod);
 		return rs;
 	}

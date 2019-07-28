@@ -21,6 +21,9 @@ public class WithdrawMethodDaoImpl extends BaseDao implements WithdrawMethodDao 
 	}
 
 	public int update(WithdrawMethod withdrawMethod) throws DataAccessException {
+		if(withdrawMethod.getSyncFlag() == 0) {
+			withdrawMethod.incrVersion();
+		}
 		return getSqlSessionTemplate().update("com.maicard.money.sql.WithdrawMethod.update", withdrawMethod);
 	}
 

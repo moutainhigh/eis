@@ -64,10 +64,12 @@
 			commission_type = #{commissionType},
 			refer_uuid = #{referUuid},
 			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
-			owner_id = #{ownerId}
+			owner_id = #{ownerId},
+			`version` = #{version}
 			
 		WHERE
 			withdraw_method_id = #{withdrawMethodId}
+			AND `version` &lt; #{version}
 	</update>
 
 	<delete id="delete" parameterType="int">

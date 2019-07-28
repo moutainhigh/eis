@@ -68,10 +68,12 @@
 			commission_type = #{commissionType},
 			data = #{data,javaType=HashMap, jdbcType=VARCHAR},
 			context_type = #{contextType},
-			owner_id = #{ownerId}
-			
+			owner_id = #{ownerId},
+			`version` = #{version}
 		WHERE
 			pay_method_id = #{payMethodId}
+			AND `version` &lt; #{version}
+			
 	</update>
 
 	<delete id="delete" parameterType="int">
