@@ -19,6 +19,7 @@
 		<result property="referUuid" column="refer_uuid"/>
 		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
 		<result property="ownerId" column="owner_id"/>
+		<result property="version" column="version"/>				
 		
 	</resultMap>
 	
@@ -38,7 +39,8 @@
 			commission_type,
 			refer_uuid,
 			`data`,
-			owner_id
+			owner_id,
+			version
 	</sql>
 
 	<insert id="insert" parameterType="WithdrawMethod" useGeneratedKeys="true"  keyProperty="withdrawMethodId">
