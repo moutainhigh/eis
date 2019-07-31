@@ -48,6 +48,8 @@ public class WithdrawCriteria extends InviterSupportCriteria {
 	private String fuzzyBankAccountNumber;
 	
 	private String parentTransactionId;
+	
+	private String businessCode;
 
 	/**
 	 * 是否包含子订单，默认包含，0为包含，1为不包含
@@ -275,5 +277,11 @@ public class WithdrawCriteria extends InviterSupportCriteria {
 
 	public void setBankAccountName(String bankAccountName) {
 		this.bankAccountName = bankAccountName;
+	}
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	public void setBusinessCode(String businessCode) {
+		this.businessCode = businessCode;
 	}
 }

@@ -36,15 +36,16 @@
 		<result property="tradeSource" column="trade_source" jdbcType="VARCHAR"/>
 		<result property="withdrawMode" column="withdraw_mode"/>
 		<result property="payeeType" column="payee_type"/>
+		<result property="businessCode" column="business_code"/>
 	</resultMap>
 
 	<insert id="insert" parameterType="Withdraw">
 		INSERT INTO withdraw
 			(<if test="withdrawId > 0">withdraw_id,</if>owner_id, withdraw_type_id, withdraw_method_id, transaction_id, parent_transaction_id, uuid, withdraw_money, arrive_money, money_before_withdraw, money_after_withdraw, bank_account_id, bank_account, begin_time, end_time, in_order_id, out_order_id, total_request, success_request, fail_request, current_status, data,
-			commission, commission_type, commission_charge_type,trade_version,member_no,cur_channel_request_no,channel_status,manual_type,trade_source,withdraw_mode,payee_type)
+			commission, commission_type, commission_charge_type,trade_version,member_no,cur_channel_request_no,channel_status,manual_type,trade_source,withdraw_mode,payee_type, business_code)
 		VALUES
 			(<if test="withdrawId > 0">#{withdrawId},</if>#{ownerId}, #{withdrawTypeId}, #{withdrawMethodId}, #{transactionId}, #{parentTransactionId}, #{uuid}, #{withdrawMoney}, #{arriveMoney}, #{moneyBeforeWithdraw},  #{moneyAfterWithdraw}, #{bankAccountId}, #{bankAccount, javaType=BankAccount, jdbcType=VARCHAR}, #{beginTime}, #{endTime}, #{inOrderId}, #{outOrderId}, #{totalRequest}, #{successRequest}, #{failRequest},
-			#{currentStatus}, #{data, javaType=HashMap, jdbcType=VARCHAR}, #{commission}, #{commissionType}, #{commissionChargeType}, #{tradeVersion}, #{memberNo}, #{curChannelRequestNo}, #{channelStatus}, #{manualType}, #{tradeSource}, #{withdrawMode}, #{payeeType})
+			#{currentStatus}, #{data, javaType=HashMap, jdbcType=VARCHAR}, #{commission}, #{commissionType}, #{commissionChargeType}, #{tradeVersion}, #{memberNo}, #{curChannelRequestNo}, #{channelStatus}, #{manualType}, #{tradeSource}, #{withdrawMode}, #{payeeType}, #{businessCode})
 	</insert>
 	
 	<sql id="selectColumns">
@@ -79,7 +80,8 @@
 		a.manual_type,
 		a.trade_source,
 		a.payee_type,
-		a.withdraw_mode
+		a.withdraw_mode,
+		a.business_code
 	</sql>
 
 	<update id="update" parameterType="Withdraw">
@@ -117,7 +119,8 @@
 			<if test="withdrawMode != null and withdrawMode !='' ">
 				withdraw_mode = #{withdrawMode},
 			</if>
-		    manual_type = #{manualType, jdbcType=VARCHAR}
+		    manual_type = #{manualType, jdbcType=VARCHAR},
+		    business_code = #{businessCode, jdbcType=VARCHAR}
 		WHERE
 			transaction_id = #{transactionId}
 			
@@ -218,6 +221,9 @@
 			</if>
 			<if test="memberNo != null">
 				AND a.member_no =#{memberNo}
+			</if>
+			<if test="businessCode != null and businessCode != ''">
+				AND a.business_code =#{businessCode}
 			</if>
 			<if test="minMoney > 0">
 				AND a.withdraw_money &gt;=#{minMoney}

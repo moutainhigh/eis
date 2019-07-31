@@ -10,7 +10,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NeedJmsDataSyncP2P
@@ -100,10 +99,6 @@ public class Withdraw extends EVEisObject implements Cloneable{
 	 */
 	private String reason;
 	
-    @JsonView({JsonFilterView.Full.class})
-	private Map<String,String> data;			//其他扩展数据
-	
-	
 	
 	
 	private long inviter;
@@ -133,6 +128,12 @@ public class Withdraw extends EVEisObject implements Cloneable{
 	private String tradeSource;
 
 	private String withdrawMode;
+	
+	
+	/**
+	 * 对应的业务代码，比如可能是对应支付方式的payTypeId
+	 */
+	private String businessCode;
 
 
 	public Withdraw(){
@@ -433,5 +434,13 @@ public class Withdraw extends EVEisObject implements Cloneable{
 
 	public void setPayeeType(String payeeType) {
 		this.payeeType = payeeType;
+	}
+
+	public String getBusinessCode() {
+		return businessCode;
+	}
+
+	public void setBusinessCode(String businessCode) {
+		this.businessCode = businessCode;
 	}
 }
