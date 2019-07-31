@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,13 @@ public class TablePartitionUtils {
 
 
 	public static String getTableMonth(String transactionId){
+		
+		if(StringUtils.isBlank(transactionId)) {
+			logger.error("应用表月份时的订单号为空");
+			return "";
+		}
+		
+		
 		String tableName = null;
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		Date splitDate = DateUtils.truncate(DateUtils.addDays(new Date(), -1), Calendar.DAY_OF_MONTH);

@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -306,7 +307,7 @@ public class ItemDaoImpl extends BaseDao implements ItemDao {
 
 		}
 		
-		if(itemCriteria.getTransactionId() != null){
+		if(StringUtils.isNotBlank(itemCriteria.getTransactionId()){
 			logger.debug("查询条件中包含了transcationId=" + itemCriteria.getTransactionId() + "，使用该ID判断表名");
 			itemCriteria.setTableName(ItemCriteria.ITEM_TABLE_PREFIX + TablePartitionUtils.getTableMonth(itemCriteria.getTransactionId()));
 			return;
