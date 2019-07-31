@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
