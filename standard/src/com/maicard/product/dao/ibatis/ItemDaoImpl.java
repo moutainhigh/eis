@@ -307,7 +307,7 @@ public class ItemDaoImpl extends BaseDao implements ItemDao {
 
 		}
 		
-		if(StringUtils.isNotBlank(itemCriteria.getTransactionId()){
+		if(StringUtils.isNotBlank(itemCriteria.getTransactionId())){
 			logger.debug("查询条件中包含了transcationId=" + itemCriteria.getTransactionId() + "，使用该ID判断表名");
 			itemCriteria.setTableName(ItemCriteria.ITEM_TABLE_PREFIX + TablePartitionUtils.getTableMonth(itemCriteria.getTransactionId()));
 			return;
