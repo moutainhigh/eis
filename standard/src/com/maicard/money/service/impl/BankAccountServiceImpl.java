@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import com.maicard.common.base.BaseService;
 import com.maicard.common.service.DataDefineService;
+import com.maicard.common.util.JsonUtils;
 import com.maicard.mb.service.MessageService;
 import com.maicard.money.criteria.BankAccountCriteria;
 import com.maicard.money.dao.BankAccountDao;
@@ -126,40 +127,20 @@ public class BankAccountServiceImpl extends BaseService implements BankAccountSe
 			logger.error("不重复创建的银行帐号ID大于0,不执行创建尝试");
 			return 0;
 		}
+		int rs = 0;
+		try{
+			rs = this.insert(bankAccount);
+		}catch(Exception e) {
+			logger.error("无法创建账号:{}，错误原因:{}", JsonUtils.toStringFull(bankAccount), e.getMessage());
+			e.printStackTrace();
+			return 0;
+		}
+		if(rs == 1){
+			messageService.sendJmsDataSyncMessage(null, "bankAccountService", "insert", bankAccount);
+		}
+		return rs;
 		
-		BankAccountCriteria bankAccountCriteria = new BankAccountCriteria();
-		bankAccountCriteria.setOwnerId(bankAccount.getOwnerId());
-		bankAccountCriteria.setUuid(bankAccount.getUuid());
-		bankAccountCriteria.setBankName(bankAccount.getBankName());
-		bankAccountCriteria.setBankAccountName(bankAccount.getBankAccountName());
-		//查找银行、账号名一样的记录，同一个银行，只应该有一个同名帐号，因此不把帐号accountNumber放入判断条件
-		List<BankAccount> bankAccountList = this.list(bankAccountCriteria);
-		if(bankAccountList == null || bankAccountList.size() < 1){
-			logger.debug("根据条件[uuid=" + bankAccountCriteria.getUuid() + ",bankName=" + bankAccountCriteria.getBankName() + ",bankAccountName=" + bankAccountCriteria.getBankAccountName() + "]未找到银行帐号，新增并返回");
-			int rs = this.insert(bankAccount);
-			if(rs == 1){
-				messageService.sendJmsDataSyncMessage(null, "bankAccountService", "insert", bankAccount);
-			}
-			return rs;
-		}
-		if(bankAccountList.size() != 1){
-			logger.debug("根据条件[uuid=" + bankAccountCriteria.getUuid() + ",bankName=" + bankAccountCriteria.getBankName() + ",bankAccountName=" + bankAccountCriteria.getBankAccountName() + "]得到的帐号数量不唯一，是:" +  bankAccountList.size());
-			return -1;
-		}
-		BankAccount _oldBankAccount = bankAccountList.get(0);
-		if(_oldBankAccount.getBankAccountNumber() != null){
-			if(bankAccount.getBankAccountNumber() == null){
-				logger.error("尝试创建的帐号没有提供银行帐号数据，但相同用户名、相同银行的已存在帐号有对应的帐号数据:" + _oldBankAccount);
-				return EisError.ACCOUNT_ERROR.id;
-			}
-			if(!_oldBankAccount.getBankAccountNumber().equals(bankAccount.getBankAccountNumber())){
-				logger.error("尝试创建的帐号的银行帐号数据[" + bankAccount.getBankAccountNumber() + "]与相同用户名、相同银行的已存在帐号有对应的帐号数据[" + _oldBankAccount + "]不一致");
-				return EisError.ACCOUNT_ERROR.id;
-			}
-		}
-		logger.debug("根据条件[uuid=" + bankAccountCriteria.getUuid() + ",bankName=" + bankAccountCriteria.getBankName() + ",bankAccountName=" + bankAccountCriteria.getBankAccountName() + "]得到的帐号数量是1[" + _oldBankAccount + "]不再新增");
-		BeanUtils.copyProperties(_oldBankAccount, bankAccount);
-		return 0;
+		
 	}
 
 
