@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -70,12 +71,21 @@ public class AuthorizeServiceImpl extends BaseService implements AuthorizeServic
 		if(CollectionUtils.isEmpty(userList)){
 			return "";
 		}
-		int roleId = userList.get(0).getRoleId();
+		Set<Integer> roleIds = new HashSet<Integer>();
+		for(UserRoleRelation urr : userList) {
+			roleIds.add(urr.getRoleId());
+		}
+		int[] roleIdArray= new int[roleIds.size()];
+		int i = 0;
+		for(Integer rid : roleIds) {
+			roleIdArray[i] = rid;
+			i++;
+			
+		}
 		//获取权限列表
-		int[] roleIds = new int[]{roleId};
 		PrivilegeCriteria privilegeCriteria = new PrivilegeCriteria();
 		privilegeCriteria.setOwnerId(user.getOwnerId());
-		privilegeCriteria.setRoleIds(roleIds);
+		privilegeCriteria.setRoleIds(roleIdArray);
 		privilegeCriteria.setObjectTypeCode(objectTypeCode);
 		List<Privilege> list = partnerPrivilegeService.listByRole(privilegeCriteria);
 		if(CollectionUtils.isEmpty(list)){
@@ -90,7 +100,7 @@ public class AuthorizeServiceImpl extends BaseService implements AuthorizeServic
 			sb.append(privilege.getOperateCode()+",");
 		}
 		sb = sb.delete(sb.length()-1,sb.length());
-		logger.info("权限列表"+sb.toString());
+		logger.debug("用户:{}有角色:{},对对象:{}权限列表:{}", user.getUuid(), roleIdArray, objectTypeCode, sb.toString());
 		return sb.toString();
 	}
 
