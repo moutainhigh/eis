@@ -3,7 +3,6 @@ package com.maicard.money.service;
 import java.util.List;
 import java.util.Map;
 
-import com.maicard.common.domain.EisMessage;
 import com.maicard.money.criteria.WithdrawCriteria;
 import com.maicard.money.domain.Withdraw;
 import com.maicard.money.domain.WithdrawMethod;
@@ -22,9 +21,7 @@ public interface WithdrawService {
 	List<Withdraw> list(WithdrawCriteria withdrawCriteria);
 
 	List<Withdraw> listOnPage(WithdrawCriteria withdrawCriteria);
-	
-	EisMessage end(int withdrawMethodId, String resultString);
-	
+		
 	int count(WithdrawCriteria withdrawCriteria);	
 	
 
@@ -36,7 +33,6 @@ public interface WithdrawService {
 	 */
 	int begin(Withdraw withdraw, List<Withdraw> subWithdrawList) throws Exception;
 		
-	EisMessage end(Withdraw withdraw) throws Exception;
 
 	int isValidWithdraw(Withdraw withdraw);
 
