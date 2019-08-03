@@ -246,6 +246,7 @@
 				<include refid="criteriaWhereClause" />
 			UNION
 			SELECT count(*) cnt FROM ${tableName}
+				<include refid="criteriaWhereClause" />
 			<if test="endTimeBegin != null">
 				UNION
 				SELECT
@@ -253,7 +254,6 @@
 					<include refid="criteriaWhereClause" />
 					
 			</if>
-		<include refid="criteriaWhereClause" />
 		) as cnt_tmp
 	</select>
 	
