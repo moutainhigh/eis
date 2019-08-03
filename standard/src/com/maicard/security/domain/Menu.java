@@ -21,6 +21,8 @@ public class Menu extends EisObject implements Cloneable{
 	
 	private String parameter;
 	
+	private int weight;
+	
 	//对应资源，比如按钮的图标
 	private String resourceId;
 
@@ -146,6 +148,14 @@ public class Menu extends EisObject implements Cloneable{
 
 	public void setParameter(String parameter) {
 		this.parameter = parameter;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 }
