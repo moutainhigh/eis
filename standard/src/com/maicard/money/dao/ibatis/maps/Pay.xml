@@ -230,7 +230,9 @@
 			SELECT
 				<include refid="selectColumns" />
 			FROM
-				${tableName2}		
+				${tableName2}	
+			<include refid="criteriaWhereClause" />
+				
 		</if>
 		ORDER BY
 		start_time DESC
@@ -248,6 +250,8 @@
 				UNION
 				SELECT
 					count(*) cnt FROM ${tableName2}		
+					<include refid="criteriaWhereClause" />
+					
 			</if>
 		<include refid="criteriaWhereClause" />
 		) as cnt_tmp
