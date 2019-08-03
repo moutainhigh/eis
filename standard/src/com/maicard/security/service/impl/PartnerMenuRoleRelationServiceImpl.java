@@ -151,7 +151,6 @@ public class PartnerMenuRoleRelationServiceImpl extends BaseService implements P
 				topMenuList.add(userMenuList.get(i));
 			}
 		}
-
 		return topMenuList;
 	}
 

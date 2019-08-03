@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -17,7 +16,6 @@ import com.maicard.money.criteria.BankAccountCriteria;
 import com.maicard.money.dao.BankAccountDao;
 import com.maicard.money.domain.BankAccount;
 import com.maicard.money.service.BankAccountService;
-import com.maicard.standard.EisError;
 
 @Service
 public class BankAccountServiceImpl extends BaseService implements BankAccountService {

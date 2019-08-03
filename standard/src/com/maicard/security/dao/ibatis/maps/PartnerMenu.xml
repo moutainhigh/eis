@@ -11,6 +11,7 @@
 		<result property="resourceId" column="resource_id"/>
 		<result property="parentMenuId" column="parent_menu_id"/>
 		<result property="menuLevel" column="menu_level"/>
+		<result property="weight" column="weight"/>
 		<result property="currentStatus" column="current_status"/>
 		<result property="ownerId" column="owner_id"/>
 	</resultMap>
@@ -23,18 +24,16 @@
 			resource_id,
 			parent_menu_id,
 			menu_level,
+			weight,
 			current_status,
 			owner_id
 	</sql>
 
-	<insert id="insert" parameterType="PartnerMenu">
+	<insert id="insert" parameterType="PartnerMenu" useGeneratedKeys="true"  keyProperty="menuId">
 		INSERT INTO partner_menu
-			(<if test="menuId>0">menu_id,</if> owner_id, menu_name, menu_url, parameter, resource_id, parent_menu_id,menu_level,current_status)
+			(<if test="menuId>0">menu_id,</if> owner_id, menu_name, menu_url, parameter, resource_id, parent_menu_id,menu_level, weight, current_status)
 		VALUES
-			(<if test="menuId>0">#{menuId},</if> #{ownerId}, #{menuName}, #{menuUrl}, #{parameter}, #{resourceId}, #{parentMenuId}, #{menuLevel}, #{currentStatus})
-		<selectKey keyProperty="menuId" resultType="int">
-			SELECT LAST_INSERT_ID() as menu_id
-		</selectKey>
+			(<if test="menuId>0">#{menuId},</if> #{ownerId}, #{menuName}, #{menuUrl}, #{parameter}, #{resourceId}, #{parentMenuId}, #{menuLevel}, #{weight}, #{currentStatus})
 	</insert>
 
 	<update id="update" parameterType="PartnerMenu">
@@ -47,6 +46,7 @@
 			resource_id = #{resourceId},	
 			parent_menu_id = #{parentMenuId},
 			menu_level = #{menuLevel},
+			weight = #{weight},
 			current_status = #{currentStatus},
 			owner_id = #{ownerId}
 		WHERE
@@ -87,6 +87,7 @@
 		FROM
 			partner_menu
 		<include refid="criteriaWhereClause"/>
+		ORDER BY weight DESC, menu_id
 	</select>
 
 	<select id="count" parameterType="PartnerMenuCriteria" resultType="int">
