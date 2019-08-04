@@ -11,7 +11,7 @@ BEGIN
   IF table_suffix<>'' AND begintime<>'' AND endtime<>'' THEN
     BEGIN
        SET table1=CONCAT('item_data_',table_suffix);
-       SET @createsql=CONCAT('create table if not exists ',table1,' like pay'); 
+       SET @createsql=CONCAT('create table if not exists ',table1,' like item'); 
        PREPARE exec FROM @createsql;
        EXECUTE exec;
        SET @insert_sql=CONCAT('insert into ',table1,' SELECT item_data.* FROM item_data,(SELECT item_id FROM item where DATE_FORMAT(enter_time,"%Y%m%d%H") >="',begintime,'" and DATE_FORMAT(enter_time,"%Y%m%d%H")<="',endtime,'") a where item_data.product_id=a.item_id');                       
@@ -31,7 +31,7 @@ BEGIN
          ELSE
            BEGIN
              SET table1=CONCAT('item_',table_suffix);
-             SET @createsql=CONCAT('create table if not exists ',table1,' like pay'); 
+             SET @createsql=CONCAT('create table if not exists ',table1,' like item'); 
              PREPARE exec FROM @createsql;
              EXECUTE exec;
              SET @insert_sql=CONCAT('insert into ',table1,' SELECT * FROM item where DATE_FORMAT(enter_time,"%Y%m%d%H") >="',begintime,'" and DATE_FORMAT(enter_time,"%Y%m%d%H")<="',endtime,'"');           

@@ -5,6 +5,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-standard"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/eis_lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

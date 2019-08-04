@@ -56,6 +56,7 @@ import com.maicard.money.domain.Withdraw;
 import com.maicard.money.service.BankAccountService;
 import com.maicard.money.service.MoneyService;
 import com.maicard.money.service.WithdrawService;
+import com.maicard.money.service.WithdrawTxService;
 import com.maicard.money.service.WithdrawTypeService;
 import com.maicard.product.service.NotifyService;
 import com.maicard.security.domain.User;
@@ -117,6 +118,9 @@ public class WithdrawController extends BaseController {
 
 	@Resource
 	private WithdrawService withdrawService;
+
+	@Resource
+	private WithdrawTxService withdrawTxService;
 
 	private final DecimalFormat df= new DecimalFormat("0.00"); 
 
@@ -999,7 +1003,7 @@ public class WithdrawController extends BaseController {
 			logger.debug("对方没提交任何POST数据");
 		}
 
-		EisMessage notifyResult = withdrawService.end(withdrawMethodId, resultString);
+		EisMessage notifyResult = withdrawTxService.end(withdrawMethodId, resultString);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("content-type", "text/html; charset=UTF-8");
 		Withdraw withdraw = null;

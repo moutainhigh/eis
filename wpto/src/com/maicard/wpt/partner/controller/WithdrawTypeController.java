@@ -50,6 +50,7 @@ import com.maicard.money.iface.PayProcessor;
 import com.maicard.money.service.BankAccountService;
 import com.maicard.money.service.MoneyService;
 import com.maicard.money.service.WithdrawService;
+import com.maicard.money.service.WithdrawTxService;
 import com.maicard.money.service.WithdrawTypeService;
 import com.maicard.product.service.NotifyService;
 import com.maicard.security.domain.User;
@@ -106,7 +107,12 @@ public class WithdrawTypeController extends BaseController {
 	private WithdrawService withdrawService;
 	
 	@Resource
+	private WithdrawTxService withdrawTxService;
+	
+	@Resource
 	private ApplicationContextService applicationContextService;
+	
+	
 	
 	@Resource
 	private DataDefineService dataDefineService;
@@ -622,7 +628,7 @@ public class WithdrawTypeController extends BaseController {
 			logger.debug("对方没提交任何POST数据");
 		}
 
-		EisMessage notifyResult = withdrawService.end(withdrawTypeId, resultString);
+		EisMessage notifyResult = withdrawTxService.end(withdrawTypeId, resultString);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("content-type", "text/html; charset=UTF-8");
 		Withdraw withdraw = null;
