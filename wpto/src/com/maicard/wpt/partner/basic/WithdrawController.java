@@ -88,6 +88,10 @@ public class WithdrawController extends BaseController {
 
 	@Resource
 	private WithdrawMethodService withdrawMethodService;
+	
+	@Resource
+	private WithdrawTxService withdrawTxService;
+	
 
 	private int rowsPerPage = 10;
 
@@ -752,7 +756,7 @@ public class WithdrawController extends BaseController {
 			logger.debug("对方没提交任何POST数据");
 		}
 
-		EisMessage notifyResult = withdrawService.end(withdrawMethodId, resultString);
+		EisMessage notifyResult = withdrawTxService.end(withdrawMethodId, resultString);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("content-type", "text/html; charset=UTF-8");
 		Withdraw withdraw = null;
