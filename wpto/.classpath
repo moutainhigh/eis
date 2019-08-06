@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-common"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-ec"/>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-standard"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-wpt"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/eis_lib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-common"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-share"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-ec"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-flow"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/eis_lib"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-stat"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/eis-develop-wpt"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
