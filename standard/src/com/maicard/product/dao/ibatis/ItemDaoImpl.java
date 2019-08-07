@@ -331,7 +331,7 @@ public class ItemDaoImpl extends BaseDao implements ItemDao {
 			
 			Calendar c2 = Calendar.getInstance();
 			c2.setTime(itemCriteria.getEnterTimeEnd());
-			int m2 = c1.get(Calendar.MONTH);
+			int m2 = c2.get(Calendar.MONTH);
 			
 			if(m1 != m2) {
 				//查询的开始和结束时间不是一个月，需要多设置一个月
