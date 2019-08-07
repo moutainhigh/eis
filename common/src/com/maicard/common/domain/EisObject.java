@@ -37,8 +37,6 @@ public class EisObject extends JmsObject implements Cloneable{
     @JsonView({JsonFilterView.Full.class})
     protected	long ownerId;		//平台ID
     
-    @JsonView({JsonFilterView.Full.class})
-    protected long version;
 
 	public EisObject(){
 
@@ -144,14 +142,6 @@ public class EisObject extends JmsObject implements Cloneable{
 		operate.put(code, value);
 	}
 
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
-	
 	public long incrVersion() {
 		this.version++;
 		return this.version;

@@ -36,6 +36,8 @@ public class GlobalUniqueServiceImpl extends BaseService implements GlobalUnique
 	private CenterDataService centerDataService;
 	
 	final long MAX_ORDER_RAND_NUMBER = 99999999;
+	
+	
 
 
 	@Override
