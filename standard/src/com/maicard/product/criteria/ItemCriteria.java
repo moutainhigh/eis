@@ -93,6 +93,8 @@ public class ItemCriteria extends InviterSupportCriteria implements Cloneable{
 	private int fixWeight = 0;	//指定优先级
 	
 	private String objectType;
+	
+	private String tableName2;
 
 	/**
 	 * 指定rate的范围
@@ -522,6 +524,12 @@ public class ItemCriteria extends InviterSupportCriteria implements Cloneable{
 	}
 	public void setObjectType(String objectType) {
 		this.objectType = objectType;
+	}
+	public String getTableName2() {
+		return tableName2;
+	}
+	public void setTableName2(String tableName2) {
+		this.tableName2 = tableName2;
 	}
 	
 	
