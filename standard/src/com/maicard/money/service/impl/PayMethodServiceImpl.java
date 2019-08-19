@@ -39,7 +39,11 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	@Override
 	public int insert(PayMethod payMethod) {
 		int rs = payMethodDao.insert(payMethod);
-		
+		if(payMethod.getPayMethodId() > 0) {
+			pkSet.add(payMethod.getPayMethodId());
+		} else {
+			pkSet.clear();
+		}
 		return rs;
 	}
 
@@ -73,7 +77,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		if (_oldPayMethod != null) {
 			actualRowsAffected = payMethodDao.delete(payMethodId);
 		}
-		
+		pkSet.clear();
 		return actualRowsAffected;
 	}
 	

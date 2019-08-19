@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Fri Mar 01 15:01:42 CST 2013 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.wpt.sql.WeixinMsg">
+	<insert id="insert" parameterType="WeixinMsg">
+		insert into weixin_gateway_message
+		(
+		`ToUserName`,
+		`FromUserName`,
+		`CreateTime`,
+		`MsgType`,
+		`MsgId`,
+		`Event`,
+		`EventKey`,
+		`Ticket`,
+		`Latitude`,
+		`Longitude`,
+		`Precision`,
+		`PicUrl`,
+		`MediaId`,
+		`Description`,
+		`URL`,
+		`Location_X`,
+		`Location_Y`,
+		`Scale`,
+		`Label`,
+		`Content`,
+		`Format`,
+		`Recognition`
+		)
+		values
+		(
+		#{ToUserName},
+		#{FromUserName},
+		#{CreateTime},
+		#{MsgType},
+		#{MsgId},
+		#{Event},
+		#{EventKey},
+		#{Ticket},
+		#{Latitude},
+		#{Longitude},
+		#{Precision},
+		#{PicUrl},
+		#{MediaId},
+		#{Description},
+		#{URL},
+		#{Location_X},
+		#{Location_Y},
+		#{Scale},
+		#{Label},
+		#{Content},
+		#{Format},
+		#{Recognition}
+		)
+	</insert>
+</mapper>
