@@ -57,7 +57,9 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		
 		if (_oldPayMethod != null) {
 			actualRowsAffected = payMethodDao.update(payMethod);
-			if(actualRowsAffected > 0 && payMethod.getSyncFlag() == 0) {
+			boolean syncCache = actualRowsAffected > 0 && payMethod.getSyncFlag() == 0;
+			logger.info("更新支付通道:{},version={},结果:{}，是否需要刷新缓存:{}", payMethod.getPayMethodId(), payMethod.getVersion(), actualRowsAffected, syncCache);
+			if(syncCache) {
 				//由于使用redis cache，因此只有第一次更新才需要更新缓存
 				String cacheKey = "PayMethod#" + payMethod.getPayMethodId();
 				//cacheService.delete(new CacheCriteria(CommonStandard.cacheNameProduct, cacheKey));
