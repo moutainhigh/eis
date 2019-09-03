@@ -1,11 +1,11 @@
 package com.maicard.money.service.impl;
 
 import java.beans.IntrospectionException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,9 +14,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSON;
 import com.maicard.common.base.BaseService;
-import com.maicard.common.service.CacheService;
+import com.maicard.common.service.CenterDataService;
 import com.maicard.common.util.ClassUtils;
+import com.maicard.common.util.JsonUtils;
+import com.maicard.common.util.NumericUtils;
 import com.maicard.money.criteria.PayMethodCriteria;
 import com.maicard.money.dao.PayMethodDao;
 import com.maicard.money.domain.PayMethod;
@@ -30,20 +33,21 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	private PayMethodDao payMethodDao;
 	
 	@Resource
-	private CacheService cacheService;
+	private CenterDataService centerDataService;
 	
-	//缓存支付通道的主键
-	private static Set<Integer> pkSet = new HashSet<Integer>();
 
+	private static final String CACHE_TABLE = "PAY_METHOD";
 
 	@Override
 	public int insert(PayMethod payMethod) {
 		int rs = payMethodDao.insert(payMethod);
 		if(payMethod.getPayMethodId() > 0) {
-			pkSet.add(payMethod.getPayMethodId());
-		} else {
-			pkSet.clear();
-		}
+			try {
+				centerDataService.setHmPlainValue(CACHE_TABLE + "_" + payMethod.getOwnerId(), "PayMethod#" + payMethod.getPayMethodId(), JSON.toJSONString(payMethod), (int)CommonStandard.CACHE_MAX_TTL);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
 		return rs;
 	}
 
@@ -61,9 +65,11 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 			logger.info("更新支付通道:{},version={},结果:{}，是否需要刷新缓存:{}", payMethod.getPayMethodId(), payMethod.getVersion(), actualRowsAffected, syncCache);
 			if(syncCache) {
 				//由于使用redis cache，因此只有第一次更新才需要更新缓存
-				String cacheKey = "PayMethod#" + payMethod.getPayMethodId();
-				//cacheService.delete(new CacheCriteria(CommonStandard.cacheNameProduct, cacheKey));
-				cacheService.put(CommonStandard.cacheNameProduct,  cacheKey , payMethod);
+				try {
+					centerDataService.setHmPlainValue(CACHE_TABLE + "_" + payMethod.getOwnerId(), "PayMethod#" + payMethod.getPayMethodId(), JSON.toJSONString(payMethod), (int)CommonStandard.CACHE_MAX_TTL);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -79,7 +85,11 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		if (_oldPayMethod != null) {
 			actualRowsAffected = payMethodDao.delete(payMethodId);
 		}
-		pkSet.clear();
+		try {
+			centerDataService.setHmPlainValue(CACHE_TABLE + "_" + _oldPayMethod.getOwnerId(), "PayMethod#" + _oldPayMethod.getPayMethodId(), null, (int)CommonStandard.CACHE_MAX_TTL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return actualRowsAffected;
 	}
 	
@@ -87,30 +97,46 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	public PayMethod select(int payMethodId) {
 		return payMethodDao.select(payMethodId);
 	}
-	
-	private void initPk() {
-		List<Integer> pkList = payMethodDao.listPkOnPage(new PayMethodCriteria());
-		if(pkList == null || pkList.size() < 1) {
-			logger.warn("系统中没有任何支付通道");
-			return;
+
+	private PayMethod select(int payMethodId, long ownerId) {
+		final String tableName = CACHE_TABLE + "_" + ownerId;
+		String text = null;
+		try {
+			text = centerDataService.getHmPlainValue(tableName, String.valueOf(payMethodId));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		pkSet.clear();
-		for(Integer pk : pkList) {
-			pkSet.add(pk);
+		if(text == null) {
+			logger.error("未能从缓存:{}中获取到支付通道:{}", tableName, payMethodId);
+			return payMethodDao.select(payMethodId);
 		}
-		logger.info("初始化{}个支付通道主键", pkSet.size());
+		PayMethod payMethod = null;
+		try {
+			payMethod = JsonUtils.getInstance().readValue(text, PayMethod.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if(payMethod == null) {
+			logger.error("未能将缓存数据:{}转换为支付通道:{}", text, payMethodId);
+			return payMethodDao.select(payMethodId);
+		} else {
+			return payMethod;
+		}
+		
+		
+		
 	}
+	
 
 	@Override
 	public List<PayMethod> list(PayMethodCriteria payMethodCriteria){
 		payMethodCriteria.setPaging(null);
-		if(pkSet.size() < 1) {
-			initPk();
-		}
+		
+		Set<Object> keys = centerDataService.getHmKeys(CACHE_TABLE + "_" + payMethodCriteria.getOwnerId());
 		List<PayMethod> list = new ArrayList<PayMethod>();
 		//从缓存中获取所有支付方式
-		for(Integer pk : pkSet) {
-			PayMethod payMethod = payMethodDao.select(pk);
+		for(Object pk : keys) {
+			PayMethod payMethod = select(NumericUtils.parseInt(pk), payMethodCriteria.getOwnerId());
 			if(payMethod != null) {
 				list.add(payMethod);
 			}
