@@ -134,14 +134,22 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		Set<Object> keys = centerDataService.getHmKeys(CACHE_TABLE + "_" + payMethodCriteria.getOwnerId());
 		if(keys == null || keys.size() < 1) {
 			initCache(payMethodCriteria.getOwnerId());
+			keys = centerDataService.getHmKeys(CACHE_TABLE + "_" + payMethodCriteria.getOwnerId());
 		}
 		List<PayMethod> list = new ArrayList<PayMethod>();
 		//从缓存中获取所有支付方式
 		for(Object pk : keys) {
-			PayMethod payMethod = select(NumericUtils.parseInt(pk), payMethodCriteria.getOwnerId());
+			int payMethodId = NumericUtils.parseInt(pk);
+			PayMethod payMethod = select(payMethodId, payMethodCriteria.getOwnerId());
 			if(payMethod != null) {
 				list.add(payMethod);
+			} else {
+				logger.error("未能获取支付通道:{}", payMethodId);
 			}
+		}
+		if(list.size() < 1) {
+			logger.error("从系统中获取到的支付通道数量是0");
+			return Collections.emptyList();
 		}
 		List<PayMethod> filteredList = null;
 		try {
