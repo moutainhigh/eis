@@ -31,10 +31,10 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 
 	@Resource
 	private PayMethodDao payMethodDao;
-	
+
 	@Resource
 	private CenterDataService centerDataService;
-	
+
 
 	private static final String CACHE_TABLE = "PAY_METHOD";
 
@@ -54,11 +54,11 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 	@Override
 	public int update(PayMethod payMethod) {
 		int actualRowsAffected = 0;
-		
+
 		int payMethodId = payMethod.getPayMethodId();
 
 		PayMethod _oldPayMethod = payMethodDao.select(payMethodId);
-		
+
 		if (_oldPayMethod != null) {
 			actualRowsAffected = payMethodDao.update(payMethod);
 			boolean syncCache = actualRowsAffected > 0 && payMethod.getSyncFlag() == 0;
@@ -72,16 +72,16 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 				}
 			}
 		}
-		
+
 		return actualRowsAffected;
 	}
 
 	@Override
 	public int delete(int payMethodId) {
 		int actualRowsAffected = 0;
-		
+
 		PayMethod _oldPayMethod = payMethodDao.select(payMethodId);
-		
+
 		if (_oldPayMethod != null) {
 			actualRowsAffected = payMethodDao.delete(payMethodId);
 		}
@@ -92,7 +92,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		}
 		return actualRowsAffected;
 	}
-	
+
 	@Override
 	public PayMethod select(int payMethodId) {
 		return payMethodDao.select(payMethodId);
@@ -122,17 +122,19 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		} else {
 			return payMethod;
 		}
-		
-		
-		
+
+
+
 	}
-	
+
 
 	@Override
 	public List<PayMethod> list(PayMethodCriteria payMethodCriteria){
-		payMethodCriteria.setPaging(null);
-		
+
 		Set<Object> keys = centerDataService.getHmKeys(CACHE_TABLE + "_" + payMethodCriteria.getOwnerId());
+		if(keys == null || keys.size() < 1) {
+			initCache(payMethodCriteria.getOwnerId());
+		}
 		List<PayMethod> list = new ArrayList<PayMethod>();
 		//从缓存中获取所有支付方式
 		for(Object pk : keys) {
@@ -164,9 +166,33 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 			}
 		}
 		return list;*/
-		
+
 	}
-	
+
+	private void initCache(long ownerId) {
+		PayMethodCriteria critera = new PayMethodCriteria(ownerId);
+		List<Integer> pkList = payMethodDao.listPkOnPage(critera);
+		if(pkList == null || pkList.size() < 1) {
+			logger.warn("系统中没有任何ownerId={}的支付通道", ownerId);
+			return;
+		}
+		final String tableName = CACHE_TABLE + "_" + ownerId;
+		try {
+			for(int pk : pkList) {
+				PayMethod payMethod = payMethodDao.select(pk);
+				if(payMethod == null) {
+					logger.error("从系统中找不到支付通道:{}", pk);
+					continue;
+				}	
+				centerDataService.setHmPlainValue(tableName, String.valueOf(pk), JSON.toJSONString(payMethod), (int)CommonStandard.CACHE_MAX_TTL);
+			}
+			logger.info("初始化{}个支付通道到缓存", pkList.size());
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public List<PayMethod> listOnPage(PayMethodCriteria payMethodCriteria) {
 		List<PayMethod> list = new ArrayList<PayMethod>();
@@ -181,7 +207,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 			}
 		}
 		return list;
-		
+
 	}
 
 	/**
@@ -208,5 +234,5 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		return payMethodDao.count(payMethodCriteria);
 	}
 
-	
+
 }
