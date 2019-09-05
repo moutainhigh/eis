@@ -102,7 +102,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		final String tableName = CACHE_TABLE + "_" + ownerId;
 		String text = null;
 		try {
-			text = centerDataService.getHmPlainValue(tableName, String.valueOf(payMethodId));
+			text = centerDataService.getHmPlainValue(tableName, "PayMethod#" + payMethodId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -192,7 +192,7 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 					logger.error("从系统中找不到支付通道:{}", pk);
 					continue;
 				}	
-				centerDataService.setHmPlainValue(tableName, String.valueOf(pk), JSON.toJSONString(payMethod), (int)CommonStandard.CACHE_MAX_TTL);
+				centerDataService.setHmPlainValue(tableName, "PayMethod#" + pk, JSON.toJSONString(payMethod), (int)CommonStandard.CACHE_MAX_TTL);
 			}
 			logger.info("初始化{}个支付通道到缓存", pkList.size());
 
