@@ -20,6 +20,7 @@ import com.maicard.common.service.CenterDataService;
 import com.maicard.common.util.ClassUtils;
 import com.maicard.common.util.JsonUtils;
 import com.maicard.common.util.NumericUtils;
+import com.maicard.common.util.Paging;
 import com.maicard.money.criteria.PayMethodCriteria;
 import com.maicard.money.dao.PayMethodDao;
 import com.maicard.money.domain.PayMethod;
@@ -181,6 +182,9 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 
 	private void initCache(long ownerId) {
 		PayMethodCriteria critera = new PayMethodCriteria(ownerId);
+		Paging paging = new Paging(99999999);
+		paging.setCurrentPage(1);
+		critera.setPaging(paging);
 		List<Integer> pkList = payMethodDao.listPkOnPage(critera);
 		if(pkList == null || pkList.size() < 1) {
 			logger.warn("系统中没有任何ownerId={}的支付通道", ownerId);
