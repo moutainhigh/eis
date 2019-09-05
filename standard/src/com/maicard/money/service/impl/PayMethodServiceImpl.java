@@ -139,7 +139,9 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 		List<PayMethod> list = new ArrayList<PayMethod>();
 		//从缓存中获取所有支付方式
 		for(Object pk : keys) {
-			int payMethodId = NumericUtils.parseInt(pk);
+			String pkStr = pk.toString().replaceAll("^PayMethod#", "");
+			logger.debug("准备从缓存查找支付通道:{}={}", pk.toString(), pkStr);
+			int payMethodId = NumericUtils.parseInt(pkStr);
 			PayMethod payMethod = select(payMethodId, payMethodCriteria.getOwnerId());
 			if(payMethod != null) {
 				list.add(payMethod);
