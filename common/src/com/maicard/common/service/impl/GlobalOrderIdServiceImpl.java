@@ -117,12 +117,22 @@ public class GlobalOrderIdServiceImpl extends BaseService implements GlobalOrder
 
 	@Override
 	public Date getDateByTransactionId(String transactionId){
-		if(transactionId == null || transactionId.equals("") || transactionId.length() < 23){
+		if(transactionId == null || transactionId.equals("") || transactionId.length() < 17){
 			return null;
 		}
+		if(transactionId.length() == 27) {
+			//老订单号格式yyyyMMddHHMMss
+			try{
+				return new SimpleDateFormat("yyyyMMddHHmmss").parse(transactionId.substring(5,19));
+			}catch(Exception e){}
+			return null;
+		} 
+		int length = CommonStandard.orderIdDateFormat.length();
+
 		try{
-			return orderIdFormaterHolder.get().parse(transactionId.substring(5,19));
+			return orderIdFormaterHolder.get().parse(transactionId.substring(5,5+length));
 		}catch(Exception e){}
+		
 		return null;
 	}
 }

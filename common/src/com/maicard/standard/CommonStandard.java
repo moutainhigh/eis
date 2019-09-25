@@ -144,7 +144,7 @@ public interface CommonStandard {
 	public static final String statDayFormat = "yyyyMMdd";
 
 
-	public static final String orderIdDateFormat = "yyyyMMddHHmmss";
+	public static final String orderIdDateFormat = "yyMMdd";
 
 	public static final String defaultCookiePolicy = "domain";
 	public static final String defaultDateFormat = "yyyy-MM-dd HH:mm:ss";
