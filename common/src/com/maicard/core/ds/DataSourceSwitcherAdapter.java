@@ -37,8 +37,8 @@ public class DataSourceSwitcherAdapter extends MethodHandlerAspectInterceptorAda
 			return jp.proceed();
 		} finally{//执行完成后将数据源标示清楚回复默认数据源
 
-			DataSourceSwitcher.clear();
 			logger.debug("Cleaned DataSource ["+target.getName()+", type=" +(StringUtils.isEmpty(DataSourceSwitcher.getDataSourceType())?"default":DataSourceSwitcher.getDataSourceType())+"]");
+			DataSourceSwitcher.clear();
 		}
 	}
 }

@@ -32,7 +32,7 @@ public interface CommonStandard {
 	public static final String DEFAULT_PAGE_SUFFIX = ".shtml";
 
 	//未指定查询时间的时候，默认查询天数
-	public static final int DEFAULT_QUERY_DAY = 7;
+	public static final int DEFAULT_QUERY_DAY = 2;
 
 
 
@@ -144,7 +144,7 @@ public interface CommonStandard {
 	public static final String statDayFormat = "yyyyMMdd";
 
 
-	public static final String orderIdDateFormat = "yyyyMMddHHmmss";
+	public static final String orderIdDateFormat = "yyMMdd";
 
 	public static final String defaultCookiePolicy = "domain";
 	public static final String defaultDateFormat = "yyyy-MM-dd HH:mm:ss";

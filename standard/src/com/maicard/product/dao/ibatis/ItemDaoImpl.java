@@ -1,6 +1,7 @@
 package com.maicard.product.dao.ibatis;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -322,6 +323,23 @@ public class ItemDaoImpl extends BaseDao implements ItemDao {
 		} else {
 			itemCriteria.setTableName(ItemCriteria.ITEM_TABLE_PREFIX);
 		}
+		
+		if(itemCriteria.getEnterTimeBegin() != null && itemCriteria.getEnterTimeEnd() != null) {
+			Calendar c1 = Calendar.getInstance();
+			c1.setTime(itemCriteria.getEnterTimeBegin());
+			int m1 = c1.get(Calendar.MONTH);
+			
+			Calendar c2 = Calendar.getInstance();
+			c2.setTime(itemCriteria.getEnterTimeEnd());
+			int m2 = c2.get(Calendar.MONTH);
+			
+			if(m1 != m2) {
+				//查询的开始和结束时间不是一个月，需要多设置一个月
+				itemCriteria.setTableName2(ItemCriteria.ITEM_TABLE_PREFIX + "_" + sdf2.format(itemCriteria.getEnterTimeEnd()));
+			}
+		}
+		
+		
 
 	}
 

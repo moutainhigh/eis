@@ -379,6 +379,15 @@
 			${tableName} as a
 			<include refid="criteriaWhereClause" />
 		</if>
+		<if test="tableName2 != null">
+			UNION
+			SELECT
+				<include refid="selectColumns" />
+			FROM
+				${tableName2}	as a
+			<include refid="criteriaWhereClause" />
+				
+		</if>
 		<if test="orderBy != null">
 			ORDER BY ${orderBy}
 		</if>
@@ -419,11 +428,20 @@
 		<if test="tableName != null">
 			UNION
 			SELECT
-			COUNT(*) num
+				COUNT(*) num
 			FROM
 			${tableName} AS a
 
 			<include refid="criteriaWhereClause" />
+		</if>
+		<if test="tableName2 != null">
+			UNION
+			SELECT
+				COUNT(*) num
+			FROM
+				${tableName2}	as a
+			<include refid="criteriaWhereClause" />
+				
 		</if>
 		) AS a
 	</select>

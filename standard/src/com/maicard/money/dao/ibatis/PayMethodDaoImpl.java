@@ -3,8 +3,6 @@ package com.maicard.money.dao.ibatis;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -14,12 +12,10 @@ import com.maicard.common.util.Paging;
 import com.maicard.money.criteria.PayMethodCriteria;
 import com.maicard.money.dao.PayMethodDao;
 import com.maicard.money.domain.PayMethod;
-import com.maicard.standard.CommonStandard;
 
 @Repository
 public class PayMethodDaoImpl extends BaseDao implements PayMethodDao {
 
-	@Cacheable(value = CommonStandard.cacheNameProduct, key = "'PayMethod#' + #payMethodId")
 	public int insert(PayMethod payMethod) throws DataAccessException {
 		return getSqlSessionTemplate().insert("com.maicard.money.sql.PayMethod.insert", payMethod);
 	}
@@ -32,12 +28,10 @@ public class PayMethodDaoImpl extends BaseDao implements PayMethodDao {
 		return rs;
 	}
 
-	@CacheEvict(value = CommonStandard.cacheNameProduct, key = "'PayMethod#' + #payMethodId")
 	public int delete(int payMethodId) throws DataAccessException {
 		return getSqlSessionTemplate().delete("com.maicard.money.sql.PayMethod.delete", new Integer(payMethodId));
 	}
 
-	@Cacheable(value = CommonStandard.cacheNameProduct, key = "'PayMethod#' + #payMethodId")
 	public PayMethod select(int payMethodId) throws DataAccessException {
 		return (PayMethod) getSqlSessionTemplate().selectOne("com.maicard.money.sql.PayMethod.select", new Integer(payMethodId));
 	}

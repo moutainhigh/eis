@@ -198,7 +198,7 @@ public class PayDaoImpl extends BaseDao implements PayDao {
 			}
 			Date historySplitDate = DateUtils.truncate(DateUtils.addDays(new Date(), -(CommonStandard.payMoveToHistoryDay)+1),Calendar.DAY_OF_MONTH );
 			
-			if(transactionIdDate.after( historySplitDate)){
+			if(!transactionIdDate.before( historySplitDate)){
 				logger.debug("订单号[" + transactionId + "]的日期[" + new SimpleDateFormat("yyyyMMddHHmmss").format(transactionIdDate) + "]在分表时间点[" + new SimpleDateFormat("yyyyMMddHHmmss").format(historySplitDate) + "]之后，使用默认表:" + defaultTableName);
 				return defaultTableName;
 			} else if(DateUtils.isSameDay(DateUtils.addDays(historySplitDate, -1), transactionIdDate) && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < moveHistoryHour){

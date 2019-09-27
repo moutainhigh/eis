@@ -158,6 +158,9 @@
 			<if test="refBuyTransactionId != null">
 				AND ref_buy_transaction_id=#{refBuyTransactionId}
 			</if>
+			<if test="fuzzyTransactionId != null">
+				AND transaction_id LIKE concat('%','${transactionId}', '%')
+			</if>
 			<if test="transactionId != null">
 				AND transaction_id=#{transactionId}
 			</if>

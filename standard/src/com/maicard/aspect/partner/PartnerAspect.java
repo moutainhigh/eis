@@ -230,6 +230,8 @@ public class PartnerAspect extends BaseService{
 		
 		//注解方式的权限配置，如果使用了这种模式，则不检查REST模式
 		RequestPrivilege requestPrivilege = AnnotationUtils.getAnnotation(method, RequestPrivilege.class);
+		
+		boolean havePrivilegeFromAnnotation = false;
 		if(requestPrivilege != null){
 			String objectTypeCode = requestPrivilege.objectTypeCode();
 			String operateCodeTemp = requestPrivilege.operateCode();
@@ -256,7 +258,8 @@ public class PartnerAspect extends BaseService{
 				return null;
 			}
 			//当定义了注解权限后就不检查REST权限
-			isIgnorePrivilegeCheck = true;
+			//isIgnorePrivilegeCheck = true;
+			havePrivilegeFromAnnotation = true;
 		} else {
 			//使用REST检查
 			if(method.isAnnotationPresent(IgnorePrivilegeCheck.class) || method.isAnnotationPresent(IgnoreLoginCheck.class)){
@@ -272,10 +275,10 @@ public class PartnerAspect extends BaseService{
 			privilegeCriteria = new PrivilegeCriteria(ownerId);
 		}
 
-		if(isIgnorePrivilegeCheck){
+		if(isIgnorePrivilegeCheck || havePrivilegeFromAnnotation){
 			logger.debug("[" + joinPoint.getTarget().getClass().getName() + "." + executeMethod + "]有IgnorePrivilegeCheck或IgnoreLoginCheck注解，不再进行权限检查");
 			//检查提交数据的合法性
-			if(!inputIsLegal(request)){
+			if(!inputIsLegal(request) || havePrivilegeFromAnnotation){
 				//对于严格环境，不合法输入写入日志
 				if(writeOperateLog){
 					//对所有操作都写入日志
@@ -290,7 +293,8 @@ public class PartnerAspect extends BaseService{
 				}
 				response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 				return null;
-			}			
+			}		
+			
 			return joinPoint.proceed();
 		}
 
