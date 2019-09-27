@@ -158,10 +158,10 @@
 			<if test="refBuyTransactionId != null">
 				AND ref_buy_transaction_id=#{refBuyTransactionId}
 			</if>
-			<if test="fuzzyTransactionId != null">
+			<if test="fuzzyQuery > 0">
 				AND transaction_id LIKE concat('%','${transactionId}', '%')
 			</if>
-			<if test="transactionId != null">
+			<if test="fuzzyQuery == 0 and transactionId != null">
 				AND transaction_id=#{transactionId}
 			</if>
 			<if test="payCardType != null">
