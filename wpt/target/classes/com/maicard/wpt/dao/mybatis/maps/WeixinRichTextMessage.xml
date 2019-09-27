@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WeixinRichTextMessage">
+
+	<resultMap id="weixinRichTextMessageResult" type="WeixinRichTextMessage">
+		<result property="weixinRichTextMessageId" column="weixin_rich_text_message_id" />
+		<result property="weight" column="weight" />
+		<result property="trigger" column="trigger" />
+		<result property="to" column="to" />
+		<result property="from" column="from" />
+		<result property="title" column="title" />
+		<result property="url" column="url" />
+		<result property="content" column="content" />
+		<result property="delaySec" column="delaySec" />
+		<result property="picUrl" column="pic_url" />
+		<result property="currentStatus" column="current_status" />
+		<result property="ownerId" column="owner_id"/>		
+	</resultMap>
+
+	<sql id="selectColumns">
+		weixin_rich_text_message_id,
+		weight,
+		`trigger`,
+		`to`,
+		`from`,
+		title,
+		url,
+		content,
+		delay_sec,
+		pic_url,
+		current_status,
+		owner_id
+	</sql>
+
+	<insert id="insert" parameterType="WeixinRichTextMessage"	useGeneratedKeys="true" keyProperty="weixinRichTextMessageId">
+		INSERT INTO weixin_rich_text_message
+		(
+		<if test="weixinRichTextMessageId>0">weixin_rich_text_message_id,</if>weight, `trigger`, `to`, from,title,url,content, delay_sec, pic_url,current_status,owner_id)
+		VALUES
+		(
+		<if test="weixinRichTextMessageId>0">#{weixinRichTextMessageId},</if>#{weight}, #{trigger}, #{to}, #{from}, #{title}, #{url}, #{content}, #{delaySec}, #{picUrl}, #{currentStatus}, #{ownerId})
+	</insert>
+
+	<update id="update" parameterType="WeixinRichTextMessage">
+		UPDATE
+			weixin_rich_text_message
+		SET
+			weight = #{weight},
+			`trigger` = #{trigger},
+			`to` = #{to},
+			`from` = #{from},
+			title = #{title},
+			url = #{url}, 
+			content = #{content},
+			delay_sec = #{delaySec},
+			pic_url = #{picUrl},
+			current_status = #{currentStatus},	
+			owner_id = #{ownerId}
+		WHERE
+			weixin_rich_text_message_id = #{weixinRichTextMessageId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			weixin_rich_text_message
+		WHERE
+			weixin_rich_text_message_id = #{weixinRichTextMessageId}
+	</delete>
+
+	<select id="select" parameterType="int" resultMap="weixinRichTextMessageResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+			weixin_rich_text_message
+		WHERE
+			weixin_rich_text_message_id = #{weixinRichTextMessageId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			owner_id = #{ownerId}
+			<if test="weight > 0">
+				AND weight = #{weight}
+			</if>
+			<if test="trigger != null">
+				AND `trigger` = #{trigger}
+			</if>
+			<if test="to != null">
+				AND `to` = #{to}
+			</if>
+			<if test="from != null">
+				AND `from` = #{from}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in
+				<foreach item="item" collection="currentStatus" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="WeixinRichTextMessageCriteria" resultMap="weixinRichTextMessageResult">
+		SELECT
+			<include refid="selectColumns" />
+		FROM
+			weixin_rich_text_message
+		<include refid="criteriaWhereClause" />
+		ORDER BY weight DESC
+	</select>
+	<select id="count" parameterType="WeixinRichTextMessageCriteria"
+		resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			weixin_rich_text_message
+		<include refid="criteriaWhereClause" />
+	</select>
+	
+</mapper>

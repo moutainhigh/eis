@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maicard.wpt.sql.WeixinButton">
+
+	<resultMap id="weixinButtonResult" type="WeixinButton">
+		<result property="weixinButtonId" column="weixin_button_id" />
+		<result property="parentButtonId" column="parent_button_id" />
+		<result property="type" column="type" />
+		<result property="name" column="`name`" />
+		<result property="key" column="key" />
+		<result property="mediaId" column="media_id" />
+		<result property="url" column="url" />
+		<result property="tagId" column="tag_id" />
+		<result property="uuid" column="uuid" />
+		<result property="currentStatus" column="current_status" />
+	</resultMap>
+
+	<sql id="selectColumns">
+		weixin_button_id,
+		parent_button_id,
+		type,
+		`name`,
+		`key`,
+		media_id,
+		url,
+		tag_id,
+		uuid,
+		current_status
+	</sql>
+
+	<insert id="insert" parameterType="WeixinButton" useGeneratedKeys="true" keyProperty="weixinButtonId">
+		INSERT INTO weixin_button
+		(
+		<if test="weixinButtonId>0">weixin_button_id,</if>
+		parent_button_id, type, `name`, `key`, media_id, url, tag_id, uuid, current_status)
+		VALUES
+		(
+		<if test="weixinButtonId>0">#{weixinButtonId},</if>
+		#{parentButtonId}, #{type}, #{name}, #{key}, #{mediaId}, #{url}, #{tagId}, #{uuid}, #{currentStatus})
+	</insert>
+
+	<update id="update" parameterType="WeixinButton">
+		UPDATE
+		weixin_button
+		SET type = #{type}, parent_button_id = #{parentButtonId}, `name` = #{name}, key = #{key}, media_id = #{mediaId}, url = #{url}, tag_id = #{tagId}, uuid = #{uuid},
+		current_status = #{currentStatus}
+		WHERE
+		weixin_button_id = #{weixinButtonId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+		weixin_button
+		WHERE
+		weixin_button_id = #{weixinButtonId}
+	</delete>
+
+	<delete id="deleteByUuid" parameterType="long">
+		DELETE FROM
+		weixin_button
+		WHERE
+		uuid = #{uuid}
+	</delete>
+
+	<select id="select" parameterType="int" resultMap="weixinButtonResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		weixin_button
+		WHERE
+		weixin_button_id = #{weixinButtonId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			<if test="uuid > 0">
+				uuid = #{uuid}
+			</if>
+			<if test="parentButtonId > 0">
+				AND parent_button_id = #{parentButtonId}
+			</if>
+			<if test="tagId > 0">
+				AND tag_id = #{tagId}
+			</if>
+			<if test="currentStatus != null">
+				AND current_status in
+				<foreach item="item" collection="currentStatus" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="WeixinButtonCriteria" resultMap="weixinButtonResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+		weixin_button
+		<include refid="criteriaWhereClause" />
+	</select>
+	<select id="count" parameterType="WeixinButtonCriteria" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM
+		weixin_button
+		<include refid="criteriaWhereClause" />
+	</select>
+
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EntityShop">
+
+	<resultMap id="entity_shopResult" type="EntityShop">
+		<result property="entityShopId" column="entity_shop_id" />
+		<result property="upId" column="up_id" />
+		<result property="uuid" column="uuid" />
+		<result property="downId" column="down_id" />
+		<result property="businessName" column="business_name" />
+		<result property="branchName" column="branch_name" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="district" column="district" />
+		<result property="address" column="address" />
+		<result property="phone" column="phone" />
+		<result property="categories" column="categories" />
+		<result property="longitude" column="longitude" />		
+		<result property="latitude" column="latitude" />
+		<result property="photoList" column="photo_list" />
+		<result property="specialService" column="special_service" />
+		<result property="avgPrice" column="avg_price" />
+		<result property="introduction" column="introduction" />
+		<result property="recommend" column="recommend" />
+		<result property="openTime" column="open_time" />
+		<result property="memory" column="memory" />
+		<result property="currentStatus" column="current_status" />
+		<result property="ownerId" column="owner_id"/>
+	</resultMap>
+
+	<sql id="selectColumns">
+		entity_shop_id,
+		up_id,
+		uuid,
+		down_id,
+		business_name,
+		branch_name,
+		province,
+		city,
+		district,
+		address,
+		phone,
+		categories,
+		longitude,
+		latitude,
+		photo_list,
+		special_service,
+		avg_price,
+		introduction,
+		recommend,
+		open_time,
+		memory,
+		current_status,
+		owner_id
+	</sql>
+
+	<insert id="insert" parameterType="EntityShop"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO entity_shop
+		(
+		<if test="entityShopId>0">entity_shop_id,</if>uuid, up_id, down_id, business_name, city, district, address,phone,categories,longitude, latitude, photo_list, special_service, avg_price, memory, introduction,recommend,open_time,current_status,owner_id)
+		VALUES
+		(
+		<if test="entityShopId>0">#{entityShopId},</if>#{uuid}, #{upId}, #{downId},  #{businessName}, #{city}, #{district}, #{address}, #{phone}, #{categories}, #{longitude}, #{latitude}, #{photoList}, #{specialService}, #{avgPrice}, #{memory}, #{introduction}, #{recommend}, #{openTime}, #{currentStatus}, #{ownerId})
+	</insert>
+
+	<update id="update" parameterType="EntityShop">
+		UPDATE
+			entity_shop
+		SET
+			up_id = #{upId},
+			down_id = #{downId},
+			business_name = #{businessName},
+			uuid = #{uuid},
+			city = #{city},
+			district = #{district},
+			address = #{address}, 
+			phone = #{phone}, 
+			categories = #{categories}, 
+			longitude = #{longitude}, 
+			latitude = #{latitude}, 
+			photo_list = #{photoList}, 
+			special_service = #{specialService}, 
+			avg_price = #{avgPrice}, 
+			memory = #{memory},
+			introduction = #{introduction}, 
+			recommend = #{recommend}, 
+			open_time = #{openTime},
+			current_status = #{currentStatus},	
+			owner_id = #{ownerId}
+		WHERE
+			entity_shop_id = #{entityShopId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			entity_shop
+		WHERE
+			entity_shop_id = #{entityShopId}
+	</delete>
+
+	<select id="select" parameterType="int" resultMap="entity_shopResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+			entity_shop
+		WHERE
+			entity_shop_id = #{entityShopId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			owner_id = #{ownerId}
+			<if test="upId > 0">
+				AND upId = #{upId}
+			</if>
+			<if test="downId != null">
+				AND down_id = #{downId}
+			</if>
+			<if test="businessName != null">
+				AND business_name = #{businessName}
+			</if>
+			<if test="city != null">
+				AND city = #{city}
+			</if>
+			<if test="uuid > 0">
+				AND uuid = #{uuid}
+			</if>
+			
+			<if test="currentStatus != null">
+				AND current_status in
+				<foreach item="item" collection="currentStatus" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			
+		</where>
+	</sql>
+
+	<select id="list" parameterType="EntityShopCriteria" resultMap="entity_shopResult">
+		SELECT
+			<include refid="selectColumns" />
+		FROM
+			entity_shop
+		<include refid="criteriaWhereClause" />
+	</select>
+	<select id="count" parameterType="EntityShopCriteria"
+		resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			entity_shop 
+		<include refid="criteriaWhereClause" />
+	</select>
+	
+</mapper>

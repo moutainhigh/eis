@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AutoResponseModel">
+
+	<resultMap id="autoResponseModelResult" type="AutoResponseModel">
+		<result property="autoResponseModelId" column="auto_response_model_id" />
+		<result property="question" column="question" />
+		<result property="response" column="response" />
+		<result property="responseType" column="response_type" />
+		<result property="responseId" column="response_id" />
+		<result property="currentStatus" column="current_status" />
+		<result property="ownerId" column="owner_id"/>
+		<result property="data" column="data" javaType="HashMap" jdbcType="VARCHAR"/>
+		
+	</resultMap>
+
+	<sql id="selectColumns">
+		auto_response_model_id,
+		question,
+		`response`,
+		response_type,
+		response_id,
+		current_status,
+		owner_id,
+		data
+	</sql>
+
+	<insert id="insert" parameterType="AutoResponseModel"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO auto_response_model
+		(
+		<if test="autoResponseModelId>0">auto_response_model_id,</if>question, `response`, response_type, response_id, current_status,owner_id, data)
+		VALUES
+		(
+		<if test="autoResponseModelId>0">#{autoResponseModelId},</if>#{question}, #{response}, #{responseType}, #{responseId},  #{currentStatus}, #{ownerId}, #{data, javaType=HashMap, jdbcType=VARCHAR})
+	</insert>
+
+	<update id="update" parameterType="AutoResponseModel">
+		UPDATE
+			auto_response_model
+		SET
+			question = #{question},
+			`response` = #{response},
+			response_type = #{responseType},
+			response_id = #{responseId},
+			current_status = #{currentStatus},	
+			owner_id = #{ownerId},
+			data = #{data, javaType=HashMap, jdbcType=VARCHAR}
+		WHERE
+			auto_response_model_id = #{autoResponseModelId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+			auto_response_model
+		WHERE
+			auto_response_model_id = #{autoResponseModelId}
+	</delete>
+
+	<select id="select" parameterType="int" resultMap="autoResponseModelResult">
+		SELECT
+		<include refid="selectColumns" />
+		FROM
+			auto_response_model
+		WHERE
+			auto_response_model_id = #{autoResponseModelId}
+	</select>
+
+	<sql id="criteriaWhereClause">
+		<where>
+			owner_id = #{ownerId}
+			<if test="question != null">
+				AND question = #{question}
+			</if>
+			<if test="responseType != null">
+				AND response_type = #{responseType}
+			</if>
+			<if test="responseId > 0">
+				AND response_id = #{responseId}
+			</if>
+			
+			<if test="currentStatus != null">
+				AND current_status in
+				<foreach item="item" collection="currentStatus" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" parameterType="AutoResponseModelCriteria" resultMap="autoResponseModelResult">
+		SELECT
+			<include refid="selectColumns" />
+		FROM
+			auto_response_model
+		<include refid="criteriaWhereClause" />
+	</select>
+	<select id="count" parameterType="AutoResponseModelCriteria"
+		resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			auto_response_model
+		<include refid="criteriaWhereClause" />
+	</select>
+	
+</mapper>
