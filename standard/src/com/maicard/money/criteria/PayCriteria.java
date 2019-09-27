@@ -10,6 +10,7 @@ public class PayCriteria extends InviterSupportCriteria {
 
 	private int payId;
 	private String transactionId;
+	private String fuzzyTransactionId;
 	private String outOrderId;
 	private String inOrderId;
 	private int moneyTypeId;
@@ -304,6 +305,14 @@ public class PayCriteria extends InviterSupportCriteria {
 
 	public void setTradeType(String tradeType) {
 		this.tradeType = tradeType;
+	}
+
+	public String getFuzzyTransactionId() {
+		return fuzzyTransactionId;
+	}
+
+	public void setFuzzyTransactionId(String fuzzyTransactionId) {
+		this.fuzzyTransactionId = fuzzyTransactionId;
 	}
 
 
