@@ -291,8 +291,10 @@ public class PartnerAspect extends BaseService{
 													null, IpUtils.getClientIp(request), configService.getServerId(), ownerId));
 
 				}
-				response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-				return null;
+				if(!inputIsLegal(request)) {
+					response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+					return null;
+				}
 			}		
 			
 			return joinPoint.proceed();
