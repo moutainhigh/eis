@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maicard.common.base.BaseController;
@@ -90,8 +91,6 @@ public class WeixinApiController extends BaseController{
 	@Resource ApplicationContextService applicationContextService;
 	private static final char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5','6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
-	private ObjectMapper om = new ObjectMapper();
-	private final SimpleDateFormat sdf = new SimpleDateFormat(CommonStandard.defaultDateFormat);
 
 	final boolean ENCRYPT_MSG = true;
 
@@ -232,11 +231,8 @@ public class WeixinApiController extends BaseController{
 			logger.warn("获取到的消息为空或无法转换");
 			return null;
 		}
-		try {
-			logger.debug("获取到消息:" + om.writeValueAsString(weixinMsg));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
+		logger.debug("获取到消息:" + JSON.toJSONString(weixinMsg));
+		
 
 
 		//User frontUser = certifyService.getLoginedUser(request, response, UserTypes.frontUser.getId());

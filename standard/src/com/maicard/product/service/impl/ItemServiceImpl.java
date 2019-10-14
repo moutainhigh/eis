@@ -319,7 +319,7 @@ public class ItemServiceImpl extends BaseService implements ItemService {
 
 	@Override
 	public Item selectSimple(String transactionId) {
-		if(StringUtils.isBlank(transactionId) || transactionId.length() < 27){
+		if(StringUtils.isBlank(transactionId) || transactionId.length() < 10){
 			logger.warn("订单号错误[" + transactionId + "]");
 			return null;
 		}
