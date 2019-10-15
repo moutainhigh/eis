@@ -32,7 +32,7 @@ public class TablePartitionUtils {
 		Date splitDate = DateUtils.truncate(DateUtils.addDays(new Date(), -1), Calendar.DAY_OF_MONTH);
 		Date orderDate = null;
 		try {
-			orderDate = new SimpleDateFormat(CommonStandard.orderIdDateFormat).parse(transactionId.substring(5,19));
+			orderDate = new SimpleDateFormat(CommonStandard.orderIdDateFormat).parse(transactionId.substring(5, 5 + CommonStandard.orderIdDateFormat.length()));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -55,4 +55,10 @@ public class TablePartitionUtils {
 
 	}
 
+	
+	public static void main(String[] argv) {
+		String id = "0112119101500383302";
+		String m = getTableMonth(id);
+		System.out.println(m);
+	}
 }
