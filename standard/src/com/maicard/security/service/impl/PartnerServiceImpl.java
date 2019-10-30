@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -36,6 +37,7 @@ import com.maicard.security.service.PartnerRoleService;
 import com.maicard.security.service.PartnerService;
 import com.maicard.security.service.UserDataService;
 import com.maicard.standard.BasicStatus;
+import com.maicard.standard.CommonStandard;
 import com.maicard.standard.DataName;
 import com.maicard.standard.CommonStandard.DataFetchMode;
 import com.maicard.standard.SecurityStandard.UserTypes;
@@ -69,6 +71,11 @@ public class PartnerServiceImpl extends BaseService implements PartnerService {
 		messageBusName = configService.getValue(DataName.messageBusUser.toString(),0);//"com.maicard.mb.yeele.System.user"//
 
 	}
+
+	@Override
+	@CacheEvict(value=CommonStandard.cacheNameUser, key = "'Partner#' + #partner.uuid")
+	public void evictCache(User partner) {
+ 	}
 
 	@Override
 	public int insert(User partner) {
