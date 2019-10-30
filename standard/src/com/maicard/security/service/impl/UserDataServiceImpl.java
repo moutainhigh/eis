@@ -118,7 +118,7 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 		userDataCriteria.setUserTypeId((int)userData.getObjectId());
 		UserData _oldUserConfig = selectByCriteria(userDataCriteria);
 
-		if (_oldUserConfig != null && _oldUserConfig.getUuid() > 0 && _oldUserConfig.getUuid() == userData.getUuid()) {
+		if (_oldUserConfig != null && _oldUserConfig.getUserDataId() > 0 && _oldUserConfig.getUuid() > 0 && _oldUserConfig.getUuid() == userData.getUuid()) {
 			logger.debug("找到了已存在的数据:{}，更新值为:{}", JsonUtils.toStringFull(_oldUserConfig), userData.getDataValue());
 			_oldUserConfig.setDataValue(userData.getDataValue());
 			return userDataDao.update(_oldUserConfig);
