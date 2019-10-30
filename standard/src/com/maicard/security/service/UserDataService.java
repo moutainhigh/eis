@@ -34,4 +34,6 @@ public interface UserDataService {
 
 	int replace(UserData userData) throws Exception;
 
+	UserData selectByCriteria(UserDataCriteria userDataCriteria);
+
 }

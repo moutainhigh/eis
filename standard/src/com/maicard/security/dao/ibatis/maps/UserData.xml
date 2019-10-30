@@ -107,7 +107,7 @@
 			b.input_method,
 			b.display_level,
 			b.input_level,
-			b.ttl
+			b.ttl,
 			b.default_value
 		FROM
 			${tableName} AS a 

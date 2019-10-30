@@ -1,6 +1,7 @@
 package com.maicard.security.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -114,7 +115,7 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 		userDataCriteria.setUserDataId(userData.getUserDataId());
 		userDataCriteria.setDataCode(userData.getDataCode());
 		userDataCriteria.setDataDefineId(userData.getDataDefineId());
-		UserData _oldUserConfig = userDataDao.select(userDataCriteria);
+		UserData _oldUserConfig = selectByCriteria(userDataCriteria);
 
 		if (_oldUserConfig != null) {
 			return userDataDao.update(userData);
@@ -139,6 +140,15 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 			}
 			return userDataDao.insert(userData);
 		}
+	}
+
+	@Override
+	public UserData selectByCriteria(UserDataCriteria userDataCriteria) {
+		List<UserData> list = list(userDataCriteria);
+		if(list.size() < 1) {
+			return null;
+		}
+		return list.get(0);
 	}
 
 	public UserData select(UserDataCriteria userDataCriteria){
@@ -257,7 +267,11 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 			}
 		}
 		//logger.debug("返回前的配置数据:" + userDataCriteria.getUuid() + "/" + (userDataList == null ? 0 : userDataList.size()));
-		return userDataList;
+		if( userDataList == null ) {
+			return Collections.emptyList();
+		} else {
+			return userDataList;
+		}
 	}
 
 
