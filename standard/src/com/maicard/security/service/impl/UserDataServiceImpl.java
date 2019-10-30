@@ -106,6 +106,9 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 		if(userData.getUuid() < 1){
 			return -1;
 		}
+		if(userData.getUserDataId() > 0) {
+			return userDataDao.update(userData);
+		}
 		UserDataCriteria userDataCriteria = new UserDataCriteria();
 		userDataCriteria.setUuid(userData.getUuid());
 		userDataCriteria.setUserDataId(userData.getUserDataId());
