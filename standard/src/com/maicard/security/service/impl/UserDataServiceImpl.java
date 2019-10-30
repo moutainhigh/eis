@@ -115,6 +115,7 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 		userDataCriteria.setUserDataId(userData.getUserDataId());
 		userDataCriteria.setDataCode(userData.getDataCode());
 		userDataCriteria.setDataDefineId(userData.getDataDefineId());
+		userDataCriteria.setUserTypeId((int)userData.getObjectId());
 		UserData _oldUserConfig = selectByCriteria(userDataCriteria);
 
 		if (_oldUserConfig != null) {
@@ -210,7 +211,7 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 			logger.debug("当前从数据库返回的userData数据列表是[" + (userDataList == null ? -1 :userDataList.size()) + "]");
 		}
 		DataDefineCriteria dataDefineCriteria = new DataDefineCriteria();
-		dataDefineCriteria.setObjectType(ObjectType.user.toString());
+		dataDefineCriteria.setObjectType(ObjectType.user.name());
 		dataDefineCriteria.setObjectId(userDataCriteria.getUserTypeId());
 		dataDefineCriteria.setObjectExtraId(userDataCriteria.getUserExtraTypeId());
 		List<DataDefine> userDataDefinePolicyList = dataDefineService.list(dataDefineCriteria);
