@@ -608,6 +608,9 @@ public class PartnerAspect extends BaseService{
 			if(whiteIp.equals(ip)){
 				ipIsValid = true;
 				break;
+			} else if(whiteIp.equalsIgnoreCase("0.0.0.0") || whiteIp.equals("0")) {
+				ipIsValid = true;
+				break;
 			}
 		}
 		if(!ipIsValid){
