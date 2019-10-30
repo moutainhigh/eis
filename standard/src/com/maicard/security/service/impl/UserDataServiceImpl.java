@@ -15,6 +15,7 @@ import com.maicard.common.base.BaseService;
 import com.maicard.common.criteria.DataDefineCriteria;
 import com.maicard.common.domain.DataDefine;
 import com.maicard.common.service.DataDefineService;
+import com.maicard.common.util.JsonUtils;
 import com.maicard.exception.RequiredObjectIsNullException;
 import com.maicard.security.criteria.UserDataCriteria;
 import com.maicard.security.dao.UserDataDao;
@@ -95,7 +96,47 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 		return -1;
 	}
 
+	
+	@IgnoreJmsDataSync
+	@Override
+	public int replace(UserData userData) throws Exception{
+		if(userData == null){
+			return -1;
+		}
+		if(userData.getUuid() < 1){
+			return -1;
+		}
+		UserDataCriteria userDataCriteria = new UserDataCriteria();
+		userDataCriteria.setUuid(userData.getUuid());
+		userDataCriteria.setUserDataId(userData.getUserDataId());
+		userDataCriteria.setDataCode(userData.getDataCode());
+		userDataCriteria.setDataDefineId(userData.getDataDefineId());
+		UserData _oldUserConfig = userDataDao.select(userDataCriteria);
 
+		if (_oldUserConfig != null) {
+			return userDataDao.update(userData);
+		} else {
+			if(userData.getDataDefineId() > 0 || userData.getUserDataId() > 0) {
+				//已经有数据定义
+			} else {
+				if(StringUtils.isBlank(userData.getDataCode())) {
+					logger.error("尝试替换-新增的用户数据没有dataDefineId、userDataId，也没有dataCode，无法新增", JsonUtils.toStringFull(userData));
+					return 0;
+				}
+				DataDefineCriteria dataDefineCriteria = new DataDefineCriteria();
+				dataDefineCriteria.setObjectType(ObjectType.user.name());
+				dataDefineCriteria.setObjectId(userData.getObjectId());
+				DataDefine dd = dataDefineService.select(dataDefineCriteria);
+				if(dd == null) {
+					logger.error("尝试替换-新增的用户数据，找不到对应的DataDefine无法新增", JsonUtils.toStringFull(userData));
+					return 0;
+				}
+				logger.debug("为替换-新增的用户数据找到了对应的DataDefine={}", dd.getDataDefineId());
+				userData.setDataDefineId(dd.getDataDefineId());
+			}
+			return userDataDao.insert(userData);
+		}
+	}
 
 	public UserData select(UserDataCriteria userDataCriteria){
 		List<String> pkList = null;

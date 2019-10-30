@@ -32,4 +32,6 @@ public interface UserDataService {
 	HashMap<String, UserData> generateStandardMap(
 			UserDataCriteria userDataCriteria);
 
+	int replace(UserData userData) throws Exception;
+
 }

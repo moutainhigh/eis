@@ -597,7 +597,11 @@ public class PartnerAspect extends BaseService{
 		}
 		String whiteList = partner.getExtraValue("commonIpWhiteList");
 		if(StringUtils.isBlank(whiteList)) {
-			logger.debug("用户未设置IP白名单",partner.getUuid());
+			logger.debug("用户:{}未设置IP白名单",partner.getUuid());
+			return false;
+		}
+		if(whiteList.equalsIgnoreCase("0.0.0.0") || whiteList.equals("0")) {
+			logger.debug("用户:{}设置的IP白名单是全部允许:{}",partner.getUuid(), whiteList);
 			return false;
 		}
 		String ip = IpUtils.getClientIp(request);
@@ -608,10 +612,7 @@ public class PartnerAspect extends BaseService{
 			if(whiteIp.equals(ip)){
 				ipIsValid = true;
 				break;
-			} else if(whiteIp.equalsIgnoreCase("0.0.0.0") || whiteIp.equals("0")) {
-				ipIsValid = true;
-				break;
-			}
+			} 
 		}
 		if(!ipIsValid){
 			logger.error("当前IP:" + ip + "]不在商户[" + partner.getUuid() + "]的通用IP白名单中:" + whiteList + "，禁止访问");
