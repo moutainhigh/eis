@@ -183,9 +183,9 @@ public class PartnerAspect extends BaseService{
 			writeOperateLog = true;
 		}
 
-
+		
 		if(securityLevelId >= SecurityLevelCriteria.SECURITY_LEVEL_STRICT){
-			boolean userIpIsForbidden = userIpIsForbidden(request, ownerId);
+			boolean userIpIsForbidden = ipIsForbidden(request, ownerId);
 			if(logger.isDebugEnabled()){
 				logger.debug("检查用户IP是否合法，检查结果:" + userIpIsForbidden);
 			}
@@ -273,6 +273,21 @@ public class PartnerAspect extends BaseService{
 		PrivilegeCriteria privilegeCriteria = Uri2PrivilegeCriteria.convert(request);
 		if(privilegeCriteria == null){
 			privilegeCriteria = new PrivilegeCriteria(ownerId);
+		}
+		
+		if(!isIgnorePrivilegeCheck && partner != null ) {
+			boolean userIpIsForbidden = userIpIsForbidden(request, partner);
+			if(logger.isDebugEnabled()){
+				logger.debug("检查用户通用IP是否合法，检查结果:" + userIpIsForbidden);
+			}
+			if(userIpIsForbidden){
+				if(logger.isDebugEnabled()){
+					logger.debug("用户IP不合法，直接返回:" + HttpStatus.NOT_FOUND.value());
+				}
+				response.setStatus(HttpStatus.NOT_FOUND.value());
+				joinPoint = null;
+				return null;
+			}
 		}
 
 		if(isIgnorePrivilegeCheck || havePrivilegeFromAnnotation){
@@ -491,6 +506,8 @@ public class PartnerAspect extends BaseService{
 	}
 
 
+	
+
 	/*
 	 * 检查该对象的访问是否需要二次验证
 	 */
@@ -553,12 +570,52 @@ public class PartnerAspect extends BaseService{
 		return false;
 	}
 
-	private boolean userIpIsForbidden(HttpServletRequest request, long ownerId) {
+	/**
+	 * 检查IP是否被拉黑
+	 * @param request
+	 * @param ownerId
+	 * @return
+	 */
+	private boolean ipIsForbidden(HttpServletRequest request, long ownerId) {
 		IpPolicyCriteria ipPolicyCriteria = new IpPolicyCriteria();
 		ipPolicyCriteria.setOwnerId(ownerId);
 
 		ipPolicyCriteria.setIpAddress(IpUtils.getClientIp(request));
 		return ipPolicyService.isForbidden(ipPolicyCriteria);
+	}
+	
+	/**
+	 * 检查用户是否配置了登录IP白名单
+	 * @param request
+	 * @param partner
+	 * @return
+	 */
+	private boolean userIpIsForbidden(HttpServletRequest request, User partner) {
+		if(partner == null) {
+			logger.error("要检查登录IP白名单的用户为空");
+			return false;
+		}
+		String whiteList = partner.getExtraValue("commonIpWhiteList");
+		if(StringUtils.isBlank(whiteList)) {
+			logger.debug("用户未设置IP白名单",partner.getUuid());
+			return false;
+		}
+		String ip = IpUtils.getClientIp(request);
+
+		String[] whiteIps = whiteList.split(",|;| ");
+		boolean ipIsValid = false;
+		for(String whiteIp : whiteIps){
+			if(whiteIp.equals(ip)){
+				ipIsValid = true;
+				break;
+			}
+		}
+		if(!ipIsValid){
+			logger.error("当前IP:" + ip + "]不在商户[" + partner.getUuid() + "]的通用IP白名单中:" + whiteList + "，禁止访问");
+			return true;
+		}
+
+		return false;
 	}
 
 	/*
