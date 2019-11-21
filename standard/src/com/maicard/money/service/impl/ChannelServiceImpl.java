@@ -60,6 +60,8 @@ public class ChannelServiceImpl extends BaseService implements ChannelService {
 				logger.debug("设置PayChannelMechInfo的属性:" + entry.getKey() + "=>" + entry.getValue());
 			}catch(Exception e) {
 				//e.printStackTrace();
+				logger.warn("在类:" + PayChannelMechInfo.class.getSimpleName() + "中找不到指定的属性异常:" + entry.getKey());
+
 			}
 		}
 		
