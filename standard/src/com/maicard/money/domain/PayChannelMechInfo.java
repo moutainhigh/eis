@@ -22,6 +22,8 @@ public class PayChannelMechInfo  implements Serializable{
 	public String submitUrl;
 	public String queryUrl;
 	
+	public float exchangeRate;
+	
 	
 
 	/**

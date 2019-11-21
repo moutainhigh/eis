@@ -123,7 +123,7 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 			_oldUserConfig.setDataValue(userData.getDataValue());
 			return userDataDao.update(_oldUserConfig);
 		} else {
-			if(userData.getDataDefineId() > 0 || userData.getUserDataId() > 0) {
+			if(userData.getDataDefineId() > 0) {
 				//已经有数据定义
 			} else {
 				if(StringUtils.isBlank(userData.getDataCode())) {
