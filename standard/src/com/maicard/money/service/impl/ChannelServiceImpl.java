@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.alibaba.fastjson.JSON;
 import com.maicard.common.base.BaseService;
 import com.maicard.common.util.JsonUtils;
 import com.maicard.money.domain.Pay;
@@ -36,7 +37,7 @@ public class ChannelServiceImpl extends BaseService implements ChannelService {
 			payMethod = payMethodService.select(pay.getPayMethodId());
 		}
 		Assert.notNull(payMethod,"尝试获取支付参数的pay实例中的payMethod不能为空");
-		logger.debug("当前的支付方式实例是:" + JsonUtils.toStringApi(payMethod));
+		logger.debug("当前的支付方式实例是:" + JSON.toJSONString(payMethod));
 		PayChannelMechInfo payChannelMechInfo = new PayChannelMechInfo();
 		
 		if(payMethod.getData() == null || payMethod.getData().size() < 1) {
