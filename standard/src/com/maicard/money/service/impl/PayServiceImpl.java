@@ -366,6 +366,12 @@ public class PayServiceImpl extends BaseService implements PayService,EisMessage
 					_oldPay.setRealMoney(pay.getRealMoney());
 				}
 				_oldPay.setSyncFlag(1);
+				if(_oldPay.getData() == null) {
+					_oldPay.initData();
+				}
+				if(pay.getData() != null) {
+					_oldPay.getData().putAll(pay.getData());
+				}
 				update(_oldPay);
 				
 				_oldPay.setSyncFlag(0);
