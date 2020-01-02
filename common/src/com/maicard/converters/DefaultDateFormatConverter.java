@@ -36,8 +36,10 @@ public class DefaultDateFormatConverter  implements Converter<String, Date> {
 		if(source.length() != CommonStandard.defaultDateFormat.length()){
 			source = source.substring(0,dateOnlyFormat.length());
 			dateFormat = new SimpleDateFormat(dateOnlyFormat);			
+			logger.debug("准备使用短格式:{}解析日期:{}", dateOnlyFormat, source);
 		} else {
 			dateFormat = new SimpleDateFormat(CommonStandard.defaultDateFormat);
+			logger.debug("准备使用默认格式:{}解析日期:{}", CommonStandard.defaultDateFormat, source);
 		}
 		
 		dateFormat.setLenient(false); 
