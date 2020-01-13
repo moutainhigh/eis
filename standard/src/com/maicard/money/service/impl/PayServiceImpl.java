@@ -3,6 +3,7 @@ package com.maicard.money.service.impl;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +34,7 @@ import com.maicard.common.service.ApplicationContextService;
 import com.maicard.common.service.CenterDataService;
 import com.maicard.common.service.ConfigService;
 import com.maicard.common.service.GlobalOrderIdService;
+import com.maicard.common.util.IpUtils;
 import com.maicard.common.util.JsonUtils;
 import com.maicard.common.util.NumericUtils;
 import com.maicard.exception.ServiceNotFoundException;
@@ -300,10 +303,36 @@ public class PayServiceImpl extends BaseService implements PayService,EisMessage
 	}
 
 	@Override
-	public EisMessage end(int payMethodId, String resultString) throws Exception{
+	public EisMessage end(int payMethodId, String resultString, Object params) throws Exception{
 		PayMethod payMethod = payMethodService.select(payMethodId);
 		if(payMethod == null){
 			logger.error("找不到指定的支付方式:" + payMethodId);
+		}
+		
+		
+		String ipList = payMethod.getExtraValue(DataName.OUT_NOTIFY_IP.name());
+		if(StringUtils.isBlank(ipList)) {
+			logger.debug("通道:{}未配置IP白名单限制", payMethodId);
+		} else if(ipList.trim().equalsIgnoreCase("0.0.0.0")) {
+			logger.warn("通道设置了通配白名单0.0.0.0", payMethodId);
+		} else {
+			HttpServletRequest request = null;
+			if(params instanceof HttpServletRequest) {
+				request = (HttpServletRequest)params;
+			}
+
+			if(request == null) {
+				logger.error("尝试结束的出金订单:{}参数不是request", resultString);
+				return new EisMessage(EisError.PARAMETER_ERROR.id,"参数错误");
+			}
+			String clientIp = IpUtils.getClientIp(request);
+			List<String> whiteIps = Arrays.asList(ipList.split(",|;| "));
+			boolean ipIsValid = whiteIps.contains(clientIp);
+			if (!ipIsValid) {
+				logger.error("当前IP:" + clientIp + "]不在通道:" + payMethodId + "]的IP白名单中:" + ipList + "，忽略通知");
+				return new EisMessage(EisError.invalidIpAddress.id,"IP地址错误");
+			}
+			logger.debug("当前IP:{}符合通道:{}的IP白名单:{}", clientIp, payMethodId, ipList);
 		}
 		String[] payProcessConfig = null;
 		if(payMethod.getProcessClass() != null){

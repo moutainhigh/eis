@@ -22,7 +22,7 @@ public interface PayService {
 
 	List<Pay> listOnPage(PayCriteria payCriteria);
 	
-	EisMessage end(int payMethodId, String resultString) throws Exception;
+	EisMessage end(int payMethodId, String resultString, Object params) throws Exception;
 	
 	int count(PayCriteria payCriteria);
 
@@ -45,6 +45,7 @@ public interface PayService {
 	Map<String, String> generateClientResponseMap(Pay pay);
 
 	PayProcessor getProcessor(Pay pay);
+
 
 	//PayMethod getPayMethod(Pay pay, User partner);
 

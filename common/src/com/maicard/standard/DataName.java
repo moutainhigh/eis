@@ -591,7 +591,9 @@ public enum DataName{
 	/**
 	 * 产品寄售的价格
 	 */
-	productSaleMoney;
+	productSaleMoney,
+	
+	OUT_NOTIFY_IP;
 
 
 

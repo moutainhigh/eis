@@ -70,7 +70,7 @@ public class PayResultController  extends BaseController{
 				resultString += "&rawContent=" + rawContent;
 			}
 		}
-		EisMessage resultMessage = payService.end(payMethodId, resultString);
+		EisMessage resultMessage = payService.end(payMethodId, resultString, request);
 		Pay pay = null;
 		if(resultMessage != null){
 			try{
@@ -124,7 +124,7 @@ public class PayResultController  extends BaseController{
 			logger.debug("对方没提交任何POST数据");
 		}
 
-		EisMessage notifyResult = payService.end(payMethodId, resultString);
+		EisMessage notifyResult = payService.end(payMethodId, resultString, request);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("content-type", "text/html; charset=UTF-8");
 		Pay pay = null;

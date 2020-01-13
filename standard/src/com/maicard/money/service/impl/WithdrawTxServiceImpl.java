@@ -135,7 +135,7 @@ public class WithdrawTxServiceImpl extends BaseService implements WithdrawTxServ
 
 	
 	@Override
-	public EisMessage end(int withdrawMethodId, String resultString){
+	public EisMessage end(int withdrawMethodId, String resultString, Object params){
 		WithdrawMethod withdrawMethod = withdrawMethodService.select(withdrawMethodId);
 		if(withdrawMethod == null){
 			logger.error("找不到尝试结束的批付方法:" + withdrawMethodId + ",结束字符串:" + resultString);
