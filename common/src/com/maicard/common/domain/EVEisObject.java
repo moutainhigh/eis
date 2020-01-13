@@ -79,15 +79,19 @@ public abstract class EVEisObject extends EisObject implements ExtraValueAccess{
 		}
 		return 0;
 	}
+	
+	public void initData() {
+		if(this.data == null){
+			this.data = new HashMap<String,String>();
+		}
+	}
 
 	@Override
 	public void setExtraValue(String dataCode, String dataValue) {
 		if(dataCode == null || dataValue == null) {
 			return;
 		}
-		if(this.data == null){
-			this.data = new HashMap<String,String>();
-		}
+		this.initData();
 		this.data.put(dataCode, dataValue);		
 	}
 

@@ -57,4 +57,6 @@ public interface PartnerService {
 
 	long getHeadUuid(long inviter);
 
+	void evictCache(User partner);
+
 }

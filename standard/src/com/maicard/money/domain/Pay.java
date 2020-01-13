@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -550,6 +549,7 @@ public class Pay extends EVEisObject{
 	public void setTradeType(String tradeType) {
 		this.tradeType = tradeType;
 	}
+	
 
 	
 	

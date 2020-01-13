@@ -161,6 +161,16 @@ public class SiteGeneralDataInjectAspect extends BaseService{
 			map.put(DataName.sitePartnerId.toString(), siteThemeRelation.getUuid());
 			logger.debug("为当前主机代码[" + hostCode + ",主机名:" + hostName + "]找到的主题配置是:" + siteThemeRelation.getSiteThemeRelationId() + ",合作方是:" + siteThemeRelation.getUuid() + ", 放入主题代码:" + siteThemeRelation.getThemeCode() + ",替换系统名称:" + siteThemeRelation.getSiteName());
 		}
+		
+		if(!map.containsKey("theme")) {
+			//从系统配置中查找
+			String theme = configService.getValue(DataName.partnerTheme.toString(), siteDomainRelation.getOwnerId());
+			if(StringUtils.isBlank(theme)) {
+				map.put("theme", CommonStandard.DEFAULT_THEME_NAME);
+			} else {
+				map.put("theme",theme.trim());
+			}
+		}
 
 
 		if(defaultNodeProcessor == null){

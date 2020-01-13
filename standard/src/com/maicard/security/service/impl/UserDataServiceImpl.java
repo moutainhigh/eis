@@ -1,6 +1,7 @@
 package com.maicard.security.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.maicard.common.base.BaseService;
 import com.maicard.common.criteria.DataDefineCriteria;
 import com.maicard.common.domain.DataDefine;
 import com.maicard.common.service.DataDefineService;
+import com.maicard.common.util.JsonUtils;
 import com.maicard.exception.RequiredObjectIsNullException;
 import com.maicard.security.criteria.UserDataCriteria;
 import com.maicard.security.dao.UserDataDao;
@@ -95,7 +97,62 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 		return -1;
 	}
 
+	
+	@IgnoreJmsDataSync
+	@Override
+	public int replace(UserData userData) throws Exception{
+		if(userData == null){
+			return -1;
+		}
+		if(userData.getUuid() < 1){
+			return -1;
+		}
+		if(userData.getUserDataId() > 0) {
+			return userDataDao.update(userData);
+		}
+		UserDataCriteria userDataCriteria = new UserDataCriteria();
+		userDataCriteria.setUuid(userData.getUuid());
+		userDataCriteria.setUserDataId(userData.getUserDataId());
+		userDataCriteria.setDataCode(userData.getDataCode());
+		userDataCriteria.setDataDefineId(userData.getDataDefineId());
+		userDataCriteria.setUserTypeId((int)userData.getObjectId());
+		UserData _oldUserConfig = selectByCriteria(userDataCriteria);
 
+		if (_oldUserConfig != null && _oldUserConfig.getUserDataId() > 0 && _oldUserConfig.getUuid() > 0 && _oldUserConfig.getUuid() == userData.getUuid()) {
+			logger.debug("找到了已存在的数据:{}，更新值为:{}", JsonUtils.toStringFull(_oldUserConfig), userData.getDataValue());
+			_oldUserConfig.setDataValue(userData.getDataValue());
+			return userDataDao.update(_oldUserConfig);
+		} else {
+			if(userData.getDataDefineId() > 0) {
+				//已经有数据定义
+			} else {
+				if(StringUtils.isBlank(userData.getDataCode())) {
+					logger.error("尝试替换-新增的用户数据没有dataDefineId、userDataId，也没有dataCode，无法新增", JsonUtils.toStringFull(userData));
+					return 0;
+				}
+				DataDefineCriteria dataDefineCriteria = new DataDefineCriteria();
+				dataDefineCriteria.setObjectType(ObjectType.user.name());
+				dataDefineCriteria.setObjectId(userData.getObjectId());
+				DataDefine dd = dataDefineService.select(dataDefineCriteria);
+				if(dd == null) {
+					logger.error("尝试替换-新增的用户数据，找不到对应的DataDefine无法新增", JsonUtils.toStringFull(userData));
+					return 0;
+				}
+				logger.debug("为替换-新增的用户数据找到了对应的DataDefine={}", dd.getDataDefineId());
+				userData.setDataDefineId(dd.getDataDefineId());
+			}
+			return userDataDao.insert(userData);
+		}
+	}
+
+	@Override
+	public UserData selectByCriteria(UserDataCriteria userDataCriteria) {
+		List<UserData> list = list(userDataCriteria);
+		if(list.size() < 1) {
+			return null;
+		}
+		return list.get(0);
+	}
 
 	public UserData select(UserDataCriteria userDataCriteria){
 		List<String> pkList = null;
@@ -156,7 +213,7 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 			logger.debug("当前从数据库返回的userData数据列表是[" + (userDataList == null ? -1 :userDataList.size()) + "]");
 		}
 		DataDefineCriteria dataDefineCriteria = new DataDefineCriteria();
-		dataDefineCriteria.setObjectType(ObjectType.user.toString());
+		dataDefineCriteria.setObjectType(ObjectType.user.name());
 		dataDefineCriteria.setObjectId(userDataCriteria.getUserTypeId());
 		dataDefineCriteria.setObjectExtraId(userDataCriteria.getUserExtraTypeId());
 		List<DataDefine> userDataDefinePolicyList = dataDefineService.list(dataDefineCriteria);
@@ -213,7 +270,11 @@ public class UserDataServiceImpl extends BaseService implements UserDataService 
 			}
 		}
 		//logger.debug("返回前的配置数据:" + userDataCriteria.getUuid() + "/" + (userDataList == null ? 0 : userDataList.size()));
-		return userDataList;
+		if( userDataList == null ) {
+			return Collections.emptyList();
+		} else {
+			return userDataList;
+		}
 	}
 
 
