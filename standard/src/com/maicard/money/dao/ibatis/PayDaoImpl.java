@@ -169,10 +169,6 @@ public class PayDaoImpl extends BaseDao implements PayDao {
 			payCriteria.setTableName(defaultTableName + "_" + monthFormatterHolder.get().format(payCriteria.getStartTimeBegin()));
 			return;
 		}
-		if(payCriteria.getStartTimeEnd() != null){
-			payCriteria.setTableName(defaultTableName + "_" + monthFormatterHolder.get().format(payCriteria.getStartTimeEnd()));
-			return;
-		}
 		if(payCriteria.getStartTime() != null){
 			payCriteria.setTableName(defaultTableName + "_" +  payCriteria.getStartTime().substring(5,7));
 			return;
