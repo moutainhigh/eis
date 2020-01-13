@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+	<property name="FORMAT" value="%date{yy-MM-dd HH:mm:ss} %thread %logger %L %p:%msg%n" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>  
+			<pattern>${FORMAT}</pattern>  
+		</encoder>  
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	   <File>${catalina.base}/logs/eis.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>eis-%d{yyyy-MM-dd}.%i.txt</FileNamePattern>
+			<MaxFileSize>1000MB</MaxFileSize>
+			<MaxHistory>15</MaxHistory>
+			<TotalSizeCap>15GB</TotalSizeCap>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>${FORMAT}</Pattern>
+		</layout>
+	</appender>
+
+	<root level="INFO"> 
+		<appender-ref ref="CONSOLE" />  
+		<appender-ref ref="FILE" />  
+	</root>  
+	<logger name="com.maicard" level="DEBUG" />
+	<logger name="org.springframework.web" level="DEBUG" />	
+	<logger name="com.maicard.security.filter" level="INFO" />
+	<logger name="com.maicard.views" level="INFO" />   	
+	<logger name="com.maicard.aspect.common.CryptStoreAspect" level="INFO" /> 
+	<logger name="com.maicard.aspect.common.DynamicDataSourceAspect" level="INFO" /> 
+	<logger name="com.maicard.mb.service.rabbitmq.MessageServiceImpl" level="INFO" /> 
+	<logger name="com.maicard.mb" level="INFO" /> 
+	<logger name="com.maicard.common.service.impl.SiteDomainRelationServiceImpl" level="INFO" /> 
+
+ </configuration>  

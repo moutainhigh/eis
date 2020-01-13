@@ -206,6 +206,8 @@
 		.queryFormBox{
 			/*width:1100px;
 			border:1px solid #efefef;*/
+			height: 100px;
+			overflow:hidden;
 			position:relative;
 			background-color: #eee;
 			border-radius: 5px;
@@ -569,7 +571,11 @@
 			$('body').on("click", ".tools", function () {
 				$(this).parent().parent().siblings().find(".toolbtns").hide();
 				$(this).siblings(".toolbtns").toggle();
-			})
+			});
+			
+			
+			
+			
 		});
 	</script>
 	<script>

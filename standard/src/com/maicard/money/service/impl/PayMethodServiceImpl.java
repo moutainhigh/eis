@@ -218,6 +218,8 @@ public class PayMethodServiceImpl extends BaseService implements PayMethodServic
 			PayMethod payMethod = payMethodDao.select(pk);
 			if(payMethod != null) {
 				list.add(payMethod);
+			} else {
+				logger.error("找不到指定的支付方式:{}", pk);
 			}
 		}
 		return list;
